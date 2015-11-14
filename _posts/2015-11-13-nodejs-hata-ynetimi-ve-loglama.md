@@ -3,8 +3,8 @@ layout: post
 title: "Node.js Hata Yönetimi ve Loglama"
 description: ""
 toc: true;
-category: ["node.js"]
-tags: ["log", "error", "node.js", "hata"]
+category: ["node.js", "kontrol bende"]
+tags: ["node.js", "log", "error", "hata"]
 ---
 {% include JB/setup %}
 

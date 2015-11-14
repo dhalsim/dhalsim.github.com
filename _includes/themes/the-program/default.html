@@ -12,10 +12,12 @@
 	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
 	<link href="http://feeds.feedburner.com/{{ site.author.feedbaname }}" rel="alternate" title="{{ page.title }}" type="application/atom+xml">
 	{% if page.toc %}
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
 
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
 	<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
 	<script type="text/javascript">
 		$(document).ready(function () {
 			anchors.add('.content h1');
@@ -27,6 +29,7 @@
 			var level = 1;
 			var $parentUl = $currentUl = $('<ul/>');
 			var count = 0;
+			var listTypes = ['decimal', 'lower-alpha', 'circle']
 			$('.anchorjs-link').each(function () {
 				count++;
 				if(count === 1)
@@ -53,6 +56,7 @@
 				$a.attr('href', $this.attr('href'));
 
 				level = thisLevel;
+				$currentUl.css('list-style', listTypes[level - 1]);
 				$currentUl.append($('<li/>').append($a));
 			});
 
@@ -60,6 +64,11 @@
 			$div.attr('class', 'toc');
 
 			$('.content header').append( $div.append($parentUl) );
+
+			$('.content img').click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
 		});
 	</script>
 
