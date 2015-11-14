@@ -2,12 +2,11 @@
 layout: post
 title: "Node.js Hata Yönetimi ve Loglama"
 description: ""
+toc: true;
 category: ["node.js"]
 tags: ["log", "error", "node.js", "hata"]
 ---
 {% include JB/setup %}
-
-{:toc}
 
 Merhaba, **"Kontrol Bende"** serisine yeni bir konu daha ekliyoruz.
 

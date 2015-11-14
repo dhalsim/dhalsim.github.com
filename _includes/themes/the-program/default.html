@@ -9,9 +9,61 @@
 	<title>{{ page.title }}</title>
 	<meta name="author" content="{{ site.author.name }}">
 	<link href='{{ ASSET_PATH }}/css/style.css' rel="stylesheet" media="all">
-	<link href='/assets/css/pygments.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
 	<link href="http://feeds.feedburner.com/{{ site.author.feedbaname }}" rel="alternate" title="{{ page.title }}" type="application/atom+xml">
+	{% if page.toc %}
+
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
 	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+	<script type="text/javascript">
+		$(document).ready(function () {
+			anchors.add('.content h1');
+			anchors.add('.content h2');
+			anchors.add('.content h3');
+			anchors.add('.content h4');
+			anchors.add('.content h5');
+
+			var level = 1;
+			var $parentUl = $currentUl = $('<ul/>');
+			var count = 0;
+			$('.anchorjs-link').each(function () {
+				count++;
+				if(count === 1)
+				{
+					return true;
+				}
+
+				var $this = $(this);
+				var $parent = $this.parent();
+				var tagName = $parent.prop("tagName");
+				var thisLevel = tagName.charAt(1);
+				var text = $parent.text();
+
+				if(thisLevel > level) {
+					var $newUl = $('<ul/>');
+					$currentUl.append($newUl);
+					$currentUl = $newUl;
+				} else if(thisLevel < level) {
+					$currentUl = $currentUl.parent('ul');
+				}
+
+				var $a = $('<a/>');
+				$a.text(text);
+				$a.attr('href', $this.attr('href'));
+
+				level = thisLevel;
+				$currentUl.append($('<li/>').append($a));
+			});
+
+			var $div = $('<div/>');
+			$div.attr('class', 'toc');
+
+			$('.content header').append( $div.append($parentUl) );
+		});
+	</script>
+
+	{% endif %}
 </head>
 <body>
 
@@ -44,7 +96,7 @@
 		<div class="unit-foot">
 			<div class="unit-inner unit-foot-inner">
 				<div class="misc vcard">
-					<h4>about</h4>
+					<h4>hakkımda</h4>
 					<ul>
 						<li class="contact"><address><span class="author fn n">{{ site.author.name }}</span> - <span class="fn email">{{ site.author.email }}</span></address></li>
 						<li class="github"><a href="http://github.com/{{ site.author.github }}/" rel="me">github.com/{{ site.author.github }}</a></li>

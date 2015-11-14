@@ -657,12 +657,15 @@ pre {
 }
 .unit-article a:link {
   border-bottom: 1px dashed #c26164;
+  background-color: beige;
 }
 .unit-article a:visited {
   border-bottom: 1px dashed #ad4346;
+  background-color: beige;
 }
 .unit-article a:hover {
   border-bottom: 1px dashed #d08688;
+  background-color: antiquewhite;
 }
 .unit-article blockquote {
   border-left: 1em solid rgba(21, 25, 25, 0.8);
@@ -722,8 +725,11 @@ pre {
 .unit-article p code,
 .unit-article li code {
   padding: 2px 5px;
-  white-space: nowrap;
-  background-color: #fff04a;
+  font-family: monospace;
+  background-color: #393939;
+  color: silver;
+  font-size: 16px;
+  line-height: 19px;
 }
 .unit-article img {
   display: block;
@@ -989,7 +995,7 @@ pre {
   }
 }
 /*
-	Not that old computer layout 
+	Not that old computer layout
 */
 @media only screen and (min-width: 1280px) {
   .the-header .unit-head .nav-global .logo {
@@ -1024,7 +1030,7 @@ pre {
   }
 }
 /*
-	Huge-screen layout 
+	Huge-screen layout
 */
 @media only screen and (min-width: 1410px) {
   .the-header {

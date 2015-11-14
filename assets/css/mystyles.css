@@ -1,0 +1,18 @@
+.toc ul {
+  padding-left: 20px;
+  list-style: decimal;
+  margin-bottom: 0;
+}
+
+.anchorjs-link {
+  background-color: #fafafa !important;
+  color: red !important;
+}
+
+strong {
+  font-size: 1.1em;
+}
+
+.unit-article blockquote {
+  border-left: 1em solid #5F021F;
+}

@@ -1,15 +1,12 @@
 ---
 layout: post
 title: "Debugging Node.js"
+toc: true
 description: ""
 category: ["node.js"]
 tags: ["node.js", "debug"]
 ---
 {% include JB/setup %}
-
-İçindekiler:
-
-{:toc}
 
 Şimdi elimizde bir node.js uygulaması var. Kodları var, çözemediğimiz çalıştırabiliyoruz ama bazı problemler/hatalar meydana geliyor. Onları incelememiz lazım. Burada noluyor? debugging devreye giriyor.
 
