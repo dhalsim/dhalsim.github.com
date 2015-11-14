@@ -52,7 +52,7 @@ V şeklindeki bu modelimizde, sürecin her aşamasına karşılık bir doğrulam
 
 Test odaklı bir süreç. Waterfall modeline göre test daha erken safhalarda başlıyor, bu da son süreçlerde keşfedilen eksik ve hataları daha erken bulmaya neden oluyor. Ama waterfall gibi bu model de yeterince esnek olmayabiliyor.
 
-Testing'le ilgiliyseniz sizi şu güzel yazımıza alalım => [Software Testing](/node.js/2015/11/15/software-testing/)
+Testing'le ilgiliyseniz sizi şu güzel yazımıza alalım => [Software Testing](/software/2015/11/15/software-testing/)
 
 # Prototyping Model
 
