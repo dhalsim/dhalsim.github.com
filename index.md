@@ -1,6 +1,6 @@
 ---
 layout: page
-title: Einen blog
+title: Yazılım Namına Dur!
 tagline: Supporting tagline
 ---
 {% include JB/setup %}
