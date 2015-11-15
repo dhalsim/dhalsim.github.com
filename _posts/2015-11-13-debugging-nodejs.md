@@ -10,7 +10,7 @@ tags: ["node.js", "debugging"]
 
 Şimdi elimizde bir node.js uygulaması var. Kodları var, çözemediğimiz çalıştırabiliyoruz ama bazı problemler/hatalar meydana geliyor. Onları incelememiz lazım. Burada noluyor? debugging devreye giriyor.
 
-![](/assets/kitten.png)
+![](/assets/images/kitten.png)
 
 Genelde gariban yazılımcı debugger'ıyla birlikte doğmuştur. Bir program yazarken yaptığı her satır değişiklikte en az bir seans debug etmezse o program çalışmaz. Eğer çalışırsa bu mucizedir.
 
