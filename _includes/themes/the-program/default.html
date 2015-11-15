@@ -11,71 +11,66 @@
 	<link href='{{ ASSET_PATH }}/css/style.css' rel="stylesheet" media="all">
 	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
 	<link href="http://feeds.feedburner.com/{{ site.author.feedbaname }}" rel="alternate" title="{{ page.title }}" type="application/atom+xml">
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
 	{% if page.toc %}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
-
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
-	<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
-	<script type="text/javascript">
-		$(document).ready(function () {
-			anchors.add('.content h1');
-			anchors.add('.content h2');
-			anchors.add('.content h3');
-			anchors.add('.content h4');
-			anchors.add('.content h5');
-
-			var level = 1;
-			var $parentUl = $currentUl = $('<ul/>');
-			var count = 0;
-			var listTypes = ['decimal', 'lower-alpha', 'circle']
-			$('.anchorjs-link').each(function () {
-				count++;
-				if(count === 1)
-				{
-					return true;
-				}
-
-				var $this = $(this);
-				var $parent = $this.parent();
-				var tagName = $parent.prop("tagName");
-				var thisLevel = tagName.charAt(1);
-				var text = $parent.text();
-
-				if(thisLevel > level) {
-					var $newUl = $('<ul/>');
-					$currentUl.append($newUl);
-					$currentUl = $newUl;
-				} else if(thisLevel < level) {
-					$currentUl = $currentUl.parent('ul');
-				}
-
-				var $a = $('<a/>');
-				$a.text(text);
-				$a.attr('href', $this.attr('href'));
-
-				level = thisLevel;
-				$currentUl.css('list-style', listTypes[level - 1]);
-				$currentUl.append($('<li/>').append($a));
-			});
-
-			var $div = $('<div/>');
-			$div.attr('class', 'toc');
-
-			$('.content header').append( $div.append($parentUl) );
-
-			$('.content img').click(function (e) {
-				var img = $('<img/>', {src: this.src});
-				return $.fancybox(img);
-			});
-		});
-	</script>
-
 	{% endif %}
 </head>
 <body>
-
+<a href="#0" class="cd-top cd-is-visible">Top</a>
 <div id="page" class="hentry">
 	<header class="the-header">
 		<div class="unit-head">
@@ -132,6 +127,95 @@
 /*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
 (function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
 </script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+{% if page.toc %}
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				$currentUl = $currentUl.parent('ul');
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		var $div = $('<div/>');
+		$div.attr('class', 'toc');
+
+		$('.content header').append( $div.append($parentUl) );
+
+		$('.content img').click(function (e) {
+			var img = $('<img/>', {src: this.src});
+			return $.fancybox(img);
+		});
+	});
+</script>
+{% endif %}
 
   {% include JB/analytics %}
 </body>
