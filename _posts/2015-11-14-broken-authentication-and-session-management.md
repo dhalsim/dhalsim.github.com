@@ -2,7 +2,7 @@
 layout: post
 title: "Broken Authentication and Session Management"
 description: ""
-toc: true;
+toc: true
 category: [".net", "security"]
 tags: [".net", "security", "session management"]
 ---

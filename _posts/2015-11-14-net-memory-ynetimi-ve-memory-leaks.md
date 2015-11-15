@@ -2,7 +2,7 @@
 layout: post
 title: ".Net Memory Yönetimi ve Memory Leaks"
 description: ""
-toc: true;
+toc: true
 category: [".net", "memory"]
 tags: [".net", "memory"]
 ---
@@ -65,7 +65,7 @@ En son çağrılan, en üstteki memory frame olduğundan stack yapısındadır.
 
 When Method1 completes, the stack frame is removed (along with the object reference), leaving the object without a reference.
 
-# 2. İşleyiş
+# İşleyiş
 
 ## Passing parameters
 
@@ -149,7 +149,7 @@ Sonuç şu şekilde olacaktır:
 ~~~
 
 
-# 3. Garbage collection
+# Garbage collection
 
 Heap üzerinde objelerin referans edilip edilmediğine bakıp heap'i temizler. Baktığı yerler:
 
@@ -263,7 +263,7 @@ Gen 2'ye gelip root referansı kalmayan objeler hafızada bir süre gereksiz yer
 
 > Bir objenin gereksiz yere referansının olması o objeyi çok kolay Gen 2'ye terfi ettirebilir, bu da memory'nin verimsiz kullanılmasını yol açabilir.
 
-# 4. Finalization
+# Finalization
 
 .NET tarafından kullanılan unmanaged (.NET olmayan) herhangi bir kod GC tarafından toplanamaz. Bu yüzden .NET tarafında bu kaynakların manuel free edilmesi gerekmektedir.
 
@@ -356,7 +356,7 @@ Böylece Dispose pattern'i eğer doğru kullanılırsa ilk baştan doğan Finali
 
 [Konu ile ilgili daha ayrıntılı anlatılan bir örnek](http://www.codeproject.com/Articles/15360/Implementing-IDisposable-and-the-Dispose-Pattern-P)
 
-# 5. GC Options
+# GC Options
 
 ## Modlar
 
@@ -436,7 +436,7 @@ finally
 }
 ~~~
 
-# 6. Weak References
+# Weak References
 
 Weak referanslar objeleri tutmanızı sağlarken aynı zamanda GC tarafından toplanmasına da izin verir. Büyük objelerde bazen kod içinde tekrar kullanılıp kullanılmayacağı belli olmayan durumlarda kullanmak isteyebilirsiniz.
 

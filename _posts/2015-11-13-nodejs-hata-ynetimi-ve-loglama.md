@@ -2,8 +2,8 @@
 layout: post
 title: "Node.js Hata Yönetimi ve Loglama"
 description: ""
-toc: true;
-category: ["node.js", "kontrol bende"]
+toc: true
+category: ["node.js", "kontrol-bende"]
 tags: ["node.js", "log", "error", "hata"]
 ---
 {% include JB/setup %}
@@ -26,7 +26,7 @@ Node.js'te bunu başarabilmenin çeşitli yolları mevcut. Ancak uygulama taraf�
 
 Dediğim gibi node.js'te bunun çok farklı yöntemleri mevcut. Benim ilk önereceğim [Winston](https://github.com/winstonjs/winston) olacak. İsmi de [şuradan](http://www.urbandictionary.com/define.php?term=Chill+Winston) geliyormuş :/. Kendisi **async** loglama yapıyor.
 
-## Winston
+# Winston
 
 Kurulum:
 
@@ -35,7 +35,7 @@ npm install winston --save
 npm install winston-redis --save
 ~~~
 
-### Seviyeler
+## Seviyeler
 
 Önemliden önemsize varsayılan seviyeler (levels): **`error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5`**
 
@@ -50,7 +50,7 @@ winston.log('info', 'Hello distributed log files!');
 winston.info('Hello again distributed logs');
 ~~~
 
-### Transports
+## Transports
 
 Varsayılan logger'ın winston.transports.Console tipinde varsayılan bir transportu vardır. Yani otomatik olarak çıktıyı Console'a verecektir.
 
@@ -67,7 +67,7 @@ winston.info('Hem dosyaya hem console'a yazacak');
 
 Winston [official transport'ları](https://github.com/winstonjs/winston/blob/master/docs/transports.md#winston-transports) çokçadır. *HTTP, redis, mongo* vb. buradan bulabilirsiniz. Bunun dışında 3rd party **zibilyon** tane [seçenek](https://github.com/winstonjs/winston/blob/master/docs/transports.md#find-more-transports) de mevcuttur.
 
-### Metadata
+## Metadata
 
 Farklı bilgileri de log'a ekleyebiliyoruz:
 
@@ -75,7 +75,7 @@ Farklı bilgileri de log'a ekleyebiliyoruz:
 winston.log('info', 'test mesajı', { bilgi: 'bu bir metadatadır' });
 ~~~
 
-### Ekleme (interpolation)
+## Ekleme (interpolation)
 
 Parametreli mesaj yazdırma konusunda yardımcı olur. Parametre tipleri: `%s string, 	%d number, %j json`
 
@@ -88,7 +88,7 @@ winston.log('info', 'test mesajı %s %d %j', 'ilk', 5, {number: 123}, {meta: "bu
 });
 ~~~
 
-### Exceptions
+## Exceptions
 
 ~~~js
 winston.handleExceptions();
@@ -111,7 +111,7 @@ winston.exitOnError = false;
 
 Üstteki kodda transport level'ı `warn` olarak ayarlanmış. Bu demektir ki `warn` **ve üzeri** önemdeki log'lar verilen transport'a uygulanacak. Bunlar `warn`, `debug` ve `error`'dür. Alt level'lar loglanmayacak: `silly` ve `verbose`.
 
-## Demo
+# Demo
 
 Konumuzu emektar repository'miz **chatcat** üzerinden götürmeye kararlıyım :) Spoiler sevenler:
 
@@ -302,6 +302,6 @@ process.on('uncaughtException', logger.logAndCrash);
   * <http://stackoverflow.com/a/15874115>
   * <https://nodejs.org/api/process.html#process_event_uncaughtexception>
 
-## Sonuç
+# Sonuç
 
 Hata yönetimi ve loglamayla ilgili epey mesafe katettik. Sonraki yazım ölçeklenebilir loglama üzerine olacak. Node.js scaled yapıdaki sistemlerde nasıl loglarız, bu logları nasıl toplarız ve değerlendiririz konusunda yazacağım.

@@ -3,7 +3,7 @@ layout: post
 title: "Debugging Node.js"
 toc: true
 description: ""
-category: ["node.js", "kontrol bende"]
+category: ["node.js", "kontrol-bende"]
 tags: ["node.js", "debugging"]
 ---
 {% include JB/setup %}

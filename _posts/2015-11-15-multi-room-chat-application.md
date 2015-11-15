@@ -2,7 +2,7 @@
 layout: post
 title: "Çok Odalı Node.js Chat Uygulaması"
 description: ""
-toc: true;
+toc: true
 category: ["node.js"]
 tags: ["node.js", "socket.io", "express", "redis", "mongodb", "xp"]
 ---

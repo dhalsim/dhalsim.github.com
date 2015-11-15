@@ -67,6 +67,16 @@
 	</style>
 	{% if page.toc %}
 	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+  <style>
+	.unit-article .bd .entry-content ul {
+		list-style: none;
+	}
+
+	.unit-article .bd .entry-content ul li:before {
+		color: red;
+		content: "\FF0A \2002";
+	}
+	</style>
 	{% endif %}
 </head>
 <body>
@@ -192,7 +202,8 @@ $(document).ready(function(){
 				$currentUl.append($newUl);
 				$currentUl = $newUl;
 			} else if(thisLevel < level) {
-				$currentUl = $currentUl.parent('ul');
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
 			}
 
 			var $a = $('<a/>');

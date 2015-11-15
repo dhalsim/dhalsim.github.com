@@ -680,15 +680,9 @@ pre {
 .unit-article dl {
   padding-left: 0;
 }
-.unit-article .bd .entry-content ul {
-  list-style: none;
+.unit-article ul {
+  list-style: square;
 }
-
-.unit-article .bd .entry-content ul li:before {
-  color: red;
-  content: "\FF0A \2002";
-}
-
 .unit-article ol {
   list-style: decimal;
 }

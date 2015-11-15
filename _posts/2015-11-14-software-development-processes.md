@@ -2,7 +2,7 @@
 layout: post
 title: "Yazılım Geliştirme Modelleri"
 description: ""
-toc: true;
+toc: true
 category: ["software"]
 tags: ["software-models", "waterfall", "spiral", "agile", "xp"]
 ---
