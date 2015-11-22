@@ -5,6 +5,7 @@ description: ""
 toc: true
 category: [".net", "memory"]
 tags: [".net", "memory"]
+excerpt: "Bu yazıda .NET memory yönetimi nasıl çalışır onu öğreneceğiz böylece uygulamarımızı hafıza açısından daha bilinçli geliştirebileceğiz.s"
 ---
 {% include JB/setup %}
 
@@ -24,7 +25,6 @@ Metot çağrımları sırasında o metot için geçerli verilerin tutulması, ve
 En son çağrılan, en üstteki memory frame olduğundan stack yapısındadır.
 
 ## Value Types
-
 
 * Byte
 * Int32
@@ -147,7 +147,6 @@ Sonuç şu şekilde olacaktır:
   lst.Add(i); // otomatik Boxing
   int p=(int)lst[0]; // Unboxing
 ~~~
-
 
 # Garbage collection
 

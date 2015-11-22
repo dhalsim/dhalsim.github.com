@@ -5,9 +5,9 @@ description: ""
 toc: true
 category: [".net", "security"]
 tags: [".net", "security", "session management"]
+excerpt: "ASP.NET uygulamalarında session management ile ilgili öneriler."
 ---
 {% include JB/setup %}
-
 
 ## Genel bilgiler
 

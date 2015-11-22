@@ -5,8 +5,13 @@ description: ""
 toc: true
 category: ["software"]
 tags: ["software-models", "waterfall", "spiral", "agile", "xp"]
+excerpt: "Her yazılımcının bilmesi gereken yazılım geliştirme süreçlerine değineceğiz. Yazılım geliştirme modellerinin en çok kullanılanlarının avantaj ve dezavantajlarını görüp XP ve agile prensiplerine değineceğiz."
+series: "Teori Önemlidir"
+series_no: 1
 ---
 {% include JB/setup %}
+
+{% include series.html %}
 
 > NOT: Bu metotlar tek başlarına iyi, kötü, çöp şeklinde sınıflandırılmamalıdır. Burada yazılmayan daha birçok model vardır. Seçilecek model, projenin tipine, boyutuna vs. bağlı olarak değişebilir, ya da hibrit çözümlere gidilebilir. Dezavantajlı kısımlar farkında olunduğunda üstesinden gelinebilir.
 

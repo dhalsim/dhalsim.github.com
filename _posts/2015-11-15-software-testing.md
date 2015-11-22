@@ -5,8 +5,16 @@ description: ""
 toc: true
 category: ["software"]
 tags: ["testing", "tdd", "unit test", "integration test", "system test"]
+excerpt: "Yazılım testi: Yazılım ürününün production'a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir. 
+
+Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çalışan yazılımın neden önemli olduğunun sebeplerine bakalım. Aşağıda önemli yazılım hatalarının tarihte sebep olduğu olaylar listeleniyor."
+series: "Teori Önemlidir"
+series_no: 2
 ---
+
 {% include JB/setup %}
+
+{% include series.html %}
 
 # Tanım
 
@@ -109,17 +117,19 @@ STLC Aşamaları:
 
 [Agile ve XP]() yazımızda da TDD'yi sıkça görürüz. Ama yine çevik prensiplerin *sözde* olarak uygulandığı ama TDD'nin **fazlalık** olarak görüldüğü yerler de çoktur.
 
-> Peki neden TDD? **Çünkü lanet olası testleri sonradan yazması ya çok zordur ya da artık imkansız hale gelmiştir.** Bu özellikle **Unit Testing** için daha geçerlidir. Zaten bizde de genelde **UI Testing** yapılır ama Unit Testing yapılmaz.
+> Peki neden TDD? **Çünkü lanet olası testleri sonradan yazması ya çok zordur ya da artık imkansız hale gelmiştir.** Bu özellikle **Unit Testing** için geçerlidir.
 
 **Amaçlar:**
 
 * Yazılmış kodun testinin yazılması zordur, bu yüzden önce test sonra kod
-* Zaman içindeki değişikliklerin önceden çalışan kodu bozup bozmadığının **anlık** kontrolü
+* Zaman içindeki değişikliklerin önceden çalışan kodu bozup bozmadığının **anlık** kontrolü (lanetli hataların oluşmasının önlenmesi: biribirini bozan hata düzeltmeleri)
 * Değişime açık olmak
 
 **Hataların anlık farkedilmesi:**
 
 Diyelim bir yazılımınızda bir hata meydana geldi. Bu müşteriden de gelebilir, siz de farketmiş olabilirsiniz. _TDD kullanılmayan_ bir projede tipik olarak şunlar yaşanır.
+
+![](/assets/images/ffffuuu.png)
 
 * Aslen hatayı oluşturan kodun yazılması (kimin yazdığı, zamanı belli değil)
 * Hata ile ilgili kaydın oluşturulması
@@ -131,6 +141,8 @@ Diyelim bir yazılımınızda bir hata meydana geldi. Bu müşteriden de gelebil
 * Düzeltme işleminden sonra kod tekrar test edilmelidir. Bizim durumumuzda bu test otomatize edilmediğinden test süreci bir haftayı bulabilir.
 * Test süreci sonrasında şanslıysak bir problem çıkmaz ve kodun tekrar canlıya atılması için örneğin 1 hafta daha gerekmektedir.
 * Şanslı değilsek ki çoğu zaman değiliz, bu hata ya hiç düzelmemiş ya da daha kötüsü başka hata(lar)a sebep olmuş olabilir. Bu durumda bu döngünün başına dönmemiz gerekiyor.
+
+![](/assets/images/happygoat.jpg)
 
 En basit bir hatanın çözümü için hatanın kaynağından itibaren günler, haftalar, aylar hatta yıllar geçmiş olabilir. Karmaşık yazılım sistemlerinde buna ratslamak çok zor değildir. Peki _TDD kullanılan_ bir projede durum nasıl olurdu? İki türlü olabilirdi. İlki:
 
@@ -183,6 +195,7 @@ Neler mock edilebilir? Fonksiyonun kullandığı tüm dış kaynaklar: HTTP requ
 **İyi unit testin özellikleri:**
 
 * (Çok) hızlı çalışması, çünkü bir kodun sonucunu ne kadar erken görebilirseniz o kadar iyidir.
+* İzole: Test edilmek istenen fonksiyonalize diğer kodlardan izole olmalıdır.
 * Tekrarlanabilir: Test her çalışmasında aynı sonucu vermelidir
 * Bağımsız: Diğer testlerin çalışmasından bağımsız olmalıdır.
 * Anlaşılabilir
@@ -197,9 +210,50 @@ Neler mock edilebilir? Fonksiyonun kullandığı tüm dış kaynaklar: HTTP requ
 
 Bu yöntemler takip edildiği takdirde, iyi bir unit test yazmış oluruz. Peki bu yöntem (TDD) aynı zamanda bize geliştirme esnasında nasıl yardımcı olur ona bakalım.
 
+**Sernaryo:** Bir ERP yazılımı yapıyorsunuz ve sizden istenen şey: siparişi görüp iptal etmek veya bir notla beraber ilgili departmana iletmek olsun.
+
+_TDD kullanılmayan_ örneğimizde geliştirme yöntemi genelde şu şekilde olacaktır.
+
+1. İstenen işlemleri yapacak kod yazılır.
+1. Daha sonra yazılım derlenir ve local ortamda çalıştırılır. Bu iş çeşitli gereksinimler gerektirebilir: DB, network bağlantısı gibi.
+1. Müşteri rolünde bir kullanıcıyla sisteme giriş yapılır.
+1. Sipariş oluşturmak için gerekli ekranlarda veriler girilir
+1. Sistemden çıkılıp siparişleri görebilen bir kullanıcıyla tekrar girilir.
+1. Sistemden sipariş görülür ve kodlanan özelliğin doğru çalışıp çalışmadığına bakılır.
+
+Eğer şanslıysanız ki çoğu zaman değilsiniz, bu işlemi 2-3 kere tekrar ederek istenen kodu yazabilirsiniz ama biz biliyoruz ki yazılan kodu test edebilmek için bu doğrudan alakası olmayan işleri çok kereler tekrarlamanız gerekecek. Üstelik bu işin müşteriden, QA'den dönme durumunda yine aynı adımları izlemeniz gerekecek.
+
+_TDD kullanılan_ örneğimizde belki işimiz çok kolay olmayacak ama bize şu basit faydaları sağlayacaktır:
+
+* Test yazmak basit ve etkili bir analiz ve tasarım sağlar
+* Geliştirme esnasında kodun ne yapıp yapamadığının anlık sonucunu görmek konsantrasyonun dağılmadan geliştirebilmeyi sağlar
+* Değiştirilen kodun başka yerleri bozup bozmadığının farkında olabilmek daha radikal (ve doğru) değişiklikleri mümkün kılar
+* Yazılan testler geliştiriciler için en güncel dökümantasyonu sağlar
+* Testlerin izole yazılması sayesinde yazılımın diğer kısımlarından bağımsız geliştirilmesi sağlanabilir.
+* Kodun bambaşka bir yerindeki bug artık sizin geliştirmenizi engellemez
+
+## Integration Testing
+
+Karmaşık bir yazılım birçok alt yazılımların birleşimiyle meydana gelir.  geliştirilen bu modüller birbirleriyle belirli arayüzlerle etkileşerek çalışırlar. Görülmüştür ki bu modüllerin entegrasyonu yazılım geliştirmesindeki en zorlu süreçlerden biridir.
+
+Bunu çözebilmek için çevik prensiplerden de yararlanarak integration testing ortaya çıkarılmıştır. Farklı stratejiler mevcuttur:
+
+* Big Bang Yöntemi: Geliştirilen tüm modüller tek bir kerede birleştirilir ve test edilir. Tüm modüllerin bitmesini gerektirir ve çıkan hataların ana kaynağını tespit etmek zordur.
+* Incremental (Birikmeli) Yöntem: *Buttom Up* (alttan üste), *Top Down* (üstten alta) ve ikisinin birleşimi *Sandwich* yöntemleri kullanılabilir. Seçilen yönteme göre **stub** ve **driver** yazılması gerekebilir. [^stubdriver]
+
+![](/assets/images/topbottom.png)
+
+## System Testing
+
+Ürünün canlıya çıkmadan önce yapılan yazılım sisteminin bütününün test edilmesidir. Yazılımın aynı zamanda donanım ve diğer dış kaynaklarla beraber denenmesidir. 50'den fazla çeşidi bununmaktadır. Kullanılabilirlik (usablity), regression [^regression], functional, performans en çok kullanılan system testing çeşitlerindendir.
+
+Çoğu zaman Functional Requirement Specification (FRS) [^frs], System Requirement Specification (SRS) [^srs] gibi üst seviye dökümantasyonlardan yararlanılır.
+
 # Code Coverage
 
-# Regression Testing
+Yazılan testlerin, yazılımı gerçekte ne kadarını kapsadığının hesaplandığı yöntemdir. Teorik olarak code coverage %100 olan yazılımlar hatasızdır denebilir ancak pratikte birçok yönden çok fazla sayıda test yazılmasını gerektireceği için çok zordur. Ancak oran ne kadar yüksekse sonra hata oluşma olasılığı düşer.
+
+TDD kullanımı code coverage'ın yüksek tutulması için bir yöntem olarak düşünülebilir çünkü TDD ile testi olmayan kod yazılmaması amaçlanır.
 
 # Continuous integration
 
@@ -209,3 +263,12 @@ Bu yöntemler takip edildiği takdirde, iyi bir unit test yazmış oluruz. Peki 
 
 * <http://www.turkishtestingboard.org/files/ISTQB-Yazilim-Testi-Terimler-Sozlugu.pdf>
 * <http://www.guru99.com/software-testing-life-cycle.html>
+* <http://istqbexamcertification.com/what-is-integration-testing>
+* <http://googletesting.blogspot.co.uk/2015/04/just-say-no-to-more-end-to-end-tests.html>
+* <http://www.artima.com/weblogs/viewpost.jsp?thread=203994>
+* <http://www.developertesting.com/archives/month200705/20070504-000425.html>
+
+[^stubdriver]: <http://testingbasicinterviewquestions.blogspot.com.tr/2012/01/why-we-use-stubs-and-drivers.html>
+[^regression]: <https://en.wikipedia.org/wiki/Regression_testing>
+[^frs]: <https://en.wikipedia.org/wiki/Functional_requirement>
+[^srs]: <https://en.wikipedia.org/wiki/Requirements_analysis>

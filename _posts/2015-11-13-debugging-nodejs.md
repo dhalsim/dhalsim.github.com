@@ -5,10 +5,14 @@ toc: true
 description: ""
 category: ["node.js", "kontrol-bende"]
 tags: ["node.js", "debugging"]
+series: "Kontrol Bende"
+series_no: 1
 ---
 {% include JB/setup %}
 
 Şimdi elimizde bir node.js uygulaması var. Kodları var, çözemediğimiz çalıştırabiliyoruz ama bazı problemler/hatalar meydana geliyor. Onları incelememiz lazım. Burada noluyor? debugging devreye giriyor.
+
+<!--more-->
 
 ![](/assets/images/kitten.png)
 

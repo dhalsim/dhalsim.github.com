@@ -5,10 +5,24 @@ tagline: Supporting tagline
 ---
 {% include JB/setup %}
 
-## Posts
-
 <ul class="posts">
   {% for post in site.posts %}
-    <li><span>{{ post.date | date_to_string }}</span> &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">{{ post.title }}</a></li>
+    <li>
+      <div class="postTitle">
+        <a href="{{ BASE_PATH }}{{ post.url }}">
+          {% if post.series %}
+            {{ post.series }} - PART {{ post.series_no }}:
+          {% endif %}
+          {{ post.title }}
+        </a> &raquo;
+        <span>{{ post.date | date_to_string }}</span>
+      </div>
+      <div class="postExcerpt">
+        <blockquote>
+          {{ post.excerpt | strip_html }}
+          ... &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">Devamı</a>
+        </blockquote>
+      </div>
+    </li>
   {% endfor %}
 </ul>

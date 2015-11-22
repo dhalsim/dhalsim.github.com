@@ -8,6 +8,7 @@ THEME_NAME: the-program
 
 # markdown: kramdown
 highlighter: pygments
+excerpt_separator: <!--more-->
 #
 # kramdown:
 #   GFM: true
@@ -15,7 +16,7 @@ highlighter: pygments
 markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks",
-    "autolink", "strikethrough", "superscript", "with_toc_data"]
+    "autolink", "strikethrough", "superscript", "with_toc_data", "footnotes"]
 
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.

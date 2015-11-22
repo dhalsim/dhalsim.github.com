@@ -1,0 +1,39 @@
+{% assign count = '0' %}
+{% assign idx = '0' %}
+{% for post in site.posts reversed %}
+	{% if post.series == page.series %}
+		{% capture count %}{{ count | plus: '1' }}{% endcapture %}
+		{% if post.url == page.url %}
+			{% capture idx %}{{count}}{% endcapture %}
+		{% endif %}
+	{% endif %}
+{% endfor %}
+
+<div class="seriesNote">
+  <p>Bu makale {{ count }} bölümlük <strong>{{page.series}}</strong> serisinin {{ idx }}. bölümüdür.</p>
+	<ul>
+	{% assign count = '0' %}
+	{% for post in site.posts reversed %}
+	{% if post.series == page.series %}
+		{% capture count %}{{ count | plus: '1' }}{% endcapture %}
+
+    {% assign liclass = '' %}
+    {% if page.url == post.url %}
+      {% assign liclass = 'selected' %}
+    {% endif %}
+		<li class="{{liclass}}">Part {{ count }} -
+		{% if page.url != post.url %}
+			<a href="{{post.url}}">
+		{% endif %}
+    {{post.title}}
+    {% if page.url != post.url %}
+      </a>
+    {% endif %}
+		</li>
+	{% endif %}
+	{% endfor %}
+	</ul>
+</div>
+
+{% assign count = nil %}
+{% assign idx = nil %}

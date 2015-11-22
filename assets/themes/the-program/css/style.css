@@ -424,7 +424,7 @@ h1,
 .h1 {
   font-size: 30px;
   line-height: 52px;
-  margin-top: 52px;
+  margin-top: 15px;
   margin-bottom: 26px;
 }
 h2,
@@ -609,7 +609,7 @@ pre {
 /* MAIN
 --------------------------------------------------------------------------------- */
 .unit-article header {
-  border-bottom: 5px solid rgba(21, 25, 25, 0.8);
+  /*border-bottom: 5px solid rgba(21, 25, 25, 0.8);*/
   margin-bottom: 21px;
 }
 .unit-article header h1 {

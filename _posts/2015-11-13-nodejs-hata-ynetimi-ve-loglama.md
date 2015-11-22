@@ -5,6 +5,8 @@ description: ""
 toc: true
 category: ["node.js", "kontrol-bende"]
 tags: ["node.js", "log", "error", "hata"]
+series: "Kontrol Bende"
+series_no: 2
 ---
 {% include JB/setup %}
 
@@ -13,6 +15,8 @@ Merhaba, **"Kontrol Bende"** serisine yeni bir konu daha ekliyoruz.
 Bundan önce [Node.js Debugging](/node.js/2015/11/13/debugging-nodejs/) konusunu işlemiştik. Şimdi ise hem debugging'te hem de production'da olmazsa olmaz **loglama** konusuna dalıyoruz.
 
 Loglama konusu node.js ile birlikte daha da önemli bir hale geliyor. Bunun nedeni node.js'in kullanım amaçlarından biri olan *scaling*'te ne kadar yaşamsal olduğunu bilmemiz.
+
+<!--more-->
 
 Şöyle düşünelim. Daha önceden [Monolithic](https://en.wikipedia.org/wiki/Monolithic_application) mimarideki uygulamalarımızı yönetmek görece kolaydı. Tek bir makinede Uygulama ve DB çalışıyordu ve bakmamız gereken DB üzerindeki bir tablo veya birkaç log dosyasından ibaretti.
 
