@@ -602,10 +602,6 @@ pre {
 .the-header .nav-global .logo {
   text-transform: none;
 }
-.the-header .nav-global .forkme {
-  position: relative;
-  top: 2px;
-}
 /* MAIN
 --------------------------------------------------------------------------------- */
 .unit-article header {
@@ -660,21 +656,21 @@ pre {
   background-color: cornsilk;
   color: black;
   padding-top: 2px;
-  padding-bottom: 2px;
+  padding-bottom: 4px;
 }
 .unit-article a:visited {
   border-bottom: 1px dashed #ad4346;
   background-color: cornsilk;
   color: black;
   padding-top: 2px;
-  padding-bottom: 2px;
+  padding-bottom: 4px;
 }
 .unit-article a:hover {
-  border-bottom: 1px dashed #d08688;
-  background-color: black;
+  border-bottom: 1px dashed black;
+  background-color: #c26164;
   color: yellow;
   padding-top: 2px;
-  padding-bottom: 2px;
+  padding-bottom: 4px;
 }
 .unit-article blockquote {
   border-left: 1em solid rgba(21, 25, 25, 0.8);
@@ -785,10 +781,10 @@ pre {
 .unit-article .list-linear .list-head {
   margin-right: 4px;
 }
-.unit-article .list-category a,
+/*.unit-article .list-category a,
 .unit-article .list-tag a {
   border: 0 none;
-}
+}*/
 .unit-article .list-category a:hover span,
 .unit-article .list-tag a:hover span {
   background-color: #f99157;
@@ -853,12 +849,17 @@ pre {
   display: inline;
   line-height: normal;
   vertical-align: middle;
+  margin: 0;
+  padding: 0;
+}
+.layout-page .tag_box li:before {
+  display: none;
 }
 .layout-page .tag_box a {
   background-color: #99cc99;
   float: left;
   border: 1px solid #448844;
-  padding: 3px 6px 3px 6px;
+  padding: 6px 6px 3px 6px;
   -webkit-border-radius: 3px;
   -moz-border-radius: 3px;
   border-radius: 3px;
@@ -889,6 +890,7 @@ pre {
 .layout-page .tag_box a:hover {
   background-color: #77bb77;
   border: 1px solid #336633;
+  color: black;
 }
 .layout-page .tag_box a:hover span {
   background-color: #e1e1e1;

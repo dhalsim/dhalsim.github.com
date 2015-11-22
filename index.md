@@ -13,8 +13,7 @@ tagline: Supporting tagline
           {% if post.series %}
             {{ post.series }} - PART {{ post.series_no }}:
           {% endif %}
-          {{ post.title }}
-        </a> &raquo;
+          {{ post.title }}</a> &raquo;
         <span>{{ post.date | date_to_string }}</span>
       </div>
       <div class="postExcerpt">

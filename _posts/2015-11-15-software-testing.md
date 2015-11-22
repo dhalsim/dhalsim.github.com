@@ -249,13 +249,23 @@ Bunu çözebilmek için çevik prensiplerden de yararlanarak integration testing
 
 Çoğu zaman Functional Requirement Specification (FRS) [^frs], System Requirement Specification (SRS) [^srs] gibi üst seviye dökümantasyonlardan yararlanılır.
 
-# Code Coverage
+# Code Coverage (Test Coverage)
 
-Yazılan testlerin, yazılımı gerçekte ne kadarını kapsadığının hesaplandığı yöntemdir. Teorik olarak code coverage %100 olan yazılımlar hatasızdır denebilir ancak pratikte birçok yönden çok fazla sayıda test yazılmasını gerektireceği için çok zordur. Ancak oran ne kadar yüksekse sonra hata oluşma olasılığı düşer.
+Yazılan testlerin, yazılımı gerçekte ne kadarını kapsadığının hesaplandığı yöntemdir. Teorik olarak code coverage %100 olan yazılımlar hatasızdır denebilir ancak pratikte birçok yönden çok fazla sayıda test yazılmasını gerektireceği için çok zordur. Ancak oran ne kadar yüksekse hata oluşma olasılığı düşer.
 
-TDD kullanımı code coverage'ın yüksek tutulması için bir yöntem olarak düşünülebilir çünkü TDD ile testi olmayan kod yazılmaması amaçlanır.
+**TDD** kullanımı code coverage'ın yüksek tutulması için bir yöntem olarak düşünülebilir çünkü TDD ile testi olmayan kod yazılmaması amaçlanır.
+
+Çok kullanılan code coverage ölçüm yöntemleri:
+
+* Statement Coverage: Kaynak kodunun satır bazında ne kadarının çalıştığına bakar
+* Decision Coverage: `if`, `while` gibi karar elemanlarında `boolean` değerinin tümüne bakar. bir kere `true` bir kere de `false` seçilebilmesi yeterlidir.
+* Condition Coverage: Yine decision coverage gibi ama bu sefer karar statement'larınındaki tüm değişkenler test edilmeli. 
 
 # Continuous integration
+
+
+
+# Continuous Delivery
 
 # Demo
 
@@ -267,6 +277,11 @@ TDD kullanımı code coverage'ın yüksek tutulması için bir yöntem olarak d�
 * <http://googletesting.blogspot.co.uk/2015/04/just-say-no-to-more-end-to-end-tests.html>
 * <http://www.artima.com/weblogs/viewpost.jsp?thread=203994>
 * <http://www.developertesting.com/archives/month200705/20070504-000425.html>
+* <http://www.bullseye.com/coverage.html>
+
+<br />
+
+**Dipnotlar:** 
 
 [^stubdriver]: <http://testingbasicinterviewquestions.blogspot.com.tr/2012/01/why-we-use-stubs-and-drivers.html>
 [^regression]: <https://en.wikipedia.org/wiki/Regression_testing>
