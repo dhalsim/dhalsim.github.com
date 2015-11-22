@@ -6,7 +6,7 @@ toc: true
 category: ["software"]
 tags: ["software-models", "waterfall", "spiral", "agile", "xp"]
 excerpt: "Her yazılımcının bilmesi gereken yazılım geliştirme süreçlerine değineceğiz. Yazılım geliştirme modellerinin en çok kullanılanlarının avantaj ve dezavantajlarını görüp XP ve agile prensiplerine değineceğiz."
-series: "Teori Önemlidir"
+series: "Teori Önemlidir!"
 series_no: 1
 ---
 {% include JB/setup %}
@@ -256,7 +256,7 @@ XP'nin bir diğer güçlü tarafı da pratiklerdir. Teknoloji ve ihtiyaçlar do�
 * Kod standartları: Tüm ekibin uymak zorunda olduğu kodlama standartlarıdır. Bu standartlar kaçınılması veya uygulanması gereken kodlama yöntemleri olabilir. Genellikle dile göre değişir ve dil topluluklarında belli standartlar zaten vardır, ancak takımlar değişiklik yapabilirler. Bu kodun herkes için daha anlaşılabilir olmasını sağlar.
 * Pair programming (eşli programlama): Tek makinede aynı iş için iki programcının çalışması şeklindedir.
 * Mesai: Fazla mesai XP topluluklarında kaçınılması gereken bir şeydir. Çünkü bu moral ve verimlilik açısından orta ve uzun vadede sorunlara yol açar
-* Test-driven Development (test yönelimli geliştirme): Buradaki çoğu pratiğin hayata geçirilebilmesi için olmazsa olmaz yöntemdir. Çeşitleri vardır ve ayrı bir yazıyı haketmektedir: <<<!!! BURAYA TESTİNG YAZISI LİNKİ GELECEK !!!>>>
+* Test-driven Development (test yönelimli geliştirme): Buradaki çoğu pratiğin hayata geçirilebilmesi için olmazsa olmaz yöntemdir. Çeşitleri vardır ve [ayrı bir yazıyı](/software/2015/11/15/software-testing) haketmektedir
 * Collective Code Ownership (Kodun müşterek sahiplenilmesi): Yazılan bir kodu isteyen herkes inceleyip değiştirebilir. Bu bugları azaltıp kodu iyileştiren bir sistemdir. Otomatize testler ve pair programming bunun için önşarttır.
 * System Metaphor: Yazılımın tüm takım (geliştiriciler, müşteri, yöneticiler) tarafından anlaşılabilir bir tanımıdır. Tüm sistemin olduğu gibi daha küçük modüllerin ve sınıfların da isimlendirmesinde anlaşılır olması ve kendi kendini anlatması beklenir. Tabii bu konu kod standartlarında da ele alınabilir.
 

@@ -8,7 +8,7 @@ tags: ["testing", "tdd", "unit test", "integration test", "system test"]
 excerpt: "Yazılım testi: Yazılım ürününün production'a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir. 
 
 Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çalışan yazılımın neden önemli olduğunun sebeplerine bakalım. Aşağıda önemli yazılım hatalarının tarihte sebep olduğu olaylar listeleniyor."
-series: "Teori Önemlidir"
+series: "Teori Önemlidir!"
 series_no: 2
 ---
 
@@ -115,7 +115,7 @@ STLC Aşamaları:
 
 Çevirisini **Test Yönelimli Geliştirme** olarak seçmeyi tercih ettim. Yazılım geliştirirken **önce** testinin yazılması, daha sonra da kodun kendisinin yazılması esasına dayanmaktadır. Çok yararlıdır, ancak kullanmaya başlaması, ikna olması/edilmesi zor bir yöntemdir. Türkiye'de çok fazla kullanıldığını düşünmüyorum. Ama yurt dışında kullanmayan ya çok azdır ya da kullanması gerektiğinin bilincindedir.
 
-[Agile ve XP]() yazımızda da TDD'yi sıkça görürüz. Ama yine çevik prensiplerin *sözde* olarak uygulandığı ama TDD'nin **fazlalık** olarak görüldüğü yerler de çoktur.
+[Agile ve XP](/software/2015/11/14/software-development-processes#agile-model) yazımızda da TDD'yi sıkça görürüz. Ama yine çevik prensiplerin *sözde* olarak uygulandığı ama TDD'nin **fazlalık** olarak görüldüğü yerler de çoktur.
 
 > Peki neden TDD? **Çünkü lanet olası testleri sonradan yazması ya çok zordur ya da artık imkansız hale gelmiştir.** Bu özellikle **Unit Testing** için geçerlidir.
 

@@ -657,15 +657,24 @@ pre {
 }
 .unit-article a:link {
   border-bottom: 1px dashed #c26164;
-  background-color: beige;
+  background-color: cornsilk;
+  color: black;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 .unit-article a:visited {
   border-bottom: 1px dashed #ad4346;
-  background-color: beige;
+  background-color: cornsilk;
+  color: black;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 .unit-article a:hover {
   border-bottom: 1px dashed #d08688;
-  background-color: antiquewhite;
+  background-color: black;
+  color: yellow;
+  padding-top: 2px;
+  padding-bottom: 2px;
 }
 .unit-article blockquote {
   border-left: 1em solid rgba(21, 25, 25, 0.8);
@@ -675,52 +684,78 @@ pre {
   margin-left: 0;
   margin-right: 0;
 }
-.unit-article ul,
-.unit-article ol,
-.unit-article dl {
+.unit-article ol {
+  counter-reset: li;
+  margin-left: 0;
   padding-left: 0;
+}
+.unit-article ol > li {
+  position: relative;
+  margin: 0 0 6px 2em;
+  padding: 4px 8px;
+  list-style: none;
+  border-top: 2px solid #666;
+  background: #f6f6f6;
+}
+.unit-article ol > li:before {
+  content: counter(li);
+  counter-increment: li;
+  position: absolute;
+  top: -2px;
+  left: -2em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 2em;
+  margin-right: 8px;
+  padding: 4px;
+  border-top: 2px solid #666;
+  color: #fff;
+  background: #666;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-align: center;
+}
+.unit-article ul,
+.unit-article dl {
+  margin-left: 0;
+  padding-left: 0;
+  margin-bottom: 10px;
 }
 .unit-article ul {
   list-style: square;
 }
-.unit-article ol {
-  list-style: decimal;
+.unit-article ul > li {
+  position: relative;
+  margin: 0 0 6px 2em;
+  padding: 4px 8px;
+  list-style: none;
+  border-top: 2px solid #666;
+  background: #f6f6f6;
 }
-.unit-article li h1,
-.unit-article dt h1,
-.unit-article dd h1,
-.unit-article li h2,
-.unit-article dt h2,
-.unit-article dd h2,
-.unit-article li h3,
-.unit-article dt h3,
-.unit-article dd h3,
-.unit-article li h4,
-.unit-article dt h4,
-.unit-article dd h4,
-.unit-article li h5,
-.unit-article dt h5,
-.unit-article dd h5,
-.unit-article li p,
-.unit-article dt p,
-.unit-article dd p,
-.unit-article li ul,
-.unit-article dt ul,
-.unit-article dd ul,
-.unit-article li ol,
-.unit-article dt ol,
-.unit-article dd ol,
-.unit-article li dl,
-.unit-article dt dl,
-.unit-article dd dl,
-.unit-article li blockquote,
-.unit-article dt blockquote,
-.unit-article dd blockquote,
-.unit-article li .hasGrid,
-.unit-article dt .hasGrid,
-.unit-article dd .hasGrid {
-  margin-left: 0;
+.unit-article ul > li:before {
+  color: #FFFF00;
+  content: "\FF0A \2002";
+  position: absolute;
+  top: -2px;
+  left: -2em;
+  -moz-box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  box-sizing: border-box;
+  width: 2em;
+  margin-right: 8px;
+  padding: 4px;
+  padding-left: 8px;
+  border-top: 2px solid #666;
+  background: #666;
+  font-weight: bold;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  text-align: center;
+}
+.unit-article li ul, .unit-article li ol {
+  margin-left: -8px;
   margin-right: 0;
+  margin-top: 8px;
 }
 .unit-article p code,
 .unit-article li code {
