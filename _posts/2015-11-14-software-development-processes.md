@@ -11,8 +11,6 @@ series_no: 1
 ---
 {% include JB/setup %}
 
-{% include series.html %}
-
 > NOT: Bu metotlar tek başlarına iyi, kötü, çöp şeklinde sınıflandırılmamalıdır. Burada yazılmayan daha birçok model vardır. Seçilecek model, projenin tipine, boyutuna vs. bağlı olarak değişebilir, ya da hibrit çözümlere gidilebilir. Dezavantajlı kısımlar farkında olunduğunda üstesinden gelinebilir.
 
 # Geleneksel (waterfall) model

@@ -1,15 +1,15 @@
 ---
 layout: page
-title: Yazılım Namına Dur!
-tagline: Supporting tagline
 ---
 {% include JB/setup %}
+
+<h1>{% t headers.main %}</h1>
 
 <ul class="posts">
   {% for post in site.posts %}
     <li>
       <div class="postTitle">
-        <a href="{{ BASE_PATH }}{{ post.url }}">
+        <a href="{{ site.baseurl }}{{ post.url }}">
           {% if post.series %}
             {{ post.series }} - PART {{ post.series_no }}:
           {% endif %}
@@ -19,7 +19,7 @@ tagline: Supporting tagline
       <div class="postExcerpt">
         <blockquote>
           {{ post.excerpt | strip_html }}
-          ... &raquo; <a href="{{ BASE_PATH }}{{ post.url }}">Devamı</a>
+          ... &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{% t mainpage.more %}</a>
         </blockquote>
       </div>
     </li>

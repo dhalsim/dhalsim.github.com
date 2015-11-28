@@ -1,0 +1,14 @@
+langs:
+  english: İngilizce
+  turkish: Türkçe
+mainpage:
+  aboutme: Hakkımda
+  more: Devamı
+headers:
+  main: Yazılım Namına Dur!
+  archive: Arşiv
+  pages: Sayfalar
+  categories: Kategoriler
+  tags: Taglar
+links:
+  back_to_top: Başa dön

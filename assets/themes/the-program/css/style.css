@@ -58,16 +58,6 @@ select,
 textarea {
   font-family: sans-serif;
 }
-::-moz-selection {
-  background: #073642;
-  color: #fff;
-  text-shadow: none;
-}
-::selection {
-  background: #073642;
-  color: #fff;
-  text-shadow: none;
-}
 /*
 Links from [HTML5 Boilerplate](http://j.mp/rP0wmY)
 
@@ -757,7 +747,7 @@ pre {
 .unit-article li code {
   padding: 2px 5px;
   font-family: monospace;
-  background-color: #393939;
+  /*background-color: #393939;*/
   color: silver;
   font-size: 16px;
   line-height: 19px;

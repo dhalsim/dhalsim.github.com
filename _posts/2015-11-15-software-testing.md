@@ -5,7 +5,7 @@ description: ""
 toc: true
 category: ["software"]
 tags: ["testing", "tdd", "unit test", "integration test", "system test"]
-excerpt: "Yazılım testi: Yazılım ürününün production'a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir. 
+excerpt: "Yazılım testi: Yazılım ürününün production'a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir.
 
 Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çalışan yazılımın neden önemli olduğunun sebeplerine bakalım. Aşağıda önemli yazılım hatalarının tarihte sebep olduğu olaylar listeleniyor."
 series: "Teori Önemlidir!"
@@ -13,8 +13,6 @@ series_no: 2
 ---
 
 {% include JB/setup %}
-
-{% include series.html %}
 
 # Tanım
 
@@ -259,7 +257,7 @@ Yazılan testlerin, yazılımı gerçekte ne kadarını kapsadığının hesapla
 
 * Statement Coverage: Kaynak kodunun satır bazında ne kadarının çalıştığına bakar
 * Decision Coverage: `if`, `while` gibi karar elemanlarında `boolean` değerinin tümüne bakar. bir kere `true` bir kere de `false` seçilebilmesi yeterlidir.
-* Condition Coverage: Yine decision coverage gibi ama bu sefer karar statement'larınındaki tüm değişkenler test edilmeli. 
+* Condition Coverage: Yine decision coverage gibi ama bu sefer karar statement'larınındaki tüm değişkenler test edilmeli.
 
 # Continuous integration
 
@@ -281,7 +279,7 @@ Yazılan testlerin, yazılımı gerçekte ne kadarını kapsadığının hesapla
 
 <br />
 
-**Dipnotlar:** 
+**Dipnotlar:**
 
 [^stubdriver]: <http://testingbasicinterviewquestions.blogspot.com.tr/2012/01/why-we-use-stubs-and-drivers.html>
 [^regression]: <https://en.wikipedia.org/wiki/Regression_testing>
