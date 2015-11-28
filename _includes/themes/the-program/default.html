@@ -2,7 +2,7 @@
 <!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
 <!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
 <!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
-<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="{{site.lang}}"> <!--<![endif]-->
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
@@ -83,14 +83,15 @@
 							</a>
 						</li>
 						<li class="logo">
-							<a href="/">
+							<a href="/" style="font-family: monospace">
+								Blog'um:
 								{{ site.title }}
 							</a>
 						</li>
-						<li class="archive"><a href="/archive.html">archive</a></li>
-						<li class="page"><a href="/pages.html">pages</a></li>
-						<li class="category"><a href="/categories.html">categories</a></li>
-						<li class="tag"><a href="/tags.html">tags</a></li>
+						<li class="archive"><a href="{{ site.baseurl }}/archive.html">{% t headers.archive %}</a></li>
+						<li class="page"><a href="{{ site.baseurl }}/pages.html">{% t headers.pages %}</a></li>
+						<li class="category"><a href="{{ site.baseurl }}/categories.html">{% t headers.categories %}</a></li>
+						<li class="tag"><a href="{{ site.baseurl }}/tags.html">{% t headers.tags %}</a></li>
 					</ul>
 				</nav>
 			</div><!-- unit-inner -->
@@ -106,10 +107,21 @@
 		</div><!-- unit-body -->
 	</div><!-- body -->
 	<footer class="the-footer">
+	{% if site.lang == "tr" %}
+		<a href="/en" >{% t langs.english %}</a>
+	{% else %}
+		{% t langs.english %}
+	{% endif %}
+	-
+	{% if site.lang == "en" %}
+		<a href="/" >{% t langs.turkish %}</a>
+	{% else %}
+		{% t langs.turkish %}
+	{% endif %}
 		<div class="unit-foot">
 			<div class="unit-inner unit-foot-inner">
 				<div class="misc vcard">
-					<h4>Hakkımda</h4>
+					<h4>{% t mainpage.aboutme %}</h4>
 					<ul>
 						<li class="contact"><address><span class="author fn n">{{ site.author.name }}</span> - <span class="fn email">{{ site.author.email }}</span></address></li>
 						<li class="github"><a href="http://github.com/{{ site.author.github }}/" rel="me">github.com/{{ site.author.github }}</a></li>

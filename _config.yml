@@ -16,16 +16,20 @@ excerpt_separator: <!--more-->
 markdown: redcarpet
 redcarpet:
   extensions: ["no_intra_emphasis", "fenced_code_blocks",
-    "autolink", "strikethrough", "superscript", "with_toc_data", "footnotes"]
+    "strikethrough", "superscript", "footnotes"]
+
+# l18n
+languages: ["tr", "en"]
+exclude_from_localizations: ["assets"]
 
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
-title : My Tech Blog
+title : Barış Aydek
 tagline: Site Tagline
 author :
   name : Barış Aydek
-  email : baris.aydek_at_gmail.com
+  email : baris.aydek :) gmail.com
   github : dhalsim
   twitter : mustapha_alaziz
   feedburner :
