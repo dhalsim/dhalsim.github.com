@@ -305,6 +305,10 @@ end
 #Load custom rake scripts
 Dir['_rake/*.rake'].each { |r| load r }
 
+
+require "jekyll"
+require "tmpdir"
+
 # Change your GitHub reponame
 GITHUB_REPONAME = "dhalsim/dhalsim.github.com"
 
