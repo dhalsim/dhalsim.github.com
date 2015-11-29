@@ -165,12 +165,18 @@ module Jekyll
         puts "Loading translation from file #{context.registers[:site].source}/_i18n/#{lang}.yml"
         Jekyll.langs[lang] = YAML.load_file("#{context.registers[:site].source}/_i18n/#{lang}.yml")
       end
+
       translation = Jekyll.langs[lang].access(key) if key.is_a?(String)
       if translation.nil? or translation.empty?
         translation = Jekyll.langs[context.registers[:site].config['default_lang']].access(key)
         puts "Missing i18n key: #{lang}:#{key}"
         puts "Using translation '%s' from default language: %s" %[translation, context.registers[:site].config['default_lang']]
       end
+
+      if key.include? "series"
+        translation = Liquid::Template.parse(translation).render(context.scopes[0])
+      end
+
       translation
     end
   end

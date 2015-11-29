@@ -10,7 +10,9 @@ series_no: 1
 ---
 {% include JB/setup %}
 
-We got a node.js application here and we've got source codes, but we can't figure it out the problems and bugs occur. We need to examine those, but how? Debugging comes into play. 
+{% include series.html %}
+
+We got a node.js application here and we've got source codes, but we can't figure it out the problems and bugs occur. We need to examine those, but how? Debugging comes into play.
 
 <!--more-->
 
@@ -22,11 +24,11 @@ This method is extremely unproductive and makes our most needed brain cells vani
 
 ## Local Debugging
 
-As we are here in the necessarily debugging zone, Nothing can save us except a debugger. 
+As we are here in the necessarily debugging zone, Nothing can save us except a debugger.
 
 I seperated this topic into two: **Local** and **remote** debugging:
 
-Local debugging means, you debug working code which works on your computer. On the other hand debugging working code on another machine is **remote debugging**: I'll mention that subject later. 
+Local debugging means, you debug working code which works on your computer. On the other hand debugging working code on another machine is **remote debugging**: I'll mention that subject later.
 
 We will see how we can debug node.js application and we will use [node-inspector](https://github.com/node-inspector/node-inspector) in this article.
 
@@ -111,3 +113,7 @@ We forwarded all needed port to our machine but we need to re-open VM if it is a
 * Open on your own machine the given URL. (It will be <http://127.0.0.1:8080/debug?port=5858> if you didn't change any settings.)
 
 Thats all folks! See you another time.
+
+<br />
+{% include series.html %}
+<br />

@@ -10,5 +10,5 @@ headers:
   pages: Sayfalar
   categories: Kategoriler
   tags: Taglar
-links:
-  back_to_top: Başa dön
+series:
+  title: Bu makale <strong>{{ count }}</strong> bölümlük <strong>{{series}}</strong> serisinin <strong>{{ idx }}.</strong> bölümüdür.</p>

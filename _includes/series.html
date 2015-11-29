@@ -1,5 +1,6 @@
 {% assign count = '0' %}
 {% assign idx = '0' %}
+{% assign series = page.series %}
 {% for post in site.posts reversed %}
 	{% if post.series == page.series %}
 		{% capture count %}{{ count | plus: '1' }}{% endcapture %}
@@ -10,7 +11,7 @@
 {% endfor %}
 
 <div class="seriesNote">
-  <p>Bu makale {{ count }} bölümlük <strong>{{page.series}}</strong> serisinin {{ idx }}. bölümüdür.</p>
+  {% t series.title %}
 	<ul>
 	{% assign count = '0' %}
 	{% for post in site.posts reversed %}

@@ -14,6 +14,8 @@ series_no: 2
 
 {% include JB/setup %}
 
+{% include series.html %}
+
 # Tanım
 
 > **Yazılım testi:** Yazılım ürününün *production*'a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir.
@@ -277,6 +279,8 @@ Yazılan testlerin, yazılımı gerçekte ne kadarını kapsadığının hesapla
 * <http://www.developertesting.com/archives/month200705/20070504-000425.html>
 * <http://www.bullseye.com/coverage.html>
 
+<br />
+{% include series.html %}
 <br />
 
 **Dipnotlar:**

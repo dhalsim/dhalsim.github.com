@@ -10,6 +10,9 @@ series_no: 1
 ---
 {% include JB/setup %}
 
+{% include series.html %}
+<br />
+
 Şimdi elimizde bir node.js uygulaması var. Kodları var, çözemediğimiz çalıştırabiliyoruz ama bazı problemler/hatalar meydana geliyor. Onları incelememiz lazım. Burada noluyor? debugging devreye giriyor.
 
 <!--more-->
@@ -124,3 +127,7 @@ Gerekli tüm portları kendimize yönlendirdik. Bu portlar kendi bilgisayarımı
 ## Bonus
 
 Anlamadım bıbıcım diyenler ve benim muhteşem debug yeteneklerimi (alet işler el övünür) görmek isteyenler sizi youtube'a alalım: <!!BURAYA LINK GELECEK!!>
+
+<br />
+{% include series.html %}
+<br />

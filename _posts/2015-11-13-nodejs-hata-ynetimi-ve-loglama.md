@@ -10,6 +10,9 @@ series_no: 2
 ---
 {% include JB/setup %}
 
+{% include series.html %}
+<br />
+
 Merhaba, **"Kontrol Bende"** serisine yeni bir konu daha ekliyoruz.
 
 Bundan önce [Node.js Debugging](/node.js/2015/11/13/debugging-nodejs/) konusunu işlemiştik. Şimdi ise hem debugging'te hem de production'da olmazsa olmaz **loglama** konusuna dalıyoruz.
@@ -309,3 +312,7 @@ process.on('uncaughtException', logger.logAndCrash);
 # Sonuç
 
 Hata yönetimi ve loglamayla ilgili epey mesafe katettik. Sonraki yazım ölçeklenebilir loglama üzerine olacak. Node.js scaled yapıdaki sistemlerde nasıl loglarız, bu logları nasıl toplarız ve değerlendiririz konusunda yazacağım.
+
+<br />
+{% include series.html %}
+<br />

@@ -10,5 +10,5 @@ headers:
   pages: Pages
   categories: Categories
   tags: Tags
-links:
-  back_to_top: Back to top
+series:
+  title: This article is <strong>part {{ idx }}</strong> of a <strong>{{ count }}-part</strong> series called <strong>{{series}}</strong></p>
