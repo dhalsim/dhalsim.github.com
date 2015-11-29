@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Node.js Error Management and Loglama"
+title: "Node.js Error Management and Logging"
 description: ""
 toc: true
 category: ["node.js", "i-have-control"]
@@ -13,7 +13,7 @@ series_no: 2
 {% include series.html %}
 <br />
 
-Hello, that's the new article to **I Have Control** series.
+Hello, that's the new article for **I Have Control** series.
 
 Before this one, I wrote about [Node.js Debugging](/en/node.js/2015/11/13/debugging-nodejs/) and now in this part, we're going to dive into the *essential* **logging**.
 
