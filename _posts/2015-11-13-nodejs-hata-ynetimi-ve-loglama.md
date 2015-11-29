@@ -25,13 +25,13 @@ Loglama konusu node.js ile birlikte daha da önemli bir hale geliyor. Bunun nede
 
 Ama **microservice**'lerin kullanımı, multi-tier uygulamaların kabul görmesi ve **scaling** ile beraber loglama ve analizi çetrefilli bir hal aldı.
 
-Uygulama arayüzünün çoklu makinede (sanal da olabilir) **Docker container**'lar üzerinde **clustered** bir yapıda çalışması, **redis**, **mongodb** **hadoop** ve daha nice teknolojinin farklı makinelerde ve hatta yerlerde kurulu olması (cloud computing) bizi logging ve hata yönetiminde radikal çözümler üretmemizi gerektiriyor.
+Uygulamanın çoklu makinede (sanal da olabilir) **Docker container**'lar üzerinde **clustered** bir yapıda çalışması, **redis**, **mongodb** **hadoop** ve daha nice teknolojinin farklı makinelerde ve hatta yerlerde kurulu olması (cloud computing) bizi logging ve hata yönetiminde radikal çözümler üretmemizi gerektiriyor.
 
 Ancak bu kadar ileri gitmeden önce işleri sırayla yapmalıyız. İlk önceliğimiz node.js uygulamamızdaki logların sağlıklı bir şekilde yazılmasıdır.
 
 Node.js'te bunu başarabilmenin çeşitli yolları mevcut. Ancak uygulama tarafında yapılması zorunlu kısımlar da var. Mesela loglamanın **level**'lar bazında yapılması. **Unhandeled Exception**'ların (yakalanmamış istisnalar/hatalar) yönetimi gibi.
 
-Dediğim gibi node.js'te bunun çok farklı yöntemleri mevcut. Benim ilk önereceğim [Winston](https://github.com/winstonjs/winston) olacak. İsmi de [şuradan](http://www.urbandictionary.com/define.php?term=Chill+Winston) geliyormuş :/. Kendisi **async** loglama yapıyor.
+Dediğim gibi node.js'te bunun çok farklı yöntemleri mevcut. Benim ilk önereceğim [Winston](https://github.com/winstonjs/winston) olacak. İsmi de [şuradan](http://www.urbandictionary.com/define.php?term=Chill+Winston) geliyormuş :/. Bu arada kendisi **async** loglama yapıyor.
 
 # Winston
 
@@ -130,9 +130,7 @@ git checkout alti
 
 Şeklinde tüm kodları alabilir, veya `git checkout bes` üzerinden değişiklikleri kendiniz de ekleyebilirsiniz.
 
-
-
-> Not: Burada önceden belirtmediğim ileri seviye konuları kullanacağım. Bunlar: Console için formatlama, renklendirme, File için zipleme, tailing ve Redis loglama olacak
+> Not: Burada önceden belirtmediğim ileri seviye konuları kullanacağım. Bunlar: renklendirme, File için zipleme, tailing ve Redis loglama olacak
 
 **src/lib/logging.js:**
 
@@ -282,8 +280,6 @@ router.get('/room/:id', securePage, function (req, res, next) {
 > **Express dökümantasyonundan:** "If the current middleware does not end the request-response cycle, it must call next() to pass control to the next middleware, otherwise the request will be left hanging."
 >
 > Express'te ya request sonlanmalı ya da sonraki middleware için next() çağrılmalıdır. Böylece request-response döngüsü bitirilir.
-
-Farkettiyseniz `done()` kullandığımız halde `catch(..)` kullanmak zorunda kaldık. Bunun nedeni request'i sonlandırmak içindi. Sonraki middleware'lerden biri hataları yakaladığımız olacak.
 
 **app.js:**
 

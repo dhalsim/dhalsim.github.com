@@ -10,5 +10,8 @@ headers:
   pages: Pages
   categories: Categories
   tags: Tags
+  toc: Table of contents
 series:
   title: This article is <strong>part {{ idx }}</strong> of a <strong>{{ count }}-part</strong> series called <strong>{{series}}</strong></p>
+misc:
+  loading_toc: Loading table of contents...

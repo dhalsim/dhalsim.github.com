@@ -66,23 +66,6 @@ div.seriesNote li.selected {
 .pagination ul > li:before {
   display:none;
 }
-
-.pagination ul > li > a,
-.pagination ul > li > a:visited,
-.pagination ul > li > a:active,
-.gotop a,
-.gotop a:visited,
-.gotop a:active {
-  background-color: black;
-  color: white;
-}
-
-.pagination ul > li > a:hover,
-.gotop a:hover {
-  background-color: black;
-  color: red;
-}
-
 div.highlight pre {
   display: block;
   padding: 9.5px;

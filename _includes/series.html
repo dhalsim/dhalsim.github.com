@@ -24,7 +24,7 @@
     {% endif %}
 		<li class="{{liclass}}">Part {{ count }} -
 		{% if page.url != post.url %}
-			<a href="{{post.url}}">
+			<a href="{{site.baseurl}}{{post.url}}">
 		{% endif %}
     {{post.title}}
     {% if page.url != post.url %}

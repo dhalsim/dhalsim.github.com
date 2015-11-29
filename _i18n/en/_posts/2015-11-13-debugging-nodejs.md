@@ -12,6 +12,8 @@ series_no: 1
 
 {% include series.html %}
 
+<br />
+
 We got a node.js application here and we've got source codes, but we can't figure it out the problems and bugs occur. We need to examine those, but how? Debugging comes into play.
 
 <!--more-->
@@ -22,7 +24,7 @@ Poor developer comes within a debugger attached. One has to debug her code at le
 
 This method is extremely unproductive and makes our most needed brain cells vanished. Although, mostly because we don't know how to deal the other way, we must use it when we **actually need it**. For who seeks different approaches can visit my [Unit Testing](/en/software/2015/11/15/software-testing#unit-testing) article.
 
-## Local Debugging
+# Local Debugging
 
 As we are here in the necessarily debugging zone, Nothing can save us except a debugger.
 
@@ -51,7 +53,7 @@ when node-debug runs, it will open <http://127.0.0.1:8080/debug?port=5858>  auto
 
 Also much much more features at: <https://github.com/node-inspector/node-inspector#features>
 
-## Remote debugging
+# Remote debugging
 
 Now we'll see how to debug on our machine a code which runs on another machine. For example we would like to have a look how the code runs on specific environments.
 
@@ -114,6 +116,5 @@ We forwarded all needed port to our machine but we need to re-open VM if it is a
 
 Thats all folks! See you another time.
 
-<br />
 {% include series.html %}
 <br />
