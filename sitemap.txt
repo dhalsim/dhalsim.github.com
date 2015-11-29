@@ -6,3 +6,9 @@ title : Sitemap
 {{site.production_url}}{{ page.url }}{% endfor %}
 {% for post in site.posts %}
 {{site.production_url}}{{ post.url }}{% endfor %}
+
+{% for lang in site.languages %}
+{% if lang != "tr" %}
+{{ site.production_url }}/{{lang}}/sitemap.txt
+{% endif %}
+{% endfor %}

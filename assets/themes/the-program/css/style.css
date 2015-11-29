@@ -641,24 +641,17 @@ pre {
 .unit-article .entry-content:first-child h6 {
   margin-top: 0;
 }
-.unit-article a:link {
-  border-bottom: 1px dashed #c26164;
-  background-color: cornsilk;
-  color: black;
-  padding-top: 2px;
-  padding-bottom: 4px;
-}
-.unit-article a:visited {
-  border-bottom: 1px dashed #ad4346;
-  background-color: cornsilk;
-  color: black;
+.unit-article a:link, .unit-article a:visited {
+  border-bottom: 2px dashed #e25608;
+  background-color: white;
+  color: #e25608;
   padding-top: 2px;
   padding-bottom: 4px;
 }
 .unit-article a:hover {
-  border-bottom: 1px dashed black;
-  background-color: #c26164;
-  color: yellow;
+  border-bottom: 2px dashed white;
+  background-color: #e25608;
+  color: white;
   padding-top: 2px;
   padding-bottom: 4px;
 }
@@ -720,7 +713,7 @@ pre {
   background: #f6f6f6;
 }
 .unit-article ul > li:before {
-  color: #FFFF00;
+  color: white;
   content: "\FF0A \2002";
   position: absolute;
   top: -2px;
