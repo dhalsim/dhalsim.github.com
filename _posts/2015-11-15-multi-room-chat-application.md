@@ -9,6 +9,12 @@ excerpt: "Node.js ve socket.io kullanarak çok odalı, çok kullanıcılı realt
 ---
 {% include JB/setup %}
 
+> **Not:** Bu yazı benim node.js'i ilk kez pratik olarak denememle beraber oluşturduğum notlardan ve deneylerden oluşmaktadır. 
+> 
+> Uygulama Grunt, Redis ve promise kısımları dışında (her ne kadar 2001 yılında lisede şu [harika siteyi](http://yazgunesi.8m.com) yaptıysam da yıllar içinde tasarım becerim köreldi) tasarım da dahil olmak üzere **Sachin Bhatnagar**'ın müthiş [Udemy Course](https://www.udemy.com/all-about-nodejs/learn)'undan baz alınmıştır. 
+> 
+> Kodları ve teknolojileri kafama göre değiştirdim ve size bu yazıyı hazırladım. Çaldığım (esinlendiğim :)) kısımlar için kendisinden özür diliyorum ancak en azından yazı sadece Türkçe olarak yayınlanacaktır. İngilizceniz varsa şiddetle üstteki linkten dersi satın almanızı öneririm.
+
 **Kullanılacak teknolojiler:**
 
 * Node.js
