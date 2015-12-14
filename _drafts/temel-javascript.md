@@ -72,9 +72,15 @@ console.log(shape.name);
 console.log(triangle.name);
 ~~~
 
-`Object.create` ile birlikte ilginç bir özellik daha kullanabiliyoruz, o da **prototype**. Şimdi yine çok gördüğümüz ama hiç anlamadığımız bir konu geldi ya la.
+`Object.create` ile birlikte ilginç iki özellik daha kullanabiliyoruz, bunlardan biri **property**, diğeri de önceden tanıdığımız ve sevdiğimiz **prototype**.
+
+<http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/>
+
+# Property
 
 # Prototype
+
+> **Prototype chain**: If you try to look up a key on an object and it is not found, JavaScript will look for it in the prototype. It will follow the "prototype chain" until it sees a null value. In that case, it returns undefined
 
 ~~~js
 function Shape(name) {
@@ -90,7 +96,10 @@ function Triangle(name) {
 	this.edges = [3, 4, 5];
 }
 
-Triangle.prototype = Shape.prototype;
+// Burada object create diyerek yeni bir obje yaratılmış oluyor.
+// Kullanmasaydık Triangle prototype ile Shape prototype aynı nesneyi gösterecekti
+// Bu yüzden Triangle'a özel prototype fonksiyonları tanımlayamayacaktık (Otomatik Shape'e de tanımlanırdı)
+Triangle.prototype = Object.create(Shape.prototype);
 Triangle.prototype.constructor = Triangle;
 
 var triangle = new Triangle("Dik üçgen");
@@ -98,7 +107,7 @@ console.log(triangle.name);
 console.log(triangle.area());
 ~~~
 
-Ne bu? Aa object oriented. Ama prototype-based. (Her ne kadar ES6'da class gelse de) Javascript'in diğer OO dillerindeki `class` gibi bir yapısı olmadığından obje üzerinden inheritance sağlar. 
+Ne bu? Aa object oriented. Ama prototype-based. Her ne kadar ES6'da **class** keyword'ü gelse de (syntax olarak değişse bile temelde yapı aynı) Javascript'in diğer OO dillerindeki `class` gibi bir yapısı olmadığından obje üzerinden inheritance sağlar.
 
 Burada `this.edges` nasıl çalıştı diye soracak olursak; Triangle prototype ile Shape'den türediği için aslında `Shape.prototype.area` Triangle context'iyle çalıştı.
 
@@ -111,6 +120,3 @@ this ve prototype ile ilgili bir başka örnek:
 ~~~
 
 # Bind
-
-
-
