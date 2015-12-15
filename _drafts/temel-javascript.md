@@ -72,11 +72,39 @@ console.log(shape.name);
 console.log(triangle.name);
 ~~~
 
+Mesela şu iki objenin farklarına bir bakın:
+
+~~~js
+var myObj = Object.create(null, {name: { value: "Barış" }});
+console.log(myObj);
+var myObj2 = { name: "Barış" };
+// ya da:
+// var myObj2 = Object.create({ name: "Barış" }); 
+console.log(myObj2);
+
+console.log(myObj instanceof(Object));
+console.log(myObj2 instanceof(Object));
+~~~
+
+> Function değil Object yaratırken Object.create'de prototype'ı karıştırmayın, prototype daha çok Function'larda kullanılır.
+
+create metodunun ilk parametresini `null` vererek aslında Object'ten türememesi sağladık. Bunun tabii ki ilginç sonuçları var. Bir nesne Object'ten türemediğinde mesela şunu yapamıyoruz:
+
+~~~js
+for(var x in myObj) { 
+   console.log(x); 
+}
+~~~
+
 `Object.create` ile birlikte ilginç iki özellik daha kullanabiliyoruz, bunlardan biri **property**, diğeri de önceden tanıdığımız ve sevdiğimiz **prototype**.
 
-<http://yehudakatz.com/2011/08/12/understanding-prototypes-in-javascript/>
-
 # Property
+
+> Object.create(proto[, propertiesObject])
+
+İkinci opsiyonel parametrede *propertiesObject* var peki bu property ne oluyor? 
+
+
 
 # Prototype
 
@@ -113,10 +141,14 @@ Burada `this.edges` nasıl çalıştı diye soracak olursak; Triangle prototype 
 
 > Bu arada context'i çok andım [şuna](https://eksisozluk.com/entry/7225385) link vermezsem olmaz.
 
-this ve prototype ile ilgili bir başka örnek:
-
-~~~js
-
+~~~
+...
+Shape.call(this, name);
+...
+console.log(triangle.name);
 ~~~
 
-# Bind
+Burada da Shape'in constructor'ını Triangle'ın this'ini geçirerek çağırdık ve Shape içindeki this'e olan atama aslında Triangle'a olmuş oldu. Ve bu bize yepyeni konuları açtı: **call**, **apply**, ve **bind**
+
+# Call, Apple ve Bind
+
