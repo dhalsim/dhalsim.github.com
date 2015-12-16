@@ -1,18 +1,19 @@
 ---
 layout: post
 title: "Çok Odalı Node.js Chat Uygulaması"
-description: ""
+description: "Bu yazıda Node.js, Redis, MongoDB kullanarak gerçek zamanlı bir chat uygulaması nasıl yapılır okuyabilirsiniz."
 toc: true
 category: ["node.js"]
 tags: ["node.js", "socket.io", "express", "redis", "mongodb", "xp"]
 excerpt: "Node.js ve socket.io kullanarak çok odalı, çok kullanıcılı realtime chat uygulaması yapıyoruz. Üstelik geliştirme araçlarından (grunt.js) da faydalanarak. MongoDB ve Redis veritabanlarını kullanarak NoSQL'e de giriş yapacağız. Javascript'in yeni versiyonu ES6'dan en önemli yeni özellik Promise'leri de sık sık projede kullanacağız. Express.js kullanarak çok basit middleware'ler nasıl yazılır ve Facebook gibi siteye login nasıl eklenir hepsini bu proje dizisinde göreceğiz."
+image: "/assets/images/nodejs.png"
 ---
 {% include JB/setup %}
 
-> **Not:** Bu yazı benim node.js'i ilk kez pratik olarak denememle beraber oluşturduğum notlardan ve deneylerden oluşmaktadır. 
-> 
-> Uygulama Grunt, Redis ve promise kısımları dışında (her ne kadar 2001 yılında lisede şu [harika siteyi](http://yazgunesi.8m.com) yaptıysam da yıllar içinde tasarım becerim köreldi) tasarım da dahil olmak üzere **Sachin Bhatnagar**'ın müthiş [Udemy Course](https://www.udemy.com/all-about-nodejs/learn)'undan baz alınmıştır. 
-> 
+> **Not:** Bu yazı benim node.js'i ilk kez pratik olarak denememle beraber oluşturduğum notlardan ve deneylerden oluşmaktadır.
+>
+> Uygulama Grunt, Redis ve promise kısımları dışında (her ne kadar 2001 yılında lisede şu [harika siteyi](http://yazgunesi.8m.com) yaptıysam da yıllar içinde tasarım becerim köreldi) tasarım da dahil olmak üzere **Sachin Bhatnagar**'ın müthiş [Udemy Course](https://www.udemy.com/all-about-nodejs/learn)'undan baz alınmıştır.
+>
 > Kodları ve teknolojileri kafama göre değiştirdim ve size bu yazıyı hazırladım. Çaldığım (esinlendiğim :)) kısımlar için kendisinden özür diliyorum ancak en azından yazı sadece Türkçe olarak yayınlanacaktır. İngilizceniz varsa şiddetle üstteki linkten dersi satın almanızı öneririm.
 
 **Kullanılacak teknolojiler:**

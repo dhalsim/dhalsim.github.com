@@ -8,6 +8,29 @@
 	<meta name="viewport" content="width=device-width,initial-scale=1">
 	<title>{{ page.title }}</title>
 	<meta name="author" content="{{ site.author.name }}">
+
+	<!-- for Google -->
+	<meta name="description" content="{{ page.description }}" />
+	<meta name="keywords" content="{{ page.tags.join(",") }}" />
+
+	<meta name="author" content="{{ site.author.name }}" />
+	<meta name="copyright" content="{{ Time.now.year }}" />
+	<meta name="application-name" content="{{ site.title }}" />
+
+	<!-- for Facebook -->
+	<meta property="og:title" content="{{ page.title }}" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="http://dhalsim.github.io{{ page.image }}" />
+	<meta property="og:url" content="http://dhalsim.github.io{{ site.baseurl }}{{ page.url }}" />
+	<meta property="og:description" content="{{ page.description }}" />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="{{ page.title }}" />
+	<meta name="twitter:description" content="{{ page.description }}" />
+	<meta name="twitter:image" content="http://dhalsim.github.io{{ page.image }}" />
+	<meta name="twitter:creator" content="@{{ site.author.twitter }}">
+
 	<link href='{{ ASSET_PATH }}/css/style.css' rel="stylesheet" media="all">
 	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
 	<link href="http://feeds.feedburner.com/{{ site.author.feedbaname }}" rel="alternate" title="{{ page.title }}" type="application/atom+xml">

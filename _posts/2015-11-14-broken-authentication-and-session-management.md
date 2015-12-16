@@ -1,11 +1,12 @@
 ---
 layout: post
 title: "Broken Authentication and Session Management"
-description: ""
+description: "OWASP Top 10 Risks listesinde 2. sırada olan Broken Authentication and Session Management konusuyla ilgili notları okuyabilirsiniz."
 toc: true
 category: [".net", "security"]
 tags: [".net", "security", "session management"]
 excerpt: "ASP.NET uygulamalarında session management ile ilgili öneriler."
+image: "/assets/images/cyber-security.jpg"
 ---
 {% include JB/setup %}
 

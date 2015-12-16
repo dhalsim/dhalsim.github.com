@@ -1,13 +1,14 @@
 ---
 layout: post
 title: "Yazılım Geliştirme Modelleri"
-description: ""
+description: "Bu yazıda her yazılımcının bilmesi gereken yazılım geliştirme süreçlerini, yazılım geliştirme modellerinin en çok kullanılanlarının avantaj ve dezavantajlarını, XP ve agile prensiplerini okuyabilirsiniz."
 toc: true
 category: ["software"]
 tags: ["software-models", "waterfall", "spiral", "agile", "xp"]
 excerpt: "Her yazılımcının bilmesi gereken yazılım geliştirme süreçlerine değineceğiz. Yazılım geliştirme modellerinin en çok kullanılanlarının avantaj ve dezavantajlarını görüp XP ve agile prensiplerine değineceğiz."
 series: "Teori Önemlidir!"
 series_no: 1
+image: "/assets/images/gears-process.jpg"
 ---
 {% include JB/setup %}
 

@@ -26,6 +26,7 @@ module Jekyll
       puts
       puts "Building site for default language: \"#{self.config['lang']}\" to: #{self.dest}"
       process_org
+      self.config['url'] = self.config['baseurl']
       languages.drop(1).each do |lang|
         @currentlang = lang;
 
