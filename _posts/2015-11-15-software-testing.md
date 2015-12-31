@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Software Testing"
-description: ""
+description: "Bu yazıda testing'in önemi, yanlış bilinenler, test çeşitleri hakkında okuyabilirsiniz."
 toc: true
 category: ["software"]
 tags: ["testing", "tdd", "unit test", "integration test", "system test"]

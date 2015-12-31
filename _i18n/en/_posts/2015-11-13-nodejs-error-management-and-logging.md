@@ -121,7 +121,7 @@ On above code, transport level specified as `warn`. This means `warn` and **abov
 
 # Demo
 
-I'm determined to continue wiht our beloved repository **chatcat** :). Spoiler lovers can get codes of this chapter with:
+I'm determined to continue with our beloved repository **chatcat** :). Spoiler lovers can get codes of this chapter with:
 
 ~~~
 git clone https://github.com/dhalsim/chatcat.git

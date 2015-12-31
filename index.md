@@ -18,6 +18,11 @@ layout: page
       </div>
       <div class="postExcerpt">
         <blockquote>
+          {% if post.image %}
+          <a href="{{ site.baseurl }}{{ post.url }}">
+            <img src="{{ post.image }}" style="width:100px; margin-left: inherit" />
+          </a>
+          {% endif %}
           {{ post.excerpt | strip_html }}
           ... &raquo; <a href="{{ site.baseurl }}{{ post.url }}">{% t mainpage.more %}</a>
         </blockquote>

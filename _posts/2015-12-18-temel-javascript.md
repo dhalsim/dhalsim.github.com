@@ -1,3 +1,15 @@
+---
+layout: post
+title: "Temel Javascript"
+description: "Bu sayfada javascript'te bilinmesi gerekli ama çoğu zaman ayrıntılı bilgi sahibi olunmayan temel konular hakkında yazıyorum."
+toc: true
+category: ["javascript"]
+tags: ["this", "new", "property", "prototype", "call", "apply", "bind"]
+excerpt: "Javascript öyle garip bir dil ki çoğu insan dilin en temel özelliklerini bilmeden onu kullanabilir. Çoğu zaman da öğrenmemiz gerekmez ancak bunları öğrenmeden de çok fazla ileri gidemeyiz. Bu yazıda javascript'in çok görünen ama bilinmeyen temellerine iniyoruz.."
+image: "/assets/images/js.jpg"
+---
+{% include JB/setup %}
+
 > Javascript öyle garip bir dil ki çoğu insan dilin en temel özelliklerini bilmeden onu kullanabilir. Çoğu zaman da öğrenmemiz gerekmez ancak bunları öğrenmeden de çok fazla ileri gidemeyiz. Bu yazıda javascript'in çok görünen ama bilinmeyen temellerine iniyoruz.
 
 # This
@@ -226,3 +238,4 @@ Gördüğünüz gibi **this** yerine **results** objesini geçirdim, böylece ar
 > Eğer eski tarayıcı sürümlerine bağımlılığınız varsa (müşterilerinizin bir kısmı IE 7/8 kullanıyor olabilir, şu siteden kullanacağınız özelliği kontrol etmekte ve gerektiği durumlarda polyfill kullanmakta yarar var. <http://kangax.github.io/compat-table/es5/> (Show obselete browsers seçeneğini seçin)
 
 > Denk geldikçe bu yazıya javascript'le ilgili bilinmesi gereken temel konuları ekleyeceğim.
+
