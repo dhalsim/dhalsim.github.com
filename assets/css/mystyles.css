@@ -104,3 +104,12 @@ div.highlight pre code {
   background: #757575;
   text-shadow: none;
 }
+.languageSelector a.alink {
+  text-decoration: underline;
+  color: #ad4346;
+}
+.languageSelector a.alink:hover {
+  text-decoration: none;
+  color: #ad4346;
+}
+   
