@@ -1,3 +1,10 @@
+.slogan span{
+  font-family: punk;
+  font-size: 80px;
+  color: black;
+  margin-bottom: 100px;
+}
+
 .toc ul {
   padding-left: 40px;
   margin-bottom: 0;
@@ -26,7 +33,7 @@ strong {
 }
 
 .series > a {
-  background-color: #4f8486!important;
+  background-color: black!important;
   color: white!important;
 
   display: inline-block;
@@ -41,8 +48,8 @@ strong {
 }
 
 .series > a:hover {
-  background-color: black!important;
-  color: white!important;
+  background-color: white!important;
+  color: black!important;
 }
 
 div.postTitle {
@@ -51,12 +58,15 @@ div.postTitle {
 }
 
 div.postTitle > a {
-  color: #000!important;
+  padding: 0!important;
+  margin: 0!important;
+  color: white!important;
   background-color: cadetblue!important;
   border: 0!important;
-  display: inline;
-  padding: 0 .5em!important;
-  text-shadow: none;
+  font-family: Allerta, Helvetica, Arial, sans-serif!important;
+
+  font-size: 50px;
+	line-height: 55px;
 }
 
 div.postExcerpt {
@@ -65,11 +75,20 @@ div.postExcerpt {
   border-color: cadetblue;
   padding: 0 0 10px 10px;
   margin-bottom: 30px;
+  min-height: 200px;
+}
+
+div.postExcerpt > div {
+  padding-top: 35px;
+}
+
+div.postExcerpt span {
+  color: red;
 }
 
 div.postExcerpt img {
   float: left;
-  padding: 35px 30px 60px 30px;
+  padding: 60px 30px 15px 10px;
   width: 150px;
 }
 

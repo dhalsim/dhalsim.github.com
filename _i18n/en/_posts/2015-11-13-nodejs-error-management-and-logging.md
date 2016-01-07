@@ -6,6 +6,7 @@ toc: true
 category: ["node.js", "i-have-control"]
 tags: ["node.js", "logging", "error", "bugs"]
 series: "I Have Control"
+series_category: "i-have-control"
 series_no: 2
 image: "/assets/images/nodejs.png"
 ---

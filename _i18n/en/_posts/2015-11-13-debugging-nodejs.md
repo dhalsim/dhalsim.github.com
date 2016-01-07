@@ -6,6 +6,7 @@ description: "In this article, you'll read about how to debug node.js applicatio
 category: ["node.js", "i-have-control"]
 tags: ["node.js", "debugging"]
 series: "I Have Control"
+series_category: "i-have-control"
 series_no: 1
 image: "https://nodejs.org/static/images/logos/nodejs.png"
 ---

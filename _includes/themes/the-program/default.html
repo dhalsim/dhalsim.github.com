@@ -31,6 +31,26 @@
 	<meta name="twitter:image" content="http://dhalsim.github.io{{ page.image }}" />
 	<meta name="twitter:creator" content="@{{ site.author.twitter }}">
 
+  <style>
+	  @font-face {
+			font-family: 'Allerta';
+			src: url('/assets/fonts/Allerta-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Allerta-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Allerta-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Allerta-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+		@font-face {
+			font-family: 'Punk';
+			src: url('/assets/fonts/punk-regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/punk-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/punk-regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/punk-regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/punk-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/punk-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+	</style>
 	<link href='{{ ASSET_PATH }}/css/style.css' rel="stylesheet" media="all">
 	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
 	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
@@ -116,7 +136,7 @@
 						<li class="category"><a href="{{ site.baseurl }}/categories.html">{% t headers.categories %}</a></li>
 						<li class="tag"><a href="{{ site.baseurl }}/tags.html">{% t headers.tags %}</a></li>
 					</ul>
-					
+
 					<hr />
 					<nav class="languageSelector">
 						{% if site.lang == "tr" %}

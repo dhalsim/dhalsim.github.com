@@ -6,6 +6,7 @@ toc: true
 category: [".net", "memory"]
 tags: [".net", "memory"]
 excerpt: "Bu yazıda .NET memory yönetimi nasıl çalışır onu öğreneceğiz böylece uygulamarımızı hafıza açısından daha bilinçli geliştirebileceğiz."
+image: "/assets/images/net_framework.png"
 ---
 {% include JB/setup %}
 
