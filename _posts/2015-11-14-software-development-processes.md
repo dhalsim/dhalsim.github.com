@@ -7,6 +7,7 @@ category: ["software"]
 tags: ["software-models", "waterfall", "spiral", "agile", "xp"]
 excerpt: "Her yazılımcının bilmesi gereken yazılım geliştirme süreçlerine değineceğiz. Yazılım geliştirme modellerinin en çok kullanılanlarının avantaj ve dezavantajlarını görüp XP ve agile prensiplerine değineceğiz."
 series: "Teori Önemlidir!"
+series_category: "software"
 series_no: 1
 image: "/assets/images/gears-process.jpg"
 ---

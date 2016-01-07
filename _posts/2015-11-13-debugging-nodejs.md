@@ -6,6 +6,7 @@ description: "Bu makalede node.js uygulamalarının lokalde ve remote üzerinden
 category: ["node.js", "kontrol-bende"]
 tags: ["node.js", "debugging"]
 series: "Kontrol Bende"
+series_category: "kontrol-bende"
 series_no: 1
 image: "https://nodejs.org/static/images/logos/nodejs.png"
 ---

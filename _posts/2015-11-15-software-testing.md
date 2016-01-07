@@ -9,6 +9,7 @@ excerpt: "Yazılım testi: Yazılım ürününün production'a geçmeden önce, 
 
 Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çalışan yazılımın neden önemli olduğunun sebeplerine bakalım. Aşağıda önemli yazılım hatalarının tarihte sebep olduğu olaylar listeleniyor."
 series: "Teori Önemlidir!"
+series_category: "software"
 series_no: 2
 image: "/assets/images/happygoat.jpg"
 ---
