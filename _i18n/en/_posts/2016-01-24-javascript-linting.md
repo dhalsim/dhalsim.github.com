@@ -11,7 +11,9 @@ image: "/assets/images/eslint-logo.png"
 
 {% include JB/setup %}
 
-#Javascript Linting
+![](/assets/images/eslint-logo.png)
+
+#Javascript Linting with ESLint
 
 Hello, in this article I'm going to explain what linting is, and why I am doing that and how to do it.
 
