@@ -1,5 +1,5 @@
 .slogan span{
-  font-family: punk;
+  font-family: Ewert;
   font-size: 80px;
   color: black;
   margin-bottom: 100px;
@@ -65,8 +65,8 @@ div.postTitle > a {
   border: 0!important;
   font-family: Allerta, Helvetica, Arial, sans-serif!important;
 
-  font-size: 50px;
-	line-height: 55px;
+  font-size: 30px;
+	line-height: 40px;
 }
 
 div.postExcerpt {

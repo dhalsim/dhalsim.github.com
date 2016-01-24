@@ -1128,10 +1128,12 @@ pre .c {
   font-style: italic;
 }
 /* Comment */
+/*
 pre .err {
   color: #a61717;
   background-color: #e3d2d2;
 }
+*/
 /* Error */
 pre .g {
   color: #d0d0d0;
