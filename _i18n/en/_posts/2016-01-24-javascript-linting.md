@@ -145,6 +145,10 @@ First parameters could be a number from 0 to 2:
 * 1 - Turn the rule on as a warning
 * 2 - Turn the rule on as an error
 
+> Here is a screenshot from eslint command:
+
+![ESLint Console ScreenShot](/assets/images/eslint-console.png)
+
 If you choose 1, ESLint only prints a warning message, but choosing 2 makes ESLint to return `exit 1` which will break your build script/tool.
 
 In addition you can use an array to define additional parameters on that rule i.e:
@@ -187,6 +191,10 @@ I want my build to be broken so I added to my start script and `npm run start` w
 ## Integrations
 
 You can even use ESLint in your favourite editor (like I do with Atom with same configuration): <http://eslint.org/docs/user-guide/integrations.html>
+
+> Here is the same code screenshot from atom eslint plugin:
+
+![ESLint Console ScreenShot](/assets/images/eslint-atom.png)
 
 ## Resources
 

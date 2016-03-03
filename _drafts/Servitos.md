@@ -1,11 +1,16 @@
 # Testify
 
-* Çalışan serviscikler
-* Schema Exchange
+* Function Exchange
+	* Clone someone elses function
+	* Should create a package with other required functions, but with a generated interface of that particular function exposed.
 * Test Exchange
+	* Merge someone elses tests with yours
 * Test Matching
 	* Parametreler eşleştirilmesi
 	* Testlerin karşılıklı çalıştırılarak sonuçların eşleştirilmesi
+	* interoperability through language to language transformaters
+		* if it is typescript you can do like [this](https://github.com/praeclarum/Netjs) or resharper?
+	* Should people write tests on typescript? or .d.ts files? or not mandatory?
 * Manuel eşleştirme
 	* Adapters
 		* From service to client (service adapter)
@@ -14,9 +19,25 @@
 * Testify search and matching
 * Testify package usage
 	* From cloud
-	* From your own
+	* From any network service
+	* From your own computer
+* Computation of structures
+	* Tree structure of functions calling other functions
+	* Tree structure of functions calling other functions over network
+	* Traversing tree (neo4j?)
+	* Parallelisation
+		* Given a hash of function structure and hash of function content, we can distinguish same functions, so we can decompose a function set and run through many nodes
+	* Performance tuning
+		* Given a hash of function structure and hash of function content and its test, we can find more performant functions from other nodes, or can be found through composition
+	* We should provide the computation persistent, so it can be downloadable from source control, or can continue from previous state
+	* persistent computation makes sharing and merging through network possible
+* Collobrative development
+	* If the development can be realtime over a network system (like Google Docs), participants can write tests together, and system can provide matched functions automatically, so development time can be accelerated.
 * Package modifications
 * Testify enterprise
+	* Provide a private test folder, other than that it will be shared by all
+	* Provide a service folder, that can be called from testify enterprice accounts' computer
+	* Provide seperate tools specific for languages, for example write a VS extension for c#, or eclipse/intellij plugin for java.
 
 ## How to use a shared service
 

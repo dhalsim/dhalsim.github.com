@@ -1,0 +1,781 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0">
+  <title>Untitled</title>
+  <style type="text/css">
+    body {
+  font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  color: #222;
+  font-size: 100%;
+}
+
+.slide {
+  position: absolute;
+  top: 0; bottom: 0;
+  left: 0; right: 0;
+  background-color: #f7f7f7;
+}
+
+.slide-content {
+  width: 800px;
+  height: 600px;
+  overflow: hidden;
+  margin: 80px auto 0 auto;
+  padding: 30px;
+
+  font-weight: 200;
+  font-size: 200%;
+  line-height: 1.375;
+}
+
+.controls {
+  position: absolute;
+  bottom: 20px;
+  left: 20px;
+}
+
+.arrow {
+  width: 0; height: 0;
+  border: 30px solid #333;
+  float: left;
+  margin-right: 30px;
+
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+.prev {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-left-color: transparent;
+
+  border-left-width: 0;
+  border-right-width: 50px;
+}
+
+.next {
+  border-top-color: transparent;
+  border-bottom-color: transparent;
+  border-right-color: transparent;
+
+  border-left-width: 50px;
+  border-right-width: 0;
+}
+
+.prev:hover {
+  border-right-color: #888;
+  cursor: pointer;
+}
+
+.next:hover {
+  border-left-color: #888;
+  cursor: pointer;
+}
+
+h1 {
+  font-size: 300%;
+  line-height: 1.2;
+  text-align: center;
+  margin: 170px 0 0;
+}
+
+h2 {
+  font-size: 100%;
+  line-height: 1.2;
+  margin: 5px 0;
+  text-align: center;
+  font-weight: 200;
+}
+
+h3 {
+  font-size: 140%;
+  line-height: 1.2;
+  border-bottom: 1px solid #aaa;
+  margin: 0;
+  padding-bottom: 15px;
+}
+
+ul {
+  padding: 20px 0 0 60px;
+  font-weight: 200;
+  line-height: 1.375;
+}
+
+.author h1 {
+  font-size: 170%;
+  font-weight: 200;
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.author h3 {
+  font-weight: 100;
+  text-align: center;
+  font-size: 95%;
+  border: none;
+}
+
+a {
+  text-decoration: none;
+  color: #44a4dd;
+}
+
+a:hover {
+  color: #66b5ff;
+}
+
+pre {
+  font-size: 60%;
+  line-height: 1.3;
+}
+
+.progress {
+  position: fixed;
+  top: 0; left: 0; right: 0;
+  height: 3px;
+}
+
+.progress-bar {
+  width: 0%;
+  height: 3px;
+  background-color: #b4b4b4;
+
+  -webkit-transition: width 0.05s ease-out;
+  -moz-transition: width 0.05s ease-out;
+  -o-transition: width 0.05s ease-out;
+  transition: width 0.05s ease-out;
+}
+
+.hidden {
+  display: none;
+}
+
+@media (max-width: 850px) {
+
+  body {
+    font-size: 70%;
+  }
+
+  .slide-content {
+    width: auto;
+  }
+
+  img {
+    width: 100%;
+  }
+
+  h1 {
+    margin-top: 120px;
+  }
+
+  .prev, .prev:hover {
+    border-right-color: rgba(135, 135, 135, 0.5);
+  }
+
+  .next, .next:hover {
+    border-left-color: rgba(135, 135, 135, 0.5);
+  }
+}
+
+@media (max-width: 480px) {
+  body {
+    font-size: 50%;
+    overflow: hidden;
+  }
+
+  .slide-content {
+    padding: 10px;
+    margin-top: 10px;
+    height: 340px;
+  }
+
+  h1 {
+    margin-top: 50px;
+  }
+
+  ul {
+    padding-left: 25px;
+  }
+}
+
+@media print {
+  * {
+    -webkit-print-color-adjust: exact;
+  }
+
+  @page {
+    size: letter;
+  }
+
+  .hidden {
+    display: inline;
+  }
+
+  html {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+  }
+
+  body {
+    margin: 0 auto !important;
+    border: 0;
+    padding: 0;
+    float: none !important;
+    overflow: visible;
+    background: none !important;
+    font-size: 52%;
+  }
+
+  .progress, .controls {
+    display: none;
+  }
+
+  .slide {
+    position: static;
+  }
+
+  .slide-content {
+    border: 1px solid #222;
+    margin-top: 0;
+    margin-bottom: 40px;
+    height: 3.5in;
+    overflow: visible;
+  }
+
+  .slide:nth-child(even) {
+    /* 2 slides per page */
+    page-break-before: always;
+  }
+}
+
+/*
+
+github.com style (c) Vasily Polovnyov <vast@whiteants.net>
+
+*/
+
+.hljs {
+  display: block;
+  overflow-x: auto;
+  padding: 0.5em;
+  color: #333;
+  background: #f8f8f8;
+}
+
+.hljs-comment,
+.hljs-quote {
+  color: #998;
+  font-style: italic;
+}
+
+.hljs-keyword,
+.hljs-selector-tag,
+.hljs-subst {
+  color: #333;
+  font-weight: bold;
+}
+
+.hljs-number,
+.hljs-literal,
+.hljs-variable,
+.hljs-template-variable,
+.hljs-tag .hljs-attr {
+  color: #008080;
+}
+
+.hljs-string,
+.hljs-doctag {
+  color: #d14;
+}
+
+.hljs-title,
+.hljs-section,
+.hljs-selector-id {
+  color: #900;
+  font-weight: bold;
+}
+
+.hljs-subst {
+  font-weight: normal;
+}
+
+.hljs-type,
+.hljs-class .hljs-title {
+  color: #458;
+  font-weight: bold;
+}
+
+.hljs-tag,
+.hljs-name,
+.hljs-attribute {
+  color: #000080;
+  font-weight: normal;
+}
+
+.hljs-regexp,
+.hljs-link {
+  color: #009926;
+}
+
+.hljs-symbol,
+.hljs-bullet {
+  color: #990073;
+}
+
+.hljs-built_in,
+.hljs-builtin-name {
+  color: #0086b3;
+}
+
+.hljs-meta {
+  color: #999;
+  font-weight: bold;
+}
+
+.hljs-deletion {
+  background: #fdd;
+}
+
+.hljs-addition {
+  background: #dfd;
+}
+
+.hljs-emphasis {
+  font-style: italic;
+}
+
+.hljs-strong {
+  font-weight: bold;
+}
+
+
+  </style>
+    <script async src="http://localhost:35729/livereload.js"></script>
+</head>
+<body>
+    <div class="progress">
+    <div class="progress-bar"></div>
+  </div>
+
+  <div class="slide -" id="slide-1">
+    <section class="slide-content"><p>layout: post
+title: &quot;Software Testing&quot;
+description: &quot;Bu yazıda testing&#39;in önemi, yanlış bilinenler, test çeşitleri hakkında okuyabilirsiniz.&quot;
+toc: true
+category: [&quot;software&quot;]
+tags: [&quot;testing&quot;, &quot;tdd&quot;, &quot;unit test&quot;, &quot;integration test&quot;, &quot;system test&quot;]
+excerpt: &quot;Yazılım testi: Yazılım ürününün production&#39;a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir.</p>
+<p>Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çalışan yazılımın neden önemli olduğunun sebeplerine bakalım. Aşağıda önemli yazılım hatalarının tarihte sebep olduğu olaylar listeleniyor.&quot;
+series: &quot;Teori Önemlidir!&quot;
+series_category: &quot;software&quot;
+series_no: 2
+image: &quot;/assets/images/happygoat.jpg&quot;</p>
+</section>
+  </div>
+  <div class="slide hidden -" id="slide-2">
+    <section class="slide-content"><p>{% include JB/setup %}</p>
+<p>{% include series.html %}</p>
+<h1 id="tan-m">Tanım</h1>
+<blockquote>
+<p><strong>Yazılım testi:</strong> Yazılım ürününün <em>production</em>&#39;a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir.</p>
+</blockquote>
+<p>Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çalışan yazılımın neden önemli olduğunun sebeplerine bakalım. Aşağıda önemli yazılım hatalarının tarihte sebep olduğu olaylar listeleniyor:</p>
+<h2 id="yaz-l-m-kazalar-">Yazılım kazaları</h2>
+<p>Neredeyse 3. Dünya Savaşını başlatacak hatalar:</p>
+<ul>
+<li>1980, Amerika Hava Savunma Komutanlığı, iletişim cihazındaki hata bir nükleer saldırının yaşandığını yayıyor.</li>
+<li>1983, Sovyet uydusu, Amerikan füzesi saldırısı raporu veriyor.</li>
+</ul>
+<p>Hastalıklar:</p>
+<ul>
+<li>1985-87 arası radyasyon tedavi aracındaki hata, en az 3 kişinin ölüme, çoğu hastanın da 100 kat fazla radyasyon almasına yol açıyor.</li>
+</ul>
+<p>Para kaybı:</p>
+<ul>
+<li>1996, uzaya uydu gönderilmesinde roket yazılımdaki hata yörüngede sapmaya neden olup roketin kendini patlatmasına neden oluyor. Hatanın maliyeti 370 milyon dolar.</li>
+<li>1999, yine uydu fırlatmasındaki hata 1.2 milyar dolara maloluyor.</li>
+<li>1996, banka yazılım hatası 832 müşterinin 920 milyon dolar borçlandırıyor.</li>
+</ul>
+<p>Kazalar:</p>
+<ul>
+<li>1994, sistem hatası bir helikopterin düşmesine ve 29 kişinin ölmesine neden oluyor.</li>
+<li>1993, uçak sistemindeki bir hata şuna yol açıyor: <a href="https://www.youtube.com/watch?v=4iToQ2FykoI">https://www.youtube.com/watch?v=4iToQ2FykoI</a></li>
+<li>1994, Çin&#39;de yazılım hatası uçak kazasına yol açıyor: 264 ölü.</li>
+</ul>
+<p>Vakit kayıpları:</p>
+<ul>
+<li>2015, Türkiye&#39;de herhangi bir devlet dairesindeki memur: Sistemler çalışmıyor!</li>
+</ul>
+<p>Yani neymiş işimiz kolay değilmiş, yapılan hatalar farkedilmeden <em>production</em>&#39;a çıkarıldığında en basitinden para ve zaman kaybına ve hatta ölüm ve yaralanmalara yol açabiliyormuş! Bu hataları azaltmanın en etkili yöntemlerinden biri de tabii ki yazılım testidir.</p>
+<p>Yazılım test otomasyonu ise yazılımın test edilmesinde en güzel yöntemdir. Bu yöntemlere gelmeden önce, konu hakkındaki önyargıları yıkmak adına yanlış bilinenlerden devam edelim.</p>
+<h2 id="yanl-bilinenler">Yanlış bilinenler</h2>
+<ul>
+<li><strong>Bilinen:</strong> Yazılımın testi, yazılım <em>production</em>&#39;a geçmeden hemen önce yapılmalıdır.</li>
+<li><strong>Doğrusu:</strong> Yazılım testi yapılabildiği en erken zamanda yapılmaya başlanmalı, mümkünse her değişiklikte güncellenmeli ve tekrarlanmalıdır.</li>
+<li><strong>Bilinen:</strong> Yazılım testi için stajerler kullanılmalı</li>
+<li><strong>Doğrusu:</strong> Yazılım testi uzmanlık gerektiren bir konudur ve ayrı bir profesyonel ekip tarafından gerçekleştirilmelidir. Ancak o yazılımla alakalı her paydaşın (stakeholder) testte rol alması gerekir: Müşteri, developer, tester, analizci vs.</li>
+<li><strong>Bilinen:</strong> Yazılım testi bittikten sonraki yapılan değişiklikler test edilmelidir.</li>
+<li><strong>Doğrusu:</strong> Herhangibir değişiklik sonrası tüm test senaryoları tekrarlanmalıdır</li>
+<li><strong>Bilinen:</strong> X tipi testing modeli en uygunudur.</li>
+<li><strong>Doğrusu:</strong> Testing modeli, proje development modeline göre değişkenlik gösterir</li>
+<li><strong>Bilinen:</strong> Tüm kodlama bittikten sonra testing başlar</li>
+<li><strong>Doğrusu:</strong> Development modeline göre değişir, eğer <em>Agile</em> gibi metodolojilerde <em>testing</em>, gereksinim analiziyle başlar.</li>
+<li><strong>Bilinen:</strong> Yazılım testi, yazılım iş gereksinimleriyle ilgilenir.</li>
+<li><strong>Doğrusu:</strong> Sadece iş gereksinimleriyle değil, aynı zamanda görünürde olmayan performans ve güvenlik gereksinimlerine de bakılmalıdır.</li>
+<li><strong>Bilinen:</strong> Automated testing çok iyi bir şeydir ve manuel testing yapılmamalıdır.</li>
+<li><strong>Doğrusu:</strong> Yazılımda automated test yazılması zor olan veya gereksiz olan kısımlar olabilir. Prototip aşamasındaki veya geliştirilmesi tamamlanmamış, manuel testten geçmemiş, ihtiyaç analizi tamamlanmamış yazılımlar gibi. Ama ideal olanı automated olanıdır.</li>
+<li><strong>Bilinen:</strong> Unit testing iyidir ama bunun için yeterli vaktimiz ve kaynağımız yok.</li>
+<li>Bu konuya ayrıyetten girilecek...</li>
+</ul>
+<h1 id="testing-teorisi">Testing Teorisi</h1>
+<p>Testing çeşitlerine gelmeden önce biraz daha teorik bilgiyle doldurayım sizi. Çünkü teori olmadan gelişen pratikten de bir nane olmuyor maalesef. Bu yüzden sizi sıksa da <a href="">Yazılım Geliştirme Modelleri</a> yazısına alalım. Çünkü bunlar üzerine bir testing sistemi oturtulabilir.</p>
+<p>Yazılım modellerinde gördüğümüz çoğu modern sistem, <strong>iterasyon</strong> temelinde olmaktadır. Bunun yanında testing, günümüzde çok popülerleşen <strong>çevik süreçler</strong>de de olduğu gibi <strong>sık ve erken sürüm</strong> ihtiyacıyla beraber tüm bu yöntemlerin mümkün olmasını sağlayar. Bu yüzden de ayrı bir önemi vardır.</p>
+<h2 id="stlc">STLC</h2>
+<p>Yazılımın birçok yönüyle test edilmesi gerekmektedir. Nasıl yazılımın çeşitli safhaları ve durumları varsa (önce fonksiyon yazılır, class&#39;a eklenir, bu modül ve alt sisteme evrilir, yazılan fonksiyonlar daha önceden yazılan fonksiyonları çağırır vb.), testing için de aynı şey geçerlidir. Testing&#39;in de bu farklıları karşılayacak çeşitleri mevcuttur.</p>
+<p>Aynı şekilde nasıl yazılımın, <em>Yazılım Geliştirme Yaşam Döngüsü</em> (Software Development Life Cycle - SDLC) varsa testing için de <strong>Yazılım Testi Yaşam Döngüsü - (Software Test Life Cycle) (STLC)</strong> vardır. Bunu en iyi <a href="">Yazılım Geliştirme Modelleri - V-model</a>&#39;inde görmüştük. Tabii farklı yazılım geliştirme modellerinde farklı STLC&#39;ler seçilmesi gerekebilir.</p>
+<p>STLC Aşamaları:</p>
+<ul>
+<li>İhtiyaç analizi (Requirement Analysis): Test bakış açısıyla test edilmesi gerekenlerin ihtiyaçları çıkarılır. Bunlar test senaryoları, test ortamı analizi gibi çıktılardır. Bunlardan biri de Test ihtiyaçları matrisi <a href="https://en.wikipedia.org/wiki/Traceability_matrix">RTM</a>&#39;tir.</li>
+<li>Test planlaması (Test Planning): Testing ile ilgili kaynakların, araçların vb. hazırlanmasıdır. Test plan dökümanı ve test tahmin dökümanı oluşturulur.</li>
+<li>Test senaryosu geliştirmesi (Test Case Development): Test senaryolarının yazılması, test datasının yaratılması</li>
+<li>Test ortamı hazırlanması (Test Environment Setup): Donanım, yazılım ve test datası kurulu ortamın hazırlanması</li>
+<li>Test çalıştırılması (Test Execution)<ul>
+<li>Test planına uygun bir şekilde testlerin çalıştırılması</li>
+<li>Test sonuçlarının ve başarısız test senaryolarının dökümante edilmesi</li>
+<li>Başarısız sonuçların, <a href="https://en.wikipedia.org/wiki/Traceability_matrix">RTM</a>&#39;deki test senaryolarıyla ilişkilendirilmesi</li>
+<li>Yazılım hatalarının takibi</li>
+</ul>
+</li>
+<li>Test döngüsü sonu (Test Cycle Closure)</li>
+</ul>
+<h2 id="testing-e-itleri">Testing Çeşitleri</h2>
+<p>Çok çekişti testing yöntemleri vardır. Burada en temel testing yöntemlerini listeliyoruz:</p>
+<ul>
+<li>Manuel testing: (Henüz) otomatize edilmediği durumda uygulanması gerekir. Sürekli tekrar edilmesi sıkıcıdır ve işgücü gerektirir.</li>
+<li>Otomatize testing: Yazılımsal araçlar yardımıyla gerçekleşir, test sonucu karşılaştırmalı yöntem kullanılarak rapor olarak sunulur.</li>
+<li>Unit testing: Yazılımın en küçük modüllerinin test edilmesidir. Kodlama becerileri gerektirdiğinden genellikle yazılım geliştiricileri tarafından yapılır. <strong>White-box</strong> testing yöntemidir.</li>
+<li>Black-box testing: Yazılımın iç işleyişi bilinmeden, sadece girdi ve çıktılarına bakarak yapılan testtir.</li>
+<li>Integration testing: Unit testi yapılsa dahi bu modüllerin birbirleriyle entegrasyonunda hatalar meydana gelebilir. Çeşitli modüllerin grup halinde ve dış kaynaklarla (donanım, veritabanı vb.) beraber test edilmesidir.</li>
+<li>User acceptance testing (UAT): Müşteri ya da kullanıcı tarafından yazılım ihtiyaç analizi dökümanınındaki <strong>functional</strong> ihtiyaçları karşılayıp karşılamadığına bakılır.</li>
+<li>System testing: Sistemin bütünü üzerinde yapılan testing&#39;dir.<ul>
+<li>Function testing: UAT ile benzerdir. Regression testleri örnektir.</li>
+<li>Non-functional testing: Yazılımın fonksiyonel olmayan yönlerinin test edilmesidir. Load testing, performance testing, security testing gibi.</li>
+</ul>
+</li>
+</ul>
+<h2 id="test-driven-development-tdd-">Test Driven Development (TDD)</h2>
+<p>Çevirisini <strong>Test Yönelimli Geliştirme</strong> olarak seçmeyi tercih ettim. Yazılım geliştirirken <strong>önce</strong> testinin yazılması, daha sonra da kodun kendisinin yazılması esasına dayanmaktadır. Çok yararlıdır, ancak kullanmaya başlaması, ikna olması/edilmesi zor bir yöntemdir. Türkiye&#39;de çok fazla kullanıldığını düşünmüyorum. Ama yurt dışında kullanmayan ya çok azdır ya da kullanması gerektiğinin bilincindedir.</p>
+<p><a href="/software/2015/11/14/software-development-processes#agile-model">Agile ve XP</a> yazımızda da TDD&#39;yi sıkça görürüz. Ama yine çevik prensiplerin <em>sözde</em> olarak uygulandığı ama TDD&#39;nin <strong>fazlalık</strong> olarak görüldüğü yerler de çoktur.</p>
+<blockquote>
+<p>Peki neden TDD? <strong>Çünkü lanet olası testleri sonradan yazması ya çok zordur ya da artık imkansız hale gelmiştir.</strong> Bu özellikle <strong>Unit Testing</strong> için geçerlidir.</p>
+</blockquote>
+<p><strong>Amaçlar:</strong></p>
+<ul>
+<li>Yazılmış kodun testinin yazılması zordur, bu yüzden önce test sonra kod</li>
+<li>Zaman içindeki değişikliklerin önceden çalışan kodu bozup bozmadığının <strong>anlık</strong> kontrolü (lanetli hataların oluşmasının önlenmesi: biribirini bozan hata düzeltmeleri)</li>
+<li>Değişime açık olmak</li>
+</ul>
+<p><strong>Hataların anlık farkedilmesi:</strong></p>
+<p>Diyelim bir yazılımınızda bir hata meydana geldi. Bu müşteriden de gelebilir, siz de farketmiş olabilirsiniz. <em>TDD kullanılmayan</em> bir projede tipik olarak şunlar yaşanır.</p>
+<p><img src="/assets/images/ffffuuu.png" alt=""></p>
+<ul>
+<li>Aslen hatayı oluşturan kodun yazılması (kimin yazdığı, zamanı belli değil)</li>
+<li>Hata ile ilgili kaydın oluşturulması</li>
+<li>Hatayı çözmek için bir geliştiricinin üzerine alması veya ona atanması</li>
+<li>Geliştirici genelde hata ile ilgili kaydı yaratan <strong>tester</strong> ile ve/veya müşteri ile iletişime geçer, senaryoyu tam olarak anlar.</li>
+<li>Geliştirici tarafından hatanın yaratılması. İki aşamadır: ilki hatanın production ortamında anlaşılması için yaratılması gerekmektedir. Bu olmuyorsa loglardan bakılarak bulunması gerekir. Her zaman yapılması zordur. İkinci aşama ise bu hatanın aynısının geliştiricinin kendi ortamında da yaratabilmesidir. İlk aşama gerçekleşse bile ortam farklarından (kod farkı, kullanıcı farklı, DB farkı...) dolayı bunu gerçekleştirmek yine zordur.</li>
+<li>Geliştirici hatayı anladıktan sonra hatanın nedenini kod üzerinde tespit etmelidir. Bu işlem genelde <strong>debugging</strong> dediğimiz yöntemle yapılır. Çoğu zaman bu yöntem, kodun büyük bir kısmına hakim olmayı gerektirir. İyi düzenlenmemiş kod üzerinde saatlerce debugging yapıldığı az görünen bir şey değildir.</li>
+<li>Sorunlu kod tespit edildikten sonra değiştirmek için ne gerektiği analiz edilir. Kişinin kendi yazdığı bir kod dahi olsa eski kodu anlamak zordur. <strong>Single Responsibility</strong> prensibine uyulmayan kodlarda değişiklik yapmak başka bir çok kısmı etkiler. Bu durumda yapılan değişikliğin nereleri etkileyeceği hakkında başka geliştiriciler hatta yazılım mimarları ile görüş alışverişi yapmak gerekecektir. Ender durumlarda da olsa bu bağımlılık yüzünden hatanın düzeltilmesi ertelenebilir ve hatta iptal edilebilir.</li>
+<li>Düzeltme işleminden sonra kod tekrar test edilmelidir. Bizim durumumuzda bu test otomatize edilmediğinden test süreci bir haftayı bulabilir.</li>
+<li>Test süreci sonrasında şanslıysak bir problem çıkmaz ve kodun tekrar canlıya atılması için örneğin 1 hafta daha gerekmektedir.</li>
+<li>Şanslı değilsek ki çoğu zaman değiliz, bu hata ya hiç düzelmemiş ya da daha kötüsü başka hata(lar)a sebep olmuş olabilir. Bu durumda bu döngünün başına dönmemiz gerekiyor.</li>
+</ul>
+<p><img src="/assets/images/happygoat.jpg" alt=""></p>
+<p>En basit bir hatanın çözümü için hatanın kaynağından itibaren günler, haftalar, aylar hatta yıllar geçmiş olabilir. Karmaşık yazılım sistemlerinde buna ratslamak çok zor değildir. Peki <em>TDD kullanılan</em> bir projede durum nasıl olurdu? İki türlü olabilirdi. İlki:</p>
+<ul>
+<li>Geliştirici istenen özelliği sağlayacak kod değişikliğini yapmak için test yazar</li>
+<li>Test fail olur. Testi geçirecek minimum kodu yazar.</li>
+<li>Başka testler fail olur. Bu durumda neden fail oldukları, yapılan son değişiklikle alakalıdır yani nedeni bellidir.</li>
+<li>Ya eski kodlar tekrar düzenlenmelidir ya da yeni yazılan kod düzenlenir.</li>
+<li>Düzenleme yapılır ve hiçbir testin başarız olmadığı görülür.</li>
+</ul>
+<p>İkinci türlü şöyle olabilirdi:</p>
+<ul>
+<li>Müşteriden veya sizden bir hata kaydı gelir.</li>
+<li>Gerekli iletişim ve analiz yapılır (TDD kullanılmayan projeyle aynı şekilde)</li>
+<li>Hata tekrar edilmesi yapılır (TDD kullanılmayan projeyle aynı şekilde)</li>
+<li>Hata tespiti yine <strong>debugging</strong> yöntemiyle tespit edilir. TDD kullanılan projelerde <strong>refactoring</strong> yapıldığı için bu işlem görece daha kolaydır.</li>
+<li>Geliştirici bu hatayı lokal ortamında bir test yazarak gerçekleştirir.</li>
+<li>Bu testi geçirecek minimum kodu yazar.</li>
+<li>Diğer unit testlerin başarısız olmadığını görür.</li>
+<li><strong>QA</strong> takımı kodun son halinin <strong>regression test</strong>lerini çalıştırır.</li>
+</ul>
+<p>Her iki durumda da TDD&#39;nin ve <strong>test automation</strong>&#39;ın bize zaman ve emek kazandırdığını görüyoruz. Kodumuzun kalitesini kod ve hatalar açısından artırıyor. Daha da iyisi kodumuz artık değişime daha açık.</p>
+<blockquote>
+<p>Eğer TDD güzel bir şey ama zamanımız yok diyen birisini görürseniz bu senaryoyu anlatın. Asıl TDD kullanmamak zaman kaybıdır.</p>
+</blockquote>
+<h2 id="unit-testing">Unit Testing</h2>
+<p>Yazılımın en küçük birimlerinin (ben bu yazıda buna <strong>fonksiyon</strong> diyeceğim) test edilmesidir. Bu kodun önceklikle <strong>test edilebilir</strong> olmasını gerektirir. Test edilebilir kodu yazmanın en doğru yolu TDD ve türevleridir.</p>
+<p><strong>Test edilebilir fonksiyon:</strong></p>
+<ul>
+<li>Bir fonksiyon sadece bir iş yapmalıdır ya da değişmek için tek bir nedeni olmalıdır. Birden fazla iş yapıyorsa bölünmelidir (Single responsibility)</li>
+<li>Nesne yönelimli dillerde olan <strong>constructor</strong> yapısının sadece <strong>field</strong> ataması için kullanılmalıdır.</li>
+<li>Fonksiyona bağımlılıkların dışarıdan enjekte edilmesi. (Dependency Injection - Inversion of Control)</li>
+<li>fonksiyonlara geçirilen parametreler olabildiğince basit objeler olmalıdır</li>
+</ul>
+<p>Şimdi sizden yazdığınız son kodlara bir bakmanızı istiyorum. Yukarıdaki prensiplere uyuyor mu? Eğer TDD ile yazılmadıysa çok zor.</p>
+<p>Peki test edilebilir kodu öğrendik ama test edilebilir kodun özelliklerini farkedebildik mi?</p>
+<blockquote>
+<p>Test edilen fonksiyon sadece o fonksiyonla ilgili işleri yapmalıdır</p>
+</blockquote>
+<p>Her şey bunun için. Neden bu kadar önemli? Diyelim ki bir fonksiyonu test eden kodu yazdık ve çalıştırdık. Bu test <strong>fail</strong> oldu. bu durumda fonksiyon beklenen sonuçları üretmemiş demektir. Peki hatayı düzeltmemiz gerektiğinde nereyi düzelteceğiz. Hata fonksiyonun kendisinde mi yoksa fonksiyonun kullandığı dış kaynaklardan mı meydana geldi? Eğer fonksiyonumuz test edilebilir prensiplere uymuyorsa bunu anlamanın kolay bir yolu yoktur.</p>
+<p>Fonksiyonun dış kaynaklardan bağımsız olarak test edilebilmesi için kullanılan tüm bu dış kaynakların izole edilmesi gerekir. Bu işleme <strong>mocking</strong> diyoruz. Bu iş için kullanılabilecek <code>Dummy, Fake, Stubs, Mocks</code> gibi seçenekler mevcuttur ama ben bu yazıda kolay olması açısından <code>Mock objeleri</code> seçtim.</p>
+<blockquote>
+<p><strong>Mock obje:</strong> Bir obje düşünün ki siz bu objeyinin fonksiyonlarını, property&#39;lerini istediğiniz çıktıları versin, istediğiniz davranışları uygulasın. Bu objeleri <strong>run-time</strong>&#39;da yaratıp, mock edilen obje yerine kullanabilirsiniz.</p>
+</blockquote>
+<p>Neler mock edilebilir? Fonksiyonun kullandığı tüm dış kaynaklar: HTTP request objesi, veritabanı objesi, test edilen fonksiyonun kullandığı herhangibir fonksiyon. <a href="#Demo">Demo</a>&#39;da tüm bunları daha rahat anlayacaksınız.</p>
+<p><strong>İyi unit testin özellikleri:</strong></p>
+<ul>
+<li>(Çok) hızlı çalışması, çünkü bir kodun sonucunu ne kadar erken görebilirseniz o kadar iyidir.</li>
+<li>İzole: Test edilmek istenen fonksiyonalize diğer kodlardan izole olmalıdır.</li>
+<li>Tekrarlanabilir: Test her çalışmasında aynı sonucu vermelidir</li>
+<li>Bağımsız: Diğer testlerin çalışmasından bağımsız olmalıdır.</li>
+<li>Anlaşılabilir</li>
+<li>Dökümante eder: Yazılan test aynı zamanda çok güncel bir dökümantasyondur (BDD)</li>
+</ul>
+<p><strong>Yazma Yöntemleri (TDD):</strong></p>
+<ol>
+<li>Red: İstenen test yazılır. Bu test çalıştırılır ve başarısız olur.</li>
+<li>Green: Testi geçirecek minimum kod yazılır. Dış kaynaklar, bağımlılıklar mock ile soyutlanabilir.</li>
+<li>Refactor: Düzenleme işlemidir. Artık teste dayanan bir kodumuz olduğundan testin fail olmamasına dikkat ederek içimiz rahat kodumuzu düzenleyebiliriz.</li>
+<li>Tekrar</li>
+</ol>
+<p>Bu yöntemler takip edildiği takdirde, iyi bir unit test yazmış oluruz. Peki bu yöntem (TDD) aynı zamanda bize geliştirme esnasında nasıl yardımcı olur ona bakalım.</p>
+<p><strong>Sernaryo:</strong> Bir ERP yazılımı yapıyorsunuz ve sizden istenen şey: siparişi görüp iptal etmek veya bir notla beraber ilgili departmana iletmek olsun.</p>
+<p><em>TDD kullanılmayan</em> örneğimizde geliştirme yöntemi genelde şu şekilde olacaktır.</p>
+<ol>
+<li>İstenen işlemleri yapacak kod yazılır.</li>
+<li>Daha sonra yazılım derlenir ve local ortamda çalıştırılır. Bu iş çeşitli gereksinimler gerektirebilir: DB, network bağlantısı gibi.</li>
+<li>Müşteri rolünde bir kullanıcıyla sisteme giriş yapılır.</li>
+<li>Sipariş oluşturmak için gerekli ekranlarda veriler girilir</li>
+<li>Sistemden çıkılıp siparişleri görebilen bir kullanıcıyla tekrar girilir.</li>
+<li>Sistemden sipariş görülür ve kodlanan özelliğin doğru çalışıp çalışmadığına bakılır.</li>
+</ol>
+<p>Eğer şanslıysanız ki çoğu zaman değilsiniz, bu işlemi 2-3 kere tekrar ederek istenen kodu yazabilirsiniz ama biz biliyoruz ki yazılan kodu test edebilmek için bu doğrudan alakası olmayan işleri çok kereler tekrarlamanız gerekecek. Üstelik bu işin müşteriden, QA&#39;den dönme durumunda yine aynı adımları izlemeniz gerekecek.</p>
+<p><em>TDD kullanılan</em> örneğimizde belki işimiz çok kolay olmayacak ama bize şu basit faydaları sağlayacaktır:</p>
+<ul>
+<li>Test yazmak basit ve etkili bir analiz ve tasarım sağlar</li>
+<li>Geliştirme esnasında kodun ne yapıp yapamadığının anlık sonucunu görmek konsantrasyonun dağılmadan geliştirebilmeyi sağlar</li>
+<li>Değiştirilen kodun başka yerleri bozup bozmadığının farkında olabilmek daha radikal (ve doğru) değişiklikleri mümkün kılar</li>
+<li>Yazılan testler geliştiriciler için en güncel dökümantasyonu sağlar</li>
+<li>Testlerin izole yazılması sayesinde yazılımın diğer kısımlarından bağımsız geliştirilmesi sağlanabilir.</li>
+<li>Kodun bambaşka bir yerindeki bug artık sizin geliştirmenizi engellemez</li>
+</ul>
+<h2 id="integration-testing">Integration Testing</h2>
+<p>Karmaşık bir yazılım birçok alt yazılımların birleşimiyle meydana gelir.  geliştirilen bu modüller birbirleriyle belirli arayüzlerle etkileşerek çalışırlar. Görülmüştür ki bu modüllerin entegrasyonu yazılım geliştirmesindeki en zorlu süreçlerden biridir.</p>
+<p>Bunu çözebilmek için çevik prensiplerden de yararlanarak integration testing ortaya çıkarılmıştır. Farklı stratejiler mevcuttur:</p>
+<ul>
+<li>Big Bang Yöntemi: Geliştirilen tüm modüller tek bir kerede birleştirilir ve test edilir. Tüm modüllerin bitmesini gerektirir ve çıkan hataların ana kaynağını tespit etmek zordur.</li>
+<li>Incremental (Birikmeli) Yöntem: <em>Buttom Up</em> (alttan üste), <em>Top Down</em> (üstten alta) ve ikisinin birleşimi <em>Sandwich</em> yöntemleri kullanılabilir. Seçilen yönteme göre <strong>stub</strong> ve <strong>driver</strong> yazılması gerekebilir. <a href="http://testingbasicinterviewquestions.blogspot.com.tr/2012/01/why-we-use-stubs-and-drivers.html">^stubdriver</a></li>
+</ul>
+<p><img src="/assets/images/topbottom.png" alt=""></p>
+<h2 id="system-testing">System Testing</h2>
+<p>Ürünün canlıya çıkmadan önce yapılan yazılım sisteminin bütününün test edilmesidir. Yazılımın aynı zamanda donanım ve diğer dış kaynaklarla beraber denenmesidir. 50&#39;den fazla çeşidi bununmaktadır. Kullanılabilirlik (usablity), regression <a href="https://en.wikipedia.org/wiki/Regression_testing">^regression</a>, functional, performans en çok kullanılan system testing çeşitlerindendir.</p>
+<p>Çoğu zaman Functional Requirement Specification (FRS) <a href="https://en.wikipedia.org/wiki/Functional_requirement">^frs</a>, System Requirement Specification (SRS) <a href="https://en.wikipedia.org/wiki/Requirements_analysis">^srs</a> gibi üst seviye dökümantasyonlardan yararlanılır.</p>
+<h1 id="code-coverage-test-coverage-">Code Coverage (Test Coverage)</h1>
+<p>Yazılan testlerin, yazılımı gerçekte ne kadarını kapsadığının hesaplandığı yöntemdir. Teorik olarak code coverage %100 olan yazılımlar hatasızdır denebilir ancak pratikte birçok yönden çok fazla sayıda test yazılmasını gerektireceği için çok zordur. Ancak oran ne kadar yüksekse hata oluşma olasılığı düşer.</p>
+<p><strong>TDD</strong> kullanımı code coverage&#39;ın yüksek tutulması için bir yöntem olarak düşünülebilir çünkü TDD ile testi olmayan kod yazılmaması amaçlanır.</p>
+<p>Çok kullanılan code coverage ölçüm yöntemleri:</p>
+<ul>
+<li>Statement Coverage: Kaynak kodunun satır bazında ne kadarının çalıştığına bakar</li>
+<li>Decision Coverage: <code>if</code>, <code>while</code> gibi karar elemanlarında <code>boolean</code> değerinin tümüne bakar. bir kere <code>true</code> bir kere de <code>false</code> seçilebilmesi yeterlidir.</li>
+<li>Condition Coverage: Yine decision coverage gibi ama bu sefer karar statement&#39;larınındaki tüm değişkenler test edilmeli.</li>
+</ul>
+<h1 id="continuous-integration">Continuous integration</h1>
+<h1 id="continuous-delivery">Continuous Delivery</h1>
+<h1 id="demo">Demo</h1>
+<h1 id="kaynaklar">Kaynaklar</h1>
+<ul>
+<li><a href="http://www.turkishtestingboard.org/files/ISTQB-Yazilim-Testi-Terimler-Sozlugu.pdf">http://www.turkishtestingboard.org/files/ISTQB-Yazilim-Testi-Terimler-Sozlugu.pdf</a></li>
+<li><a href="http://www.guru99.com/software-testing-life-cycle.html">http://www.guru99.com/software-testing-life-cycle.html</a></li>
+<li><a href="http://istqbexamcertification.com/what-is-integration-testing">http://istqbexamcertification.com/what-is-integration-testing</a></li>
+<li><a href="http://googletesting.blogspot.co.uk/2015/04/just-say-no-to-more-end-to-end-tests.html">http://googletesting.blogspot.co.uk/2015/04/just-say-no-to-more-end-to-end-tests.html</a></li>
+<li><a href="http://www.artima.com/weblogs/viewpost.jsp?thread=203994">http://www.artima.com/weblogs/viewpost.jsp?thread=203994</a></li>
+<li><a href="http://www.developertesting.com/archives/month200705/20070504-000425.html">http://www.developertesting.com/archives/month200705/20070504-000425.html</a></li>
+<li><a href="http://www.bullseye.com/coverage.html">http://www.bullseye.com/coverage.html</a></li>
+</ul>
+<p><br />
+{% include series.html %}
+<br /></p>
+<p><strong>Dipnotlar:</strong></p>
+</section>
+  </div>
+
+  <div class="controls">
+    <div class="arrow prev"></div>
+    <div class="arrow next"></div>
+  </div>
+
+
+  <script type="text/javascript">
+    /**
+ * Returns the current page number of the presentation.
+ */
+function currentPosition() {
+  return parseInt(document.querySelector('.slide:not(.hidden)').id.slice(6));
+}
+
+
+/**
+ * Navigates forward n pages
+ * If n is negative, we will navigate in reverse
+ */
+function navigate(n) {
+  var position = currentPosition();
+  var numSlides = document.getElementsByClassName('slide').length;
+
+  /* Positions are 1-indexed, so we need to add and subtract 1 */
+  var nextPosition = (position - 1 + n) % numSlides + 1;
+
+  /* Normalize nextPosition in-case of a negative modulo result */
+  nextPosition = (nextPosition - 1 + numSlides) % numSlides + 1;
+
+  document.getElementById('slide-' + position).classList.add('hidden');
+  document.getElementById('slide-' + nextPosition).classList.remove('hidden');
+
+  updateProgress();
+  updateURL();
+  updateTabIndex();
+}
+
+
+/**
+ * Updates the current URL to include a hashtag of the current page number.
+ */
+function updateURL() {
+  try {
+    window.history.replaceState({} , null, '#' + currentPosition());
+  } catch (e) {
+    window.location.hash = currentPosition();
+  }
+}
+
+
+/**
+ * Sets the progress indicator.
+ */
+function updateProgress() {
+  var progressBar = document.querySelector('.progress-bar');
+
+  if (progressBar !== null) {
+    var numSlides = document.getElementsByClassName('slide').length;
+    var position = currentPosition() - 1;
+    var percent = (numSlides === 1) ? 100 : 100 * position / (numSlides - 1);
+    progressBar.style.width = percent.toString() + '%';
+  }
+}
+
+
+/**
+ * Removes tabindex property from all links on the current slide, sets
+ * tabindex = -1 for all links on other slides. Prevents slides from appearing
+ * out of control.
+ */
+function updateTabIndex() {
+  var allLinks = document.querySelectorAll('.slide a');
+  var position = currentPosition();
+  var currentPageLinks = document.getElementById('slide-' + position).querySelectorAll('a');
+  var i;
+
+  for (i = 0; i < allLinks.length; i++) {
+    allLinks[i].setAttribute('tabindex', -1);
+  }
+
+  for (i = 0; i < currentPageLinks.length; i++) {
+    currentPageLinks[i].removeAttribute('tabindex');
+  }
+}
+
+/**
+ * Determines whether or not we are currently in full screen mode
+ */
+function isFullScreen() {
+  return document.fullscreenElement ||
+         document.mozFullScreenElement ||
+         document.webkitFullscreenElement ||
+         document.msFullscreenElement;
+}
+
+/**
+ * Toggle fullScreen mode on document element.
+ * Works on chrome (>= 15), firefox (>= 9), ie (>= 11), opera(>= 12.1), safari (>= 5).
+ */
+function toggleFullScreen() {
+  /* Convenient renames */
+  var docElem = document.documentElement;
+  var doc = document;
+
+  docElem.requestFullscreen =
+      docElem.requestFullscreen ||
+      docElem.msRequestFullscreen ||
+      docElem.mozRequestFullScreen ||
+      docElem.webkitRequestFullscreen.bind(docElem, Element.ALLOW_KEYBOARD_INPUT);
+
+  doc.exitFullscreen =
+      doc.exitFullscreen ||
+      doc.msExitFullscreen ||
+      doc.mozCancelFullScreen ||
+      doc.webkitExitFullscreen;
+
+  isFullScreen() ? doc.exitFullscreen() : docElem.requestFullscreen();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+  // Update the tabindex to prevent weird slide transitioning
+  updateTabIndex();
+
+  // If the location hash specifies a page number, go to it.
+  var page = window.location.hash.slice(1);
+  if (page) {
+    navigate(parseInt(page) - 1);
+  }
+
+  document.onkeydown = function (e) {
+    var kc = e.keyCode;
+
+    // left, down, H, J, backspace, PgUp - BACK
+    // up, right, K, L, space, PgDn - FORWARD
+    // enter - FULLSCREEN
+    if (kc === 37 || kc === 40 || kc === 8 || kc === 72 || kc === 74 || kc === 33) {
+      navigate(-1);
+    } else if (kc === 38 || kc === 39 || kc === 32 || kc === 75 || kc === 76 || kc === 34) {
+      navigate(1);
+    } else if (kc === 13) {
+      toggleFullScreen();
+    }
+  };
+
+  if (document.querySelector('.next') && document.querySelector('.prev')) {
+    document.querySelector('.next').onclick = function (e) {
+      e.preventDefault();
+      navigate(1);
+    };
+
+    document.querySelector('.prev').onclick = function (e) {
+      e.preventDefault();
+      navigate(-1);
+    };
+  }
+});
+
+
+  </script>
+</body>
+</html>
