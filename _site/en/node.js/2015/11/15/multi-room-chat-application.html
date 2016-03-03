@@ -1,0 +1,1928 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="tr"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Çok Odalı Node.js Chat Uygulaması</title>
+	<meta name="author" content="Barış Aydek">
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Çok Odalı Node.js Chat Uygulaması" type="application/atom+xml">
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="/">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/">
+								Welcome to Dhalsim's Place
+							</a>
+						</li>
+						<li class="archive"><a href="/en/archive.html">Arşiv</a></li>
+						<li class="page"><a href="/en/pages.html">Sayfalar</a></li>
+						<li class="category"><a href="/en/categories.html">Kategoriler</a></li>
+						<li class="tag"><a href="/en/tags.html">Taglar</a></li>
+					</ul>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Çok Odalı Node.js Chat Uygulaması</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				<div class="toc">
+					<span>İçindekiler tablosu yükleniyor...</span>
+					<div class="sp-circle"></div>
+				</div>
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					<p><strong>Kullanılacak teknolojiler:</strong></p>
+
+<ul>
+<li>Node.js</li>
+<li>Express framework</li>
+<li>Grunt build manager</li>
+<li>Redis</li>
+<li>Mongo, mongoose</li>
+<li>Q, Bluebird promise library&#39;leri</li>
+<li>Passport.js</li>
+<li>socket.io</li>
+</ul>
+
+<h1>Başlarken</h1>
+
+<p>Node.js Linux / Mac OSX / Windows gibi daha bir çok platformda çalışabilen bir  yazılımdır. Eğer Linux / OS X terminaline aşina biriyseniz Node.js kullanmak gerçekten çok kolay ve keyifli oluyor. Ancak ülkemizde ağırlıklı olarak Windows üzerinde yazılım geliştirildiğini bildiğimden sadece bu kısımda olmak üzere Windows üzerinde nasıl gerekli yazılımları kurup çalıştırırsınız ona gireceğim.</p>
+
+<p>Eğer Linux&#39;tan korkmayan ve farklı bir dünyaya dalmak isteyen cesur bir yazılımcıysanız, sanal olarak bir Ubuntu Linux kurup işinizi kolaylaştırabilirsiniz.</p>
+
+<p><strong>Öncelikle gereksinimlerimiz:</strong></p>
+
+<ul>
+<li>Node.js</li>
+<li>NPM (node paket yöneticisi)</li>
+<li>Git (SVN, TFS gibi ama daha iyisi)</li>
+<li>Text Editor / IDE</li>
+</ul>
+
+<p><strong>Node</strong> node.js uygulamalarını çalıştıracağımız program. <code>node dosya.js</code> şeklinde çalıştırabileceğimiz gibi, diğer kuracağımız programcıklar üzerinden de çalıştırılabiliyor. <strong>npm</strong> node kurulumu ile birlikte geliyor ve node paketlerini kurmamızı sağlayacak.</p>
+
+<p><strong>Peki neden node.js?</strong></p>
+
+<ul>
+<li>Çünkü Javascript!</li>
+<li>Google&#39;ın chrome&#39;da da kullandığı V8 Javascript motoru üzerinde çalışır</li>
+<li>Event-driven (olay güdümlü), non-blocking (engellenmeyen) I/O (giriş çıkış) modelini kullanarak verimli ve hızlı çalışır: <strong>concurrency</strong></li>
+<li>Web uygulamaları geliştirmek için uygundur</li>
+<li><strong>Scale</strong> edilmesi (ölçeklenmesi) kolaydır</li>
+<li>Müthiş kütüphane ve topluluk desteği,</li>
+<li>Modüler, genişletilebilir yapıda olması: <strong>extensibility</strong></li>
+</ul>
+
+<p>İngilizce şu video&#39;dan izlemenizi tavsiye ederim: <a href="https://www.youtube.com/watch?v=e8ZLfcHxrD8&amp;spfreload=10">What is Node.js?</a>. Başka kaynaklardan da araştırabilirsiniz.</p>
+
+<p><strong>NPM</strong>, Node package manager, <a href="https://www.npmjs.com/">https://www.npmjs.com/</a> üzerinde de yayımlanan paketleri indirmenize yarar. <code>package.json</code> dosyası üzerinden projenizin paketlerinin takibini yapar.</p>
+
+<p><strong>Git</strong>&#39;i benim projemi indirmek için kullanacağız. Ayrıca <code>git branch</code> ile projenin farklı bölümlerinin kodlarına geçiş yapabilirsiniz.</p>
+
+<ul>
+<li>Git&#39;le ilgili çok iyi bir türkçe kaynak (<a href="https://aliozgur.gitbooks.io/git101/content">Türkçe Git 101</a>) var. Bilmiyorsanız okuyup öğrenin, göz atın.</li>
+<li>Resmi hakkında sayfası da birçok yararlı bilgi veriyor <a href="https://git-scm.com/about">https://git-scm.com/about</a></li>
+<li><a href="https://www.atlassian.com/git/articles/10-years-of-git">Git&#39;in 10 senesi</a>: Git&#39;in tarihçesini çok güzel bir şekilde anlatmışlar efendim.</li>
+</ul>
+
+<p><strong>Atom</strong> benim son dönemde kullanmaktan keyif aldığım, <strong>github</strong>&#39;ın bir ürünü. Her işletim sisteminde çalışması da cabası. Çıplak haliyle de yeterince iyi olan bu editör, tıpkı <em>npm</em> gibi <strong>apm</strong> adında bir paket yönetim programına sahip. İster atom&#39;un arayüzünden ister komut satırından kullanabilirsiniz. Arayüzden popüler paketleri inceleyip yükleyebilirsiniz.</p>
+
+<ul>
+<li>Mesela şu kullanım çok mantıklı: <a href="http://www.atomtips.com/file-navigation-in-atom/">http://www.atomtips.com/file-navigation-in-atom/</a></li>
+<li>ya da şu <a href="https://atom.io/packages/linter">https://atom.io/packages/linter</a></li>
+<li>atom&#39;un özelleştirilmesinin sonu yok diyorum ve konuyu kilitliyorum</li>
+</ul>
+
+<p>Şimdi reklamlar: <a href="https://www.youtube.com/watch?time_continue=133&amp;v=Y7aEiVwBAdk">https://www.youtube.com/watch?time_continue=133&amp;v=Y7aEiVwBAdk</a></p>
+
+<h2>Windows</h2>
+
+<blockquote>
+<p>Komut satırı <em>cmd</em>&#39;yi <em>administrator</em> olarak açmanız gerekebilir.
+Yüklenen programların tanınması için komut satırını yeniden açmanız gerekebilir</p>
+</blockquote>
+
+<ol>
+<li><a href="https://chocolatey.org">Chocalatey</a> kurun. Ubuntu <em>apt-get</em> benzeri kurulum yapmanızı sağlayacak. Bu sayede windows cmd üzerinden kurulum yapabileceksiniz:</li>
+<li><code>choco install git</code></li>
+<li><code>choco install node</code></li>
+<li><code>choco install atom</code></li>
+</ol>
+
+<h2>Linux (Ubuntu)</h2>
+
+<p>Linux&#39;unu sanal olarak kullanmak isteyenler için:</p>
+
+<ol>
+<li><a href="https://www.virtualbox.org/wiki/Downloads">Download VirtualBox</a></li>
+<li><a href="http://www.ubuntu.com/download/desktop">Download Ubuntu</a></li>
+<li>Altından kalkamadınız mı sizi google yada şuraya alalım <a href="https://mylifemypc.wordpress.com/appserv/oracle-virtualbox-ile-ubuntu-kurulum">https://mylifemypc.wordpress.com/appserv/oracle-virtualbox-ile-ubuntu-kurulum</a></li>
+</ol>
+
+<p>Terminal açıp komut yazacağız, yönetici hakkı gerektiren işlemde komutların başına <code>sudo</code> koyuyoruz ve parolamızı giriyoruz.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> sudo apt-get update
+<span class="lineno">2</span> sudo apt-get install nodejs
+</code></pre></div>
+<blockquote>
+<p>Kurulumlarla ilgili problem yaşarsanız şuradan bakabilirsiniz: <a href="https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server">https://www.digitalocean.com/community/tutorials/how-to-install-node-js-on-an-ubuntu-14-04-server</a></p>
+</blockquote>
+
+<h2>Mac OS X</h2>
+
+<p>OS X&#39;te de <strong>Homebrew</strong> kullanalım. Kurulum için:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ruby -e &quot;$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)&quot;
+</code></pre></div>
+<p>Ardından <code>brew</code> ile kurulum yapıyoruz:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> brew install node
+<span class="lineno">2</span> brew install git
+</code></pre></div>
+<p>Atom kurun: <a href="https://atom.io/download/mac">https://atom.io/download/mac</a></p>
+
+<h1>Proje Başlasın</h1>
+
+<p>Şimdi node.js&#39;te yeni bir proje nasıl oluşturulur görelim:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm init
+</code></pre></div>
+<blockquote>
+<p><strong>package.json</strong> dosyasını oluşturmak için bir takım sorular sorar</p>
+</blockquote>
+
+<p>Kullanacağımız node paketlerini kuralım:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install express --save
+<span class="lineno">2</span> npm install hogan-express --save
+</code></pre></div>
+<p>Uygulamamızın genel yapısı şu şekilde olacak:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> project/
+<span class="lineno">2</span>     public/
+<span class="lineno">3</span>         css/
+<span class="lineno">4</span>         images/
+<span class="lineno">5</span>     views/   
+<span class="lineno">6</span>     routes/
+<span class="lineno">7</span>     Gruntfile.js
+<span class="lineno">8</span>     app.js
+<span class="lineno">9</span>     package.json
+</code></pre></div>
+<blockquote>
+<p>Uygulama ile ilgili her dosyayı buradan paylaşamıyorum. O yüzden ister ara ara bakmak için kullanın, isterseniz de indirip üzerinden devam edin, şu linkten uygulamanın ilk halini görebilirsiniz: <a href="https://github.com/dhalsim/chatcat">https://github.com/dhalsim/chatcat</a>. Tavsiyem <strong>bir</strong> branch&#39;ini bilgisayarınıza kurup devam etmeniz:</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> git clone https://github.com/dhalsim/chatcat.git
+<span class="lineno">2</span> cd chatchat
+<span class="lineno">3</span> npm install
+<span class="lineno">4</span> npm instal grunt-cli -g
+<span class="lineno">5</span> grunt dev
+</code></pre></div>
+<p>Browser&#39;dan <a href="http://localhost:3000">http://localhost:3000</a> açıp test edin.</p>
+
+<h1>Geliştirme</h1>
+
+<p>Meteor.js&#39;te uygulama geliştirirken çok büyük kolaylık sağlayan bir sistem var. Gavurların <strong>hot-code reloading</strong> dedikleri bu sistem, sizin uygulama dosyalarınızı izliyor ve bir değişiklik olduğunda node.js&#39;i baştan başlatıyor. Üstelik açık olan browser&#39;da kendini yeniliyor. Yani siz editörünüzde çalışıp Ctrl+S&#39;ye basıp browser&#39;a döndüğünüzde yeni kodu çalışmış halde buluyorsunuz. Development&#39;ı çok hızlandıran bir durum.</p>
+
+<p>Node.js için bu sistemi yapabilmek için <strong>grunt.js</strong> denen bir build sistemi kullanacağım. Grunt kısaca sizin javascript ile bir takım işleri otomatikleştirmenizi sağlıyor. Örneğin <strong>less</strong> dosyalarını <strong>css</strong> dosyalarına çevirmenizi, javascriptleri <strong>minify</strong> etmenizi sağlayabilir. Üstelik birçok <strong>grunt-contrib</strong> hazır paketi var.</p>
+
+<h2>Grunt.js&#39;i tanıyalım</h2>
+
+<p>Grunt.js aslında bir task manager&#39;dır. Veriler taskları komut satırından çalıştırabilirsiniz.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> grunt dev
+</code></pre></div>
+<p>Çalıştırılan directory içinde <strong>Gruntfile.js</strong>&#39;yi arar ve içinde verilen tasklardan <strong>dev</strong> ismindekini çakıştırır.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;express:dev&#39;</span><span class="p">,</span> <span class="s1">&#39;watch:all&#39;</span><span class="p">]);</span>
+</code></pre></div>
+<ul>
+<li><strong>dev</strong> isminde bir task yaratır.</li>
+<li>Bu task başka iki task&#39;ı çalıştırır.</li>
+<li>grunt-express-server ile eklenen <strong>express</strong> task&#39;ının <strong>dev</strong> target&#39;i ile</li>
+<li>grunt-contrib-watch ile eklenen <strong>watch</strong> task&#39;ının <strong>all</strong> target&#39;ini çalıştırır.</li>
+<li>target&#39;ler <strong>initConfig</strong> içinde tanımlanmış olmalıdır (anlatacağım)</li>
+</ul>
+
+<h2>Grunt.js kurulum</h2>
+
+<p>Öncelikle grunt&#39;ı yükleyelim:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install -g grunt-cli
+</code></pre></div>
+<blockquote>
+<p>grunt komut satırı çalıştırabilir programını global olarak yükler</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install grunt --save
+</code></pre></div>
+<blockquote>
+<p>grunt node.js library&#39;sini uygulama altına yükler</p>
+</blockquote>
+
+<p>Kullanacağımız diğer paketleri de yukarıdaki gibi npm ile yükleyelim:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install grunt-contrib-watch --save
+<span class="lineno">2</span> npm install grunt-express-server --save
+<span class="lineno">3</span> npm install load-grunt-tasks --save
+<span class="lineno">4</span> npm install connect-livereload --save-dev
+</code></pre></div>
+<ul>
+<li><strong>grunt-contrib-watch:</strong> Verdiğiniz ayarlardan <strong>file watcher</strong>&#39;lar oluşturur, değişikliklerde veriler task&#39;ları çalıştırır</li>
+<li><strong>grunt-express-server:</strong> <em>express.js</em> node uygulamanızı çalıştırır</li>
+<li><strong>connect-livereload:</strong> <em>express.js</em>&#39;de template&#39;lerinize <strong>livereload</strong> script&#39;ini inject eder.</li>
+<li><strong>load-grunt-tasks:</strong> <em>package.json</em> içindeki dependency&#39;lerinizi okuyup otomatik olarak onları <em>gruntfile.js</em>&#39;te yükler. <a href="https://github.com/sindresorhus/load-grunt-tasks">Ayrıntılı bilgi</a></li>
+</ul>
+
+<p>Farkettiyseniz bu komutlar <strong>package.json</strong> dosyasında değişikliklere yol açtılar:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="s2">&quot;name&quot;</span><span class="o">:</span> <span class="s2">&quot;chatcat&quot;</span><span class="p">,</span>
+<span class="lineno"> 3</span>   <span class="s2">&quot;version&quot;</span><span class="o">:</span> <span class="s2">&quot;1.0.0&quot;</span><span class="p">,</span>
+<span class="lineno"> 4</span>   <span class="s2">&quot;description&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="lineno"> 5</span>   <span class="s2">&quot;main&quot;</span><span class="o">:</span> <span class="s2">&quot;app.js&quot;</span><span class="p">,</span>
+<span class="lineno"> 6</span>   <span class="s2">&quot;scripts&quot;</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="s2">&quot;test&quot;</span><span class="o">:</span> <span class="s2">&quot;echo \&quot;Error: no test specified\&quot; &amp;&amp; exit 1&quot;</span>
+<span class="lineno"> 8</span>   <span class="p">},</span>
+<span class="lineno"> 9</span>   <span class="s2">&quot;author&quot;</span><span class="o">:</span> <span class="s2">&quot;&quot;</span><span class="p">,</span>
+<span class="lineno">10</span>   <span class="s2">&quot;license&quot;</span><span class="o">:</span> <span class="s2">&quot;ISC&quot;</span><span class="p">,</span>
+<span class="lineno">11</span>   <span class="s2">&quot;dependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">12</span>     <span class="s2">&quot;express&quot;</span><span class="o">:</span> <span class="s2">&quot;^4.13.3&quot;</span><span class="p">,</span>
+<span class="lineno">13</span>     <span class="s2">&quot;grunt&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.4.5&quot;</span><span class="p">,</span>
+<span class="lineno">14</span>     <span class="s2">&quot;hogan-express&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.5.2&quot;</span>
+<span class="lineno">15</span>   <span class="p">},</span>
+<span class="lineno">16</span>   <span class="s2">&quot;devDependencies&quot;</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">17</span>     <span class="s2">&quot;connect-livereload&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.5.3&quot;</span><span class="p">,</span>
+<span class="lineno">18</span>     <span class="s2">&quot;grunt-contrib-watch&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.6.1&quot;</span><span class="p">,</span>
+<span class="lineno">19</span>     <span class="s2">&quot;grunt-express-server&quot;</span><span class="o">:</span> <span class="s2">&quot;^0.5.1&quot;</span><span class="p">,</span>
+<span class="lineno">20</span>     <span class="s2">&quot;load-grunt-tasks&quot;</span><span class="o">:</span> <span class="s2">&quot;^3.3.0&quot;</span>
+<span class="lineno">21</span>   <span class="p">}</span>
+<span class="lineno">22</span> <span class="p">}</span>
+</code></pre></div>
+<p>Peki <strong>dependencies</strong> yanında bu <strong>devDependencies</strong> nedir diye sorarsanız cevabı <a href="http://stackoverflow.com/questions/18875674/whats-the-difference-between-dependencies-devdependencies-and-peerdependencies">burada</a></p>
+
+<h2>Gruntfile.js</h2>
+
+<p>Bir sonraki yapmamız gerekenlerden <strong>Gruntfile.js</strong> dosyasını oluşturmak:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">grunt</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;load-grunt-tasks&#39;</span><span class="p">)(</span><span class="nx">grunt</span><span class="p">);</span>
+<span class="lineno"> 3</span>   <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span>   <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+<span class="lineno"> 6</span>     <span class="nx">express</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 7</span>       <span class="nx">dev</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 9</span>           <span class="nx">script</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="s1">&#39;./app.js&#39;</span><span class="p">)</span>
+<span class="lineno">10</span>         <span class="p">}</span>
+<span class="lineno">11</span>       <span class="p">}</span>
+<span class="lineno">12</span>     <span class="p">},</span>
+<span class="lineno">13</span>     <span class="nx">watch</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">14</span>       <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">15</span>         <span class="nx">livereload</span><span class="o">:</span> <span class="kc">true</span>
+<span class="lineno">16</span>       <span class="p">},</span>
+<span class="lineno">17</span>       <span class="nx">all</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">18</span>         <span class="nx">files</span><span class="o">:</span> <span class="p">[</span>
+<span class="lineno">19</span>           <span class="s1">&#39;app.js&#39;</span><span class="p">,</span>
+<span class="lineno">20</span>           <span class="s1">&#39;Gruntfile.js&#39;</span><span class="p">,</span>
+<span class="lineno">21</span>           <span class="s1">&#39;public/**/*.*&#39;</span><span class="p">,</span>
+<span class="lineno">22</span>           <span class="s1">&#39;views/**/*.*&#39;</span>
+<span class="lineno">23</span>         <span class="p">]</span>
+<span class="lineno">24</span>       <span class="p">}</span>
+<span class="lineno">25</span>     <span class="p">}</span>
+<span class="lineno">26</span>   <span class="p">});</span>
+<span class="lineno">27</span> 
+<span class="lineno">28</span>   <span class="nx">grunt</span><span class="p">.</span><span class="nx">event</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;watch&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">action</span><span class="p">,</span> <span class="nx">filepath</span><span class="p">,</span> <span class="nx">target</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">29</span>     <span class="nx">grunt</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">writeln</span><span class="p">(</span><span class="nx">target</span> <span class="o">+</span> <span class="s1">&#39;: &#39;</span> <span class="o">+</span> <span class="nx">filepath</span> <span class="o">+</span> <span class="s1">&#39; has &#39;</span> <span class="o">+</span> <span class="nx">action</span><span class="p">);</span>
+<span class="lineno">30</span>   <span class="p">});</span>
+<span class="lineno">31</span> 
+<span class="lineno">32</span>   <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="p">[</span><span class="s1">&#39;express:dev&#39;</span><span class="p">,</span> <span class="s1">&#39;watch:all&#39;</span><span class="p">]);</span>
+<span class="lineno">33</span> <span class="p">}</span>
+</code></pre></div>
+<ul>
+<li><strong>initConfig</strong> içine task&#39;ların gerekli parametrelerini belirtiyoruz</li>
+<li>express task&#39;ına dev, watch task&#39;ına all isminde target&#39;ler tanımlanmış</li>
+<li>express &gt; dev &gt; options &gt; server ile çalışacak express uygulamasının dosya ismini verdim</li>
+<li>watch &gt; all &gt; files ile değişikliklerini izlemek istediğim dosya ve klasörleri belirttim</li>
+</ul>
+
+<p>Evet artık <strong>grunt dev</strong> komutuyla uygulamamızı başlattıktan sonra <a href="http://localhost:3000">http://localhost:3000</a> altından test edebiliriz. Herhangi bir dosyayı değiştirin ve kaydedin. grunt&#39;ın uygulamayı yeniden başladığını ve browser&#39;ın sayfayı yenilediğini göreceksiniz.</p>
+
+<h1>Express</h1>
+
+<p><strong>Grunt</strong>&#39;ın yaptığı bir takım sihirbazlıkları anlamadan önce, <strong>express</strong> nedir ne işe yarar ona bakalım.</p>
+
+<p>Express, node.js ile birlikte çok basit bir http server yapabilmenize olanak sağlarken, <strong>middleware</strong> yapısıyla istenidiğiniz esnekliğe sahiptir. İster REST servisi yazabilir isterseniz bir web uygulaması yazabilirsiniz.</p>
+
+<h2>Middleware nedir?</h2>
+
+<p>Middleware request objesine (req), response objesine (res) ve sonraki middleware&#39;e (next) erişimi olan bir fonksiyondur.</p>
+
+<p><img src="/assets/images/middleware.png" alt=""></p>
+
+<ul>
+<li>Her tür kodu çalıştırabilir</li>
+<li>Request ve response objelerini değiştirebilir.</li>
+<li>Request-response çağrımını durdurabilir</li>
+<li>Sıradaki middleware&#39;i çağırabilir</li>
+</ul>
+
+<p>Application level veya route level tanımlanabilir. Error handling (hata yönetimi) için kullanımı farklıdır. Ayrıntılı bilgi: <a href="http://expressjs.com/guide/using-middleware.html">http://expressjs.com/guide/using-middleware.html</a></p>
+
+<h2>View&#39;lar</h2>
+
+<p>Biz <strong>hogan</strong> (mustache) template engine&#39;i kullanarak bir chat web uygulaması yazacağız.</p>
+
+<p>Hogan ile ayrıntılı bilgi: <a href="https://github.com/vol4ok/hogan-express">https://github.com/vol4ok/hogan-express</a>
+<br />
+Mustache: <a href="http://mustache.github.io/mustache.5.html">http://mustache.github.io/mustache.5.html</a></p>
+
+<p>Hadi uygulamamızı inceleyelim:</p>
+
+<p><strong>app.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">express</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express&#39;</span><span class="p">);</span>
+<span class="lineno"> 2</span> <span class="kd">var</span> <span class="nx">path</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;path&#39;</span><span class="p">);</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="kd">var</span> <span class="nx">app</span> <span class="o">=</span> <span class="nx">express</span><span class="p">();</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;views&#39;</span><span class="p">,</span> <span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;views&#39;</span><span class="p">));</span>
+<span class="lineno"> 7</span> <span class="nx">app</span><span class="p">.</span><span class="nx">set</span><span class="p">(</span><span class="s1">&#39;view engine&#39;</span><span class="p">,</span> <span class="s1">&#39;html&#39;</span><span class="p">);</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> <span class="c1">// template&#39;ler için .html uzantısını kullan</span>
+<span class="lineno">10</span> <span class="nx">app</span><span class="p">.</span><span class="nx">engine</span><span class="p">(</span><span class="s1">&#39;html&#39;</span><span class="p">,</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;hogan-express&#39;</span><span class="p">));</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span> <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">express</span><span class="p">.</span><span class="kr">static</span><span class="p">(</span><span class="nx">path</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">,</span> <span class="s1">&#39;public&#39;</span><span class="p">)));</span>
+<span class="lineno">13</span> <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">require</span><span class="p">(</span><span class="s1">&#39;connect-livereload&#39;</span><span class="p">)());</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./routes/routes.js&#39;</span><span class="p">)(</span><span class="nx">express</span><span class="p">,</span> <span class="nx">app</span><span class="p">);</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span> <span class="nx">app</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="mi">3000</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">18</span>   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;chatcat 3000 portunda çalışıyor&#39;</span><span class="p">);</span>
+<span class="lineno">19</span> <span class="p">});</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">app</span><span class="p">;</span>
+</code></pre></div>
+<ul>
+<li>İlk üç satır <strong>hogan</strong>&#39;ı template engine için ayarlamak üzere kullanılıyor</li>
+<li>sonraki satırda <em>public</em> klasörü statik dosyaların sunumu için ayarlanıyor</li>
+<li><strong>connect-livereload</strong> middleware&#39;i ekleniyor</li>
+<li>ayrı bir dosyadan (routes.js) route&#39;ların tanımı ayarları yapılıyor</li>
+<li>3000 portunda uygulama çalıştırılıyor</li>
+<li>son satır uygulamanın <strong>grunt</strong> üzerinden çalışabilmesi için gerekli</li>
+</ul>
+
+<h1>Session</h1>
+
+<blockquote>
+<p>Git ile bu kısımdan sonra yapılan değişiklikleri almak için aşağıdaki komutu kullanın. Böylece bu kısımda anlatacağım değişiklikleri elle yapmak zorunda kalmazsınız.</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> git checkout iki
+<span class="lineno">2</span> npm install
+</code></pre></div>
+<p>Uygulamamızı çalıştırdık yalnız express uygulamasının kullanıcı bazında bilgi tutabilmesi için <strong>session</strong> adı verilen bir yönteme ihtiyacı var bunu da aşağıdaki paketi kurarak sağlayacağım:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install express-session --save
+</code></pre></div>
+<p>ve artık session&#39;ı kullanabiliriz. session&#39;la birlikte farkettiyseniz <strong>cookie</strong> paketi de yüklendi. Artık express cookie&#39;de session ID&#39;yi kullanarak kullanıcının bilgisini server tarafında takip edebileceğiz. Çok çeşitli ayarları olmakla birlikte biz hepsini kullanmayacağız. İncelemek isterseniz: <a href="https://github.com/expressjs/session">https://github.com/expressjs/session</a></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express-session&#39;</span><span class="p">);</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+<span class="lineno">4</span>   <span class="nx">secret</span><span class="o">:</span> <span class="s1">&#39;gizlişey&#39;</span><span class="p">,</span>
+<span class="lineno">5</span>   <span class="nx">resave</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="lineno">6</span>   <span class="nx">saveUninitialized</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">7</span>   <span class="nx">cookie</span><span class="o">:</span> <span class="p">{</span> <span class="nx">secure</span><span class="o">:</span> <span class="kc">true</span> <span class="p">}</span>
+<span class="lineno">8</span> <span class="p">}));</span>
+</code></pre></div>
+<blockquote>
+<p>Not: cookie secure=true değeri HTTPS bağlantıda geçerlidir, HTTP bağlantıda (mesela development ortamında) cookie çalışmayacaktır. Bunu önlemek için kodumuza hangi ortamda (development, production, vb.) çalıştığıyla ilgili kontroller eklemeliyiz. Bu kontrolleri kolay yönetilebilir yapmak için kendi <strong>environment</strong> modülümüzü yazacağız</p>
+</blockquote>
+
+<h1>Environment Modülü</h1>
+
+<p>Şimdi projemize yeni dosyalar ekliyoruz</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> project/
+<span class="lineno">2</span>     ...
+<span class="lineno">3</span>     config/
+<span class="lineno">4</span>         development.json
+<span class="lineno">5</span>         production.json
+<span class="lineno">6</span>         environment.js
+<span class="lineno">7</span>     ...
+</code></pre></div>
+<p><strong>environment.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./&#39;</span> <span class="o">+</span>
+<span class="lineno">2</span>     <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">||</span> <span class="s1">&#39;development&#39;</span><span class="p">)</span> <span class="o">+</span> <span class="s1">&#39;.json&#39;</span><span class="p">);</span>
+</code></pre></div>
+<ul>
+<li><strong>process.env.NODE_ENV</strong> üzerinde çalıştığı bilgisayarın işletim sisteminde <em>NODE_ENV</em> ismindeki variable&#39;ı bize verir. Bu variable set edilmemişse <em>undefined</em> olacağından varsayılan olarak <em>development</em> olarak çalışacak.</li>
+<li>Production ortamında bu variable <em>production</em> olarak setlenmelidir. <a href="http://stackoverflow.com/a/9204973">İlgili yöntemler</a></li>
+<li>variable&#39;ın o anki değeri ile birlikte ilgili <em>.json</em> dosyasını okur ve export eder.</li>
+</ul>
+
+<blockquote>
+<p>NOT: local ortamda production ayarlarını deneyebilmek için <em>test</em> diye bir environment uydurdum. <em>production</em>&#39;dan tek farkı cookie secure değil ama redis cloud üzerinden çalışacak.</p>
+</blockquote>
+
+<p><strong>development.json:</strong></p>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="lineno"> 1</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="nt">&quot;cookie_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;gizlişey&quot;</span><span class="p">,</span>
+<span class="lineno"> 3</span>   <span class="nt">&quot;cookie&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="nt">&quot;secure&quot;</span><span class="p">:</span> <span class="kc">false</span>
+<span class="lineno"> 5</span>   <span class="p">},</span>
+<span class="lineno"> 6</span>   <span class="nt">&quot;redis&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="nt">&quot;port&quot;</span><span class="p">:</span> <span class="mi">6379</span><span class="p">,</span>
+<span class="lineno"> 8</span>     <span class="nt">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;localhost&quot;</span>
+<span class="lineno"> 9</span>   <span class="p">}</span>
+<span class="lineno">10</span> <span class="p">}</span>
+</code></pre></div>
+<p><strong>test.json:</strong></p>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="lineno"> 1</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="nt">&quot;cookie_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;gizlishey&quot;</span><span class="p">,</span>
+<span class="lineno"> 3</span>   <span class="nt">&quot;cookie&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="nt">&quot;secure&quot;</span><span class="p">:</span> <span class="kc">false</span>
+<span class="lineno"> 5</span>   <span class="p">},</span>
+<span class="lineno"> 6</span>   <span class="nt">&quot;redis&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="nt">&quot;port&quot;</span><span class="p">:</span> <span class="mi">11386</span><span class="p">,</span>
+<span class="lineno"> 8</span>     <span class="nt">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;pub-redis-11386.us-east-1-2.4.ec2.garantiadata.com&quot;</span><span class="p">,</span>
+<span class="lineno"> 9</span>     <span class="nt">&quot;pass&quot;</span><span class="p">:</span> <span class="s2">&quot;chatcat&quot;</span>
+<span class="lineno">10</span>   <span class="p">}</span>
+<span class="lineno">11</span> <span class="p">}</span>
+</code></pre></div>
+<p><strong>production:</strong></p>
+<div class="highlight"><pre><code class="language-json" data-lang="json"><span class="lineno"> 1</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="nt">&quot;cookie_secret&quot;</span><span class="p">:</span> <span class="s2">&quot;gizlishey&quot;</span><span class="p">,</span>
+<span class="lineno"> 3</span>   <span class="nt">&quot;cookie&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="nt">&quot;secure&quot;</span><span class="p">:</span> <span class="kc">true</span>
+<span class="lineno"> 5</span>   <span class="p">},</span>
+<span class="lineno"> 6</span>   <span class="nt">&quot;redis&quot;</span><span class="p">:</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="nt">&quot;port&quot;</span><span class="p">:</span> <span class="mi">11386</span><span class="p">,</span>
+<span class="lineno"> 8</span>     <span class="nt">&quot;host&quot;</span><span class="p">:</span> <span class="s2">&quot;pub-redis-11386.us-east-1-2.4.ec2.garantiadata.com&quot;</span><span class="p">,</span>
+<span class="lineno"> 9</span>     <span class="nt">&quot;pass&quot;</span><span class="p">:</span> <span class="s2">&quot;chatcat&quot;</span>
+<span class="lineno">10</span>   <span class="p">}</span>
+<span class="lineno">11</span> <span class="p">}</span>
+</code></pre></div>
+<p><strong>app.js&#39;te:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./config/environment&#39;</span><span class="p">);</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+<span class="lineno">4</span>   <span class="nx">secret</span><span class="o">:</span> <span class="nx">config</span><span class="p">.</span><span class="nx">cookie_secret</span><span class="p">,</span>
+<span class="lineno">5</span>   <span class="nx">resave</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="lineno">6</span>   <span class="nx">saveUninitialized</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">7</span>   <span class="nx">cookie</span><span class="o">:</span> <span class="nx">config</span><span class="p">.</span><span class="nx">cookie</span>
+<span class="lineno">8</span> <span class="p">}));</span>
+</code></pre></div>
+<h1>Session (Devam)</h1>
+
+<p>Artık session verilerimizi kullanabildiğimize göre, bir sonraki işimiz <strong>session store</strong> kullanmak olacaktır. Daha önceden de bahsettiğimiz gibi session ile birlikte veri asıl olarak server tarafında tutulmaktadır. Ancak biz store belirtmediğimiz için varsayılan olarak <strong>MemoryStore</strong> kullanılıyor.</p>
+
+<p>Biz de bu <em>store</em>&#39;u değiştireceğiz. Bunu <strong>Redis</strong> olarak ayarlayacağız.</p>
+
+<blockquote>
+<p>Redis, hafızada çalışan bir <em>key-valued</em> NoSQL veritabanı. Daha birçok yararlı kullanım alanları var ancak ilerledikçe bakacağız. Çok merak ediyorsan <a href="#nedenredis">buradan</a> bakabilirsin.</p>
+</blockquote>
+
+<p><em>MemoryStore</em>&#39;da veriler bilgisayarın geçici hafızasında tutulmaktadır. Sunucu restart vb. durumlarda bu verileri kaybedebiliriz. Daha da önemlisi ileride uygulamamızı birden fazla bilgisayar üzerinde -veya <strong>cluster</strong>&#39;da- çalıştırmak istediğimizde her <em>process</em>&#39;in kendi hafızasında bilgi tutmasından dolayı senkron problemleri yaşanacaktır. <strong>Redis</strong>&#39;le bu problemlerin üstesinden gelmeye çalışacağız.</p>
+
+<ul>
+<li>Öncelikle redisi kendi bilgisayarımıza kuralım: <a href="http://redis.io/download">http://redis.io/download</a></li>
+<li>Çalıştıralım:</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> redis-server
+</code></pre></div>
+<p>Redis server port 6379 üzerinden çalışıyor. Bunu kapatmadan başka bir terminal&#39;de:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> redis-cli
+</code></pre></div>
+<p>yazıp bir kaç komut deneyelim:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> 127.0.0.1:6379&gt; SET my:key &#39;A value&#39;
+<span class="lineno">2</span> OK
+<span class="lineno">3</span> 127.0.0.1:6379&gt; GET my:key
+<span class="lineno">4</span> &quot;A value&quot;
+</code></pre></div>
+<ul>
+<li>İstersek de cloud üzerinden redis&#39;i kullanabiliriz.</li>
+<li><a href="https://redislabs.com/">https://redislabs.com/</a> üzerinden <strong>free cloud database</strong> seçeneğini kullanın. Üye olup bir adet redis database&#39;i yaratın.</li>
+</ul>
+
+<p>Artık redis&#39;i localde veya cloud&#39;da çalıştırabilme imkanımız var
+Şimdi de node uygulamamızdan bağlanmayı deneyelim. Hatta önceki konularda uyguladığımız gibi eğer <em>development</em> modundaysak local redis&#39;e, bağlanamazsa <em>MemoryStore</em>&#39;a, <em>production</em> modundaysak da <strong>redislab</strong> üzerinden bağlanalım.</p>
+
+<p>Kurmamız gereken paketler:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install redis -save
+<span class="lineno">2</span> npm install connect-redis -save
+<span class="lineno">3</span> npm install q --save
+</code></pre></div>
+<p>Projemizin yeni yapısı:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> project/
+<span class="lineno">2</span>     ...
+<span class="lineno">3</span>     lib/
+<span class="lineno">4</span>         sessionStore.js
+<span class="lineno">5</span>     ...
+</code></pre></div>
+<p><strong>sessionStore.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">session</span><span class="p">,</span> <span class="nx">redis_config</span><span class="p">){</span>
+<span class="lineno"> 2</span>   <span class="kd">var</span> <span class="nx">Q</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s2">&quot;q&quot;</span><span class="p">);</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span>   <span class="kd">var</span> <span class="nx">environment</span> <span class="o">=</span> <span class="p">(</span><span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">||</span> <span class="s1">&#39;development&#39;</span><span class="p">);</span>
+<span class="lineno"> 5</span>   <span class="kd">function</span> <span class="nx">getStore</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">return</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 7</span>       <span class="kd">var</span> <span class="nx">redis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;redis&#39;</span><span class="p">);</span>
+<span class="lineno"> 8</span>       <span class="kd">var</span> <span class="nx">client</span> <span class="o">=</span> <span class="nx">redis</span><span class="p">.</span><span class="nx">createClient</span><span class="p">(</span>
+<span class="lineno"> 9</span>         <span class="nx">redis_config</span><span class="p">.</span><span class="nx">port</span><span class="p">,</span>
+<span class="lineno">10</span>         <span class="nx">redis_config</span><span class="p">.</span><span class="nx">host</span><span class="p">,</span>
+<span class="lineno">11</span>         <span class="p">{</span><span class="nx">no_ready_check</span><span class="o">:</span> <span class="kc">true</span><span class="p">});</span>
+<span class="lineno">12</span>       <span class="kd">var</span> <span class="nx">RedisStore</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;connect-redis&#39;</span><span class="p">)(</span><span class="nx">session</span><span class="p">);</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span>       <span class="nx">client</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">15</span>         <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="lineno">16</span>       <span class="p">});</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span>       <span class="k">if</span><span class="p">(</span><span class="nx">redis_config</span><span class="p">.</span><span class="nx">pass</span><span class="p">){</span>
+<span class="lineno">19</span>         <span class="nx">client</span><span class="p">.</span><span class="nx">auth</span><span class="p">(</span><span class="nx">redis_config</span><span class="p">.</span><span class="nx">pass</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">20</span>             <span class="k">if</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span>
+<span class="lineno">21</span>               <span class="nx">reject</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="lineno">22</span>         <span class="p">});</span>
+<span class="lineno">23</span>       <span class="p">}</span>
+<span class="lineno">24</span> 
+<span class="lineno">25</span>       <span class="nx">client</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;ready&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">26</span>         <span class="nx">resolve</span><span class="p">(</span><span class="k">new</span> <span class="nx">RedisStore</span><span class="p">({</span>
+<span class="lineno">27</span>           <span class="nx">client</span><span class="o">:</span> <span class="nx">client</span>
+<span class="lineno">28</span>         <span class="p">}));</span>
+<span class="lineno">29</span>       <span class="p">});</span>
+<span class="lineno">30</span>     <span class="p">});</span>
+<span class="lineno">31</span>   <span class="p">}</span>
+<span class="lineno">32</span> 
+<span class="lineno">33</span>   <span class="kd">var</span> <span class="nx">store</span><span class="p">;</span>
+<span class="lineno">34</span> 
+<span class="lineno">35</span>   <span class="kd">var</span> <span class="nx">promise</span> <span class="o">=</span> <span class="nx">Q</span><span class="p">.</span><span class="nx">fcall</span><span class="p">(</span><span class="nx">getStore</span><span class="p">)</span>
+<span class="lineno">36</span>     <span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">37</span>       <span class="nx">store</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="lineno">38</span>     <span class="p">});</span>
+<span class="lineno">39</span> 
+<span class="lineno">40</span>   <span class="k">if</span><span class="p">(</span><span class="nx">environment</span> <span class="o">===</span> <span class="s1">&#39;development&#39;</span><span class="p">){</span>
+<span class="lineno">41</span>     <span class="nx">promise</span> <span class="o">=</span> <span class="nx">promise</span><span class="p">.</span><span class="nx">fail</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">42</span>       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="lineno">43</span>       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;falling back to MemoryStore&quot;</span><span class="p">);</span>
+<span class="lineno">44</span>       <span class="nx">store</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">session</span><span class="p">.</span><span class="nx">MemoryStore</span><span class="p">();</span>
+<span class="lineno">45</span>     <span class="p">});</span>
+<span class="lineno">46</span>   <span class="p">}</span>
+<span class="lineno">47</span> 
+<span class="lineno">48</span>   <span class="nx">promise</span><span class="p">.</span><span class="nx">done</span><span class="p">();</span>
+<span class="lineno">49</span> 
+<span class="lineno">50</span>   <span class="k">return</span> <span class="nx">store</span><span class="p">;</span>
+<span class="lineno">51</span> <span class="p">};</span>
+</code></pre></div>
+<blockquote>
+<p>redis client&#39;ını oluşturmak asenkron çalıştığı için ve callback&#39;lerle uğraşıp durmamak için yapıyı senkron çalışacak şekilde geliştirdim. <strong>Promise</strong>&#39;lerle ilgili ayrıntılı bilgiye ES6 yazılarımdan bakabilirsiniz. Kabaca callback&#39;lerin işini bitirdikten sonra devam ettiğimizi düşünebilirsiniz.</p>
+</blockquote>
+
+<p><strong>app.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="c1">//...</span>
+<span class="lineno"> 2</span> <span class="kd">var</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;express-session&#39;</span><span class="p">);</span>
+<span class="lineno"> 3</span> <span class="kd">var</span> <span class="nx">store</span> <span class="o">=</span>  <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./lib/sessionStore.js&#39;</span><span class="p">)(</span><span class="nx">session</span><span class="p">);</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">session</span><span class="p">({</span>
+<span class="lineno"> 6</span>   <span class="nx">secret</span><span class="o">:</span> <span class="nx">config</span><span class="p">.</span><span class="nx">cookie_secret</span><span class="p">,</span>
+<span class="lineno"> 7</span>   <span class="nx">store</span><span class="o">:</span> <span class="nx">store</span><span class="p">,</span>
+<span class="lineno"> 8</span>   <span class="nx">resave</span><span class="o">:</span> <span class="kc">false</span><span class="p">,</span>
+<span class="lineno"> 9</span>   <span class="nx">saveUninitialized</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">10</span>   <span class="nx">cookie</span><span class="o">:</span> <span class="nx">config</span><span class="p">.</span><span class="nx">cookie</span>
+<span class="lineno">11</span> <span class="p">}));</span>
+<span class="lineno">12</span> <span class="c1">//...</span>
+</code></pre></div>
+<p>Ayrıca artık <strong>grunt</strong> script&#39;imiz <em>environment</em> variable&#39;ını bizim için ayarlıyor. <strong>dev</strong> task&#39;ı yanında yeni bir <strong>prod</strong> task&#39;ımız da var:</p>
+
+<p><strong>Gruntfile.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span>   <span class="c1">//...</span>
+<span class="lineno"> 2</span>   <span class="nx">grunt</span><span class="p">.</span><span class="nx">initConfig</span><span class="p">({</span>
+<span class="lineno"> 3</span>     <span class="nx">setEnvironment</span><span class="o">:</span><span class="p">{</span>
+<span class="lineno"> 4</span>       <span class="nx">dev</span><span class="o">:</span> <span class="s1">&#39;development&#39;</span><span class="p">,</span>
+<span class="lineno"> 5</span>       <span class="nx">prod</span><span class="o">:</span> <span class="s1">&#39;production&#39;</span><span class="p">,</span>
+<span class="lineno"> 6</span>       <span class="nx">test</span><span class="o">:</span> <span class="s1">&#39;test&#39;</span>
+<span class="lineno"> 7</span>     <span class="p">},</span>
+<span class="lineno"> 8</span>   <span class="c1">//...</span>
+<span class="lineno"> 9</span>   <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerMultiTask</span><span class="p">(</span><span class="s1">&#39;setEnvironment&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>     <span class="s1">&#39;sets environment variable to development or production&#39;</span><span class="p">,</span>
+<span class="lineno">11</span>     <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">12</span>       <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">data</span><span class="p">;</span>
+<span class="lineno">13</span>     <span class="p">}</span>
+<span class="lineno">14</span>   <span class="p">);</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span>   <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;dev&#39;</span><span class="p">,</span> <span class="p">[</span>
+<span class="lineno">17</span>     <span class="s1">&#39;setEnvironment:dev&#39;</span><span class="p">,</span>
+<span class="lineno">18</span>     <span class="s1">&#39;express:all&#39;</span><span class="p">,</span>
+<span class="lineno">19</span>     <span class="s1">&#39;watch:all&#39;</span>
+<span class="lineno">20</span>   <span class="p">]);</span>
+<span class="lineno">21</span> 
+<span class="lineno">22</span>   <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;test&#39;</span><span class="p">,</span> <span class="p">[</span>
+<span class="lineno">23</span>     <span class="s1">&#39;setEnvironment:test&#39;</span><span class="p">,</span>
+<span class="lineno">24</span>     <span class="s1">&#39;express:all&#39;</span><span class="p">,</span>
+<span class="lineno">25</span>     <span class="s1">&#39;watch:all&#39;</span>
+<span class="lineno">26</span>   <span class="p">]);</span>
+<span class="lineno">27</span> 
+<span class="lineno">28</span>   <span class="nx">grunt</span><span class="p">.</span><span class="nx">registerTask</span><span class="p">(</span><span class="s1">&#39;prod&#39;</span><span class="p">,</span> <span class="p">[</span>
+<span class="lineno">29</span>     <span class="s1">&#39;setEnvironment:prod&#39;</span><span class="p">,</span>
+<span class="lineno">30</span>     <span class="s1">&#39;express:all&#39;</span><span class="p">,</span>
+<span class="lineno">31</span>     <span class="s1">&#39;watch:all&#39;</span>
+<span class="lineno">32</span>   <span class="p">]);</span>
+<span class="lineno">33</span>   <span class="c1">//...</span>
+</code></pre></div>
+<blockquote>
+<p><strong>grunt dev</strong> diyerek uygulamayı başlatırken NODE_ENV&#39;ı da <strong>development</strong> diye setleyecek.</p>
+</blockquote>
+
+<p><strong>routes.js</strong> dosyasını aşağıdaki şekilde düzenleyelim:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/chatrooms&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 2</span> <span class="kd">var</span> <span class="nx">session</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">session</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 5</span>   <span class="k">return</span> <span class="nx">next</span><span class="p">(</span><span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;oh no&#39;</span><span class="p">))</span> <span class="c1">// handle error</span>
+<span class="lineno"> 6</span> <span class="p">}</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="nx">session</span><span class="p">.</span><span class="nx">viewCount</span> <span class="o">=</span> <span class="nx">session</span><span class="p">.</span><span class="nx">viewCount</span>
+<span class="lineno"> 9</span>   <span class="o">?</span> <span class="nx">session</span><span class="p">.</span><span class="nx">viewCount</span> <span class="o">+</span> <span class="mi">1</span>
+<span class="lineno">10</span>   <span class="o">:</span> <span class="mi">1</span><span class="p">;</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span> <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;chatrooms&#39;</span><span class="p">,</span> <span class="p">{</span><span class="nx">title</span><span class="o">:</span> <span class="s1">&#39;Chatrooms &#39;</span> <span class="o">+</span>
+<span class="lineno">13</span>   <span class="nx">session</span><span class="p">.</span><span class="nx">viewCount</span><span class="p">});</span>
+<span class="lineno">14</span> <span class="p">});</span>
+</code></pre></div>
+<blockquote>
+<p>Her <strong>chatrooms</strong> ziyaret edildiğinde session bazında gösterim sayısı hesaplanıp title&#39;a yazılıyor</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> redis-server
+<span class="lineno">2</span> grunt dev
+</code></pre></div>
+<p>Şimdi redis&#39;i test edelim ve çalışıp çalışmadığını görelim: <a href="http://localhost:3000/chatrooms">http://localhost:3000/chatrooms</a></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> redis-cli
+<span class="lineno">2</span> 127.0.0.1:6379&gt; KEYS *
+<span class="lineno">3</span> 1) &quot;my:key&quot;
+<span class="lineno">4</span> 2) &quot;sess:s80MXIPbWE5iRxpU8F9j2QlxAJVe9our&quot;
+<span class="lineno">5</span> 127.0.0.1:6379&gt; GET sess:s80MXIPbWE5iRxpU8F9j2QlxAJVe9our
+<span class="lineno">6</span> &quot;{\&quot;cookie\&quot;:{\&quot;originalMaxAge\&quot;:null,\&quot;expires\&quot;:null,\&quot;secure\&quot;:false,\&quot;httpOnly\&quot;:true,\&quot;path\&quot;:\&quot;/\&quot;},\&quot;viewCount\&quot;:3}&quot;
+</code></pre></div>
+<p>Görüldüğü gibi <em>viewCount</em> 3 olarak doğru bir şekilde kaydedilmiş.</p>
+
+<p>Peki daha önceden düşündüğümüz local redis&#39;in çalışmaması durumuna bakalım. redis-server&#39;ı durdurun ve tekrar</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> grunt dev
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> { [Error: Redis connection to localhost:6379 failed - connect ECONNREFUSED 127.0.0.1:6379]
+<span class="lineno">2</span>   code: &#39;ECONNREFUSED&#39;,
+<span class="lineno">3</span>   errno: &#39;ECONNREFUSED&#39;,
+<span class="lineno">4</span>   syscall: &#39;connect&#39;,
+<span class="lineno">5</span>   address: &#39;127.0.0.1&#39;,
+<span class="lineno">6</span>   port: 6379 }
+<span class="lineno">7</span> falling back to MemoryStore
+</code></pre></div>
+<blockquote>
+<p>Görüldüğü gibi error callback&#39;ten hatayı <strong>Promise</strong> <strong>reject</strong>&#39;ten döndürdüğümüzde catch kısmında yakalayıp gerekli düzeltmeyi yapmış olduk. redis-cli&#39;den başarılı bağlantı geldiğinde de <em>ready</em> callback&#39;iyle <strong>Promise</strong> <strong>resolve</strong> çalıştırıp programın devam etmesini sağladık.</p>
+</blockquote>
+
+<p>Şimdi de production&#39;da kullanmayı düşündüğümüz cloud redis&#39;i localde test ediyoruz.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> grunt test
+</code></pre></div>
+<p>Şimdi de cloud üzerinden çalışan <strong>RedisStore</strong>&#39;u test edelim: <a href="http://localhost:3000/chatrooms">http://localhost:3000/chatrooms</a></p>
+
+<p>Farklı yöntemlerle cloud redis&#39;e bağlanabilirsiniz. Ben komut satırından bağlanacağım:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> redis-cli -h pub-redis-11386.us-east-1-2.4.ec2.garantiadata.com -p 11386 -a chatcat
+<span class="lineno">2</span> 
+<span class="lineno">3</span> pub-redis-11386.us-east-1-2.4.ec2.garantiadata.com:11386&gt; KEYS *
+<span class="lineno">4</span> 1) &quot;sess:LFKHQuh7UY8Cnsx8TWmyPcuqBASZbBsh&quot;
+<span class="lineno">5</span> pub-redis-11386.us-east-1-2.4.ec2.garantiadata.com:11386&gt; GET &quot;sess:LFKHQuh7UY8Cnsx8TWmyPcuqBASZbBsh&quot;
+<span class="lineno">6</span> &quot;{\&quot;cookie\&quot;:{\&quot;originalMaxAge\&quot;:null,\&quot;expires\&quot;:null,\&quot;secure\&quot;:false,\&quot;httpOnly\&quot;:true,\&quot;path\&quot;:\&quot;/\&quot;},\&quot;viewCount\&quot;:4}&quot;
+</code></pre></div>
+<p>Kodun her kısmını test ettik cloud redis&#39;imizde de bir problem olmadığına göre redis ve session konusunu burada bitiriyorum :)</p>
+
+<h1>Mongo DB</h1>
+
+<p>Facebook login&#39;e geçmeden önce, kullanıcılarımızı kaydetmemiz gereken bir database&#39;e ihtiyacımız var. Redis&#39;i bu iş için de kullanabilirdik ama ben burada <strong>mongo</strong> ve <strong>mongoose</strong> kullanmak istiyorum. <strong>Mongo</strong> kullanımı kolay bir <strong>Document Database</strong>&#39;idir. Ayrıntılı bilgi ve kurumun için <a href="https://docs.mongodb.org/getting-started/shell/introduction/">buraya</a> bakabilirsiniz.</p>
+
+<blockquote>
+<p>NOT: Benim burada kullandığım komutlar işletim sistemine veya mongo versiyonuna göre değişebilir. Ben genellikle Mac OS için olan komutları kullanıyorum. Mac OS komutları çoğunlukla GNU/Linux sistemlerle benzer olmakla beraber burada farklı. Windows içinse verdiğim kaynaklara bakabilirsiniz.</p>
+</blockquote>
+
+<p>Kurulum için:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> brew install mongo
+<span class="lineno">2</span> sudo chown -R $USER /data/db
+</code></pre></div>
+<p>Kurduktan sonra <em>server</em>&#39;ı çalıştırmak için:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> mongod
+</code></pre></div>
+<p>Ayrı bir terminalde:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> mongo
+</code></pre></div>
+<p>Evet burası local mongo&#39;nuz. Hayırlı olsun. Ancak ben yine <a href="https://mongolab.com/">https://mongolab.com/</a> üzerinden cloud bir hesap açtım. ilgili environment ayarlarını aynı redis&#39;te yaptığım gibi giriyorum.</p>
+
+<p>Ve fakat mongo&#39;ya node tarafından bağlanabilmek için mongoose kurmalıyız:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install mongoose --save
+</code></pre></div>
+<p>Kod yazma işlerini sonra göreceğiz. Şimdi biraz daha teori:</p>
+
+<h1>Mongoose.js</h1>
+
+<p><strong>Mongo</strong> normalde <em>schemaless</em> denilen tipsiz (: bir database&#39;dir. Ancak gerçek hayatta bu bize bazı zorluklara yol açıyor. <strong>Mongoose</strong> bunları aşmak için güzel bir library.</p>
+
+<ul>
+<li><strong>Model</strong>&#39;leriniz için <strong>schema</strong>&#39;lar tanımlayabilirsiniz</li>
+<li>Bu <strong>schema</strong>&#39;lar <strong>type</strong>d field&#39;lar içerir</li>
+<li>Bu modeller üzerinden database işlemleri (CRUD) yapabilirsiniz.</li>
+<li>Daha da bilgi: <a href="http://mongoosejs.com/">http://mongoosejs.com/</a></li>
+</ul>
+
+<h1>Facebook Login</h1>
+
+<blockquote>
+<p>Yine git kullanarak sıradaki kısımın kodlarını alabilirsiniz:</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> git checkout uc
+</code></pre></div>
+<p>Facebook login gerçekletirebilmek için, bir adet facebook hesabına ihtiyacımız var:</p>
+
+<ul>
+<li>Daha sonra <a href="https://developers.facebook.com/apps/">https://developers.facebook.com/apps/</a> adresine girin</li>
+<li><code>add new app</code> kısmından yeni bir uygulama tanımlayın.</li>
+<li>Tip olarak, www web site seçin.</li>
+<li>Çıkan kutuda bir isim girin ve <code>Create new facebook App ID</code> ye tıklayın.</li>
+<li>Sağ üstteki <code>Skip Quick Start</code>&#39;a tıklayarak çıkın</li>
+<li>Settings &gt; Website &gt; Site URL kısmına <code>localhost:3000</code> olarak girin</li>
+<li>Save changes diyip, Uygulama kodunu (App ID) ve App Secret&#39;i kopyalayıp,</li>
+<li><strong>development.json</strong>, <strong>test.json</strong> config dosyalarına şu şekilde ekleyin:</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> &quot;fb&quot;: {
+<span class="lineno">2</span>   &quot;appId&quot;: &quot;&lt;APP ID&gt;&quot;,
+<span class="lineno">3</span>   &quot;appSecret&quot;: &quot;&lt;APP SECRET&gt;&quot;,
+<span class="lineno">4</span>   &quot;callbackURL&quot;: &quot;http://localhost:3000/auth/facebook/callback&quot;
+<span class="lineno">5</span> }
+</code></pre></div>
+<h2>Problem: Node.js içindeki local module path&#39;leri</h2>
+
+<p>Node.js local module&#39;leri nasıl yüklediğimizi gördünüz. Projenin root directory&#39;sindeki <strong>app.js</strong>&#39;te şunu yazmıştık:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">store</span> <span class="o">=</span>  <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;./lib/sessionStore.js&#39;</span><span class="p">)(</span><span class="nx">session</span><span class="p">);</span>
+</code></pre></div>
+<p>Ancak mesela <em>lib/sessionStore.js</em> içinde <em>model/user.js</em> dosyasındaki modüle ulaşmak için şunu yazmamış gerekecekti:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span>  <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../model/user.js&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>Günün birinde canımız sessionStore.js dosyasını <em>lib/session/sessionStore.js</em>&#39;e taşımak istese bu sefer <strong>require</strong> içindeki path&#39;leri şu şekilde tekrar düzeltmemiz gerekecekti:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">user</span> <span class="o">=</span>  <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;../../model/user.js&#39;</span><span class="p">);</span>
+</code></pre></div>
+<blockquote>
+<p>require içine yazılan path yazıldığı yere ve istenen modülün yerine göre değişiklik gösteriyor.</p>
+</blockquote>
+
+<p>Bu problemi çözmek için <a href="https://gist.github.com/branneman/8048520">çeşitli yollar</a> bulunuyor, ancak benim içinden ileride başımızı en az ağrıtacak yöntem  şu oldu: <a href="https://www.npmjs.com/package/app-module-path">https://www.npmjs.com/package/app-module-path</a>. Ancak bu bile bizi bir takım düzenlemeler yapmaktan kurtarmıyor :(</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install app-module-path --save
+</code></pre></div>
+<p><strong>app-module-path</strong> bize öneriler sunmuş: local modüllerin <em>node_modules</em> altındaki modüllerden ayrı olduğunun anlaşılması için bu modülleri ortak bir directory altına alınması.</p>
+
+<p>Bu yüzden proje structure&#39;ımız biraz değişecek ve şöyle olacak:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno"> 1</span> project/
+<span class="lineno"> 2</span>     src/
+<span class="lineno"> 3</span>         lib/
+<span class="lineno"> 4</span>         models/
+<span class="lineno"> 5</span>         config/
+<span class="lineno"> 6</span>         routes/
+<span class="lineno"> 7</span>     views/
+<span class="lineno"> 8</span>     public/
+<span class="lineno"> 9</span>     app.js
+<span class="lineno">10</span>     Gruntfile.js
+</code></pre></div>
+<p>Ayrıca yine kullanımı kısaltmak amacıyla directory altında tek modül varsa bu modül dosya isimlerini <strong>index.js</strong> yapıyorum. Bunu <em>config/environment.js</em> ve <em>routes/route.js</em>&#39;te uyguladım.</p>
+
+<p>İlgili düzenlemeleri yaptıktan sonra <strong>app.js</strong>&#39;te ilk satıra şunu ekliyoruz:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;app-module-path&#39;</span><span class="p">).</span><span class="nx">addPath</span><span class="p">(</span><span class="nx">__dirname</span><span class="p">);</span>
+</code></pre></div>
+<p>Ve artık local modüllerimizi şu şekilde yerinden bağımsız bir şekilde kullanabiliriz:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">config</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/config&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h1>Facebook Login (devam)</h1>
+
+<p>Facebook login&#39;i <strong>passport.js</strong> üzerinden sağlayacağız. Kurmak için:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install passport --save
+<span class="lineno">2</span> npm install passport-facebook --save
+</code></pre></div>
+<p><strong>Passport</strong> ister local olarak, isterse birçok <em>external provider</em>&#39;lar üzerinden <em>Authentication</em> (Kimlik Doğrulama) sağlayan bir kütüphane. Biz facebook bağlantısı için kullanacağız. <a href="http://passportjs.org/">Websitesi</a> üzerinden diğer yöntemlere ve seçeneklere de bakabilirsiniz.</p>
+
+<p>Peki external provider üzerinden bağlanmak nasıl çalışıyor?</p>
+
+<p><img src="/assets/images/facebook-login2.png" alt=""></p>
+
+<p>Buradaki tüm yapılması gerken işlemleri <em>passport</em> bizim yerimize yapıyor. Peki implementasyonu nasıl yapıyoruz?</p>
+
+<p><strong>src/lib/facebookLogin.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">passport</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;passport&#39;</span><span class="p">),</span>
+<span class="lineno"> 2</span>   <span class="nx">FacebookStrategy</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;passport-facebook&#39;</span><span class="p">).</span><span class="nx">Strategy</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">init</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">config</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 5</span>   <span class="kd">var</span> <span class="nx">facebook_config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">fb</span><span class="p">,</span>
+<span class="lineno"> 6</span>     <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">),</span>
+<span class="lineno"> 7</span>     <span class="nx">User</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/models/user.js&#39;</span><span class="p">)(</span><span class="nx">mongoose</span><span class="p">),</span>
+<span class="lineno"> 8</span>     <span class="nx">userModel</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;loginUser&#39;</span><span class="p">,</span> <span class="nx">User</span><span class="p">),</span>
+<span class="lineno"> 9</span>     <span class="nx">mongoConnection</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span>   <span class="c1">// user, id property&#39;si ile serialize ediliyor</span>
+<span class="lineno">12</span>   <span class="c1">// session&#39;a yazılacak</span>
+<span class="lineno">13</span>   <span class="nx">passport</span><span class="p">.</span><span class="nx">serializeUser</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">user</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">14</span>     <span class="nx">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">id</span><span class="p">);</span>
+<span class="lineno">15</span>   <span class="p">});</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span>   <span class="c1">// user, id&#39;si kullanılarak deserialize ediliyor</span>
+<span class="lineno">18</span>   <span class="nx">passport</span><span class="p">.</span><span class="nx">deserializeUser</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">19</span>     <span class="nx">userModel</span><span class="p">.</span><span class="nx">findById</span><span class="p">(</span><span class="nx">id</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">20</span>       <span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
+<span class="lineno">21</span>     <span class="p">});</span>
+<span class="lineno">22</span>   <span class="p">});</span>
+<span class="lineno">23</span> 
+<span class="lineno">24</span>   <span class="kd">var</span> <span class="nx">verifyCallback</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">accessToken</span><span class="p">,</span> <span class="nx">refreshToken</span><span class="p">,</span> <span class="nx">profile</span><span class="p">,</span> <span class="nx">done</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">25</span>     <span class="kd">var</span> <span class="nx">mongo_config</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">mongo</span><span class="p">;</span>
+<span class="lineno">26</span>     <span class="kd">var</span> <span class="nx">promise</span><span class="p">;</span>
+<span class="lineno">27</span> 
+<span class="lineno">28</span>     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">mongoConnection</span><span class="p">){</span>
+<span class="lineno">29</span>       <span class="nx">promise</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/mongoConnection.js&#39;</span><span class="p">)(</span><span class="nx">mongo_config</span><span class="p">,</span> <span class="nx">mongoose</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">30</span>         <span class="nx">mongoConnection</span> <span class="o">=</span> <span class="kc">true</span><span class="p">;</span>
+<span class="lineno">31</span>       <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">32</span>         <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="lineno">33</span>         <span class="nx">done</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="lineno">34</span>       <span class="p">});</span>
+<span class="lineno">35</span>     <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="lineno">36</span>       <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">){</span> <span class="nx">resolve</span><span class="p">();</span> <span class="p">});</span>
+<span class="lineno">37</span>     <span class="p">}</span>
+<span class="lineno">38</span> 
+<span class="lineno">39</span>     <span class="nx">promise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">40</span>       <span class="k">return</span> <span class="nx">userModel</span><span class="p">.</span><span class="nx">findOne</span><span class="p">({</span><span class="nx">profileID</span><span class="o">:</span> <span class="nx">profile</span><span class="p">.</span><span class="nx">id</span><span class="p">}).</span><span class="nx">exec</span><span class="p">();</span>
+<span class="lineno">41</span>     <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">dbUser</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">42</span>       <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">dbUser</span><span class="p">){</span>
+<span class="lineno">43</span>         <span class="nx">dbUser</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">userModel</span><span class="p">();</span>
+<span class="lineno">44</span>         <span class="nx">dbUser</span><span class="p">.</span><span class="nx">profileID</span> <span class="o">=</span> <span class="nx">profile</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="lineno">45</span>         <span class="nx">dbUser</span><span class="p">.</span><span class="nx">fullName</span> <span class="o">=</span> <span class="nx">profile</span><span class="p">.</span><span class="nx">displayName</span><span class="p">;</span>
+<span class="lineno">46</span>         <span class="nx">dbUser</span><span class="p">.</span><span class="nx">profilePictureURL</span> <span class="o">=</span> <span class="nx">profile</span><span class="p">.</span><span class="nx">photos</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">value</span><span class="p">;</span>
+<span class="lineno">47</span>         <span class="nx">dbUser</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+<span class="lineno">48</span>       <span class="p">}</span>
+<span class="lineno">49</span> 
+<span class="lineno">50</span>       <span class="nx">done</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">dbUser</span><span class="p">);</span>
+<span class="lineno">51</span>     <span class="p">});</span>
+<span class="lineno">52</span>   <span class="p">};</span>
+<span class="lineno">53</span> 
+<span class="lineno">54</span>   <span class="kd">var</span> <span class="nx">strategy</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">FacebookStrategy</span><span class="p">({</span>
+<span class="lineno">55</span>     <span class="nx">clientID</span><span class="o">:</span> <span class="nx">facebook_config</span><span class="p">.</span><span class="nx">appId</span><span class="p">,</span>
+<span class="lineno">56</span>     <span class="nx">clientSecret</span><span class="o">:</span> <span class="nx">facebook_config</span><span class="p">.</span><span class="nx">appSecret</span><span class="p">,</span>
+<span class="lineno">57</span>     <span class="nx">callbackURL</span><span class="o">:</span> <span class="nx">facebook_config</span><span class="p">.</span><span class="nx">callbackURL</span><span class="p">,</span>
+<span class="lineno">58</span>     <span class="nx">profileFields</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;id&#39;</span><span class="p">,</span> <span class="s1">&#39;displayName&#39;</span><span class="p">,</span> <span class="s1">&#39;photos&#39;</span><span class="p">]</span>
+<span class="lineno">59</span>   <span class="p">},</span> <span class="nx">verifyCallback</span><span class="p">);</span>
+<span class="lineno">60</span> 
+<span class="lineno">61</span>   <span class="nx">passport</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">strategy</span><span class="p">);</span>
+<span class="lineno">62</span> 
+<span class="lineno">63</span>   <span class="k">return</span> <span class="nx">passport</span><span class="p">;</span>
+<span class="lineno">64</span> <span class="p">};</span>
+</code></pre></div>
+<p><strong>routes/index.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="p">...</span>
+<span class="lineno"> 2</span> <span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/auth/facebook&#39;</span><span class="p">,</span>
+<span class="lineno"> 3</span>   <span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span><span class="s1">&#39;facebook&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">scope</span> <span class="o">:</span> <span class="s1">&#39;email&#39;</span> <span class="p">})</span>
+<span class="lineno"> 4</span> <span class="p">);</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="c1">// facebook authenticate olduktan sonra</span>
+<span class="lineno"> 7</span> <span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/auth/facebook/callback&#39;</span><span class="p">,</span>
+<span class="lineno"> 8</span>   <span class="nx">passport</span><span class="p">.</span><span class="nx">authenticate</span><span class="p">(</span><span class="s1">&#39;facebook&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">failureRedirect</span><span class="o">:</span> <span class="s1">&#39;/login&#39;</span> <span class="p">}),</span>
+<span class="lineno"> 9</span>   <span class="kd">function</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="c1">// authentication başarılı</span>
+<span class="lineno">11</span>     <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/chatrooms&#39;</span><span class="p">);</span>
+<span class="lineno">12</span>   <span class="p">}</span>
+<span class="lineno">13</span> <span class="p">);</span>
+<span class="lineno">14</span> <span class="p">...</span>
+</code></pre></div>
+<ul>
+<li><strong>passport.js</strong>&#39;nin <strong>FacebookStrategy</strong>&#39;sini kullanarak <em>verifyCallback</em> içinde <em>user</em> profilini <em>facebook</em>&#39;tan aldık</li>
+<li>bu kişi db&#39;de yoksa kaydettik</li>
+<li>bu bizi callback url&#39;in success function&#39;ına düşürdü, oradan <em>/chatrooms</em>&#39;a yönlendirme yaptık</li>
+<li><strong>req.user</strong> üzerinden kullanıcı bilgilerini kullandık</li>
+</ul>
+
+<p>Mongo bağlantısını da aşağıdaki dosyayla sağlıyoruz:</p>
+
+<p><strong>mongoConnection.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">mongo_config</span><span class="p">,</span> <span class="nx">mongoose</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="kd">var</span> <span class="nx">q</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;q&#39;</span><span class="p">);</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span>   <span class="kd">var</span> <span class="nx">promise</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Promise</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">resolve</span><span class="p">,</span> <span class="nx">reject</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nx">mongo_config</span><span class="p">.</span><span class="nx">url</span><span class="p">);</span>
+<span class="lineno"> 6</span>     <span class="kd">var</span> <span class="nx">db</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">connection</span><span class="p">;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span>     <span class="nx">db</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">error</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 9</span>       <span class="nx">reject</span><span class="p">(</span><span class="nx">error</span><span class="p">);</span>
+<span class="lineno">10</span>     <span class="p">});</span>
+<span class="lineno">11</span>     <span class="nx">db</span><span class="p">.</span><span class="nx">once</span><span class="p">(</span><span class="s1">&#39;open&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">12</span>       <span class="nx">resolve</span><span class="p">();</span>
+<span class="lineno">13</span>     <span class="p">});</span>
+<span class="lineno">14</span>   <span class="p">});</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span>   <span class="k">return</span> <span class="nx">q</span><span class="p">(</span><span class="nx">promise</span><span class="p">);</span>
+<span class="lineno">17</span> <span class="p">};</span>
+</code></pre></div>
+<blockquote>
+<p>Değişiklik veya ekleme yapılan tüm dosyaları <em>git</em> ile alıp inceleyebilirsiniz.</p>
+</blockquote>
+
+<ul>
+<li>Sonuç olarak <em>Login</em> linkine tıklayıp <em>/auth/facebook/</em> route&#39;ına düşüyoruz</li>
+<li>ardından <strong>passport</strong> bizi facebook&#39;a yönlendiriyor.</li>
+<li>Facebook login işlemini yaptıktan sonra bizi <strong>config</strong> ile verdiğimiz <strong>callbackURL</strong> adresine döndürüyor</li>
+<li><em>/auth/facebook/callback</em> route&#39;ına düşüyoruz ve <strong>passport</strong> facebook&#39;un gönderdiği bilgileri alıp <strong>verifyCallback</strong> fonksiyonunu kullanıp <em>user</em>&#39;ın database üzerinde olup olmadığını kontrol ediyoruz</li>
+<li>Yoksa kaydediyoruz, <strong>done</strong> callback&#39;ini çağırıp işlemi tamamlıyoruz</li>
+<li><strong>passport</strong> done ile gönderdiğimiz <em>user</em> verisini alıp <strong>passport.serializeUser</strong> ile <em>session</em>&#39;a kaydediyor.</li>
+<li>artık <strong>user.id</strong> <em>session</em>&#39;da <em>req.user</em> üzerinden alınıp kullanılabilir durumda</li>
+<li><strong>passport</strong> yine <em>user</em> nesnesini kullanacağımız zaman otomatik olarak <strong>passport.deserializeUser</strong> ile db&#39;den çekiyor</li>
+<li><em>authentication</em> işlemi başarılıysa kullanıcıyı <em>/chatrooms</em> route&#39;ına yönlendiriyoruz.</li>
+<li>Artık kullanıcının bilgileri elimizde, <em>view</em> üzerinde bu bilgileri gösterebiliyoruz.</li>
+</ul>
+
+<blockquote>
+<p>NOT: db gibi <strong>asenkron</strong> işlemlerde, <strong>promise</strong> adı verilen yapıları <strong>then</strong> ile bol bol kullandım. Bu yazının konusu olmadığından bunlara değinmiyorum. Javascript&#39;te asenkronron kavramlarını açıkladığım diğer yazılarımdan bakabilirsiniz.</p>
+</blockquote>
+
+<h2>Güvenli sayfalar</h2>
+
+<p>Artık bağlanma işlemini kolaylıkla sağlayabildiğimize göre <em>/chatrooms</em> gibi sayfaları kullanıcı login olup olmadı mı gibi kontrolleri de yapmamız lazım.</p>
+
+<p><strong>routes/index.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="p">...</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="kd">function</span> <span class="nx">securePage</span><span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">){</span>
+<span class="lineno"> 4</span>   <span class="k">if</span> <span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">isAuthenticated</span><span class="p">())</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="nx">next</span><span class="p">();</span>
+<span class="lineno"> 6</span>   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="nx">res</span><span class="p">.</span><span class="nx">redirect</span><span class="p">(</span><span class="s1">&#39;/&#39;</span><span class="p">);</span>
+<span class="lineno"> 8</span>   <span class="p">}</span>
+<span class="lineno"> 9</span> <span class="p">}</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span> <span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/chatrooms&#39;</span><span class="p">,</span> <span class="nx">securePage</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span> <span class="p">...</span>
+</code></pre></div>
+<ul>
+<li><strong>securePage</strong> adında bir <strong>middleware</strong> tanımladık.</li>
+<li>Bunu ilgili route&#39;a koyduk.</li>
+<li>Bu route browser tarafından çağrıldığında önce bizim yazdığımız <strong>middleware</strong>&#39;e düşecektir.</li>
+<li><strong>passport</strong>&#39;un sağladığı <strong>req.isAuthenticated</strong> fonksiyonu ile kullanıcı login olmuş mu kontrolü yapıyoruz.</li>
+<li><strong>next</strong> ile bir sonraki <strong>middleware</strong>&#39;e devam et diyoruz</li>
+<li>aksi durumda ana sayfaya yönlendiriyoruz.</li>
+</ul>
+
+<h1>Geliştirme (mongo, redis, nodemon)</h1>
+
+<p>Artık <em>dev</em> ortamındayken, <strong>mongo</strong> ve <strong>redis</strong> server&#39;larını elle başlatma işini de <strong>grunt</strong> ile otomatize edebiliriz.</p>
+
+<p>Bu iş için iki yeni grunt kütüphanesi daha kullanacağız (concurrent, exec):</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> sudo npm install --save-dev grunt-concurrent
+<span class="lineno">2</span> npm install grunt-exec --save-dev
+<span class="lineno">3</span> npm install grunt-concurrent --save-dev
+</code></pre></div>
+<blockquote>
+<p><strong>sudo</strong>, <strong>root</strong> access gerektiren komutlarda kullandığımız bazı Linux/UNIX işletim sistemlerindeki bir ön komuttur. Şifrenizi girmeniz gerekebilir.</p>
+</blockquote>
+
+<p><strong>initConfig</strong>&#39;e iki yeni tanım giriyoruz:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="nx">exec</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">2</span>   <span class="nx">mongo</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;./mongo.sh&#39;</span>
+<span class="lineno">4</span>   <span class="p">},</span>
+<span class="lineno">5</span>   <span class="nx">redis</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno">6</span>     <span class="nx">command</span><span class="o">:</span> <span class="s1">&#39;./redis.sh&#39;</span>
+<span class="lineno">7</span>   <span class="p">}</span>
+<span class="lineno">8</span> <span class="p">}</span>
+</code></pre></div>
+<p>İki yeni dosya oluşturuyoruz:</p>
+
+<p><strong>redis.sh:</strong></p>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="lineno">1</span> <span class="c">#!/bin/sh</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="nv">OUTPUT</span><span class="o">=</span><span class="s2">&quot;$(redis-cli ping)&quot;</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$OUTPUT&quot;</span> <span class="o">=</span> <span class="s2">&quot;PONG&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<span class="lineno">6</span>   <span class="nb">echo</span> <span class="s2">&quot;redis-server is already running.&quot;</span>
+<span class="lineno">7</span> <span class="k">else</span>
+<span class="lineno">8</span>   redis-server
+<span class="lineno">9</span> <span class="k">fi</span>
+</code></pre></div>
+<p><strong>mongo.sh:</strong></p>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="lineno">1</span> <span class="c">#!/bin/sh</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="nv">OUTPUT</span><span class="o">=</span><span class="s2">&quot;$(pgrep mongod)&quot;</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="k">if</span> <span class="o">[</span> <span class="s2">&quot;$OUTPUT&quot;</span> <span class="o">=</span> <span class="s2">&quot;&quot;</span> <span class="o">]</span><span class="p">;</span> <span class="k">then</span>
+<span class="lineno">6</span>   mongod
+<span class="lineno">7</span> <span class="k">else</span>
+<span class="lineno">8</span>   <span class="nb">echo</span> <span class="s2">&quot;mongo service is already running.&quot;</span>
+<span class="lineno">9</span> <span class="k">fi</span>
+</code></pre></div>
+<p>Dosyalara çalıştırma hakkı veriyoruz:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> chmod a+x redis.sh
+<span class="lineno">2</span> chmod a+x mongo.sh
+</code></pre></div>
+<h2>nodemon</h2>
+
+<p>Şimdi de <em>livereload</em> için bir yükseltme yapacağız. Normalde kullandığımız ayarlarla node uygulaması yeniden başlamıyordu. Bu da yenilemelerin view&#39;larla sınırlı olmasına yol açıyordu. Artık <strong>grunt-express-server</strong> yerine <strong>nodemon</strong> kullanacağız. <strong>nodemon</strong>, dosyaları izleyip değişiklik olduğunda <em>node</em>&#39;u yeniden başlatacak.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm remove grunt-express-server --save-dev
+<span class="lineno">2</span> sudo npm install -g nodemon
+</code></pre></div>
+<blockquote>
+<p>NOT: <em>Gruntfile.js</em> dosyasında birçok değişiklik oldu. <strong>git</strong> üzerinden bakınız.</p>
+
+<p>NOT: Özellikle <strong>exec</strong> ile çalıştırdığım script&#39;ler işletim sistemi bağımlı olup gerekli değişiklikleri kendiniz yapmalısınız.</p>
+</blockquote>
+
+<p><br /></p>
+
+<blockquote>
+<p>NOT: Bir sonraki chapter kodlarını <em>git</em> ile aşağıdaki gibi alabilirsiniz.</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> git checkout dort
+</code></pre></div>
+<h1>Socket.IO</h1>
+
+<blockquote>
+<p>Gerçek zamanlı, iki yönlü, event-based (olay tabanlı) iletişim için kullanılır. Her platformda, tarayıcıda veya cihazda çalışır.</p>
+</blockquote>
+
+<p>Altında kullanılan teknolojileri, bunu nasıl yaptığı gibi kısımları geçiyorum. Socket.IO kullandığınız tarayıcının yetenekleri dolayısıyla farklı teknolojileri devreye sokarak bunu yapıyor.</p>
+
+<p>Bizim kullanma amacımız da client&#39;lar arasında gerçek zamanlı bilgi akışını sağlamak olacak.</p>
+
+<p>İlk işimiz chat odalarının DB üzerinden kaydedilmesi ve bu bilginin client&#39;lara gönderilmesi şeklinde olacak. Bunun için hem <em>node</em> tarafında kodlar yazacağız hem de <em>client</em> tarafı için yazılacak.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install socket.io --save
+</code></pre></div>
+<p>Daha sonra da <strong>app.js</strong>&#39;te bir takım değişiklikler yaptık:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="p">...</span>
+<span class="lineno">2</span> <span class="kd">var</span> <span class="nx">server</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;http&#39;</span><span class="p">).</span><span class="nx">createServer</span><span class="p">(</span><span class="nx">app</span><span class="p">);</span>
+<span class="lineno">3</span> <span class="kd">var</span> <span class="nx">io</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;socket.io&#39;</span><span class="p">).</span><span class="nx">listen</span><span class="p">(</span><span class="nx">server</span><span class="p">);</span>
+<span class="lineno">4</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/socket&#39;</span><span class="p">)(</span><span class="nx">io</span><span class="p">);</span>
+<span class="lineno">5</span> 
+<span class="lineno">6</span> <span class="nx">server</span><span class="p">.</span><span class="nx">listen</span><span class="p">(</span><span class="nx">config</span><span class="p">.</span><span class="nx">port</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">7</span>   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;chatcat &#39;</span> <span class="o">+</span> <span class="nx">config</span><span class="p">.</span><span class="nx">port</span> <span class="o">+</span> <span class="s1">&#39; portunda çalışıyor&#39;</span><span class="p">);</span>
+<span class="lineno">8</span> <span class="p">});</span>
+</code></pre></div>
+<p>Ayrıca client tarafı için kullanmak istediğimiz <em>template</em>&#39;lerde şu script&#39;leri eklememiz gerekiyor:</p>
+<div class="highlight"><pre><code class="language-html" data-lang="html"><span class="lineno">1</span> <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;//code.jquery.com/jquery-1.11.0.min.js&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="lineno">2</span> <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;/socket.io/socket.io.js&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+<span class="lineno">3</span> <span class="nt">&lt;script </span><span class="na">type=</span><span class="s">&quot;text/javascript&quot;</span><span class="nt">&gt;</span>
+<span class="lineno">4</span>     <span class="nb">window</span><span class="p">.</span><span class="nx">socket_host</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="lineno">5</span> <span class="nt">&lt;/script&gt;</span>
+<span class="lineno">6</span> <span class="nt">&lt;script </span><span class="na">src=</span><span class="s">&quot;../js/chatrooms.js&quot;</span> <span class="na">charset=</span><span class="s">&quot;utf-8&quot;</span><span class="nt">&gt;&lt;/script&gt;</span>
+</code></pre></div>
+<p><em>/socket.io/socket.io.js</em> otomatik olarak <em>express</em> ve <em>socket.io</em> tarafından yakalanıp <em>client</em>&#39;a sunum için hazırlanacaktır. Artık <em>client</em> tarafında <strong>socket</strong> ile ilgili <strong>event</strong>&#39;leri kullanabiliriz:</p>
+
+<p><strong>window.socket_host</strong> üzerine <em>template</em>&#39;e <em>route</em>&#39;da gönderdiğimiz parametreyi geçiyoruz. Böylece bir alttaki <strong>chatrooms.js</strong> dosyasında kullanabileceğiz:</p>
+
+<p><strong>public/js/chatrooms.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="nx">$</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">2</span>   <span class="kd">var</span> <span class="nx">roomChannel</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">socket_host</span> <span class="o">+</span> <span class="s1">&#39;/roomlist&#39;</span><span class="p">);</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span>   <span class="nx">roomChannel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">5</span>     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;socket connection established&#39;</span><span class="p">);</span>
+<span class="lineno">6</span>   <span class="p">});</span>
+<span class="lineno">7</span> <span class="p">});</span>
+</code></pre></div>
+<ul>
+<li>kendimize <em>/roomlist</em> diye bir namespace oluşturup buna bağlanıyoruz. Daha sonra bu <em>channel</em>&#39;ın <strong>connect</strong> event&#39;ini dinliyoruz. Server tarafında bağlantı kabul edildiğinde browser console&#39;unda log&#39;u göreceğiz.</li>
+</ul>
+
+<p>Server tarafında da, <strong>src/lib/socket.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">io</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">2</span>   <span class="kd">var</span> <span class="nx">chatrooms</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="s1">&#39;/roomlist&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">3</span>     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;socket connection established on server&#39;</span><span class="p">);</span>
+<span class="lineno">4</span>   <span class="p">});</span>
+<span class="lineno">5</span> <span class="p">};</span>
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> grunt dev
+</code></pre></div>
+<p>Herşey yolundaysa şunun gibi bir çıktı almamız lazım:</p>
+
+<p><img src="/assets/images/socket_io_connection.png" alt=""></p>
+
+<p>Basit olarak sistemi kurduk denebilir. Artık bu iletişim çerçevesinde DB üzerinde işlemler yapılacak. <strong>mongo</strong> üzerinde daha kolay çalışabilmek, kod karmaşasını önleyip düzenlemek amacıyla yine kodumuzda düzenlemelere gidiyoruz, son değişiklikler:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno"> 1</span> ...
+<span class="lineno"> 2</span> public/
+<span class="lineno"> 3</span>     ...
+<span class="lineno"> 4</span>     js/
+<span class="lineno"> 5</span>         chatRoom.js
+<span class="lineno"> 6</span> ...
+<span class="lineno"> 7</span> src/lib
+<span class="lineno"> 8</span>     mongoAdapters/
+<span class="lineno"> 9</span>         mongoConnection.js
+<span class="lineno">10</span>         roomAdapter.js
+<span class="lineno">11</span>         userAdapter.js
+<span class="lineno">12</span>     redisAdapters/
+<span class="lineno">13</span>     ...
+<span class="lineno">14</span>     facebookLogin.js
+<span class="lineno">15</span>     socket.js
+<span class="lineno">16</span>     utils.js
+<span class="lineno">17</span>     ...
+<span class="lineno">18</span> ...
+<span class="lineno">19</span> src/models
+<span class="lineno">20</span>     user.js
+<span class="lineno">21</span>     room.js
+<span class="lineno">22</span> ...
+</code></pre></div>
+<blockquote>
+<p>Burada dediğim gibi tüm kodlara tek tek girmeyeceğim. Özellikle <strong>mongoConnect</strong> ve <strong>facebookLogin</strong> üzerinde yaptığım değişiklikleri inceleyin.</p>
+</blockquote>
+
+<p>Şimdi buradaki tüm kodlara girmeden kısaca <strong>mongo</strong> ve <strong>socket.io</strong> ile yaptığım oda yaratma kodlarını açıklayacağım. Daha sonra bu kodların bir de <strong>redis</strong> ile nasıl yazılabileceğine bakacağız.</p>
+
+<h2>Server-side</h2>
+
+<p><strong>socket.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">roomAdapter</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/adapters/roomAdapter&#39;</span><span class="p">),</span>
+<span class="lineno"> 2</span>   <span class="nx">Promise</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bluebird&#39;</span><span class="p">),</span>
+<span class="lineno"> 3</span>   <span class="nx">channel</span> <span class="o">=</span> <span class="kc">null</span><span class="p">,</span>
+<span class="lineno"> 4</span>   <span class="nx">rooms</span> <span class="o">=</span> <span class="kc">null</span><span class="p">;</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">io</span><span class="p">,</span> <span class="nx">userId</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 7</span>   <span class="k">if</span> <span class="p">(</span><span class="o">!</span><span class="nx">channel</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 8</span>     <span class="nx">channel</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="s1">&#39;/roomlist&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 9</span>       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;socket connection established on server&#39;</span><span class="p">);</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span>       <span class="kd">function</span> <span class="nx">broadcastClient</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">12</span>         <span class="kd">var</span> <span class="nx">stringified</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="lineno">13</span>         <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;room_update&#39;</span><span class="p">,</span> <span class="nx">stringified</span><span class="p">);</span>
+<span class="lineno">14</span>         <span class="nx">rooms</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+<span class="lineno">15</span>       <span class="p">}</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span>       <span class="kd">function</span> <span class="nx">broadcastAll</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">18</span>         <span class="kd">var</span> <span class="nx">stringified</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="lineno">19</span>         <span class="nx">socket</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;room_update&#39;</span><span class="p">,</span> <span class="nx">stringified</span><span class="p">);</span>
+<span class="lineno">20</span>         <span class="nx">socket</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;room_update&#39;</span><span class="p">,</span> <span class="nx">stringified</span><span class="p">);</span>
+<span class="lineno">21</span>         <span class="nx">rooms</span> <span class="o">=</span> <span class="nx">data</span><span class="p">;</span>
+<span class="lineno">22</span>       <span class="p">}</span>
+<span class="lineno">23</span> 
+<span class="lineno">24</span>       <span class="kd">var</span> <span class="nx">promise</span> <span class="o">=</span> <span class="nx">rooms</span> <span class="o">?</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="nx">rooms</span><span class="p">)</span> <span class="o">:</span> <span class="nx">roomAdapter</span><span class="p">.</span><span class="nx">getRooms</span><span class="p">();</span>
+<span class="lineno">25</span>       <span class="nx">promise</span><span class="p">.</span><span class="nx">then</span><span class="p">(</span><span class="nx">broadcastClient</span><span class="p">);</span>
+<span class="lineno">26</span> 
+<span class="lineno">27</span>       <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;create_room&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">room</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">28</span>         <span class="nx">room</span><span class="p">.</span><span class="nx">createdBy</span> <span class="o">=</span> <span class="nx">userId</span><span class="p">;</span>
+<span class="lineno">29</span> 
+<span class="lineno">30</span>         <span class="nx">roomAdapter</span><span class="p">.</span><span class="nx">createRoom</span><span class="p">(</span><span class="nx">room</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">31</span>           <span class="k">return</span> <span class="nx">roomAdapter</span><span class="p">.</span><span class="nx">getRooms</span><span class="p">();</span>
+<span class="lineno">32</span>         <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="nx">broadcastAll</span><span class="p">);</span>
+<span class="lineno">33</span>       <span class="p">});</span>
+<span class="lineno">34</span>     <span class="p">});</span>
+<span class="lineno">35</span>   <span class="p">}</span>
+<span class="lineno">36</span> <span class="p">};</span>
+</code></pre></div>
+<ul>
+<li>server tarafında <em>/roomlist</em> channel&#39;ı üzerinden gelen bağlantıları dinliyoruz.</li>
+<li>channel&#39;ı birden çok açmamak için kontrol ekledik</li>
+<li>her client için mongo&#39;ya gidip çekmemek için server tarafında <em>rooms</em> <strong>cache</strong>&#39;i kullandık.</li>
+<li>Her bağlanan client için <em>rooms</em> verisini <em>broadcastClient</em> ile gönderdik</li>
+<li><strong>create_room</strong> mesajını dinlemeye aldık</li>
+<li>mesaj geldiğinde ilgili verileri <strong>roomAdapter.createRoom</strong> ile mongo&#39;ya kaydedip, tüm client&#39;lara <em>rooms</em> verisini <em>broadcastAll</em> ile gönderdik</li>
+<li>bu bilgileri client&#39;lara <strong>room_update</strong> mesajıyla gönderdik.</li>
+</ul>
+
+<blockquote>
+<p>NOT: <strong>socket.broadcast.emit</strong>, o anki client dışındaki client&#39;lara bilgi gönderir. <strong>socket.emit</strong> sadece o client için gönderir.</p>
+</blockquote>
+
+<p><strong>roomAdapter.js</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">mongo_config</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/config&#39;</span><span class="p">).</span><span class="nx">mongo</span><span class="p">,</span>
+<span class="lineno"> 2</span>   <span class="nx">mongoose</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;mongoose&#39;</span><span class="p">),</span>
+<span class="lineno"> 3</span>   <span class="nx">init</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/adapters/mongoConnection&#39;</span><span class="p">).</span><span class="nx">mongoInit</span><span class="p">,</span>
+<span class="lineno"> 4</span>   <span class="nx">Room</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/models/room.js&#39;</span><span class="p">)(</span><span class="nx">mongoose</span><span class="p">),</span>
+<span class="lineno"> 5</span>   <span class="nx">roomModel</span> <span class="o">=</span> <span class="nx">mongoose</span><span class="p">.</span><span class="nx">model</span><span class="p">(</span><span class="s1">&#39;room&#39;</span><span class="p">,</span> <span class="nx">Room</span><span class="p">),</span>
+<span class="lineno"> 6</span>   <span class="nx">moment</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;moment&#39;</span><span class="p">);</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">createRoom</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="k">return</span> <span class="nx">init</span><span class="p">(</span><span class="nx">mongo_config</span><span class="p">,</span> <span class="nx">mongoose</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="kd">var</span> <span class="nx">room</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">roomModel</span><span class="p">();</span>
+<span class="lineno">11</span>     <span class="nx">room</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+<span class="lineno">12</span>     <span class="nx">room</span><span class="p">.</span><span class="nx">createdBy</span> <span class="o">=</span> <span class="nx">data</span><span class="p">.</span><span class="nx">userId</span><span class="p">;</span>
+<span class="lineno">13</span>     <span class="nx">room</span><span class="p">.</span><span class="nx">createdAt</span> <span class="o">=</span> <span class="nx">moment</span><span class="p">.</span><span class="nx">utc</span><span class="p">();</span>
+<span class="lineno">14</span>     <span class="nx">room</span><span class="p">.</span><span class="nx">save</span><span class="p">();</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span>     <span class="k">return</span> <span class="nx">room</span><span class="p">;</span>
+<span class="lineno">17</span>   <span class="p">});</span>
+<span class="lineno">18</span> <span class="p">};</span>
+<span class="lineno">19</span> 
+<span class="lineno">20</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">getRooms</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">21</span>   <span class="k">return</span> <span class="nx">init</span><span class="p">(</span><span class="nx">mongo_config</span><span class="p">,</span> <span class="nx">mongoose</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">22</span>     <span class="k">return</span> <span class="nx">roomModel</span><span class="p">.</span><span class="nx">find</span><span class="p">({}).</span><span class="nx">exec</span><span class="p">();</span>
+<span class="lineno">23</span>   <span class="p">});</span>
+<span class="lineno">24</span> <span class="p">};</span>
+</code></pre></div>
+<p>Çok basit bir şekilde <em>rooms</em> bilgisi çeken, ve <em>room</em> kaydeden fonksiyonlar.</p>
+
+<h2>Client-side</h2>
+
+<p><strong>chatRoom.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="nx">$</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="kd">var</span> <span class="nx">roomChannel</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">connect</span><span class="p">(</span><span class="nb">window</span><span class="p">.</span><span class="nx">socket_host</span> <span class="o">+</span> <span class="s1">&#39;/roomlist&#39;</span><span class="p">);</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span>   <span class="nx">roomChannel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;socket connection established&#39;</span><span class="p">);</span>
+<span class="lineno"> 6</span>   <span class="p">});</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span>   <span class="nx">roomChannel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;room_update&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">(</span><span class="nx">rooms</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 9</span>     <span class="nx">rooms</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">rooms</span><span class="p">);</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span>     <span class="kd">var</span> <span class="nx">$ul</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;ul.roomlist&#39;</span><span class="p">);</span>
+<span class="lineno">12</span>     <span class="nx">$ul</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span>     <span class="nx">rooms</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">room</span><span class="p">){</span>
+<span class="lineno">15</span>       <span class="kd">var</span> <span class="nx">$li</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s2">&quot;&lt;li&gt;&quot;</span><span class="p">);</span>
+<span class="lineno">16</span>       <span class="nx">$li</span><span class="p">.</span><span class="nx">text</span><span class="p">(</span><span class="nx">room</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="lineno">17</span>       <span class="nx">$li</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-id&#39;</span><span class="p">,</span> <span class="nx">room</span><span class="p">.</span><span class="nx">_id</span><span class="p">);</span>
+<span class="lineno">18</span>       <span class="nx">$li</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-createdby&#39;</span><span class="p">,</span> <span class="nx">room</span><span class="p">.</span><span class="nx">createdBy</span><span class="p">);</span>
+<span class="lineno">19</span>       <span class="nx">$li</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;data-cratedat&#39;</span><span class="p">,</span> <span class="nx">room</span><span class="p">.</span><span class="nx">createdAt</span><span class="p">);</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span>       <span class="nx">$ul</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$li</span><span class="p">);</span>
+<span class="lineno">22</span>     <span class="p">});</span>
+<span class="lineno">23</span>   <span class="p">});</span>
+<span class="lineno">24</span> 
+<span class="lineno">25</span>   <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;#create&#39;</span><span class="p">).</span><span class="nx">click</span><span class="p">(</span><span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">26</span>     <span class="kd">var</span> <span class="nx">$roomNameInput</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;.newRoom&#39;</span><span class="p">);</span>
+<span class="lineno">27</span>     <span class="kd">var</span> <span class="nx">roomName</span> <span class="o">=</span> <span class="nx">$roomNameInput</span><span class="p">.</span><span class="nx">val</span><span class="p">();</span>
+<span class="lineno">28</span>     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">roomName</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">29</span>       <span class="nx">alert</span><span class="p">(</span><span class="s1">&#39;Oda ismini giriniz&#39;</span><span class="p">);</span>
+<span class="lineno">30</span>       <span class="k">return</span><span class="p">;</span>
+<span class="lineno">31</span>     <span class="p">}</span>
+<span class="lineno">32</span> 
+<span class="lineno">33</span>     <span class="nx">roomChannel</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;create_room&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="nx">roomName</span> <span class="p">});</span>
+<span class="lineno">34</span>     <span class="nx">$roomNameInput</span><span class="p">.</span><span class="nx">val</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="lineno">35</span>   <span class="p">});</span>
+<span class="lineno">36</span> <span class="p">});</span>
+</code></pre></div>
+<ul>
+<li>Client tarafında server&#39;dan gelen <strong>room_update</strong> mesajı dinleniyor</li>
+<li>Gelen bilgi DOM&#39;a jquery ile basılıyor</li>
+<li>Oda yarat, butonu ile girilen oda ismi <strong>create_room</strong> ile server&#39;a gönderiliyor.</li>
+</ul>
+
+<p>Buradaki tek sorun, <strong>mongo</strong> üzerinde bu oda bilgilerinin paylaşımının socket.io üzerinden gitmesi, yani mongo üzerinde <strong>remove</strong> işlemi yaptığınızda bu siteye yansımayacak.</p>
+
+<p>Bu tarz işlemlerin bir de <strong>redis</strong> üzerinden nasıl yapıldığına ve bu sorunu nasıl çözeceğimize bakalım.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install shortid --save
+<span class="lineno">2</span> npm install flat --save
+<span class="lineno">3</span> npm install moment --save
+</code></pre></div>
+<p>Redis üzerinde mongo&#39;daki gibi otomatik <strong>ID</strong> oluşturma mekanizması yok. Bu yüzden <strong>shortid</strong> kullanacağım. <strong>node-uuid</strong> de seçebilirdik ama URL&#39;de göstermek için fazla uzun.</p>
+
+<p><strong>Flat</strong> ise redis&#39;e veri gönderirken kullanacağımız fayfalı bir kütüphane, redis&#39;e objelerimizi ister JSON olarak koyabiliriz veya bu şekilde <em>gezilebilir</em> objelere döndürerek:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">flatten</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;flat&#39;</span><span class="p">)</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="nx">flatten</span><span class="p">({</span>
+<span class="lineno"> 4</span>     <span class="nx">key1</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 5</span>         <span class="nx">keyA</span><span class="o">:</span> <span class="s1">&#39;valueI&#39;</span>
+<span class="lineno"> 6</span>     <span class="p">},</span>
+<span class="lineno"> 7</span>     <span class="nx">key2</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nx">keyB</span><span class="o">:</span> <span class="s1">&#39;valueII&#39;</span>
+<span class="lineno"> 9</span>     <span class="p">},</span>
+<span class="lineno">10</span>     <span class="nx">key3</span><span class="o">:</span> <span class="p">{</span> <span class="nx">a</span><span class="o">:</span> <span class="p">{</span> <span class="nx">b</span><span class="o">:</span> <span class="p">{</span> <span class="nx">c</span><span class="o">:</span> <span class="mi">2</span> <span class="p">}</span> <span class="p">}</span> <span class="p">}</span>
+<span class="lineno">11</span> <span class="p">})</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span> <span class="c1">// {</span>
+<span class="lineno">14</span> <span class="c1">//   &#39;key1.keyA&#39;: &#39;valueI&#39;,</span>
+<span class="lineno">15</span> <span class="c1">//   &#39;key2.keyB&#39;: &#39;valueII&#39;,</span>
+<span class="lineno">16</span> <span class="c1">//   &#39;key3.a.b.c&#39;: 2</span>
+<span class="lineno">17</span> <span class="c1">// }</span>
+</code></pre></div>
+<p>Bununla ilgili kodlarımızı <strong>utils.js</strong>&#39;de görebilirsiniz.</p>
+
+<p>Tabii toplamda çok kod değişti ama ben en ilginç olanlara burada değineceğim. Diğerleri kodu inceleyerek anlaşılabilir.</p>
+
+<h2><a name="nedenredis"></a>Neden Redis</h2>
+
+<p>Şimdi daha önceden <em>session</em> için <strong>redis</strong> kullandık fakat bu sefer kullanma mantığımız biraz daha farklı. O yüzden konuya biraz daha derinlemesine girelim.</p>
+
+<blockquote>
+<p>Şimdi NoSQL nedir, neden kullanılır, çeşitleri nelerdir, hangisi hangi durumda seçilmelidir, avantajları, dezavantajları nelerdir gibi bu konuda gırla bilgi vermek gerekir. Hem ben bu konuları bu kadar profesyonel şekilde açıklayamam hem de konu çok dağılır. Bu yüzden burada hangi amaçla kullandık onun üzerinden kısaca açıklayacağım.</p>
+</blockquote>
+
+<p>Şimdi mongo yerine redis kullanmamızın ana sebebi, chat gibi bir uygulamanın çok hızlı çalışması gereğidir. Redis, in-memory DB olmasından kaynaklı buna mongo&#39;dan daha yatkın.</p>
+
+<p>Bir de kullanıcılar arasındaki senkronizasyonu redis üzerinden yapmaya karar verdim. Bu hem kodlamayı kolaylaştıracak, hem de db - server - client arasındaki veri bütünlüğü tek bir yerden sağlanmış olacak. Redis bunu destekliyor.</p>
+
+<p>Şimdi ilk yapacağımız iş redis&#39;in çalıştırılmasındaki ayarın değiştirilmesi olacak. <em>redis-server</em>&#39;ı çalıştırırken bir adet configuration dosyası belirtmemiz gerekecek. Bu dosya <strong>redis.conf</strong>&#39;tur. Ancak işletim sistemine göre ismi ve yeri değişebilir. Ben OS X&#39;e göre belirteceğim.</p>
+
+<p>Favori editörünüzle dosyayı açın, ben <em>atom</em> ile açıyorum. *NIX&#39;te nano seçeneğini kullanabilirsiniz.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> atom /usr/local/etc/redis.conf
+</code></pre></div>
+<blockquote>
+<p>notify-keyspace-events ile başlayan satırı bulup aşağıdaki gibi düzenleyin ve kaydedin.</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> notify-keyspace-events &quot;Kgs&quot;
+</code></pre></div>
+<p>Artık <strong>redis.sh</strong>&#39;ta çalıştırma komutunu değiştirelim</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> redis-server /usr/local/etc/redis.conf
+</code></pre></div>
+<p>Artık redis verdiğimiz parametrelere göre bir takım event&#39;leri dinliyor. Eğer biz de bu bilgilere talip olursak alabileceğiz. Ama önce redis&#39;le ilgili biraz daha bilgi vermem gerekiyor.</p>
+
+<ul>
+<li>Redis key-value şeklinde string tabanlı bir NoSQL veritabanıdır</li>
+<li>In-memory çalışır, istenirse belli zamanlarda diske snapshot alınabilir</li>
+<li>Veri yapıları servisidir. String, List, Hash, Set, Bitmap gibi veri yapılarını destekler</li>
+<li>Master/slave replication ve clustering destekler</li>
+<li>Üzerinde PUB/SUB mekanizması vardır. Belli key&#39;lere <em>subscribe</em> olan client&#39;lar, <em>publish</em> gerçekleştiği durumda <em>notify</em> olurlar.</li>
+</ul>
+
+<p>Bu özelliklerin <strong>socket.io</strong> ile birlikte kullanılmasıyla dinamik bir chat uygulaması kullanabilmiş olacağız. Mongo db&#39;den farklı olarak ise:</p>
+
+<ul>
+<li>JSON desteklemiyor, bu yüzden javascript&#39;ten kullanırken flat gibi yardımcı fonksiyonlara gerek duydum.</li>
+<li>Otomatik unique id oluşturamıyor. Uniqueness adına da <strong>shortid</strong> kullandım.</li>
+<li>Oda bilgilerini tutmak için iki tip yapı kullandım. İlki <em>room:key</em> şeklinde girdiğim key&#39;i shortid ile ürettiğim hash.</li>
+<li>İkincisi de bu odaları tuttuğum <em>rooms</em> <em>set</em>&#39;i.</li>
+</ul>
+
+<p><strong>redisAdapter.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">shortid</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/utils&#39;</span><span class="p">).</span><span class="nx">shortid</span><span class="p">,</span>
+<span class="lineno"> 2</span>   <span class="nx">objToArray</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/utils&#39;</span><span class="p">).</span><span class="nx">objToFlattenArray</span><span class="p">,</span>
+<span class="lineno"> 3</span>   <span class="nx">unflatten</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/utils&#39;</span><span class="p">).</span><span class="nx">unflatten</span><span class="p">,</span>
+<span class="lineno"> 4</span>   <span class="nx">redis</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;redis&#39;</span><span class="p">),</span>
+<span class="lineno"> 5</span>   <span class="nx">redisConnection</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/redisAdapters/redisConnection&#39;</span><span class="p">),</span>
+<span class="lineno"> 6</span>   <span class="nx">client</span> <span class="o">=</span> <span class="nx">redisConnection</span><span class="p">.</span><span class="nx">getClient</span><span class="p">(),</span>
+<span class="lineno"> 7</span>   <span class="nx">subscriberClient</span> <span class="o">=</span> <span class="nx">redisConnection</span><span class="p">.</span><span class="nx">getClient</span><span class="p">(</span><span class="kc">true</span><span class="p">),</span>
+<span class="lineno"> 8</span>   <span class="nx">Promise</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;bluebird&#39;</span><span class="p">);</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">createRoom</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">11</span>   <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="s1">&#39;room:&#39;</span> <span class="o">+</span> <span class="nx">shortid</span><span class="p">();</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>   <span class="nx">Promise</span><span class="p">.</span><span class="nx">promisifyAll</span><span class="p">(</span><span class="nx">redis</span><span class="p">.</span><span class="nx">Multi</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="lineno">14</span>   <span class="kd">var</span> <span class="nx">multi</span> <span class="o">=</span> <span class="nx">client</span><span class="p">.</span><span class="nx">multi</span><span class="p">();</span>
+<span class="lineno">15</span>   <span class="nx">multi</span><span class="p">.</span><span class="nx">hmset</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">objToArray</span><span class="p">(</span><span class="nx">data</span><span class="p">));</span>
+<span class="lineno">16</span>   <span class="nx">multi</span><span class="p">.</span><span class="nx">sadd</span><span class="p">(</span><span class="s1">&#39;rooms&#39;</span><span class="p">,</span> <span class="nx">key</span><span class="p">);</span>
+<span class="lineno">17</span>   <span class="k">return</span> <span class="nx">multi</span><span class="p">.</span><span class="nx">execAsync</span><span class="p">();</span>
+<span class="lineno">18</span> <span class="p">};</span>
+<span class="lineno">19</span> 
+<span class="lineno">20</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">getRooms</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">21</span>   <span class="kd">var</span> <span class="nx">smembers</span> <span class="o">=</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">client</span><span class="p">.</span><span class="nx">smembers</span><span class="p">,</span> <span class="nx">client</span><span class="p">);</span>
+<span class="lineno">22</span>   <span class="kd">var</span> <span class="nx">hgetall</span> <span class="o">=</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">promisify</span><span class="p">(</span><span class="nx">client</span><span class="p">.</span><span class="nx">hgetall</span><span class="p">,</span> <span class="nx">client</span><span class="p">);</span>
+<span class="lineno">23</span> 
+<span class="lineno">24</span>   <span class="k">return</span> <span class="nx">smembers</span><span class="p">(</span><span class="s1">&#39;rooms&#39;</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">keys</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">25</span>     <span class="kd">var</span> <span class="nx">getJobs</span> <span class="o">=</span> <span class="nx">keys</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">26</span>       <span class="k">return</span> <span class="nx">hgetall</span><span class="p">(</span><span class="nx">key</span><span class="p">);</span>
+<span class="lineno">27</span>     <span class="p">});</span>
+<span class="lineno">28</span> 
+<span class="lineno">29</span>     <span class="k">return</span> <span class="nx">Promise</span><span class="p">.</span><span class="nx">all</span><span class="p">(</span><span class="nx">getJobs</span><span class="p">);</span>
+<span class="lineno">30</span>   <span class="p">}).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">results</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">31</span>     <span class="k">return</span> <span class="nx">results</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">result</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">32</span>       <span class="k">return</span> <span class="nx">unflatten</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="lineno">33</span>     <span class="p">});</span>
+<span class="lineno">34</span>   <span class="p">});</span>
+<span class="lineno">35</span> <span class="p">};</span>
+<span class="lineno">36</span> 
+<span class="lineno">37</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">subscribeRooms</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">callback</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">38</span>   <span class="nx">subscriberClient</span><span class="p">.</span><span class="nx">subscribe</span><span class="p">(</span><span class="s1">&#39;__keyspace@0__:rooms&#39;</span><span class="p">);</span>
+<span class="lineno">39</span> 
+<span class="lineno">40</span>   <span class="nx">subscriberClient</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&quot;message&quot;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">command</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">41</span>     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">key</span><span class="p">,</span> <span class="nx">command</span><span class="p">);</span>
+<span class="lineno">42</span>     <span class="nx">callback</span><span class="p">();</span>
+<span class="lineno">43</span>   <span class="p">});</span>
+<span class="lineno">44</span> <span class="p">};</span>
+</code></pre></div>
+<ul>
+<li><strong>createRoom</strong> ile başlarsak, önce unique bir key oluşturuyoruz</li>
+<li>redis.Multi&#39;yi <strong>promisify</strong> ederek <em>thenable</em> hale getirdik</li>
+<li><strong>multi</strong> komutuyla redis&#39;e tek <em>request</em>&#39;te ve <em>transaction</em> içinde birden çok komut gönderebiliyoruz</li>
+<li><strong>hmset</strong> ile <em>hash</em> objemizi setliyoruz. Objemizi array tipinde kaydediyoruz.</li>
+</ul>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> client.hmset(key, [&quot;key1&quot;, &quot;value1&quot;, &quot;key2&quot;, &quot;value2&quot;, ...]);
+</code></pre></div>
+<ul>
+<li><strong>sadd</strong> ile de <em>rooms</em> key&#39;li <em>set</em>&#39;imize <em>hash</em>&#39;in <em>key</em>&#39;ini ekliyoruz.</li>
+<li><strong>execAsync</strong> ile <em>Promise</em> oluşturup dönüyoruz.</li>
+<li><strong>getRooms</strong> ise yukarıda yaptıklarımızın tam tersini yapıp bize <strong>rooms</strong> javascript object array&#39;ini alıyoruz.</li>
+<li><strong>subscribeRooms</strong> ile key&#39;leri takip ediyoruz.</li>
+</ul>
+
+<h2>Kaynaklar, notlar</h2>
+
+<blockquote>
+<p><a href="http://redis.io/topics/notifications">Redis notifications ayrıntılı bilgi</a></p>
+
+<p><a href="http://redis.io/commands">Redis komutlar</a></p>
+
+<p><a href="https://www.npmjs.com/package/redis">Redis node client</a></p>
+
+<p><a href="https://www.npmjs.com/package/socket.io-redis">socket.io-redis</a>: Birbiri arasında haberleşebilen socket.io sunucuları çalıştırabilirsiniz.</p>
+</blockquote>
+
+<p>Bol bol kullandığım, <em>room</em> ile başlayan key&#39;leri silen <em>bash</em> script:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> redis-cli KEYS &quot;room*&quot; | xargs redis-cli DEL
+</code></pre></div>
+<p>Redis OK, socket&#39;te ne gibi değişiklikler var:</p>
+
+<ul>
+<li><strong>app.js</strong>&#39;te socket.io ile express&#39;in aynı session&#39;a ulaşabilmesi sağlandı</li>
+<li>mongo user kodları <strong>userAdapter.js</strong>&#39;e taşındı</li>
+<li>Promise library olarak <em>bluebird</em> denendi</li>
+</ul>
+
+<h1>Socket.io (devam)</h1>
+
+<p>Sıra chat room&#39;un gösterilmesi ve chat&#39;leşmeye geldi.</p>
+
+<p><strong>routes/index.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="p">...</span>
+<span class="lineno"> 2</span>   <span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/room/:id&#39;</span><span class="p">,</span> <span class="nx">securePage</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 3</span>     <span class="kd">var</span> <span class="nx">roomId</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="lineno"> 4</span>     <span class="nx">roomAdapter</span><span class="p">.</span><span class="nx">getRoomById</span><span class="p">(</span><span class="nx">roomId</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">room</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 5</span>       <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">room</span> <span class="o">=</span> <span class="nx">room</span><span class="p">;</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span>       <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;room&#39;</span><span class="p">,</span> <span class="p">{</span>
+<span class="lineno"> 8</span>         <span class="nx">user</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">),</span>
+<span class="lineno"> 9</span>         <span class="nx">room</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">room</span><span class="p">),</span>
+<span class="lineno">10</span>         <span class="nx">socket_host</span><span class="o">:</span> <span class="nx">config</span><span class="p">.</span><span class="nx">socket_host</span>
+<span class="lineno">11</span>       <span class="p">});</span>
+<span class="lineno">12</span>     <span class="p">});</span>
+<span class="lineno">13</span>   <span class="p">});</span>
+<span class="lineno">14</span> <span class="p">...</span>
+</code></pre></div>
+<ul>
+<li>Gerekli bilgileri çekip, room <em>template</em>&#39;imize gönderiyoruz.</li>
+<li><code>room:id</code> dediğimizde <code>req.params.id</code> ile route&#39;ın parametresini alabildik.</li>
+<li>Bu bilgiyse <em>redis</em>&#39;e gidip ilgili room&#39;u çekiyoruz.</li>
+</ul>
+
+<p><code>/messages</code> adında yeni bir <em>channel</em> oluşturuyoruz.</p>
+
+<p><strong>soket.js:</strong> (server)</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">messagesChannel</span> <span class="o">=</span> <span class="nx">io</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="s1">&#39;/messages&#39;</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connection&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">socket</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">room</span><span class="p">){</span>
+<span class="lineno"> 3</span>     <span class="k">return</span><span class="p">;</span>
+<span class="lineno"> 4</span>   <span class="p">}</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>   <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;disconnect&#39;</span><span class="p">,</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="kd">var</span> <span class="nx">roomId</span> <span class="o">=</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">room</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="lineno"> 8</span>     <span class="nx">updateUsersList</span><span class="p">(</span><span class="nx">roomId</span><span class="p">);</span>
+<span class="lineno"> 9</span>   <span class="p">});</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span>   <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;joinroom&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">12</span>     <span class="kd">var</span> <span class="nx">roomId</span> <span class="o">=</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">request</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">room</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span>     <span class="c1">// bu user&#39;la join olacağız, bu bilgi daha sonra clients&#39;dan alınabilir</span>
+<span class="lineno">15</span>     <span class="nx">socket</span><span class="p">.</span><span class="nx">user</span> <span class="o">=</span> <span class="nx">user</span><span class="p">;</span>
+<span class="lineno">16</span>     <span class="nx">socket</span><span class="p">.</span><span class="nx">roomId</span> <span class="o">=</span> <span class="nx">roomId</span><span class="p">;</span>
+<span class="lineno">17</span>     <span class="nx">socket</span><span class="p">.</span><span class="nx">join</span><span class="p">(</span><span class="nx">roomId</span><span class="p">);</span>
+<span class="lineno">18</span> 
+<span class="lineno">19</span>     <span class="nx">updateUsersList</span><span class="p">(</span><span class="nx">roomId</span><span class="p">);</span>
+<span class="lineno">20</span>   <span class="p">});</span>
+<span class="lineno">21</span> 
+<span class="lineno">22</span>   <span class="nx">socket</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;sendMessage&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">23</span>     <span class="kd">var</span> <span class="nx">stringified</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="lineno">24</span>     <span class="nx">socket</span><span class="p">.</span><span class="nx">broadcast</span><span class="p">.</span><span class="nx">to</span><span class="p">(</span><span class="nx">data</span><span class="p">.</span><span class="nx">roomId</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;receiveMessage&#39;</span><span class="p">,</span> <span class="nx">stringified</span><span class="p">);</span>
+<span class="lineno">25</span>   <span class="p">});</span>
+<span class="lineno">26</span> 
+<span class="lineno">27</span>   <span class="kd">function</span> <span class="nx">updateUsersList</span><span class="p">(</span><span class="nx">roomId</span><span class="p">){</span>
+<span class="lineno">28</span>     <span class="kd">var</span> <span class="nx">clients</span> <span class="o">=</span> <span class="nx">messagesChannel</span><span class="p">.</span><span class="k">in</span><span class="p">(</span><span class="nx">roomId</span><span class="p">).</span><span class="nx">sockets</span><span class="p">.</span><span class="nx">filter</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">29</span>       <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">roomId</span> <span class="o">===</span> <span class="nx">roomId</span><span class="p">;</span>
+<span class="lineno">30</span>     <span class="p">});</span>
+<span class="lineno">31</span>     <span class="kd">var</span> <span class="nx">users</span> <span class="o">=</span> <span class="nx">clients</span><span class="p">.</span><span class="nx">map</span><span class="p">(</span><span class="kd">function</span><span class="p">(</span><span class="nx">socket</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">32</span>       <span class="k">return</span> <span class="nx">socket</span><span class="p">.</span><span class="nx">user</span><span class="p">;</span>
+<span class="lineno">33</span>     <span class="p">});</span>
+<span class="lineno">34</span>     <span class="nx">messagesChannel</span><span class="p">.</span><span class="k">in</span><span class="p">(</span><span class="nx">roomId</span><span class="p">).</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;receiveUsersList&#39;</span><span class="p">,</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">users</span><span class="p">));</span>
+<span class="lineno">35</span>   <span class="p">}</span>
+<span class="lineno">36</span> <span class="p">});</span>
+</code></pre></div>
+<ul>
+<li><em>socket.io</em> için yeni bir kavram: <strong>room</strong></li>
+<li><code>socket.broadcast.to(data.roomId).emit</code> ile o odaya ait kullanıcılara mesaj gönderiliyor</li>
+<li>yalnız <em>socket.io</em>&#39;nun bu versiyonunda eksik bir <a href="https://github.com/socketio/socket.io/pull/1630">kısım</a> var, bunu kendi kodumuzla aşacağız:</li>
+<li><strong>updateUsersList</strong>&#39;te ise kısaca yeni bağlantılar ve kopmalar/ayrılmalarda kullanıcı listesinin o room&#39;a bağlı kullanıcılara gönderilmesi sağlanıyor</li>
+<li>socket, room&#39;a <em>join</em> edilirken <strong>user</strong> ve <strong>roomId</strong> bilgileri üzerine setleniyor.</li>
+<li><code>filter</code> ile bu socket&#39;lerden o <strong>roomId</strong>&#39;ye bağlı olanlar seçilip, <strong>user</strong> bilgileri toplanıyor, yine ilgili client&#39;lara gönderiliyor.</li>
+</ul>
+
+<p><strong>public/js/room.js:</strong> (client)</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">function</span> <span class="nx">insertMessage</span><span class="p">(</span><span class="nx">message</span><span class="p">,</span> <span class="nx">me</span><span class="p">){</span>
+<span class="lineno"> 2</span>   <span class="kd">var</span> <span class="nx">$profilePic</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;img&gt;&#39;</span><span class="p">);</span>
+<span class="lineno"> 3</span>   <span class="nx">$profilePic</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">.</span><span class="nx">profilePictureURL</span><span class="p">);</span>
+<span class="lineno"> 4</span>   <span class="nx">$profilePic</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;alt&#39;</span><span class="p">,</span> <span class="nx">message</span><span class="p">.</span><span class="nx">userName</span><span class="p">);</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span>   <span class="kd">var</span> <span class="nx">$pic</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&#39;</span><span class="p">);</span>
+<span class="lineno"> 7</span>   <span class="k">if</span><span class="p">(</span><span class="nx">me</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 8</span>     <span class="nx">$pic</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;mypic&#39;</span><span class="p">);</span>
+<span class="lineno"> 9</span>   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="nx">$pic</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;pic&#39;</span><span class="p">);</span>
+<span class="lineno">11</span>   <span class="p">}</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>   <span class="nx">$pic</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$profilePic</span><span class="p">);</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>   <span class="kd">var</span> <span class="nx">$msg</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&#39;</span><span class="p">);</span>
+<span class="lineno">16</span>   <span class="k">if</span> <span class="p">(</span><span class="nx">me</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">17</span>     <span class="nx">$msg</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;mymsg&#39;</span><span class="p">);</span>
+<span class="lineno">18</span>   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="lineno">19</span>     <span class="nx">$msg</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;msg&#39;</span><span class="p">);</span>
+<span class="lineno">20</span>   <span class="p">}</span>
+<span class="lineno">21</span> 
+<span class="lineno">22</span>   <span class="nx">$msg</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;p&gt;&#39;</span><span class="p">)).</span><span class="nx">append</span><span class="p">(</span><span class="nx">message</span><span class="p">.</span><span class="nx">message</span><span class="p">);</span>
+<span class="lineno">23</span> 
+<span class="lineno">24</span>   <span class="kd">var</span> <span class="nx">$msgBox</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;div&gt;&#39;</span><span class="p">);</span>
+<span class="lineno">25</span>   <span class="nx">$msgBox</span><span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;class&#39;</span><span class="p">,</span> <span class="s1">&#39;msgbox&#39;</span><span class="p">);</span>
+<span class="lineno">26</span>   <span class="nx">$msgBox</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$pic</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">$msg</span><span class="p">);</span>
+<span class="lineno">27</span>   <span class="nx">$msgBox</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">$msgBox</span><span class="p">);</span>
+<span class="lineno">28</span> 
+<span class="lineno">29</span>   <span class="nx">$msgBox</span><span class="p">.</span><span class="nx">hide</span><span class="p">().</span><span class="nx">prependTo</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;ul.messages&#39;</span><span class="p">)).</span><span class="nx">slideDown</span><span class="p">(</span><span class="mi">100</span><span class="p">);</span>
+<span class="lineno">30</span> <span class="p">}</span>
+<span class="lineno">31</span> 
+<span class="lineno">32</span> <span class="kd">function</span> <span class="nx">onKeyUp</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">33</span>   <span class="nx">$</span><span class="p">(</span><span class="nb">document</span><span class="p">).</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;keyup&#39;</span><span class="p">,</span> <span class="s1">&#39;.newmessage&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">e</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">34</span>     <span class="kd">var</span> <span class="nx">value</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">;</span>
+<span class="lineno">35</span>     <span class="k">if</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">which</span> <span class="o">===</span> <span class="mi">13</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">!==</span> <span class="s1">&#39;&#39;</span><span class="p">){</span>
+<span class="lineno">36</span>       <span class="kd">var</span> <span class="nx">messageData</span> <span class="o">=</span> <span class="p">{</span>
+<span class="lineno">37</span>         <span class="nx">userId</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">_id</span><span class="p">,</span>
+<span class="lineno">38</span>         <span class="nx">userName</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">fullName</span><span class="p">,</span>
+<span class="lineno">39</span>         <span class="nx">profilePictureURL</span><span class="o">:</span> <span class="nx">user</span><span class="p">.</span><span class="nx">profilePictureURL</span><span class="p">,</span>
+<span class="lineno">40</span>         <span class="nx">roomId</span><span class="o">:</span> <span class="nx">room</span><span class="p">.</span><span class="nx">id</span><span class="p">,</span>
+<span class="lineno">41</span>         <span class="nx">message</span><span class="o">:</span> <span class="nx">value</span>
+<span class="lineno">42</span>       <span class="p">};</span>
+<span class="lineno">43</span> 
+<span class="lineno">44</span>       <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="s1">&#39;&#39;</span><span class="p">;</span>
+<span class="lineno">45</span>       <span class="nx">insertMessage</span><span class="p">(</span><span class="nx">messageData</span><span class="p">,</span> <span class="kc">true</span><span class="p">);</span>
+<span class="lineno">46</span>       <span class="nx">roomChannel</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;sendMessage&#39;</span><span class="p">,</span> <span class="nx">messageData</span><span class="p">);</span>
+<span class="lineno">47</span>     <span class="p">}</span>
+<span class="lineno">48</span>   <span class="p">});</span>
+<span class="lineno">49</span> <span class="p">}</span>
+<span class="lineno">50</span> 
+<span class="lineno">51</span> <span class="kd">function</span> <span class="nx">addUsers</span><span class="p">(</span><span class="nx">users</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">52</span>   <span class="kd">var</span> <span class="nx">$usersList</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;ul.users&#39;</span><span class="p">);</span>
+<span class="lineno">53</span>   <span class="nx">$usersList</span><span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s1">&#39;&#39;</span><span class="p">);</span>
+<span class="lineno">54</span> 
+<span class="lineno">55</span>   <span class="nx">users</span><span class="p">.</span><span class="nx">forEach</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">56</span>     <span class="kd">var</span> <span class="nx">$user</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;span&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">fullName</span><span class="p">);</span>
+<span class="lineno">57</span>     <span class="kd">var</span> <span class="nx">$profilePic</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;img&gt;&#39;</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s1">&#39;src&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">.</span><span class="nx">profilePictureURL</span><span class="p">);</span>
+<span class="lineno">58</span>     <span class="kd">var</span> <span class="nx">$userName</span> <span class="o">=</span> <span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;h5&gt;&#39;</span><span class="p">).</span><span class="nx">text</span><span class="p">(</span><span class="nx">user</span><span class="p">.</span><span class="nx">fullName</span><span class="p">);</span>
+<span class="lineno">59</span>     <span class="nx">$usersList</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="nx">$</span><span class="p">(</span><span class="s1">&#39;&lt;li&gt;&#39;</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">$profilePic</span><span class="p">).</span><span class="nx">append</span><span class="p">(</span><span class="nx">$userName</span><span class="p">));</span>
+<span class="lineno">60</span>   <span class="p">});</span>
+<span class="lineno">61</span> <span class="p">}</span>
+<span class="lineno">62</span> 
+<span class="lineno">63</span> <span class="nx">roomChannel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;connect&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno">64</span>   <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;socket connection established&#39;</span><span class="p">);</span>
+<span class="lineno">65</span>   <span class="nx">roomChannel</span><span class="p">.</span><span class="nx">emit</span><span class="p">(</span><span class="s1">&#39;joinroom&#39;</span><span class="p">,</span> <span class="nx">user</span><span class="p">);</span>
+<span class="lineno">66</span>   <span class="nx">onKeyUp</span><span class="p">();</span>
+<span class="lineno">67</span> <span class="p">});</span>
+<span class="lineno">68</span> 
+<span class="lineno">69</span> <span class="nx">roomChannel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;receiveMessage&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">70</span>   <span class="nx">data</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="lineno">71</span>   <span class="nx">insertMessage</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="lineno">72</span> <span class="p">});</span>
+<span class="lineno">73</span> 
+<span class="lineno">74</span> <span class="nx">roomChannel</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;receiveUsersList&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">data</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">75</span>   <span class="nx">users</span> <span class="o">=</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">parse</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+<span class="lineno">76</span>   <span class="nx">addUsers</span><span class="p">(</span><span class="nx">users</span><span class="p">);</span>
+<span class="lineno">77</span> <span class="p">});</span>
+<span class="lineno">78</span> <span class="p">...</span>
+</code></pre></div>
+<ul>
+<li>ilgili socket.io event&#39;lerini yakalayıp, data&#39;yı <strong>jquery</strong> ile DOM&#39;a basıyoruz</li>
+<li><strong>onKeyUp</strong> ile, kullanıcı <strong>enter</strong> tuşuna bastığında input&#39;ta yazan mesajı alıp <code>roomChannel.emit</code> ile gönderiyoruz.</li>
+<li><code>roomChannel.on(&#39;receiveMessage&#39;)</code> ile server&#39;dan gelen dönüşü yazıyoruz.</li>
+<li><code>roomChannel.on(&#39;receiveUsersList&#39;)</code> ile server&#39;dan <strong>joinroom</strong> ve <strong>disconnect</strong> sonucu değişen oda kullanıcı listesi ilgili client&#39;lara gönderiliyor.</li>
+</ul>
+
+<h1>Sonuç</h1>
+
+<p>Evet, artık uygulamamamızı yeterince geliştirdik ve çoklu odalı, gerçek zamanlı bir uygulamayı node.js üzerinde nasıl yaparız denemiş olduk.</p>
+
+<p>Bunu yaparken tabii çok düz bir şekilde yapmadık. Kodları incelerseniz az çok kodların ileriye dönük biçimde gelişmeye açık olduğunu görebilirsiniz. Minimum düzeyde kod tekrarı, anlaşılır kodlama, basit mimari ile bunları gerçekleştirdik.</p>
+
+<p>Çıkan sonuç kadar, geliştirme ortamı da burada önemli oldu. Özellikle <strong>grunt</strong> kullanarak basit ama tekrara dayalı işleri otomatize ettik. Geliştirmeyi hızlandıran <em>hot-code-push</em> özelliğini kullandık.</p>
+
+<p>Geliştirme ortamlarını ayırarak, geliştirme, test ve canlı ortamları için ayrı konfigurasyonlar sağladık.</p>
+
+<p><strong>Passport.js</strong> ile facebook bağlantı yapmayı gördük.</p>
+
+<p><strong>Mongo</strong> ve <strong>mongoose* ile <em>Document-based</em> veritabanları nasıldır, nasıl kullanılır bilgimiz oldu. **Redis</strong> ile uygulama arasında çift yönlü bir bağlantı kullandık, DB taraflı data güncellemelerinden haberdar olduk.</p>
+
+<p><strong>Socket.io</strong> ile client-server ve client-client arası haberleşmeyi sağladık.</p>
+
+<p><strong>Promise</strong>&#39;lerle <em>callback</em> tipi çağrımları dönüştürdük.</p>
+
+<p>Tüm bunları yaparken irili ufaklı birçok kütüphane kullandık. <strong>express</strong> <em>middleware</em> yapısına aşina olduk. Uygulamayı ihtiyaç duydukça <strong>refactor</strong> ettik.</p>
+
+<p>Sonuç olarak ortaya başarılı bir web uygulaması çıktı.</p>
+
+<p>Afiyet olsun :)</p>
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2015-11-15T00:00:00+02:00" datetime="2015-11-15T00:00:00+02:00" pubdate>
+							<span class="month"><abbr>November</abbr></span>
+							<span class="day">15</span>
+							<span class="year">2015</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/categories.html#node.js-ref">
+    		node.js <span>3</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/tags.html#node.js-ref">node.js <span>3</span></a></li>
+    
+    	<li><a href="/en/tags.html#socket.io-ref">socket.io <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#express-ref">express <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#redis-ref">redis <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#mongodb-ref">mongodb <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#xp-ref">xp <span>2</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="mustapha_alaziz" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/mustapha_alaziz" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/virtual-machines/2015/11/14/vagrant" title="View Vagrant">&laquo; Vagrant</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/software/2015/11/15/software-testing" title="View Software Testing">Software Testing &raquo;</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+	
+		<a href="/en" >İngilizce</a>
+	
+	-
+	
+		Türkçe
+	
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>Hakkımda</h4>
+					<ul>
+						<li class="contact"><address><span class="author fn n">Barış Aydek</span> - <span class="fn email">baris.aydek :) gmail.com</span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="twitter"><a href="http://twitter.com/mustapha_alaziz/" rel="me">twitter.com/mustapha_alaziz</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/node.js/2015/11/15/multi-room-chat-application" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		$('.content header').append(
+			$('.toc').html(
+				$('<h4/>', {text: {"langs"=>{"english"=>"İngilizce", "turkish"=>"Türkçe"}, "mainpage"=>{"aboutme"=>"Hakkımda", "more"=>"Devamı"}, "headers"=>{"main"=>"Yazılım Namına Dur!", "archive"=>"Arşiv", "pages"=>"Sayfalar", "categories"=>"Kategoriler", "tags"=>"Taglar"}, "series"=>{"title"=>"Bu makale <strong>{{ count }}</strong> bölümlük <strong>{{series}}</strong> serisinin <strong>{{ idx }}.</strong> bölümüdür.</p>"}}})
+			).append($parentUl)
+		);
+
+		$('.content img')
+			.attr('title', 'Resmi büyütmek için üstüne tıklayınız.')
+			.click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
+	});
+</script>
+
+
+  
+
+
+
+</body>
+</html>
+

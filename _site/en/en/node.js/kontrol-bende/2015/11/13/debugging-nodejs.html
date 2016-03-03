@@ -1,0 +1,583 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="tr"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Debugging Node.js</title>
+	<meta name="author" content="Barış Aydek">
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Debugging Node.js" type="application/atom+xml">
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="/">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/">
+								Welcome to Dhalsim's Place
+							</a>
+						</li>
+						<li class="archive"><a href="/en/en/archive.html">Arşiv</a></li>
+						<li class="page"><a href="/en/en/pages.html">Sayfalar</a></li>
+						<li class="category"><a href="/en/en/categories.html">Kategoriler</a></li>
+						<li class="tag"><a href="/en/en/tags.html">Taglar</a></li>
+					</ul>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Debugging Node.js</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				<div class="toc">
+					<span>İçindekiler tablosu yükleniyor...</span>
+					<div class="sp-circle"></div>
+				</div>
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					<div class="seriesNote">
+  Bu makale <strong>2</strong> bölümlük <strong>Kontrol Bende</strong> serisinin <strong>1.</strong> bölümüdür.</p>
+    <ul>
+    
+    
+    
+        
+
+    
+    
+        <li class="selected">Part 1 -
+        
+    Debugging Node.js
+    
+        </li>
+    
+    
+    
+        
+
+    
+    
+        <li class="">Part 2 -
+        
+            <a href="/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama">
+        
+    Node.js Hata Yönetimi ve Loglama
+    
+      </a>
+    
+        </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </ul>
+</div>
+
+<p><br /></p>
+
+<p>Şimdi elimizde bir node.js uygulaması var. Kodları var, çözemediğimiz çalıştırabiliyoruz ama bazı problemler/hatalar meydana geliyor. Onları incelememiz lazım. Burada noluyor? debugging devreye giriyor.</p>
+
+<!--more-->
+
+<p><img src="/assets/images/kitten.png" alt=""></p>
+
+<p>Genelde gariban yazılımcı debugger&#39;ıyla birlikte doğmuştur. Bir program yazarken yaptığı her satır değişiklikte en az bir seans debug etmezse o program çalışmaz. Eğer çalışırsa bu mucizedir.</p>
+
+<p>Bu ciddi şekilde verimsiz bir yöntemdir. Ve en çok ihtiyacımız olan beyin hücrelerimize zararlıdır.</p>
+
+<p>Ancak genelde başka bir yöntem bilmediğimizde veya <strong>gerçekten ihtiyaç olduğunda</strong> kullanmak kaçınılmazdır.</p>
+
+<p>Ama sizi mağdur yazılımcı rolünü oynamaktan men ediyorum ve muhteşem makaleme davet ediyorum efendim. (bkz: <a href="">Unit Testing</a>)</p>
+
+<h2>Local Debugging</h2>
+
+<p>Ve işte zorunlu olarak debug etmemiz gereken bölgedeyiz. Artık bizi bu beladan ancak bir debugger kurtarabilir.</p>
+
+<p>Şimdi burada debugging mevzusunu da 2&#39;ye ayırdım ister istemez. <strong>Local</strong> ve <strong>remote</strong> olmak üzere:</p>
+
+<p>Local demek, kendi bilgisayarımız üstündeki uygulamamız anlamında. Başka bir bilgisayar üzerindeki uygulamayı kendi bilgisayarımızda debug etmeye ise <strong>remote debugging</strong> deniyor. Ona sonra geleceğim.</p>
+
+<p>Bu yazıda node.js uygulamaları nasıl debug edilir bunu göreceğiz. Bu yazıda <a href="https://github.com/node-inspector/node-inspector">node-inspector</a> kullanacağız.</p>
+
+<p>İndirgeç:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install -g node-inspector
+<span class="lineno">2</span> node-debug app.js
+</code></pre></div>
+<p>şeklinde debug edebiliyoruz.</p>
+
+<blockquote>
+<p>Not: node-inspector sadece Chrome ve Opera tarayıcılarını destekliyor.</p>
+</blockquote>
+
+<p>Node-debug açıldığında otomatik olarak <a href="http://127.0.0.1:8080/debug?port=5858">http://127.0.0.1:8080/debug?port=5858</a> sayfasını varsayılan tarayıcınızda açacaktır.</p>
+
+<p>Şimdi <em>node-debug</em> da ne ola ki derseniz aslında bu <strong>local</strong> üzerinde debugging işlemini kolaylaştıran bir araçlar silsilesi.</p>
+
+<ol>
+<li>node&#39;u --debug-brk parametresiyle çalıştırıyor (ilk satırda durması, 5858 portunu dinlemesi)</li>
+<li>node-inspector&#39;u 8080 portu üzerinden çalıştırıyor</li>
+<li>Varsayılan tarayıcıda debug&#39;ı başlatıyor</li>
+</ol>
+
+<p>Ayrıca yüzbinlerce özellik daha: <a href="https://github.com/node-inspector/node-inspector#features">https://github.com/node-inspector/node-inspector#features</a></p>
+
+<h2>Remote debugging</h2>
+
+<p>Şimdi başka bilgisayardaki bir uygulamayı kendi bilgisayarımızda nasıl debug ederiz onu görelim. Niye böyle bir şey yapayım beni deli mi öptü demeyin. Mesela production bir ortamda, mesela grafik arayüzü olmayan bir Linux sistemininde uygulamanız çalışıyor. Ha, o zaman tamam.</p>
+
+<p>Size bunun demonstreşınını vagrant üzerinden yapacağım ki bir zamanlar <strong>vagrant</strong> üzerinden nasıl proje çalıştırılır onu da yazmıştım lanet olsun.  (bkz: <a href="">Vagrant? Buyur?</a>)</p>
+
+<p>Şimdi vagrant üzerinden, o yazıdaki projeyi nasıl debug ediyoruz, görelim:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> vagrant up
+<span class="lineno">2</span> vagrant ssh
+<span class="lineno">3</span> # --&gt; ilgili projenin klasörüne gidin (chatcat?)
+<span class="lineno">4</span> grunt dev
+</code></pre></div>
+<p>ile açtığımız VM&#39;in ilgili klasörüne gidip uygulamamızı buluyoruz. Uygulamayı <em>debug</em> modunda başlatmamız gerekiyor. Ama biliyorsunuz ki biz bunu nasıl <strong>grunt</strong>&#39;ta başlatacağızı da öğrenmiştik allah belamızı vermesin.</p>
+
+<p>Önceki <a href="">Multiroom Chat</a> uygulamamamızda <strong>nodemon</strong> kullanmıştık. Grunt içindeki ayarların şu şekilde olduğuna emin olun:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="nx">nodemon</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="nx">dev</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 3</span>     <span class="nx">script</span><span class="o">:</span> <span class="s1">&#39;app.js&#39;</span><span class="p">,</span>
+<span class="lineno"> 4</span>     <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+<span class="lineno"> 5</span>       <span class="nx">nodeArgs</span><span class="o">:</span> <span class="p">[</span><span class="s1">&#39;--debug-brk&#39;</span><span class="p">],</span>
+<span class="lineno"> 6</span>       <span class="nx">watch</span><span class="o">:</span> <span class="p">[</span>
+<span class="lineno"> 7</span>         <span class="s1">&#39;app.js&#39;</span><span class="p">,</span>
+<span class="lineno"> 8</span>         <span class="s1">&#39;Gruntfile.js&#39;</span><span class="p">,</span>
+<span class="lineno"> 9</span>         <span class="s1">&#39;src/**/*.js&#39;</span>
+<span class="lineno">10</span>       <span class="p">]</span>
+<span class="lineno">11</span>     <span class="p">}</span>
+<span class="lineno">12</span>   <span class="p">}</span>
+<span class="lineno">13</span> <span class="p">}</span>
+</code></pre></div>
+<p>İkinci olarak yine başka bir terminalde <code>vagrant ssh</code> ile bağlantı daha kuracağız ve onda da <code>node-inspector</code>&#39;ı çalıştıracağız.</p>
+
+<p>Farkedersiniz ki bize utanmadan <code>Visit http://127.0.0.1:8080/?ws=127.0.0.1:8080&amp;port=5858 to start debugging.</code> gibi tavsiyelerde bulunuyor bu ukala program!</p>
+
+<p>Ama bilmiyor ki biz bir VM üzerindeyiz de görsel bir browser&#39;ımız yok. Nasıl açıp da bakalım?</p>
+
+<p>Ama zaten konumuz <strong>remote debugging</strong> olduğundan debug olayını kendi bilgisayarımızda yapacağız. O yüzden link&#39;te verdiği <strong>8080</strong> ve <strong>5858</strong>
+portları bizim için önemli.</p>
+
+<p>Neden önemli, çünkü <strong>port forwarding</strong> (port yönlendirme - verdiğim linkte yazdım bu ne deme şimdi) yapacağız:</p>
+
+<p><strong>VagrantFile:</strong></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ...
+<span class="lineno">2</span> config.vm.network &quot;forwarded_port&quot;, guest: 3000, host: 3000
+<span class="lineno">3</span> config.vm.network &quot;forwarded_port&quot;, guest: 8080, host: 8080
+<span class="lineno">4</span> config.vm.network &quot;forwarded_port&quot;, guest: 5858, host: 5858
+<span class="lineno">5</span> ...
+</code></pre></div>
+<p>Gerekli tüm portları kendimize yönlendirdik. Bu portlar kendi bilgisayarımızda VM&#39;in kullandığı portlara yönlenecek. Şimdi ayarları girdik ama VM&#39;i tekrar başlatıp komutları tekrarlamamız lazım. İyi oldu hem pekişmiş olur konu:</p>
+
+<ul>
+<li><code>CTRL+C</code> ile uygulamadan çıkın.</li>
+<li><code>exit</code> ile <em>ssh</em> bağlantısından çıkın.</li>
+<li><code>vagrant reload</code> ile VM baştan başlasın ki port ayarları yüklensin</li>
+<li><code>vagrant ssh</code> ile tekrar bağlanın</li>
+<li>ilgili klasörde <code>grunt dev</code> diyin ki <em>nodemon</em> --debug-brk ile çalışsın</li>
+<li>başka bir <em>shh</em> bağlantısında <code>node-inspector</code> açın ki debug bilgilerini göndersin</li>
+<li>kendi bilgisayarınızda size söylediği linki açın (hiçbir ayar değiştirmediyseniz <a href="http://127.0.0.1:8080/debug?port=5858">http://127.0.0.1:8080/debug?port=5858</a> olacaktır)</li>
+</ul>
+
+<h2>Bonus</h2>
+
+<p>Anlamadım bıbıcım diyenler ve benim muhteşem debug yeteneklerimi (alet işler el övünür) görmek isteyenler sizi youtube&#39;a alalım: &lt;!!BURAYA LINK GELECEK!!&gt;</p>
+
+<p><br /></p>
+
+<div class="seriesNote">
+  Bu makale <strong>2</strong> bölümlük <strong>Kontrol Bende</strong> serisinin <strong>1.</strong> bölümüdür.</p>
+    <ul>
+    
+    
+    
+        
+
+    
+    
+        <li class="selected">Part 1 -
+        
+    Debugging Node.js
+    
+        </li>
+    
+    
+    
+        
+
+    
+    
+        <li class="">Part 2 -
+        
+            <a href="/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama">
+        
+    Node.js Hata Yönetimi ve Loglama
+    
+      </a>
+    
+        </li>
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    </ul>
+</div>
+
+<p><br /></p>
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2015-11-13T00:00:00+02:00" datetime="2015-11-13T00:00:00+02:00" pubdate>
+							<span class="month"><abbr>November</abbr></span>
+							<span class="day">13</span>
+							<span class="year">2015</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/en/categories.html#node.js-ref">
+    		node.js <span>3</span>
+    	</a></li>
+    
+    	<li><a href="/en/en/categories.html#kontrol-bende-ref">
+    		kontrol-bende <span>2</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/en/tags.html#node.js-ref">node.js <span>3</span></a></li>
+    
+    	<li><a href="/en/en/tags.html#debugging-ref">debugging <span>1</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="mustapha_alaziz" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/mustapha_alaziz" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+    var disqus_developer = 1;
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama" title="View Node.js Hata Yönetimi ve Loglama">Node.js Hata Yönetimi ve Loglama &raquo;</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+	
+		<a href="/en" >İngilizce</a>
+	
+	-
+	
+		Türkçe
+	
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>Hakkımda</h4>
+					<ul>
+						<li class="contact"><address><span class="author fn n">Barış Aydek</span> - <span class="fn email">baris.aydek :) gmail.com</span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="twitter"><a href="http://twitter.com/mustapha_alaziz/" rel="me">twitter.com/mustapha_alaziz</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/node.js/kontrol-bende/2015/11/13/debugging-nodejs" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+<script src="http://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		$('.content header').append(
+			$('.toc').html(
+				$('<h4/>', {text: İçindekiler + ': '})
+			).append($parentUl)
+		);
+
+		$('.content img')
+			.attr('title', 'Resmi büyütmek için üstüne tıklayınız.')
+			.click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
+	});
+</script>
+
+
+  
+
+
+
+</body>
+</html>
+

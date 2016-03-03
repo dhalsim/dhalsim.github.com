@@ -1,0 +1,218 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+
+ <title>Dhalsim&#39;s Place</title>
+ <link href="http://dhalsim.github.io/atom.xml" rel="self"/>
+ <link href="http://dhalsim.github.io"/>
+ <updated>2016-03-03T23:17:55+02:00</updated>
+ <id>http://dhalsim.github.io</id>
+ <author>
+   <name>Barış Aydek</name>
+   <email>baris.aydek@gmail.com</email>
+ </author>
+
+ 
+ <entry>
+   <title>Temel Javascript</title>
+   <link href="http://dhalsim.github.io/javascript/2015/12/18/temel-javascript"/>
+   <updated>2015-12-18T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/javascript/2015/12/18/temel-javascript</id>
+   <content type="html">Javascript öyle garip bir dil ki çoğu insan dilin en temel özelliklerini bilmeden onu kullanabilir. Çoğu zaman da öğrenmemiz gerekmez ancak bunları öğrenmeden de çok fazla ileri gidemeyiz. Bu yazıda javascript&#39;in çok görünen ama bilinmeyen temellerine iniyoruz..</content>
+ </entry>
+ 
+ <entry>
+   <title>Software Testing</title>
+   <link href="http://dhalsim.github.io/software/2015/11/15/software-testing"/>
+   <updated>2015-11-15T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/software/2015/11/15/software-testing</id>
+   <content type="html">Yazılım testi: Yazılım ürününün production&#39;a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir.
+Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çalışan yazılımın neden önemli olduğunun sebeplerine bakalım. Aşağıda önemli yazılım hatalarının tarihte sebep olduğu olaylar listeleniyor.</content>
+ </entry>
+ 
+ <entry>
+   <title>Çok Odalı Node.js Chat Uygulaması</title>
+   <link href="http://dhalsim.github.io/node.js/2015/11/15/multi-room-chat-application"/>
+   <updated>2015-11-15T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/node.js/2015/11/15/multi-room-chat-application</id>
+   <content type="html">Node.js ve socket.io kullanarak çok odalı, çok kullanıcılı realtime chat uygulaması yapıyoruz. Üstelik geliştirme araçlarından (grunt.js) da faydalanarak. MongoDB ve Redis veritabanlarını kullanarak NoSQL&#39;e de giriş yapacağız. Javascript&#39;in yeni versiyonu ES6&#39;dan en önemli yeni özellik Promise&#39;leri de sık sık projede kullanacağız. Express.js kullanarak çok basit middleware&#39;ler nasıl yazılır ve Facebook gibi siteye login nasıl eklenir hepsini bu proje dizisinde göreceğiz.</content>
+ </entry>
+ 
+ <entry>
+   <title>Vagrant</title>
+   <link href="http://dhalsim.github.io/virtual-machines/2015/11/14/vagrant"/>
+   <updated>2015-11-14T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/virtual-machines/2015/11/14/vagrant</id>
+   <content type="html">Vagrant bir sanal makine yöneticisi. Bilgisayarınızdaki sanal makinelerin oluşturulmasından kurulumuna, çalıştırılmasına ve izlenmesine yönelik kolaylıklar sunuyor. Peki bu bizim gerçek hayatta ne işimize yarayacak?</content>
+ </entry>
+ 
+ <entry>
+   <title>Yazılım Geliştirme Modelleri</title>
+   <link href="http://dhalsim.github.io/software/2015/11/14/software-development-processes"/>
+   <updated>2015-11-14T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/software/2015/11/14/software-development-processes</id>
+   <content type="html">Her yazılımcının bilmesi gereken yazılım geliştirme süreçlerine değineceğiz. Yazılım geliştirme modellerinin en çok kullanılanlarının avantaj ve dezavantajlarını görüp XP ve agile prensiplerine değineceğiz.</content>
+ </entry>
+ 
+ <entry>
+   <title>.Net Memory Yönetimi ve Memory Leaks</title>
+   <link href="http://dhalsim.github.io/.net/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks"/>
+   <updated>2015-11-14T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/.net/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks</id>
+   <content type="html">Bu yazıda .NET memory yönetimi nasıl çalışır onu öğreneceğiz böylece uygulamarımızı hafıza açısından daha bilinçli geliştirebileceğiz.</content>
+ </entry>
+ 
+ <entry>
+   <title>ES6</title>
+   <link href="http://dhalsim.github.io/javascript/2015/11/14/es6"/>
+   <updated>2015-11-14T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/javascript/2015/11/14/es6</id>
+   <content type="html">&lt;p&gt;Selamlar. Bu yazıda javascript&amp;#39;in gelecek nesil versiyonundan bahsedeceğim: EcmaScript 6 veya EcmaScript 2015. Kullanacağım teknoloji &lt;a href=&quot;https://babeljs.io&quot;&gt;babel js&lt;/a&gt; olacak.&lt;/p&gt;
+
+&lt;h2&gt;Neden babel JS&lt;/h2&gt;
+
+&lt;p&gt;Javascript bildiğiniz gibi hem client tarafında hem de server tarafında çalışan yorumlamalı bir dildir. Client tarafı değişkenlik gösterdiği için her özelliğin çalışması beklenemez. Mesela eski browserlarda javascript&amp;#39;in yeni özelliklerin çoğu yoktur.&lt;/p&gt;
+
+&lt;p&gt;Bu sorunu aşmak için babel js preprocessor kullanacağım. basitçe ES6&amp;#39;da yazdığınız javascript kodunu ES5&amp;#39;e çevirir.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Broken Authentication and Session Management</title>
+   <link href="http://dhalsim.github.io/.net/security/2015/11/14/broken-authentication-and-session-management"/>
+   <updated>2015-11-14T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/.net/security/2015/11/14/broken-authentication-and-session-management</id>
+   <content type="html">ASP.NET uygulamalarında session management ile ilgili öneriler.</content>
+ </entry>
+ 
+ <entry>
+   <title>Node.js Hata Yönetimi ve Loglama</title>
+   <link href="http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama"/>
+   <updated>2015-11-13T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama</id>
+   <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
+  Bu makale &lt;strong&gt;2&lt;/strong&gt; bölümlük &lt;strong&gt;Kontrol Bende&lt;/strong&gt; serisinin &lt;strong&gt;2.&lt;/strong&gt; bölümüdür.&lt;/p&gt;
+    &lt;ul&gt;
+    
+    
+    
+        
+
+    
+    
+        &lt;li class=&quot;&quot;&gt;Part 1 -
+        
+            &lt;a href=&quot;/node.js/kontrol-bende/2015/11/13/debugging-nodejs&quot;&gt;
+        
+    Debugging Node.js
+    
+      &lt;/a&gt;
+    
+        &lt;/li&gt;
+    
+    
+    
+        
+
+    
+    
+        &lt;li class=&quot;selected&quot;&gt;Part 2 -
+        
+    Node.js Hata Yönetimi ve Loglama
+    
+        &lt;/li&gt;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Merhaba, &lt;strong&gt;&amp;quot;Kontrol Bende&amp;quot;&lt;/strong&gt; serisine yeni bir konu daha ekliyoruz.&lt;/p&gt;
+
+&lt;p&gt;Bundan önce &lt;a href=&quot;/node.js/2015/11/13/debugging-nodejs/&quot;&gt;Node.js Debugging&lt;/a&gt; konusunu işlemiştik. Şimdi ise hem debugging&amp;#39;te hem de production&amp;#39;da olmazsa olmaz &lt;strong&gt;loglama&lt;/strong&gt; konusuna dalıyoruz.&lt;/p&gt;
+
+&lt;p&gt;Loglama konusu node.js ile birlikte daha da önemli bir hale geliyor. Bunun nedeni node.js&amp;#39;in kullanım amaçlarından biri olan &lt;em&gt;scaling&lt;/em&gt;&amp;#39;te ne kadar yaşamsal olduğunu bilmemiz.&lt;/p&gt;
+</content>
+ </entry>
+ 
+ <entry>
+   <title>Debugging Node.js</title>
+   <link href="http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/debugging-nodejs"/>
+   <updated>2015-11-13T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/debugging-nodejs</id>
+   <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
+  Bu makale &lt;strong&gt;2&lt;/strong&gt; bölümlük &lt;strong&gt;Kontrol Bende&lt;/strong&gt; serisinin &lt;strong&gt;1.&lt;/strong&gt; bölümüdür.&lt;/p&gt;
+    &lt;ul&gt;
+    
+    
+    
+        
+
+    
+    
+        &lt;li class=&quot;selected&quot;&gt;Part 1 -
+        
+    Debugging Node.js
+    
+        &lt;/li&gt;
+    
+    
+    
+        
+
+    
+    
+        &lt;li class=&quot;&quot;&gt;Part 2 -
+        
+            &lt;a href=&quot;/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama&quot;&gt;
+        
+    Node.js Hata Yönetimi ve Loglama
+    
+      &lt;/a&gt;
+    
+        &lt;/li&gt;
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    &lt;/ul&gt;
+&lt;/div&gt;
+
+&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
+
+&lt;p&gt;Şimdi elimizde bir node.js uygulaması var. Kodları var, çözemediğimiz çalıştırabiliyoruz ama bazı problemler/hatalar meydana geliyor. Onları incelememiz lazım. Burada noluyor? debugging devreye giriyor.&lt;/p&gt;
+</content>
+ </entry>
+ 
+
+</feed>
