@@ -196,6 +196,10 @@ You can even use ESLint in your favourite editor (like I do with Atom with same 
 
 ![ESLint Console ScreenShot](/assets/images/eslint-atom.png)
 
+> And you can auto-fix some of the rules (ones with the tool icon) by typing `⌘ ⇧ P` (or whatever shortcut for your OS) for the *Command Palette* and `eslint`. Then select the one with the `fix` command. You can add a shortcut for this if you want, too.
+
+![ESLint Console ScreenShot](/assets/images/eslint-atom-fix.png)
+
 ## Resources
 
 * <http://devnull.guru/get-started-with-eslint/>
