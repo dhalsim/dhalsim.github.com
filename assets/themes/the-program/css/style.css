@@ -641,6 +641,12 @@ pre {
 .unit-article .entry-content:first-child h6 {
   margin-top: 0;
 }
+
+.unit-article .entry-content:first-child h3 {
+  margin-top: 30px;
+  margin-bottom: 10px;
+}
+
 .unit-article a:link, .unit-article a:visited {
   border-bottom: 2px dashed #e25608;
   background-color: white;

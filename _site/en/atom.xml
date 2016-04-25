@@ -4,13 +4,21 @@
  <title>Dhalsim&#39;s Place</title>
  <link href="http://dhalsim.github.io/en/atom.xml" rel="self"/>
  <link href="http://dhalsim.github.io/en"/>
- <updated>2016-03-03T23:47:40+02:00</updated>
+ <updated>2016-04-26T01:59:44+03:00</updated>
  <id>http://dhalsim.github.io/en</id>
  <author>
    <name>Barış Aydek</name>
    <email>baris.aydek@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>What I&#39;ve learned from Learning how to learn?</title>
+   <link href="http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn"/>
+   <updated>2016-04-25T00:00:00+03:00</updated>
+   <id>http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn</id>
+   <content type="html">Every day a new technology, a new buzzword arises, and we are unable to catch the stream day by day. This leads to frustration, but at the end it leads to refusing to learn or conceiving new ideas altogether ... The last solution is this course, and I wanted to learn quickly as possible, so I attended Learning How To Learn By Dr. Barbara Oakley &amp; Dr. Terrence Sejnowski.</content>
+ </entry>
  
  <entry>
    <title>Javascript Linting with ESLint</title>
@@ -70,6 +78,8 @@
     
     
     
+    
+    
     &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -119,6 +129,8 @@
       &lt;/a&gt;
     
         &lt;/li&gt;
+    
+    
     
     
     
