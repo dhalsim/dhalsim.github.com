@@ -25,7 +25,7 @@ exclude_from_localizations: ["assets"]
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
-title : Dhalsim's Place
+title : Dhalsim's
 tagline: Site Tagline
 author :
   name : Barış Aydek
