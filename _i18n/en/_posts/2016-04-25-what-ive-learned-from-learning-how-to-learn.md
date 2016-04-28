@@ -19,35 +19,35 @@ Every day a new technology, a new *buzzword* arises, and we are unable to catch 
 
 For example read this blog post about [Javascript Fatigue](http://www.allenpike.com/2015/javascript-framework-fatigue/)
 
-My first solution was learning the theory behind the technologies, not the technology itself. This directed me to the roots of the software development, paradigms and models (which I wrote about on my blog in Turkish, too)
+My first solution to this problem was **learning the theory behind** the technologies, not the technology itself. This directed me to the roots of the software development, paradigms and models (which I wrote about on my blog in Turkish, too)
 
-Second solution was this blog itself. Writing about something you wanted to learn makes you think about on every aspects of the topic, makes you disciplined for following the sub-topics and deepens your knowledge.
+Second solution was this blog itself. **Writing about something** you wanted to learn makes you think about on every aspects of the topic, makes you disciplined for following the sub-topics and deepens your knowledge.
 
-This approach did a great job at the beginning when I have the enthusiasm and lots of free time (I had broken my leg and stayed at home for four and a half months). Vast amount of knowledge I needed to learn started to accumulated again and I see 4 articles waiting to be finished and I'm starting a new one (yeah I'm whimsical on topics) already.
+This approach did a great job at the beginning when I have the enthusiasm and lots of free time (I had broken my leg and stayed at home for four and a half months). Vast amount of topics I needed to learn started to accumulated again. I can see 4 articles waiting to be finished in my drafts queue and I'm starting a new one (yeah I'm whimsical on topics) already.
 
-The last solution was this course, and I wanted to learn quickly as possible, so I attended Learning How To Learn.
+The last solution was **this course**, and I wanted to learn quickly (or easy) as possible, so I attended Learning How To Learn.
 
-> I hope there is a *how to teach* course, too. Probably I can learn to teach by understanding how I learned myself.
+> I hope there is a *how to teach* course, too. I can probably learn to teach by understanding how I learned myself.
 
 ## The Course
 
-This course is prepared by [Dr. Barbara Oakley](https://www.coursera.org/instructor/barboakley) and [Dr. Terrence Sejnowski](https://www.coursera.org/instructor/terry). You can understand from their bio that they are one of the best researchers on learning, memory and how does the brain work generally.
+This course is prepared by [Dr. Barbara Oakley](https://www.coursera.org/instructor/barboakley) and [Dr. Terrence Sejnowski](https://www.coursera.org/instructor/terry). They are one of the best researchers on learning, memory and the brain generally.
 
 And this is the general course's contents, and my interpretations: 
 
 ## What Is Learning
 
-![](/assets/images/krang.jpg)
+![](/assets/images/krang.png)
 
 ### Working Memory and Long Term Memory
 
-It is important to get to know brain and memory and how they work. This is a nerdy blog so I will jump to computer terms analogies:
+It is important to get to know brain and memory and how they work. This is a nerdy blog so I will jump to computer term analogies:
 
 ![](/assets/images/yoda.jpg)
 
 > **Working memory** is the RAM of your laptop. RAM is the memory of the computer that CPU directly works on. If CPU needs other data apart from the RAM data, it reads from a hard disk and loads to the RAM. 
 
-> **Long term memory** is the hard disk of the computer. It is much much bigger than your RAM, but it is much slower and needs to be transferred to the RAM to be processed by CPU.
+> **Long term memory** is the hard disk of the computer. It is much bigger than your RAM, but it is slower and needs to be transferred to the RAM to be processed by CPU.
 
 Apart from the analogy, we can say that working memory is a fast but limited power of the brain. So we need to use it efficiently (like not letting something to distract us from our focused mode). And if we need to remember and learn the topic permanently, we need to transfer the information to our long term memory.
 
@@ -55,13 +55,13 @@ Apart from the analogy, we can say that working memory is a fast but limited pow
 
 ![](http://uploads5.wikiart.org/images/salvador-dali.jpg!Portrait.jpg)
 
-Our brains have two main *modes* of thinking; focused and diffused. **Focus mode** is the one you are concentrated on the topic you are learning at the moment. This is working mode when you learn something. But there is a drawback here; you sometimes can't see other solutions or aspects when you're in focused.
+Our brains have two main *modes* of thinking; focused and diffused. **Focus mode** is the one when you are concentrated on the topic and gaining information. But there is a drawback here; you sometimes can't see other solutions or aspects when you're in focused.
 
-> **Analogy:** When you are looking through a microscope, you can see the germs very clear and detailed, but probably won't see your near surroundings (for example rats in the room).
+> **Analogy:** When you are looking through a microscope, you can see the germs very clear and detailed, but probably won't see your near surroundings (for example rats in the room!).
 
 **Diffuse mode** on the other hand, is a more relaxed mode of thinking of your brain, which can access broader parts of your brain and memory. Connections between different knowledges of your previous learnings (called **chunks** in the course) happens in this mode.
 
-This mode is activated when you're sleeping, doing activities, shower, cleaning etc. 
+This mode is activated when you're sleeping, doing activities, shower, cleaning etc.
 
 > To be able to learn efficiently, we have to use our brains by switching between these two modes sequentially. There is even a technique called the **Pomodoro technique**.
 
@@ -74,6 +74,10 @@ Procrastination is the delaying activity when you encounter with a difficult tas
 Our long term memory thrives with repetition and practice. Doing all the learning in a day doesn't help the long term memory. Instead we should consistently learn bit by bit throughout in a long period.
 
 > **Analogy:** Brain muscles are like our regular muscles. We need time, sleep and lots of practice to develop muscles.
+
+Also see this youtube video about **why do we need to sleep**? Just don't fell asleep, read the rest of the article!
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3mufsteNrTI" frameborder="0" allowfullscreen></iframe>
 
 Beside these techniques here my thoughts about preventing procrastination:
 
@@ -88,21 +92,23 @@ Beside these techniques here my thoughts about preventing procrastination:
 
 > Basically, what people do to enhance their knowledge and gain expertise is to gradually build the number of chunks in their mind: valuable bits of information that they can piece together in new and creative ways.
 
+![](/assets/images/chunking.jpeg)
+
 Chunks are neurones bound together through use and often meaning. Chunking is gaining these chunks; bits of informations related together. This happens in the focused mode of your brain. Once you get enough of chunks, you'll get the **bigger picture** better. But knowing the big picture while you're learning helps improving your chunking ability, too.
 
 > **Analogy:** Chunking is a down to top, getting big picture is a top to down learning methods. So if we do them together we will be learned the topic in the middle; both near to the chunks and the big picture.
 
 To achieve gaining lots of chunks, one must practice intently and regularly by using the focus mode. **Recalling** and testing yourself with what you've learned is the best method for grasping and strengthening knowledge into the long term memory.
 
-Also, chunks can help you understand new concepts. This is because when you grasp one chunk, you will find that that chunk can be related to similar chunks not only in that field, but also in very different fields. This is also called **transfer**.
+Also, chunks can help you understand new concepts. This is because when you grasp one chunk, you will find that that chunk can be related to similar chunks not only in that field, but also in a very different field. This is also called **transfering**.
 
 > **Analogy:** Chunks are the pieces of a puzzle. Puzzle is the big picture.
 
 ### Seeing the Bigger Picture
 
-![](/assets/images/chunking.png)
+![](/assets/images/bigpicture.png)
 
-If you have lots of chunks on that topic, it is easier to get the bigger picture. Gaining as many chunks as possible while thinking about its place on the big picture helps your learning much. Also chunks can be knit together and create bigger chunks that once triggered you can accomplish a complex activity without using your working memory.
+If you have lots of chunks on that topic, it is easier to get the bigger picture. Gaining as many chunks as possible while thinking about its place on the big picture helps learning much. Also chunks can be knit together and create bigger chunks that once triggered you can accomplish a complex activity without using working memory.
 
 It's quite common to get stuck on a problem often because you have initial ideas about what the solution should be that block your ability to see the real solution. It is called **Einstellung**.
 
@@ -112,7 +118,7 @@ It's quite common to get stuck on a problem often because you have initial ideas
 
 > This also effects Einstellung problem and helps you to look from other angles.
 
-Brain storms and collaborative thinking can be a method of interleaving by scaling people.
+Brain storms and **collaborative thinking** can be a method of interleaving by scaling people.
 
 # Notes to the Self
 
