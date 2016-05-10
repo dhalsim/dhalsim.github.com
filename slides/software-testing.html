@@ -202,15 +202,15 @@ Bu sadece yazılım tekniğinin değil, yaklaşımının da tamamen değişmesi 
 * Hız ama?.. (kontrolsüz güç güç değildir)
 
 ???
-Bizde ne eksikler var?
-Entegrasyonda karşılaştığımız problemler nedir? QA Bug
-Ne kadar hazırız?
-Problemler ne olabilir?
+Agile'ın gerektirdiği şeyleri tam olarak yapmadan sadece mesela sık release çıkarmak başka problemlere yol açar
 
 --
 .bullet[
 * Continuous Integration ve Continuous delivery? Nasıl mümkün olabilir
 ]
+
+???
+Bu kavramları biliyor musunuz? İleride de değineceğiz ama kısaca kodun sürekli entegre edilmesi diye düşünebiliriz
 
 ---
 
@@ -223,7 +223,7 @@ graph LR
     Test-->Merge
     Merge-->UAT1
     UAT1-->R[Regression]
-    R-- QA Bug -->CR
+    R-- QA Bug -->UAT1
     Test-- CR Bug -->Dev
 		R-- OK -->PROD
 ]
@@ -259,32 +259,44 @@ Günde birkaç kere kodun ortak depoya entegre edilmesi. Otomatize build ile bir
 .mermaid[
 graph TB;
   CR[CR Branch]-->DEV[Development]
-	DEV-- Unit Tests -->CI[Continuous Integration]
+	DEV-- +Integration Tests -->CI[Continuous Integration]
+	DEV-- Unit Tests -->DEV
 	CI-- Fail -->DEV;
-	CI-- OK -->Test;
-	Test[Internal Test]-->Merge;
-	Merge-- Integration Tests -->CI;
+	CI-- OK -->Test[Internal Test];
+	Test-- +Manuel Tests -->Merge;
+	Merge-- +Integration Tests -->CI
 	CI-- OK -->UAT1;
-  UAT1-- Regression Tests -->CI
+  UAT1-- All Tests -->CI
 	UAT1-- OK -->PROD
 ]
 
 ???
-Amaç hataların erken tespiti
-Offtopic: Başka hangi çözümler olabilir?
-(FF: Yazdığım bir fonksiyonun küçük ve bağımsız olması, composibility)
-(OO: Loosly coupled)
+* Amaç hataların erken tespiti
 
 ---
 ## Testing Türleri
 
+--
+
 .bullet[
 * Unit Testing
+]
+
+--
+
+.bullet[
 * Integration Testing
+]
+
+--
+
+.bullet[
 * UI Testing
 ]
 
-.footnote[.red[*] Aslında 10'larca Testing türü vardır, burada sadece bizi ilgilendirenler bulunuyor.]
+--
+
+.red[*] Aslında 10'larca Testing türü vardır, burada sadece bizi ilgilendirenler bulunuyor.
 
 --
 
@@ -302,39 +314,9 @@ Olması Gereken:
 ![](/assets/images/test-should.png)
 ]
 
----
+???
 
-## Testing Türleri
-
-* **Otomatize testing:** Yazılımsal araçlar yardımıyla gerçekleşir, test sonucu karşılaştırmalı yöntem kullanılarak rapor olarak sunulur.
-
---
-
-* **Unit testing:** Yazılımın en küçük modüllerinin test edilmesidir. Kodlama becerileri gerektirdiğinden genellikle yazılım geliştiricileri tarafından yapılır. **White-box** testing yöntemidir.
-
---
-
-* **Black-box testing:** Yazılımın iç işleyişi bilinmeden, sadece girdi ve çıktılarına bakarak yapılan testtir.
-
---
-
-* **Integration testing:** Unit testi yapılsa dahi bu modüllerin birbirleriyle entegrasyonunda hatalar meydana gelebilir. Çeşitli modüllerin grup halinde ve dış kaynaklarla (donanım, veritabanı vb.) beraber test edilmesidir.
-
---
-
-* **User acceptance testing (UAT):** Müşteri ya da kullanıcı tarafından yazılım ihtiyaç analizi dökümanınındaki **functional** ihtiyaçları karşılayıp karşılamadığına bakılır.
-
----
-
-* **System testing:** Sistemin bütünü üzerinde yapılan testing'dir.
-
---
-
-* **Functional testing:** UAT ile benzerdir. Regression testleri örnektir.
-
---
-
-* **Non-functional testing:** Yazılımın fonksiyonel olmayan yönlerinin test edilmesidir. Load testing, performance testing, security testing gibi.
+Peki bizde nasıl?
 
 ---
 
@@ -354,6 +336,12 @@ Yazılım geliştirirken **önce** testinin yazılması, daha sonra da kodun ken
 
 .bullet[
 * Çünkü lanet olası testleri sonradan yazması ya çok zordur ya da artık imkansız hale gelmiştir.
+]
+
+--
+
+.bullet[
+* Ve bunun yanında değineceğimiz birsürü yararı daha var.
 ]
 
 ???
@@ -409,6 +397,8 @@ class: inverse
 
 Bu kısımları roman tadında düşünün, hızlı hızlı okuyacağım, zaten bildiğimiz şeyler
 
+Bir de bu kısımların tahmini ne kadar süre alabileceğini birlikte hesaplayalım istiyorum.
+
 1. Aslında hatanın tespitine kadar olan zamanı da düşünmemiz gerekir
 1. Genelde bu hatayla ilgili kişi olmaz
 1. Kod farkı, ortam farkı vb. sebeplerle yaratılması zordur
@@ -420,6 +410,9 @@ Bu kısımları roman tadında düşünün, hızlı hızlı okuyacağım, zaten 
 class: inverse, middle
 
 > If that guy has any way of making a mistake, he will. **Edward A. Murphy**
+
+???
+Eğer bir hata yapma ihtimali varsa, o hatayı yapılacaktır.
 
 ---
 
@@ -433,15 +426,19 @@ class: inverse, middle
 1. Düzenleme yapılır ve hiçbir testin başarız olmadığı görülür.
 
 ???
+Yine süreleri birlikte hesaplayalım
+
 1. Adı üstünde test driven development
 1. Haliyle
 1. Burada minimum kelimesi gerçekten önemli, çünkü TDD'nin dolaylı olarak bir amacı da testi olmayan kodun yazılmasının engellenmesi. Eğer testin gerektirdiğinden fazla kod yazarsanız testi yazmanın amacını bozmuş olursunuz.
 
 ---
 
-class: middle
+### Sorular
 
-> Sizce hangi senaryo daha iyi? Neden?
+1. Karşılaştırdığımızda hangi senaryo daha kısa sürer?
+1. TDD yönteminde eksik gördüğünüz kısımlar var mı?
+1. Testin yakalamadığı durumlarda ne yapmamız gerekir?
 
 ???
 Free talk
@@ -658,6 +655,8 @@ Tabii testlerin kalitesinin de yüksek olduğunu varsayıyoruz
 --
 
 http://stackoverflow.com/questions/261139/nunit-vs-mbunit-vs-mstest-vs-xunit-net
+
+http://www.slant.co/topics/543/compare/~nunit_vs_xunit-net_vs_mstest
 
 .bullet[
 * Genel olarak MbUnit ve xUnit frameworkleri yeni özellikleriyle dikkat çekerken, nUnit en çok kullanılan ve son versiyonlarıyla rakiplerinin özellikleri ekleyen framework olarak öne çıkıyor. MsTest ise Visual Studio entegrasyonuyla hem iyi hem de ona bağımlılığından kötü olarak geçiyor.

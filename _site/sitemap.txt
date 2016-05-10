@@ -9,7 +9,6 @@ http://dhalsim.github.io/pages
 http://dhalsim.github.io/rss.xml
 http://dhalsim.github.io/sitemap.txt
 http://dhalsim.github.io/software-testing/
-http://dhalsim.github.io/software-testing2/
 http://dhalsim.github.io/tags
 
 http://dhalsim.github.io/javascript/2015/12/18/temel-javascript

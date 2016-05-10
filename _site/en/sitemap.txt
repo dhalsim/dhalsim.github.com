@@ -9,7 +9,6 @@ http://dhalsim.github.io/pages
 http://dhalsim.github.io/rss.xml
 http://dhalsim.github.io/sitemap.txt
 http://dhalsim.github.io/software-testing/
-http://dhalsim.github.io/software-testing2/
 http://dhalsim.github.io/tags
 
 http://dhalsim.github.io/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn
