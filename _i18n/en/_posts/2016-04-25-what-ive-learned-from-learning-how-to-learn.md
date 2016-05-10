@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "What I've learned from Learning how to learn?"
+title: "What I've learned from Learning how to learn"
 description: "Learning learning how to learn, an online course about how brain works and gathers new information, memory techniques and best practices on learning By Dr. Barbara Oakley & Dr. Terrence Sejnowski."
 toc: true
 category: ["Learning"]
@@ -9,7 +9,7 @@ excerpt: "Every day a new technology, a new buzzword arises, and we are unable t
 image: "https://upload.wikimedia.org/wikipedia/commons/8/85/Cerebral_lobes.png"
 ---
 
-# What I've learned from "Learning how to learn"?
+# What I've learned from "Learning how to learn"
 
 This 4 week course on [coursera](https://www.coursera.org/learn/learning-how-to-learn), is the solution I found on the Internet about my learning problems. As a software developer I know that our ability to learn new technologies, skills are vital in our careers. 
 
@@ -75,7 +75,7 @@ Our long term memory thrives with repetition and practice. Doing all the learnin
 
 > **Analogy:** Brain muscles are like our regular muscles. We need time, sleep and lots of practice to develop muscles.
 
-Also see this youtube video about **why do we need to sleep**? Just don't fell asleep, read the rest of the article!
+Also see this youtube video about **why do we need to sleep**. Just don't fell asleep, read the rest of the article!
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/3mufsteNrTI" frameborder="0" allowfullscreen></iframe>
 

@@ -11,6 +11,7 @@ headers:
   categories: Kategoriler
   tags: Taglar
   toc: İçindekiler
+  cv: Özgeçmişim
 series:
   title: Bu makale <strong>{{ count }}</strong> bölümlük <strong>{{series}}</strong> serisinin <strong>{{ idx }}.</strong> bölümüdür.</p>
 misc:

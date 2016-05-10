@@ -1,0 +1,170 @@
+---
+layout: presentation
+title: Software Testing
+permalink: /software-testing2/
+---
+
+# Slide 1
+This is slide 1
+
+---
+
+# Slide 2
+This is slide 2
+
+# Slide
+
+- bullet 1
+--
+
+- bullet 2
+
+# Slide
+
+- bullet 1
+---
+
+# Slide
+
+- bullet 1
+- bullet 2
+
+# Slide
+
+Some content.
+
+???
+Some note.
+
+# Agenda
+
+--
+1. Introduction
+
+--
+2. Markdown formatting
+
+# Section
+
+---
+
+## Sub section 1
+
+---
+
+## Sub section 2
+
+.footnote[.red.bold[*] Important footnote]
+
+# slide
+
+Code:
+
+```ruby
+def add(a,b)
+  a + b
+end
+```
+---
+
+# slide2
+
+Implicit return statment:
+
+```ruby
+def add(a,b)
+*  a + b
+end
+
+Notice how there is no return statement.
+```
+
+---
+
+.mermaid[sequenceDiagram
+    participant Alice
+    participant Bob
+    Alice->>John: Hello John, how are you?
+    loop Healthcheck
+        John->>John: Fight against hypochondria
+    end
+    Note right of John: Rational thoughts <br/>prevail...
+    John-->>Alice: Great!
+    John->>Bob: How about you?
+    Bob-->>John: Jolly good!
+]
+
+---
+class: center, middle
+
+.mermaid[
+graph TD;
+    A-->B;
+    A-->C;
+    B-->D;
+    C-->D;
+]
+
+.footnote[Go directly to [project site](https://github.com/gnab/remark)]
+
+---
+class: inverse, center, middle
+
+# Dello
+
+## Hello
+
+### Mello
+
+---
+
+name: other-slide
+
+Some content.
+
+---
+template: other-slide
+
+Content appended to other-slide's content.
+
+---
+
+# Agenda
+
+--
+1. Introduction
+
+--
+1. Markdown formatting
+
+---
+
+layout: true
+class: center, middle
+
+---
+
+## Sub section 1 layout
+
+---
+
+## Sub section 2
+
+---
+layout: false
+
+# Back to normal
+
+---
+
+name: how
+
+.left-column[
+  ## How does it work?
+  ### - Markdown
+  ### - Inside HTML
+  ### - Hello
+]
+.right-column[
+A Markdown-formatted chunk of text is transformed into individual slides by JavaScript running in the browser:
+]

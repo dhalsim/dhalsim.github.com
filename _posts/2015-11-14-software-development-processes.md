@@ -199,7 +199,7 @@ Aynı zamanda çevik prensiplerden birçoğunu barındırır: **basitlik, ileti�
 
 ## Müşterinin önemi
 
-XP takım odaklı bir modeldir ve takım içinde **müşteriyi** de koyar. Planlamalarda müşteri de bulunur çünkü toplantılardan dışlanılmayacak kadar önemlidir. Ancak müşteri XP'nin gerekliliklerini yerine getirebilecek yetkinlikte olmalıdır. Konusuna hakim, sorumluluk sahibi, teknik ekibe güvenen (özellikle zaman tahminlerinde ve bunlar tahmin olduğunun bilinciyle), karar verici, önceliklendirme yapabilen, testlerde yer alan vb.
+XP takım odaklı bir modeldir ve takım içine **müşteriyi** de koyar. Planlamalarda müşteri de bulunur çünkü toplantılardan dışlanılmayacak kadar önemlidir. Ancak müşteri XP'nin gerekliliklerini yerine getirebilecek yetkinlikte olmalıdır. Konusuna hakim, sorumluluk sahibi, teknik ekibe güvenen (özellikle zaman tahminlerinde ve bunların tahmin olduğunun bilinciyle), karar verici, önceliklendirme yapabilen, testlerde yer alan vb.
 
 ## User stories
 

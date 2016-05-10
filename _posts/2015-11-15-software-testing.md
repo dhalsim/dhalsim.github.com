@@ -33,13 +33,13 @@ Neredeyse 3. Dünya Savaşını başlatacak hatalar:
 
 Hastalıklar:
 
-* 1985-87 arası radyasyon tedavi aracındaki hata, en az 3 kişinin ölüme, çoğu hastanın da 100 kat fazla radyasyon almasına yol açıyor.
+* 1985-87 arası radyasyon tedavi aracındaki hata, en az 3 kişinin ölümene, çoğu hastanın da 100 kat fazla radyasyon almasına yol açıyor.
 
 Para kaybı:
 
 * 1996, uzaya uydu gönderilmesinde roket yazılımdaki hata yörüngede sapmaya neden olup roketin kendini patlatmasına neden oluyor. Hatanın maliyeti 370 milyon dolar.
 * 1999, yine uydu fırlatmasındaki hata 1.2 milyar dolara maloluyor.
-* 1996, banka yazılım hatası 832 müşterinin 920 milyon dolar borçlandırıyor.
+* 1996, banka yazılım hatası 832 müşteriyi 920 milyon dolar borçlandırıyor.
 
 Kazalar:
 
@@ -66,7 +66,7 @@ Yazılım test otomasyonu ise yazılımın test edilmesinde en güzel yöntemdir
 * **Bilinen:** X tipi testing modeli en uygunudur.
 * **Doğrusu:** Testing modeli, proje development modeline göre değişkenlik gösterir
 * **Bilinen:** Tüm kodlama bittikten sonra testing başlar
-* **Doğrusu:** Development modeline göre değişir, eğer *Agile* gibi metodolojilerde *testing*, gereksinim analiziyle başlar.
+* **Doğrusu:** Development modeline göre değişir, *Agile* gibi metodolojilerde *testing*, gereksinim analiziyle başlar.
 * **Bilinen:** Yazılım testi, yazılım iş gereksinimleriyle ilgilenir.
 * **Doğrusu:** Sadece iş gereksinimleriyle değil, aynı zamanda görünürde olmayan performans ve güvenlik gereksinimlerine de bakılmalıdır.
 * **Bilinen:** Automated testing çok iyi bir şeydir ve manuel testing yapılmamalıdır.
@@ -76,7 +76,7 @@ Yazılım test otomasyonu ise yazılımın test edilmesinde en güzel yöntemdir
 
 # Testing Teorisi
 
-Testing çeşitlerine gelmeden önce biraz daha teorik bilgiyle doldurayım sizi. Çünkü teori olmadan gelişen pratikten de bir nane olmuyor maalesef. Bu yüzden sizi sıksa da [Yazılım Geliştirme Modelleri]() yazısına alalım. Çünkü bunlar üzerine bir testing sistemi oturtulabilir.
+Testing çeşitlerine gelmeden önce biraz daha teorik bilgiyle doldurayım sizi. Çünkü teori olmadan gelişen pratikten de bir nane olmuyor maalesef. Bu yüzden sizi sıksa da [Yazılım Geliştirme Modelleri](/software/2015/11/14/software-development-processes) yazısına alalım. Çünkü bunlar üzerine bir testing sistemi oturtulabilir.
 
 Yazılım modellerinde gördüğümüz çoğu modern sistem, **iterasyon** temelinde olmaktadır. Bunun yanında testing, günümüzde çok popülerleşen **çevik süreçler**de de olduğu gibi **sık ve erken sürüm** ihtiyacıyla beraber tüm bu yöntemlerin mümkün olmasını sağlayar. Bu yüzden de ayrı bir önemi vardır.
 
