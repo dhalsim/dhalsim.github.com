@@ -44,7 +44,7 @@ XML tabanlı ASP.NET framework'ünün geliştirilmesinden sorumluydum. Ürün XM
 `05-09`
 **Pamukkale Üniversitesi**, Bilgisayar Mühendisliği
 
-`01-08`
+`01-05`
 İzmir Milli Piyango Anadolu Lisesi
 
 ## Teknik
