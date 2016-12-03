@@ -1,10 +1,10 @@
 _theme_packages/*
-_drafts
 
 Thumbs.db
 .DS_Store
 
 !.gitkeep
+!.gitignore
 
 .rbenv-version
 .rvmrc

@@ -919,7 +919,7 @@ Mesela, iç içe array içeren bir değeri düzlemek istersek:</p>
 <p>// 1 2 3 4 5</p>
 
 <p><strong>for</strong> içinde <strong>let</strong> kullandığımızda aslında şuna dönüşmüş oluyor:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="p">{</span> 
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="p">{</span>
 <span class="lineno">2</span>     <span class="kd">let</span> <span class="nx">k</span><span class="p">;</span>
 <span class="lineno">3</span>     <span class="k">for</span> <span class="p">(</span><span class="nx">k</span><span class="o">=</span><span class="mi">1</span><span class="p">;</span> <span class="nx">k</span><span class="o">&lt;=</span><span class="mi">5</span><span class="p">;</span> <span class="nx">k</span><span class="o">++</span><span class="p">)</span> <span class="p">{</span>
 <span class="lineno">4</span>         <span class="kd">let</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">k</span><span class="p">;</span> <span class="c1">// --&gt; her döngü için yeni bir `i`</span>
@@ -941,11 +941,22 @@ Mesela, iç içe array içeren bir değeri düzlemek istersek:</p>
 <p>Console&#39;da şu çıktıyı verir.</p>
 <div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> Line 2: unknown: Line 2: &quot;a&quot; is read-only
 </code></pre></div>
-<p>Çünkü artık <code>a</code> <strong>const</strong> ile bir kez tanımlandıktan sonra bir daha değiştirilemez. </p>
+<p>Çünkü artık <code>a</code> <strong>const</strong> ile bir kez tanımlandıktan sonra bir daha değiştirilemez.</p>
 
 <blockquote>
 <p>Peki buna neden ihtiyacımız var? Bunun en basit cevabı <em>güvenlik</em> olacaktır. Bir kere tanımlama yaptıktan sonra kod içindeki başka yerlerden değiştirilmesini önlediğimiz için <code>a</code>&#39;nın kullanıldığı her yer bize ilk değerini verecektir. Bu da bize kod içinde determinizmi ve güvenliği verir. Karmaşıklığı azaltan bir etkendir. Bu tarz yapılar <em>functional programing</em>&#39;te çok sık kullanılır ve bu da başka bir yazının konusu olabilir :)</p>
 </blockquote>
+
+<p>Görüldüğü gibi tekrar atama yaptığımızda hata alıyoruz ve eski değerimiz böylece korunuyor. Ama daha kompleks veri tiplerine geçtiğimizde işler düşündüğümüz gibi olmuyor.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kr">const</span> <span class="nx">myObject</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">nick</span><span class="o">:</span> <span class="s1">&#39;dhalsim&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span><span class="s1">&#39;32&#39;</span> <span class="p">};</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="nx">myObject</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">nick</span><span class="o">:</span> <span class="s1">&#39;dhalsim&#39;</span><span class="p">,</span> <span class="nx">age</span><span class="o">:</span><span class="s1">&#39;22&#39;</span> <span class="p">};</span> <span class="c1">// Hata fırlatır</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="nx">myObject</span><span class="p">.</span><span class="nx">age</span> <span class="o">=</span> <span class="mi">22</span><span class="p">;</span> <span class="c1">// Hata falan fırlatmaz</span>
+<span class="lineno">6</span> 
+<span class="lineno">7</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myObject</span><span class="p">)</span> <span class="c1">// { nick: &#39;dhalsim&#39;, age:&#39;22&#39; }</span>
+</code></pre></div>
+<p>Yeni atama yapamasak da verinin değişmesine engel olamıyoruz. Eğer öyle bir niyetiniz varsa <a href="Immutable.js">https://facebook.github.io/immutable-js/</a> veya <a href="Mori">http://swannodette.github.io/mori/</a> gibi gerçek immutable veri yapıları kütüphanelerine bakmalısınız.</p>
 
 <h3>TO BE CONTINUED!!!</h3>
 
@@ -1071,6 +1082,11 @@ Mesela, iç içe array içeren bir değeri düzlemek istersek:</p>
 						<li class="twitter"><a href="http://twitter.com/mustapha_alaziz/" rel="me">twitter.com/mustapha_alaziz</a></li>
 						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
 					</ul>
+
+					<hr />
+
+					<a href=/software-testing>Software Testing & TDD</a> sunumuma göz at!
+
 				</div><!-- misc -->
 			</div><!-- unit-foot-inner -->
 		</div><!-- unit-foot -->

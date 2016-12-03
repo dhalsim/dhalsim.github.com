@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
 
- <title>Dhalsim&#39;s</title>
+ <title>Dhalsim's</title>
  <link href="http://dhalsim.github.io/en/atom.xml" rel="self"/>
  <link href="http://dhalsim.github.io/en"/>
- <updated>2016-11-30T22:30:53+02:00</updated>
+ <updated>2016-12-03T21:00:43+02:00</updated>
  <id>http://dhalsim.github.io/en</id>
  <author>
    <name>Barış Aydek</name>
@@ -13,23 +13,15 @@
 
  
  <entry>
-   <title>What I&#39;ve learned from Learning how to learn</title>
-   <link href="http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn"/>
-   <updated>2016-04-25T00:00:00+03:00</updated>
-   <id>http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn</id>
-   <content type="html">Every day a new technology, a new buzzword arises, and we are unable to catch the stream day by day. This leads to frustration, but at the end it leads to refusing to learn or conceiving new ideas altogether ... The last solution is this course, and I wanted to learn quickly as possible, so I attended Learning How To Learn By Dr. Barbara Oakley &amp; Dr. Terrence Sejnowski.</content>
+   <title>What is Webpack and How does it work</title>
+   <link href="http://dhalsim.github.io/en/javascript/build/tooling/2016/12/03/webpack"/>
+   <updated>2016-12-03T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/en/javascript/build/tooling/2016/12/03/webpack</id>
+   <content type="html">This is another build tool (task runner) like grunt or gulp but mostly a module bundler like browserify and also can be used with a transpiler like babel (to be able to use ES6 javascript feautures from the future!) or typescript</content>
  </entry>
  
  <entry>
-   <title>What I&#39;ve learned from Learning how to learn</title>
-   <link href="http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn"/>
-   <updated>2016-04-25T00:00:00+03:00</updated>
-   <id>http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn</id>
-   <content type="html">Every day a new technology, a new buzzword arises, and we are unable to catch the stream day by day. This leads to frustration, but at the end it leads to refusing to learn or conceiving new ideas altogether ... The last solution is this course, and I wanted to learn quickly as possible, so I attended Learning How To Learn By Dr. Barbara Oakley &amp; Dr. Terrence Sejnowski.</content>
- </entry>
- 
- <entry>
-   <title>What I&#39;ve learned from Learning how to learn</title>
+   <title>What I've learned from Learning how to learn</title>
    <link href="http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn"/>
    <updated>2016-04-25T00:00:00+03:00</updated>
    <id>http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn</id>
@@ -45,43 +37,11 @@
  </entry>
  
  <entry>
-   <title>Javascript Linting with ESLint</title>
-   <link href="http://dhalsim.github.io/en/javascript/2016/01/24/javascript-linting"/>
-   <updated>2016-01-24T00:00:00+02:00</updated>
-   <id>http://dhalsim.github.io/en/javascript/2016/01/24/javascript-linting</id>
-   <content type="html">Scripting languages like Javascript have no compiler to pre-check some rules and errors, so everything will be come out when the code runs (runtime). Even the smallest mistakes like forgetting a semicolon on a certain case, leads to tremendous bugs that may require hours of debugging and cause pain</content>
- </entry>
- 
- <entry>
-   <title>Javascript Linting with ESLint</title>
-   <link href="http://dhalsim.github.io/en/javascript/2016/01/24/javascript-linting"/>
-   <updated>2016-01-24T00:00:00+02:00</updated>
-   <id>http://dhalsim.github.io/en/javascript/2016/01/24/javascript-linting</id>
-   <content type="html">Scripting languages like Javascript have no compiler to pre-check some rules and errors, so everything will be come out when the code runs (runtime). Even the smallest mistakes like forgetting a semicolon on a certain case, leads to tremendous bugs that may require hours of debugging and cause pain</content>
- </entry>
- 
- <entry>
    <title>Vagrant</title>
    <link href="http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant"/>
    <updated>2015-11-14T00:00:00+02:00</updated>
    <id>http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant</id>
-   <content type="html">Vagrant is a virtual machine manager. It makes easy for creating, running and monitoring of VM&#39;s on your host machines. But what real benefits we can get from it?</content>
- </entry>
- 
- <entry>
-   <title>Vagrant</title>
-   <link href="http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant"/>
-   <updated>2015-11-14T00:00:00+02:00</updated>
-   <id>http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant</id>
-   <content type="html">Vagrant is a virtual machine manager. It makes easy for creating, running and monitoring of VM&#39;s on your host machines. But what real benefits we can get from it?</content>
- </entry>
- 
- <entry>
-   <title>Vagrant</title>
-   <link href="http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant"/>
-   <updated>2015-11-14T00:00:00+02:00</updated>
-   <id>http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant</id>
-   <content type="html">Vagrant is a virtual machine manager. It makes easy for creating, running and monitoring of VM&#39;s on your host machines. But what real benefits we can get from it?</content>
+   <content type="html">Vagrant is a virtual machine manager. It makes easy for creating, running and monitoring of VM's on your host machines. But what real benefits we can get from it?</content>
  </entry>
  
  <entry>
@@ -90,7 +50,7 @@
    <updated>2015-11-13T00:00:00+02:00</updated>
    <id>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging</id>
    <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
-  This article is &lt;strong&gt;part 6&lt;/strong&gt; of a &lt;strong&gt;6-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
+  This article is &lt;strong&gt;part 2&lt;/strong&gt; of a &lt;strong&gt;2-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
     &lt;ul&gt;
     
     
@@ -115,327 +75,11 @@
 
     
     
-        &lt;li class=&quot;&quot;&gt;Part 2 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/debugging-nodejs&quot;&gt;
-        
-    Debugging Node.js
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 3 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/debugging-nodejs&quot;&gt;
-        
-    Debugging Node.js
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 4 -
+        &lt;li class=&quot;selected&quot;&gt;Part 2 -
         
     Node.js Error Management and Logging
     
         &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 5 -
-        
-    Node.js Error Management and Logging
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 6 -
-        
-    Node.js Error Management and Logging
-    
-        &lt;/li&gt;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Hello, that&amp;#39;s the new article for &lt;strong&gt;I Have Control&lt;/strong&gt; series.&lt;/p&gt;
-
-&lt;p&gt;Before this one, I wrote about &lt;a href=&quot;/en/node.js/2015/11/13/debugging-nodejs/&quot;&gt;Node.js Debugging&lt;/a&gt; and now in this part, we&amp;#39;re going to dive into the &lt;em&gt;essential&lt;/em&gt; &lt;strong&gt;logging&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Logging is much more important within node.js, because logging is crucial for the one of node&amp;#39;s main goals: &lt;em&gt;scaling&lt;/em&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Node.js Error Management and Logging</title>
-   <link href="http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging"/>
-   <updated>2015-11-13T00:00:00+02:00</updated>
-   <id>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging</id>
-   <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
-  This article is &lt;strong&gt;part 6&lt;/strong&gt; of a &lt;strong&gt;6-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
-    &lt;ul&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 1 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/debugging-nodejs&quot;&gt;
-        
-    Debugging Node.js
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 2 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/debugging-nodejs&quot;&gt;
-        
-    Debugging Node.js
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 3 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/debugging-nodejs&quot;&gt;
-        
-    Debugging Node.js
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 4 -
-        
-    Node.js Error Management and Logging
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 5 -
-        
-    Node.js Error Management and Logging
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 6 -
-        
-    Node.js Error Management and Logging
-    
-        &lt;/li&gt;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Hello, that&amp;#39;s the new article for &lt;strong&gt;I Have Control&lt;/strong&gt; series.&lt;/p&gt;
-
-&lt;p&gt;Before this one, I wrote about &lt;a href=&quot;/en/node.js/2015/11/13/debugging-nodejs/&quot;&gt;Node.js Debugging&lt;/a&gt; and now in this part, we&amp;#39;re going to dive into the &lt;em&gt;essential&lt;/em&gt; &lt;strong&gt;logging&lt;/strong&gt;.&lt;/p&gt;
-
-&lt;p&gt;Logging is much more important within node.js, because logging is crucial for the one of node&amp;#39;s main goals: &lt;em&gt;scaling&lt;/em&gt;&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Node.js Error Management and Logging</title>
-   <link href="http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging"/>
-   <updated>2015-11-13T00:00:00+02:00</updated>
-   <id>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging</id>
-   <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
-  This article is &lt;strong&gt;part 6&lt;/strong&gt; of a &lt;strong&gt;6-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
-    &lt;ul&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 1 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/debugging-nodejs&quot;&gt;
-        
-    Debugging Node.js
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 2 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/debugging-nodejs&quot;&gt;
-        
-    Debugging Node.js
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 3 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/debugging-nodejs&quot;&gt;
-        
-    Debugging Node.js
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 4 -
-        
-    Node.js Error Management and Logging
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 5 -
-        
-    Node.js Error Management and Logging
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 6 -
-        
-    Node.js Error Management and Logging
-    
-        &lt;/li&gt;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     
@@ -465,7 +109,7 @@
    <updated>2015-11-13T00:00:00+02:00</updated>
    <id>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs</id>
    <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
-  This article is &lt;strong&gt;part 3&lt;/strong&gt; of a &lt;strong&gt;6-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
+  This article is &lt;strong&gt;part 1&lt;/strong&gt; of a &lt;strong&gt;2-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
     &lt;ul&gt;
     
     
@@ -486,31 +130,7 @@
 
     
     
-        &lt;li class=&quot;selected&quot;&gt;Part 2 -
-        
-    Debugging Node.js
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 3 -
-        
-    Debugging Node.js
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 4 -
+        &lt;li class=&quot;&quot;&gt;Part 2 -
         
             &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging&quot;&gt;
         
@@ -519,290 +139,6 @@
       &lt;/a&gt;
     
         &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 5 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging&quot;&gt;
-        
-    Node.js Error Management and Logging
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 6 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging&quot;&gt;
-        
-    Node.js Error Management and Logging
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;We got a node.js application here and we&amp;#39;ve got source codes, but we can&amp;#39;t figure it out the problems and bugs occur. We need to examine those, but how? Debugging comes into play.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Debugging Node.js</title>
-   <link href="http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs"/>
-   <updated>2015-11-13T00:00:00+02:00</updated>
-   <id>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs</id>
-   <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
-  This article is &lt;strong&gt;part 3&lt;/strong&gt; of a &lt;strong&gt;6-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
-    &lt;ul&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 1 -
-        
-    Debugging Node.js
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 2 -
-        
-    Debugging Node.js
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 3 -
-        
-    Debugging Node.js
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 4 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging&quot;&gt;
-        
-    Node.js Error Management and Logging
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 5 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging&quot;&gt;
-        
-    Node.js Error Management and Logging
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 6 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging&quot;&gt;
-        
-    Node.js Error Management and Logging
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;We got a node.js application here and we&amp;#39;ve got source codes, but we can&amp;#39;t figure it out the problems and bugs occur. We need to examine those, but how? Debugging comes into play.&lt;/p&gt;
-</content>
- </entry>
- 
- <entry>
-   <title>Debugging Node.js</title>
-   <link href="http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs"/>
-   <updated>2015-11-13T00:00:00+02:00</updated>
-   <id>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs</id>
-   <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
-  This article is &lt;strong&gt;part 3&lt;/strong&gt; of a &lt;strong&gt;6-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
-    &lt;ul&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 1 -
-        
-    Debugging Node.js
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 2 -
-        
-    Debugging Node.js
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 3 -
-        
-    Debugging Node.js
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 4 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging&quot;&gt;
-        
-    Node.js Error Management and Logging
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 5 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging&quot;&gt;
-        
-    Node.js Error Management and Logging
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 6 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging&quot;&gt;
-        
-    Node.js Error Management and Logging
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     

@@ -1,18 +1,18 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
 <channel>
-        <title>Dhalsim&#39;s</title>
-        <description>Dhalsim&#39;s - Barış Aydek</description>
+        <title>Dhalsim's</title>
+        <description>Dhalsim's - Barış Aydek</description>
         <link>http://dhalsim.github.io</link>
         <atom:link href="http://dhalsim.github.io/rss.xml" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Wed, 30 Nov 2016 22:31:01 +0200</lastBuildDate>
-        <pubDate>Wed, 30 Nov 2016 22:31:01 +0200</pubDate>
+        <lastBuildDate>Sat, 03 Dec 2016 21:00:42 +0200</lastBuildDate>
+        <pubDate>Sat, 03 Dec 2016 21:00:42 +0200</pubDate>
         <ttl>60</ttl>
 
 
         <item>
                 <title>Temel Javascript</title>
-                <description>Javascript öyle garip bir dil ki çoğu insan dilin en temel özelliklerini bilmeden onu kullanabilir. Çoğu zaman da öğrenmemiz gerekmez ancak bunları öğrenmeden de çok fazla ileri gidemeyiz. Bu yazıda javascript&#39;in çok görünen ama bilinmeyen temellerine iniyoruz..</description>
+                <description>Javascript öyle garip bir dil ki çoğu insan dilin en temel özelliklerini bilmeden onu kullanabilir. Çoğu zaman da öğrenmemiz gerekmez ancak bunları öğrenmeden de çok fazla ileri gidemeyiz. Bu yazıda javascript'in çok görünen ama bilinmeyen temellerine iniyoruz..</description>
                 <link>http://dhalsim.github.io/javascript/2015/12/18/temel-javascript</link>
                 <guid>http://dhalsim.github.io/javascript/2015/12/18/temel-javascript</guid>
                 <pubDate>Fri, 18 Dec 2015 00:00:00 +0200</pubDate>
@@ -20,7 +20,7 @@
 
         <item>
                 <title>Software Testing</title>
-                <description>Yazılım testi: Yazılım ürününün production&#39;a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir.
+                <description>Yazılım testi: Yazılım ürününün production'a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir.
 Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çalışan yazılımın neden önemli olduğunun sebeplerine bakalım. Aşağıda önemli yazılım hatalarının tarihte sebep olduğu olaylar listeleniyor.</description>
                 <link>http://dhalsim.github.io/software/2015/11/15/software-testing</link>
                 <guid>http://dhalsim.github.io/software/2015/11/15/software-testing</guid>
@@ -29,7 +29,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
 
         <item>
                 <title>Çok Odalı Node.js Chat Uygulaması</title>
-                <description>Node.js ve socket.io kullanarak çok odalı, çok kullanıcılı realtime chat uygulaması yapıyoruz. Üstelik geliştirme araçlarından (grunt.js) da faydalanarak. MongoDB ve Redis veritabanlarını kullanarak NoSQL&#39;e de giriş yapacağız. Javascript&#39;in yeni versiyonu ES6&#39;dan en önemli yeni özellik Promise&#39;leri de sık sık projede kullanacağız. Express.js kullanarak çok basit middleware&#39;ler nasıl yazılır ve Facebook gibi siteye login nasıl eklenir hepsini bu proje dizisinde göreceğiz.</description>
+                <description>Node.js ve socket.io kullanarak çok odalı, çok kullanıcılı realtime chat uygulaması yapıyoruz. Üstelik geliştirme araçlarından (grunt.js) da faydalanarak. MongoDB ve Redis veritabanlarını kullanarak NoSQL'e de giriş yapacağız. Javascript'in yeni versiyonu ES6'dan en önemli yeni özellik Promise'leri de sık sık projede kullanacağız. Express.js kullanarak çok basit middleware'ler nasıl yazılır ve Facebook gibi siteye login nasıl eklenir hepsini bu proje dizisinde göreceğiz.</description>
                 <link>http://dhalsim.github.io/node.js/2015/11/15/multi-room-chat-application</link>
                 <guid>http://dhalsim.github.io/node.js/2015/11/15/multi-room-chat-application</guid>
                 <pubDate>Sun, 15 Nov 2015 00:00:00 +0200</pubDate>

@@ -4,6 +4,7 @@ langs:
 mainpage:
   aboutme: Hakkımda
   more: Devamı
+  tddslide: <a href=/software-testing>Software Testing & TDD</a> sunumuma göz at!
 headers:
   main: YAZILIM NAMINA DUR!
   archive: Arşiv
