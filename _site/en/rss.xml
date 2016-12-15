@@ -5,10 +5,18 @@
         <description>Dhalsim's - Barış Aydek</description>
         <link>http://dhalsim.github.io/en</link>
         <atom:link href="http://dhalsim.github.io/en/rss.xml" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Sat, 03 Dec 2016 21:00:43 +0200</lastBuildDate>
-        <pubDate>Sat, 03 Dec 2016 21:00:43 +0200</pubDate>
+        <lastBuildDate>Thu, 15 Dec 2016 14:58:11 +0200</lastBuildDate>
+        <pubDate>Thu, 15 Dec 2016 14:58:11 +0200</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>Subtyping and Variance in Scala</title>
+                <description>Liskov's Substitution prinsiple as seen in SOLID principles is an important aspect of polymorphism. I tried to fully understand this concept by using variance techniques.</description>
+                <link>http://dhalsim.github.io/en/scala/2016/12/15/subtyping-and-variance</link>
+                <guid>http://dhalsim.github.io/en/scala/2016/12/15/subtyping-and-variance</guid>
+                <pubDate>Thu, 15 Dec 2016 00:00:00 +0200</pubDate>
+        </item>
 
         <item>
                 <title>What is Webpack and How does it work</title>
@@ -85,6 +93,8 @@
     
     
     
+    
+    
     &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -134,6 +144,8 @@
       &lt;/a&gt;
     
         &lt;/li&gt;
+    
+    
     
     
     
