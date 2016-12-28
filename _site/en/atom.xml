@@ -4,13 +4,21 @@
  <title>Dhalsim's</title>
  <link href="http://dhalsim.github.io/en/atom.xml" rel="self"/>
  <link href="http://dhalsim.github.io/en"/>
- <updated>2016-12-15T14:58:11+02:00</updated>
+ <updated>2016-12-28T10:56:54+02:00</updated>
  <id>http://dhalsim.github.io/en</id>
  <author>
    <name>Barış Aydek</name>
    <email>baris.aydek@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Jenkins NUnit Integration with Test and Coverage Reports</title>
+   <link href="http://dhalsim.github.io/en/build/tooling/2016/12/27/jenkins-nunit-integration"/>
+   <updated>2016-12-27T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/en/build/tooling/2016/12/27/jenkins-nunit-integration</id>
+   <content type="html">Create reports automatically when your build runs using Jenkins, NUnit and various other tools.</content>
+ </entry>
  
  <entry>
    <title>Subtyping and Variance in Scala</title>
@@ -100,6 +108,8 @@
     
     
     
+    
+    
     &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -149,6 +159,8 @@
       &lt;/a&gt;
     
         &lt;/li&gt;
+    
+    
     
     
     
