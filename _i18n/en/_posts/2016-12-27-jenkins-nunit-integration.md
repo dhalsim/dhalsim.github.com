@@ -1,11 +1,11 @@
 ---
 layout: post
 title: "Jenkins NUnit Integration with Test and Coverage Reports"
-description: "Create reports automatically when your build runs using Jenkins, NUnit and various other tools"
+description: "Create unit test and coverage reports automatically when your build runs on Jenkins with NUnit and other various tools."
 toc: true
 category: ["build", "tooling"]
 tags: ["jenkins", "nunit", "TDD", "CI"]
-excerpt: "Create reports automatically when your build runs using Jenkins, NUnit and various other tools."
+excerpt: "Create unit test and coverage reports automatically when your build runs on Jenkins with NUnit and other various tools."
 image: "/assets/images/jenkins-logo.png"
 mermaid: true
 ---
