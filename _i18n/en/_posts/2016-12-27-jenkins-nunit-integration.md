@@ -4,7 +4,7 @@ title: "Jenkins NUnit Integration with Test and Coverage Reports"
 description: "Create unit test and coverage reports automatically when your build runs on Jenkins with NUnit and other various tools."
 toc: true
 category: ["build", "tooling"]
-tags: ["jenkins", "nunit", "TDD", "CI"]
+tags: ["jenkins", "nunit", "unit test", "code coverage", "report", "TDD", "CI"]
 excerpt: "Create unit test and coverage reports automatically when your build runs on Jenkins with NUnit and other various tools."
 image: "/assets/images/jenkins-logo.png"
 mermaid: true
@@ -22,20 +22,20 @@ This integration contains:
 * A CI job that runs NUnit tests and creates HTML reports after building a .NET project
 * Installing HTML publish plugin
 * Generating NUnit report with ReportUnit
-* Generating code coverage report with OpenCover
-* Generating code coverage HTML report with ReportUnit
+* Generating code coverage reports with OpenCover
+* Generating code coverage HTML reports with ReportUnit
 
 But doesn't contain:
 
 * How to install and Jenkins
 * How to create a build job from scratch
-* How to integrate source control managers
+* How to integrate the source control managers
 * How to write unit tests
 * etc.
 
 ## Setup
 
-This is a relatively easy to integrate NUnit and the reports. The tricky parts are installing the right tools and running them on the console. If you can accomplish that, Jenkins part is easy as I said.
+This is relatively an easy task to integrate Jenkins with NUnit and the reports as you'll see in the batch script. But the tricky part is installing the right tools and running them on the console separately with the right parameters. If you can accomplish that, Jenkins integration is easy.
 
 ### Step 1: Installing Nuget packages
 
@@ -52,6 +52,8 @@ If you check your *packages* directory, you'll see these packages installed for 
 `packages\NUnit.ConsoleRunner.X.X.X\tools\nunit3-console.exe`
 
 > Write at least a few unit tests, and test the project using this exe from command line.
+
+> Watch out the version numbers! You will need to arrange the batch script with the installed versions. If you update the packages and the version numbers change, you would need to update the script again.
 
 ### Step 2: Create a bat executable
 
@@ -111,7 +113,24 @@ I used these 2 folders for reports generated.
 
 Create these folders on the computer jenkins runs.
 
-### Step 4: Configuring Jenkins
+### Step 4: Understand and test
+
+The basic flow is:
+
+<div class="mermaid">
+graph LR
+    Start-- Unit test project -->nunit[Run Tests with NUnit]
+    nunit-->TR[TestResult.xml]
+    RU[ReportUnit.exe]-- TestResult.xml -->TReport[TestResult.html]
+    OC[OpenCover]-- Unit test project<br />NUnit -->OCR[opencovertests.xml]
+    RG[Report Generator]-- opencovertests.xml -->HTML[HTML Coverage Report]
+</div>
+
+You can also try to run each script separately to see how it works, or to troubleshoot. In each step an output file will be created. When NUnit tests run, an XML file (we gave **TestResult.xml** as the output file name) will be created in the specified path. Then ReportUnit will create a single HTML file (**TestResult.html**) in the same folder. This will be the first report and will give us unit test results.
+
+Second report will be the coverage report. OpenCover will create report XML (**opencovertests.xml**) using NUnit, then ReportGenerator will create an HTML site with that file in the given path (**C:\UnitTestResults**) and addition to that, the old reports will be saved at (**C:\CoverageHistory**), so each time you run coverage, you can also track coverage changes.
+
+### Step 5: Configuring Jenkins
 
 You need these plugins or equivalents in order to make this integration
 
@@ -121,7 +140,7 @@ You need these plugins or equivalents in order to make this integration
 
 Search and install these plugins from **Manage Jenkins** -> **Manage Plugins**
 
-### Step 4: Create/Update your jenkins job
+### Step 6: Create/Update your jenkins job
 
 After you setup your jenkins job and see that your build is successful, we can go on and integrate the tests.
 
@@ -149,23 +168,6 @@ Fill the forms with the appropriate values
   * Report title: Code Coverage Report
 
 > Select **Keep past HTML reports** and **Always link to last build** from **Publishing options**.
-
-## Running
-
-The basic flow is:
-
-<div class="mermaid">
-graph LR
-    Start-- Unit test project -->nunit[Run Tests with NUnit]
-    nunit-->TR[TestResult.xml]
-    RU[ReportUnit.exe]-- TestResult.xml -->TReport[TestResult.html]
-    OC[OpenCover]-- Unit test project<br />NUnit -->OCR[opencovertests.xml]
-    RG[Report Generator]-- opencovertests.xml -->HTML[HTML Coverage Report]
-</div>
-
-You can also try to run each script separately to see how it works, or to troubleshoot. In each step an output file will be created. When nunit tests run, an XML file (we gave **TestResult.xml** as the output file name) will be created in the specified path. Then ReportUnit will create a single HTML file (**TestResult.html**) in the same folder. This will be the first report and will give us unit test results.
-
-Second report will be the coverage report. OpenCover will create report XML (**opencovertests.xml**) using NUnit, then ReportGenerator will create an HTML site with that file in the given path (**C:\UnitTestResults**) and addition to that, the old reports will be saved at (**C:\CoverageHistory**), so each time you run coverage, you can also track coverage changes.
 
 ## Notes
 

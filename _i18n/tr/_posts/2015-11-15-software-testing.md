@@ -18,6 +18,8 @@ image: "/assets/images/happygoat.jpg"
 
 {% include series.html %}
 
+> YENİ: Aynı zamanda makalenin [sunumuna](/software-testing) da göz atabilirsin!
+
 # Tanım
 
 > **Yazılım testi:** Yazılım ürününün *production*'a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir.

@@ -4,7 +4,7 @@
  <title>Dhalsim's</title>
  <link href="http://dhalsim.github.io/en/atom.xml" rel="self"/>
  <link href="http://dhalsim.github.io/en"/>
- <updated>2016-12-28T10:58:15+02:00</updated>
+ <updated>2017-01-11T04:43:51+02:00</updated>
  <id>http://dhalsim.github.io/en</id>
  <author>
    <name>Barış Aydek</name>
@@ -17,7 +17,7 @@
    <link href="http://dhalsim.github.io/en/build/tooling/2016/12/27/jenkins-nunit-integration"/>
    <updated>2016-12-27T00:00:00+02:00</updated>
    <id>http://dhalsim.github.io/en/build/tooling/2016/12/27/jenkins-nunit-integration</id>
-   <content type="html">Create reports automatically when your build runs using Jenkins, NUnit and various other tools.</content>
+   <content type="html">Create unit test and coverage reports automatically when your build runs on Jenkins with NUnit and other various tools.</content>
  </entry>
  
  <entry>
