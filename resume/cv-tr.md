@@ -8,19 +8,24 @@ Bilgisayar Mühendisi
 <div id="webaddress">
 <a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a>
 |
+<a href="https://dhalsim.github.io">Blogum (TR)</a>
+|
+<a href="https://dhalsim.github.io/en">Blogum (EN)</a>
+|
 <i class="fa fa-github"></i> <a href="http://github.com/dhalsim">dhalsim</a>
 |
 <i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/in/baris-aydek-39352325">Barış Aydek</a>
-</div>
 
+<br /> > Not: Orjinal CV'min basitleştirilmiş halidir. Orijinali için (EN PDF) <a href=/assets/resume/cv-full-en.pdf>tıklayınız</a>.
+</div>
 
 ## Şu anda
 
-**Node.js** ve diğer **javascript** teknolojilerini yakından takip ediyorum. Yazılım geliştirme yöntemlerine (**Agile**, **DevOps** gibi) kafa yoruyorum. Yazılımda kaliteyi önemsiyorum. Unit test yazıyorum. Açık kaynak projelerde çalışmayı seviyorum. Fonksiyonel programlamayı öğrenip uygulamaya çalışıyorum. Ama hayatımı .NET'den kazanıyorum.
+Scala öğrenerek fonksiyonel programlamayı anlamaya ve uygulamaya çalışıyorum. **Node.js** ve diğer **javascript** teknolojilerini takip ediyorum. Yazılım geliştirme yöntemlerine (**Agile**, **DevOps** gibi) kafa yoruyorum. Yazılımda kaliteyi önemsiyorum. Unit test yazıyorum. Açık kaynak projelerde çalışmayı seviyorum.
 
 ## İş Tecrübelesi
 
-`15-`
+`13-16`
 **Amadeus R&D Istanbul** Software Developer
 
 Uçak bileti ve yan ürünlerin satışının gerçekleştirilebildiği B2B ve B2C ürününün yazılım geliştirilmesinden sorumluyum. Proje yönetimi Nice (Fransa)'daki merkezden gerçekleşiyor, Türkiyede ise PM tarafından oluşturulan istekler analiz edilip geliştiriliyor.
@@ -49,7 +54,7 @@ XML tabanlı ASP.NET framework'ünün geliştirilmesinden sorumluydum. Ürün XM
 
 ## Teknik
 
-* C# / Javascript / Python / Ruby
+* C# / Javascript / Scala / Python / Ruby
 * ASP.NET / Node.js / Meteor.js
 * WCF / REST / Web API
 * React.js / Redux
@@ -80,11 +85,9 @@ Meteor.js ve cordova ile aktivite paylaşım uygulaması geliştirildi.
 1. WCF / BTAkademi, 18 hours
 1. ASP.NET MVC Framework / BTAkademi, 18 hours
 1. Windows Azure/ Microsoft, 24 hours
+
+## Serifikalar
+
 1. Fundamentals of Application Security / Team Mentor (Score: 92/100)
-1. Learning how to learn / coursera (Score: 92.4/100)
-
-## Bağlantılar
-
-* <i class="fa fa-envelope"></i> <a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a><br />
-* <i class="fa fa-github"></i> <a href="http://github.com/dhalsim">dhalsim</a><br />
-*  <i class="fa fa-wordpress"></i> <a href="http://dhalsim.github.io">Blog'um</a><br />
+1. [Learning how to learn / Coursera (Grade Achieved: 92.4%)](https://www.coursera.org/account/accomplishments/records/4FKFYFV5643W)
+1. [Functional Programming Principles in Scala / Coursera (Grade Achieved: 96.0%)](https://www.coursera.org/account/accomplishments/records/TNQK6WGCUZET)

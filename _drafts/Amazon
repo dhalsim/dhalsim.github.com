@@ -1,0 +1,134 @@
+Barış Aydek: changed language to cs
+Barış Aydek: it falled
+Amazon Recruiting: can't you hear me anymore ?
+Barış Aydek: no it just dropped
+Amazon Recruiting: I'm calling back
+Barış Aydek: ok
+Barış Aydek: it droped again
+Barış Aydek: maybe we can talk via skype?
+Amazon Recruiting: not allowed on my computer
+Amazon Recruiting: calling back
+Barış Aydek: it droped :(
+Barış Aydek: maybe we can chat
+Barış Aydek: instead of calling
+Amazon Recruiting: I guess we won't have a choice
+Amazon Recruiting: So, what would be the space complexity of this solution ?
+Barış Aydek: it will be again O(n)
+Amazon Recruiting: Really ? Do you store one entry in the map for each array element ?
+Barış Aydek: sorry :)
+Barış Aydek: actually it will depend on the array
+Barış Aydek: if there are duplicate elements much
+Barış Aydek: it will be less than o(n)
+Amazon Recruiting: There will be duplicate since they're all present an even number of times except one
+Barış Aydek: yeah good point :)
+Amazon Recruiting: Can you try to come up with the worst case scenario ?
+Barış Aydek: worst case
+Barış Aydek: one odd number and rest of it pairs
+Barış Aydek: so it will be O(N/2)
+Barış Aydek: but we cut off the 1/2 part right?
+Amazon Recruiting: yep :)
+Barış Aydek: then it will be O(N) again
+Amazon Recruiting: Ok
+Amazon Recruiting: Seems like a pretty good solution for this problem
+Amazon Recruiting: could you code it?
+Amazon Recruiting: In the language of your choice
+Barış Aydek: sure
+Barış Aydek: i pick c#
+Amazon Recruiting: Assume you have all the standards libraries, and I don't care about imports and such
+Amazon Recruiting: but the code should be compilable and runnabl
+Barış Aydek: do you prefer recursive or just iterative approach?
+Amazon Recruiting: your pick
+Barış Aydek: ok I'll do the iterative one
+Barış Aydek: if array is empty then what should I return
+Amazon Recruiting: Feel free to throw an error/exception
+Barış Aydek: ok
+Amazon Recruiting: why long ?
+Barış Aydek: sorry I thought hash code will be long
+Amazon Recruiting: ok, so
+Amazon Recruiting: I'm not that familiar with Dictionary, but it looks like a <int, int> structure
+Amazon Recruiting: and you're putting only one element ?
+Amazon Recruiting: don't you have to provide key and value ?
+Barış Aydek: yes you're right
+Barış Aydek: when you are used to IDEs :)
+Amazon Recruiting: that's cheating :p
+Amazon Recruiting: So, it's a bit wastefull to store the same value as both key and value
+Amazon Recruiting: you're not really using the value
+Amazon Recruiting: now that you see it written, would you know any datastructure you could use instead of a map ?
+Barış Aydek: yeah sure :)
+Barış Aydek: it could be
+Barış Aydek: a data structure that allows only one item
+Barış Aydek: of that one
+Barış Aydek: it will be a list
+Amazon Recruiting: a list allows duplicated items
+Amazon Recruiting: it just guarantees order
+Barış Aydek: OrderedList
+Barış Aydek: so it will still find the value fast enough
+Barış Aydek: with binary search or smt
+Amazon Recruiting: But does it guarantee unicity ?
+Barış Aydek: no it doesn't, I should handle it myself than
+Amazon Recruiting: Ok
+Barış Aydek: if you have more than one value
+Amazon Recruiting: welll, it works either way :)
+Amazon Recruiting: We're unfortunately almost running out of time
+Barış Aydek: then it will probably create a nested list
+Barış Aydek: ok
+Amazon Recruiting: and I want to keep some time for question from you to me
+Barış Aydek: ok :)
+Barış Aydek: do you satisfied of your job
+Amazon Recruiting: anything you'd want to ask about Amazon, how we work here, what we do, etc ?
+Barış Aydek: especially technically
+Amazon Recruiting: Well, I always describe Amazon as the dream job for a geek
+Barış Aydek: great
+Amazon Recruiting: We have access to a lot of cool technologies, everything from AWS, and a lot of power.
+Barış Aydek: can you choose your project
+Barış Aydek: how that works?
+Amazon Recruiting: For example, there isn't any procedure for accessing production, you don't have to have approval from 5 managers
+Amazon Recruiting: you just do it.
+Amazon Recruiting: You're also free to choose the technology you want, as long as you can make a case for it and convince your peers.
+Amazon Recruiting: Of course, this power comes with responsability : if you screw up, you don't have any excuse, since you choose
+Barış Aydek: Ahah :)
+Barış Aydek: ok if you have time
+Barış Aydek: can you tell me how you monitor applicatipons in brief
+Barış Aydek: handle it?
+Amazon Recruiting: For projects, you have a certain amount of decision power
+Amazon Recruiting: There is always a lot of projects recruiting new people, but it's ultimately up to the team itself to accept you or not.
+Amazon Recruiting: Generally, you'll be recruited for a specific project, this hiring manager of the interview loop will be the manager of a given team.
+Amazon Recruiting: However, if the projects itself doesn't interest you more than that, you can always ask for more opportunities in different teams
+Barış Aydek: great to have this flexibility
+Amazon Recruiting: In general, a developer move quite easily from one project to another. At Seattle, it's considered "too long" to stay on the same project for more than a year
+Barış Aydek: really?
+Amazon Recruiting: It's a bit different in remote location since we don't have as many project in a given city, but it's also possible to move quite easily, even going abroad
+Amazon Recruiting: And it's also not that hard, if you have a good idea, to build a brand new team.
+Barış Aydek: a passinate job
+Amazon Recruiting: For example, we're having regularly hackathons, and if the idea and prototype develop is popular amongst manager
+Barış Aydek: what I'm looking for :)
+Amazon Recruiting: you can get the budget for a 2-pizzas team within a few months
+Amazon Recruiting: So I wouldn't recommend this job to just anyone, but for someone passionate it's perfect :)
+Amazon Recruiting: As for monitoring applications in prod, it really depends on the application itself. We rely primarily on a ticketing system, or on metrics alarms
+Amazon Recruiting: AWS Cloudwatch is becoming more and more the main alarming system
+Amazon Recruiting: And depending on the criticality of the application, we have on-calls. One developer with a pager and in charge of responding 24/7 if a high severity issue occurs.
+Amazon Recruiting: So, I guess you weren't briefed on the "what's next"
+Barış Aydek: I know that amazon will make an event in Istanbul
+Barış Aydek: for interviewing more :)
+Amazon Recruiting: I will send my feedback to the HR, they will compile it with the other feedbacks and you should get an answers within 5 days
+Barış Aydek: ah, ok :)
+Barış Aydek: yes, thank you
+Amazon Recruiting: If you don't receive an email, do not hesistate to ping them. Sometimes mail got lost
+Amazon Recruiting: If the answer is positive, then you will be invited to the hiring event in Istambul.
+Barış Aydek: ok
+Amazon Recruiting: It's a full day of interview, where you will see something like 4 or 5 persons for 1-hour interviews
+Amazon Recruiting: It's pretty similar to this one, with a whiteboard instead of collabedit
+Amazon Recruiting: (so get used to not have an IDE :p)
+Barış Aydek: ahaha :) sure
+Barış Aydek: need to exercise
+Amazon Recruiting: and will cover all the subjects from coding to algorithm to system design
+Barış Aydek: ok
+Amazon Recruiting: we're out of time and I have to run to a meeting, so I will have to go
+Amazon Recruiting: I'm sorry the phoneline didn't work out, it's not a great experience for you
+Barış Aydek: Thank you for all your help and interest
+Amazon Recruiting: If you have any more questions, feel free to contact HR
+Barış Aydek: no problem
+Barış Aydek: ok I will. thanks again
+Amazon Recruiting: And... good luck ! :)
+Amazon Recruiting: Bye !
+Barış Aydek: Bye

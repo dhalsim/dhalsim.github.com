@@ -8,23 +8,29 @@ Computer Engineer
 <div id="webaddress">
 <a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a>
 |
+<a href="https://dhalsim.github.io/en">My Blog (EN)</a>
+|
+<a href="https://dhalsim.github.io">My Blog (TR)</a>
+|
 <i class="fa fa-github"></i> <a href="http://github.com/dhalsim">dhalsim</a>
 |
 <i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/in/baris-aydek-39352325">Barış Aydek</a>
+
+<br /> > Note: This is a simplified CV, to see my full CV (PDF) please click <a href=/assets/resume/cv-full-en.pdf>here</a>.
 </div>
 
 ## Currently
 
-Closely following **Node.js** and other **Javascript** technologies. Pondering on software development methodologies (like **Agile**, **Lean**, **DevOps**). I write unit tests. Love to work on open source (free) software. Trying to understand and use functional programming concepts. But I make my life from .NET.
+Trying to understand and use functional programming concepts while learning Scala. Following **Node.js** and other **Javascript** technologies. Pondering on software development methodologies (like **Agile**, **Lean**, **DevOps**). I write unit tests. Love to work on open source (free) software.
 
 ## Work expreriences
 
-`15-`
+`13-16`
 **Amadeus R&D Istanbul** Software Developer
 
 Amadeus e-Power is a fully customizable, high performance, easy-to-use online booking engine (flight, hotel, car, train) that will deliver online sales success to travel agencies which are about worldwide 1000+ booking portals.
 
-*Technologies used: Single Page Application, Lucene, Web API*
+Responsibilities: Application configuration management for deploying on different farm machines 	Unit test initial setup, Test and Code Coverage Reports integration for Jenkins 	Application code security 	Various Flight, Hotel, Payment, Webservice module features 
 
 `12-13`
 **Gezisitesi** Software Development Specialist
@@ -48,7 +54,7 @@ I was responsible from developing of an XML based ASP.NET framework which create
 
 ## Technical
 
-* C# / Javascript / Python / Ruby
+* C# / Javascript / Scala / Python / Ruby
 * ASP.NET / Node.js / Meteor.js
 * WCF / REST / Web API
 * React.js / Redux
@@ -79,11 +85,9 @@ An activity sharing application developed with Meteor.js and cordova.
 1. WCF / BTAkademi, 18 hours
 1. ASP.NET MVC Framework / BTAkademi, 18 hours
 1. Windows Azure/ Microsoft, 24 hours
+
+## Certificates
+
 1. Fundamentals of Application Security / Team Mentor (Score: 92/100)
-1. Learning how to learn / coursera (Score: 92.4/100)
-
-## Links
-
-* <i class="fa fa-envelope"></i> <a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a><br />
-* <i class="fa fa-github"></i> <a href="http://github.com/dhalsim">dhalsim</a><br />
-* <i class="fa fa-wordpress"></i> <a href="http://dhalsim.github.io">My blog</a><br />
+1. [Learning how to learn / Coursera (Grade Achieved: 92.4%)](https://www.coursera.org/account/accomplishments/records/4FKFYFV5643W)
+1. [Functional Programming Principles in Scala / Coursera (Grade Achieved: 96.0%)](https://www.coursera.org/account/accomplishments/records/TNQK6WGCUZET)
