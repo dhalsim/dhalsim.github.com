@@ -11,6 +11,7 @@ http://dhalsim.github.io/sitemap.txt
 http://dhalsim.github.io/software-testing/
 http://dhalsim.github.io/tags
 
+http://dhalsim.github.io/scala/scala-code-n-comments/2017/05/14/scala-one-to-five
 http://dhalsim.github.io/build/tooling/2016/12/27/jenkins-nunit-integration
 http://dhalsim.github.io/scala/2016/12/15/subtyping-and-variance
 http://dhalsim.github.io/javascript/build/tooling/2016/12/03/webpack

@@ -4,7 +4,7 @@ title: "Debugging Node.js"
 toc: true
 description: "Bu makalede node.js uygulamalarının lokalde ve remote üzerinden nasıl debug edilebileceğini okuyabilirsiniz."
 category: ["node.js", "kontrol-bende"]
-tags: ["node.js", "debugging"]
+tags: ["javascript", "node.js", "debugging"]
 series: "Kontrol Bende"
 series_category: "kontrol-bende"
 series_no: 1

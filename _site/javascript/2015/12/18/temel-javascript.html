@@ -31,7 +31,7 @@
 	<meta name="twitter:title" content="Temel Javascript" />
 	<meta name="twitter:description" content="Bu sayfada javascript'te bilinmesi gerekli ama çoğu zaman ayrıntılı bilgi sahibi olunmayan temel konular hakkında yazıyorum." />
 	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/js.jpg" />
-	<meta name="twitter:creator" content="@mustapha_alaziz">
+	<meta name="twitter:creator" content="@">
 
   <style>
 	  @font-face {
@@ -179,10 +179,12 @@
 						<h1 class="h2 entry-title">Temel Javascript</h1>
 					</div><!-- unit-inner -->
 				</div><!-- unit-head -->
+				
 				<div class="toc">
 					<span>İçindekiler tablosu yükleniyor...</span>
 					<div class="sp-circle"></div>
 				</div>
+				
 			</header>
 
 			<div class="bd">
@@ -256,7 +258,7 @@
 <span class="lineno">2</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myObj</span><span class="p">);</span>
 <span class="lineno">3</span> <span class="kd">var</span> <span class="nx">myObj2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Barış&quot;</span> <span class="p">};</span>
 <span class="lineno">4</span> <span class="c1">// ya da:</span>
-<span class="lineno">5</span> <span class="c1">// var myObj2 = Object.create({ name: &quot;Barış&quot; }); </span>
+<span class="lineno">5</span> <span class="c1">// var myObj2 = Object.create({ name: &quot;Barış&quot; });</span>
 <span class="lineno">6</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myObj2</span><span class="p">);</span>
 <span class="lineno">7</span> 
 <span class="lineno">8</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myObj</span> <span class="k">instanceof</span><span class="p">(</span><span class="nb">Object</span><span class="p">));</span>
@@ -267,8 +269,8 @@
 </blockquote>
 
 <p>create metodunun ilk parametresini <code>null</code> vererek aslında Object&#39;ten türememesi sağladık. Bunun tabii ki ilginç sonuçları var. Bir nesne Object&#39;ten türemediğinde mesela şunu yapamıyoruz:</p>
-<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="k">in</span> <span class="nx">myObj</span><span class="p">)</span> <span class="p">{</span> 
-<span class="lineno">2</span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span> 
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="k">in</span> <span class="nx">myObj</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">2</span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
 <span class="lineno">3</span> <span class="p">}</span>
 </code></pre></div>
 <p><code>Object.create</code> ile birlikte ilginç iki özellik daha kullanabiliyoruz, bunlardan biri <strong>property</strong>, diğeri de önceden tanıdığımız ve sevdiğimiz <strong>prototype</strong>.</p>
@@ -362,7 +364,7 @@
 <span class="lineno"> 3</span> <span class="p">};</span>
 <span class="lineno"> 4</span> 
 <span class="lineno"> 5</span> <span class="nx">loggerFunc</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">originalFunc</span><span class="p">)</span> <span class="p">{</span>
-<span class="lineno"> 6</span>     <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span> 
+<span class="lineno"> 6</span>     <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
 <span class="lineno"> 7</span>         <span class="c1">// fonksiyon parametrelerini yazdır</span>
 <span class="lineno"> 8</span>       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
 <span class="lineno"> 9</span> 
@@ -409,7 +411,7 @@
 					<div class="meta">
 						<p class="date-publish">
 							Published:
-							<date class="date-pub" title="2015-12-18T00:00:00+02:00" datetime="2015-12-18T00:00:00+02:00" pubdate>
+							<date class="date-pub" title="2015-12-18T00:00:00+01:00" datetime="2015-12-18T00:00:00+01:00" pubdate>
 							<span class="month"><abbr>December</abbr></span>
 							<span class="day">18</span>
 							<span class="year">2015</span>
@@ -440,6 +442,8 @@
 
   
     
+    	<li><a href="/tags.html#javascript-ref">javascript <span>5</span></a></li>
+    
     	<li><a href="/tags.html#this-ref">this <span>1</span></a></li>
     
     	<li><a href="/tags.html#new-ref">new <span>1</span></a></li>
@@ -464,8 +468,8 @@
 				<div class="misc-content">
 					<div class="social">
 						<ul class="list-linear">
-							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="mustapha_alaziz" data-lang="en">Tweet</a></div></li>
-							<li><div class="twitter-follow"><a href="https://twitter.com/mustapha_alaziz" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
 						</ul>
 					</div>
 					<div class="comment">
@@ -526,10 +530,12 @@
 					<img src="/assets/me_rounded.png" style="width: 150px" />
 					<ul>
 						<li class="contact"><span class="author fn n">Barış Aydek</span></li>
-						<li class="resume"><a href="/resume/cv-tr">Özgeçmişim</a> | <a href="/assets/resume/cv-tr.pdf">pdf</a></li>
+						<li class="resume"><a href="/resume/cv-tr">Özgeçmişim HTML (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-tr.pdf">pdf (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf (ingilizce)</a>
+						</li>
 						<li class="contact"><address><span class="fn email"><a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a></span></address></li>
 						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
-						<li class="twitter"><a href="http://twitter.com/mustapha_alaziz/" rel="me">twitter.com/mustapha_alaziz</a></li>
 						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
 					</ul>
 

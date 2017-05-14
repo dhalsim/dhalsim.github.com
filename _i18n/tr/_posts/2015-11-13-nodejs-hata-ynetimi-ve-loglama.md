@@ -4,7 +4,7 @@ title: "Node.js Hata Yönetimi ve Loglama"
 description: "Bu makalede node.js uygulamalarının Winston kütüphanesi ile nasıl kolay ve doğru bir şekilde loglama yapılacağını ve Express üzerinden hata yönetiminin nasıl yapılabileceğini okuyabilirsiniz."
 toc: true
 category: ["node.js", "kontrol-bende"]
-tags: ["node.js", "log", "error", "hata"]
+tags: ["javascript", "node.js", "log", "error", "hata"]
 series: "Kontrol Bende"
 series_category: "kontrol-bende"
 series_no: 2

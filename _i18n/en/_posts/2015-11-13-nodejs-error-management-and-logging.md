@@ -4,7 +4,7 @@ title: "Node.js Error Management and Logging"
 description: "In this article, you'll read about logging on node.js apps using Winston library and how to manage exceptions on your Express applications."
 toc: true
 category: ["node.js", "i-have-control"]
-tags: ["node.js", "logging", "error", "bugs"]
+tags: ["javascript", "node.js", "logging", "error", "bugs"]
 series: "I Have Control"
 series_category: "i-have-control"
 series_no: 2

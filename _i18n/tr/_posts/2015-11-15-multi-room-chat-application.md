@@ -4,7 +4,7 @@ title: "Çok Odalı Node.js Chat Uygulaması"
 description: "Bu yazıda Node.js, Redis, MongoDB kullanarak gerçek zamanlı bir chat uygulaması nasıl yapılır okuyabilirsiniz."
 toc: true
 category: ["node.js"]
-tags: ["node.js", "socket.io", "express", "redis", "mongodb", "xp"]
+tags: ["javascript", "node.js", "socket.io", "express", "redis", "mongodb", "xp"]
 excerpt: "Node.js ve socket.io kullanarak çok odalı, çok kullanıcılı realtime chat uygulaması yapıyoruz. Üstelik geliştirme araçlarından (grunt.js) da faydalanarak. MongoDB ve Redis veritabanlarını kullanarak NoSQL'e de giriş yapacağız. Javascript'in yeni versiyonu ES6'dan en önemli yeni özellik Promise'leri de sık sık projede kullanacağız. Express.js kullanarak çok basit middleware'ler nasıl yazılır ve Facebook gibi siteye login nasıl eklenir hepsini bu proje dizisinde göreceğiz."
 image: "/assets/images/nodejs.png"
 ---

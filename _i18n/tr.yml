@@ -13,6 +13,8 @@ headers:
   tags: Taglar
   toc: İçindekiler
   cv: Özgeçmişim
+  simplified: (basitleştirilmiş)
+  full: (ingilizce)
 series:
   title: Bu makale <strong>{{ count }}</strong> bölümlük <strong>{{series}}</strong> serisinin <strong>{{ idx }}.</strong> bölümüdür.</p>
 misc:

@@ -197,10 +197,12 @@
 					<img src="/assets/me_rounded.png" style="width: 150px" />
 					<ul>
 						<li class="contact"><span class="author fn n">{{ site.author.name }}</span></li>
-						<li class="resume"><a href="/resume/cv-{{ site.lang }}">{% t headers.cv %}</a> | <a href="/assets/resume/cv-{{ site.lang }}.pdf">pdf</a></li>
+						<li class="resume"><a href="/resume/cv-{{ site.lang }}">{% t headers.cv %} HTML {% t headers.simplified %}</a> |
+							<a href="/assets/resume/cv-{{ site.lang }}.pdf">pdf {% t headers.simplified %}</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf {% t headers.full %}</a>
+						</li>
 						<li class="contact"><address><span class="fn email"><a href="mailto:{{ site.author.email }}">{{ site.author.email }}</a></span></address></li>
 						<li class="github"><a href="http://github.com/{{ site.author.github }}/" rel="me">github.com/{{ site.author.github }}</a></li>
-						<li class="twitter"><a href="http://twitter.com/{{ site.author.twitter }}/" rel="me">twitter.com/{{ site.author.twitter }}</a></li>
 						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
 					</ul>
 

@@ -4,7 +4,7 @@
  <title>Dhalsim's</title>
  <link href="http://dhalsim.github.io/en/atom.xml" rel="self"/>
  <link href="http://dhalsim.github.io/en"/>
- <updated>2017-01-21T22:00:19+02:00</updated>
+ <updated>2017-05-14T22:13:26+02:00</updated>
  <id>http://dhalsim.github.io/en</id>
  <author>
    <name>Barış Aydek</name>
@@ -13,9 +13,17 @@
 
  
  <entry>
+   <title>Scala by code and comments 1 to 5</title>
+   <link href="http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-one-to-five"/>
+   <updated>2017-05-14T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-one-to-five</id>
+   <content type="html">Some problems in scala and my notes as comments, part 1</content>
+ </entry>
+ 
+ <entry>
    <title>Jenkins NUnit Integration with Test and Coverage Reports</title>
    <link href="http://dhalsim.github.io/en/build/tooling/2016/12/27/jenkins-nunit-integration"/>
-   <updated>2016-12-27T00:00:00+02:00</updated>
+   <updated>2016-12-27T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/en/build/tooling/2016/12/27/jenkins-nunit-integration</id>
    <content type="html">Create unit test and coverage reports automatically when your build runs on Jenkins with NUnit and other various tools.</content>
  </entry>
@@ -23,7 +31,7 @@
  <entry>
    <title>Subtyping and Variance in Scala</title>
    <link href="http://dhalsim.github.io/en/scala/2016/12/15/subtyping-and-variance"/>
-   <updated>2016-12-15T00:00:00+02:00</updated>
+   <updated>2016-12-15T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/en/scala/2016/12/15/subtyping-and-variance</id>
    <content type="html">Liskov's Substitution prinsiple as seen in SOLID principles is an important aspect of polymorphism. I tried to fully understand this concept by using variance techniques.</content>
  </entry>
@@ -31,7 +39,7 @@
  <entry>
    <title>What is Webpack and How does it work</title>
    <link href="http://dhalsim.github.io/en/javascript/build/tooling/2016/12/03/webpack"/>
-   <updated>2016-12-03T00:00:00+02:00</updated>
+   <updated>2016-12-03T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/en/javascript/build/tooling/2016/12/03/webpack</id>
    <content type="html">This is another build tool (task runner) like grunt or gulp but mostly a module bundler like browserify and also can be used with a transpiler like babel (to be able to use ES6 javascript feautures from the future!) or typescript</content>
  </entry>
@@ -39,7 +47,7 @@
  <entry>
    <title>What I've learned from Learning how to learn</title>
    <link href="http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn"/>
-   <updated>2016-04-25T00:00:00+03:00</updated>
+   <updated>2016-04-25T00:00:00+02:00</updated>
    <id>http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn</id>
    <content type="html">Every day a new technology, a new buzzword arises, and we are unable to catch the stream day by day. This leads to frustration, but at the end it leads to refusing to learn or conceiving new ideas altogether ... The last solution is this course, and I wanted to learn quickly as possible, so I attended Learning How To Learn By Dr. Barbara Oakley &amp; Dr. Terrence Sejnowski.</content>
  </entry>
@@ -47,7 +55,7 @@
  <entry>
    <title>Javascript Linting with ESLint</title>
    <link href="http://dhalsim.github.io/en/javascript/2016/01/24/javascript-linting"/>
-   <updated>2016-01-24T00:00:00+02:00</updated>
+   <updated>2016-01-24T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/en/javascript/2016/01/24/javascript-linting</id>
    <content type="html">Scripting languages like Javascript have no compiler to pre-check some rules and errors, so everything will be come out when the code runs (runtime). Even the smallest mistakes like forgetting a semicolon on a certain case, leads to tremendous bugs that may require hours of debugging and cause pain</content>
  </entry>
@@ -55,7 +63,7 @@
  <entry>
    <title>Vagrant</title>
    <link href="http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant"/>
-   <updated>2015-11-14T00:00:00+02:00</updated>
+   <updated>2015-11-14T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant</id>
    <content type="html">Vagrant is a virtual machine manager. It makes easy for creating, running and monitoring of VM's on your host machines. But what real benefits we can get from it?</content>
  </entry>
@@ -63,7 +71,7 @@
  <entry>
    <title>Node.js Error Management and Logging</title>
    <link href="http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging"/>
-   <updated>2015-11-13T00:00:00+02:00</updated>
+   <updated>2015-11-13T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging</id>
    <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
   This article is &lt;strong&gt;part 2&lt;/strong&gt; of a &lt;strong&gt;2-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
@@ -110,6 +118,8 @@
     
     
     
+    
+    
     &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -126,7 +136,7 @@
  <entry>
    <title>Debugging Node.js</title>
    <link href="http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs"/>
-   <updated>2015-11-13T00:00:00+02:00</updated>
+   <updated>2015-11-13T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs</id>
    <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
   This article is &lt;strong&gt;part 1&lt;/strong&gt; of a &lt;strong&gt;2-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
@@ -159,6 +169,8 @@
       &lt;/a&gt;
     
         &lt;/li&gt;
+    
+    
     
     
     

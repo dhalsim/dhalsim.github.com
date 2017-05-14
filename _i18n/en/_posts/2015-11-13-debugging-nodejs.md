@@ -4,7 +4,7 @@ title: "Debugging Node.js"
 toc: true
 description: "In this article, you'll read about how to debug node.js applications on your local machine or from a remote machine."
 category: ["node.js", "i-have-control"]
-tags: ["node.js", "debugging"]
+tags: ["javascript", "node.js", "debugging"]
 series: "I Have Control"
 series_category: "i-have-control"
 series_no: 1

@@ -4,7 +4,7 @@
  <title>Dhalsim's</title>
  <link href="http://dhalsim.github.io/atom.xml" rel="self"/>
  <link href="http://dhalsim.github.io"/>
- <updated>2017-01-21T22:00:18+02:00</updated>
+ <updated>2017-05-14T22:13:25+02:00</updated>
  <id>http://dhalsim.github.io</id>
  <author>
    <name>Barış Aydek</name>
@@ -15,7 +15,7 @@
  <entry>
    <title>Temel Javascript</title>
    <link href="http://dhalsim.github.io/javascript/2015/12/18/temel-javascript"/>
-   <updated>2015-12-18T00:00:00+02:00</updated>
+   <updated>2015-12-18T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/javascript/2015/12/18/temel-javascript</id>
    <content type="html">Javascript öyle garip bir dil ki çoğu insan dilin en temel özelliklerini bilmeden onu kullanabilir. Çoğu zaman da öğrenmemiz gerekmez ancak bunları öğrenmeden de çok fazla ileri gidemeyiz. Bu yazıda javascript'in çok görünen ama bilinmeyen temellerine iniyoruz..</content>
  </entry>
@@ -23,7 +23,7 @@
  <entry>
    <title>Software Testing</title>
    <link href="http://dhalsim.github.io/software/2015/11/15/software-testing"/>
-   <updated>2015-11-15T00:00:00+02:00</updated>
+   <updated>2015-11-15T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/software/2015/11/15/software-testing</id>
    <content type="html">Yazılım testi: Yazılım ürününün production'a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir.
 Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çalışan yazılımın neden önemli olduğunun sebeplerine bakalım. Aşağıda önemli yazılım hatalarının tarihte sebep olduğu olaylar listeleniyor.</content>
@@ -32,7 +32,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
  <entry>
    <title>Çok Odalı Node.js Chat Uygulaması</title>
    <link href="http://dhalsim.github.io/node.js/2015/11/15/multi-room-chat-application"/>
-   <updated>2015-11-15T00:00:00+02:00</updated>
+   <updated>2015-11-15T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/node.js/2015/11/15/multi-room-chat-application</id>
    <content type="html">Node.js ve socket.io kullanarak çok odalı, çok kullanıcılı realtime chat uygulaması yapıyoruz. Üstelik geliştirme araçlarından (grunt.js) da faydalanarak. MongoDB ve Redis veritabanlarını kullanarak NoSQL'e de giriş yapacağız. Javascript'in yeni versiyonu ES6'dan en önemli yeni özellik Promise'leri de sık sık projede kullanacağız. Express.js kullanarak çok basit middleware'ler nasıl yazılır ve Facebook gibi siteye login nasıl eklenir hepsini bu proje dizisinde göreceğiz.</content>
  </entry>
@@ -40,7 +40,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
  <entry>
    <title>Vagrant</title>
    <link href="http://dhalsim.github.io/virtual-machines/2015/11/14/vagrant"/>
-   <updated>2015-11-14T00:00:00+02:00</updated>
+   <updated>2015-11-14T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/virtual-machines/2015/11/14/vagrant</id>
    <content type="html">Vagrant bir sanal makine yöneticisi. Bilgisayarınızdaki sanal makinelerin oluşturulmasından kurulumuna, çalıştırılmasına ve izlenmesine yönelik kolaylıklar sunuyor. Peki bu bizim gerçek hayatta ne işimize yarayacak?</content>
  </entry>
@@ -48,7 +48,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
  <entry>
    <title>Yazılım Geliştirme Modelleri</title>
    <link href="http://dhalsim.github.io/software/2015/11/14/software-development-processes"/>
-   <updated>2015-11-14T00:00:00+02:00</updated>
+   <updated>2015-11-14T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/software/2015/11/14/software-development-processes</id>
    <content type="html">Her yazılımcının bilmesi gereken yazılım geliştirme süreçlerine değineceğiz. Yazılım geliştirme modellerinin en çok kullanılanlarının avantaj ve dezavantajlarını görüp XP ve agile prensiplerine değineceğiz.</content>
  </entry>
@@ -56,7 +56,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
  <entry>
    <title>.Net Memory Yönetimi ve Memory Leaks</title>
    <link href="http://dhalsim.github.io/.net/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks"/>
-   <updated>2015-11-14T00:00:00+02:00</updated>
+   <updated>2015-11-14T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/.net/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks</id>
    <content type="html">Bu yazıda .NET memory yönetimi nasıl çalışır onu öğreneceğiz böylece uygulamarımızı hafıza açısından daha bilinçli geliştirebileceğiz.</content>
  </entry>
@@ -64,7 +64,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
  <entry>
    <title>ES6</title>
    <link href="http://dhalsim.github.io/javascript/2015/11/14/es6"/>
-   <updated>2015-11-14T00:00:00+02:00</updated>
+   <updated>2015-11-14T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/javascript/2015/11/14/es6</id>
    <content type="html">&lt;p&gt;Selamlar. Bu yazıda javascript&amp;#39;in gelecek nesil versiyonundan bahsedeceğim: EcmaScript 6 veya EcmaScript 2015. Kullanacağım teknoloji &lt;a href=&quot;https://babeljs.io&quot;&gt;babel js&lt;/a&gt; olacak.&lt;/p&gt;
 
@@ -79,7 +79,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
  <entry>
    <title>Broken Authentication and Session Management</title>
    <link href="http://dhalsim.github.io/.net/security/2015/11/14/broken-authentication-and-session-management"/>
-   <updated>2015-11-14T00:00:00+02:00</updated>
+   <updated>2015-11-14T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/.net/security/2015/11/14/broken-authentication-and-session-management</id>
    <content type="html">ASP.NET uygulamalarında session management ile ilgili öneriler.</content>
  </entry>
@@ -87,7 +87,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
  <entry>
    <title>Node.js Hata Yönetimi ve Loglama</title>
    <link href="http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama"/>
-   <updated>2015-11-13T00:00:00+02:00</updated>
+   <updated>2015-11-13T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama</id>
    <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
   Bu makale &lt;strong&gt;2&lt;/strong&gt; bölümlük &lt;strong&gt;Kontrol Bende&lt;/strong&gt; serisinin &lt;strong&gt;2.&lt;/strong&gt; bölümüdür.&lt;/p&gt;
@@ -154,7 +154,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
  <entry>
    <title>Debugging Node.js</title>
    <link href="http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/debugging-nodejs"/>
-   <updated>2015-11-13T00:00:00+02:00</updated>
+   <updated>2015-11-13T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/debugging-nodejs</id>
    <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
   Bu makale &lt;strong&gt;2&lt;/strong&gt; bölümlük &lt;strong&gt;Kontrol Bende&lt;/strong&gt; serisinin &lt;strong&gt;1.&lt;/strong&gt; bölümüdür.&lt;/p&gt;

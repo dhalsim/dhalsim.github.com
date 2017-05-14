@@ -4,7 +4,7 @@ title: "Javascript Linting with ESLint"
 description: "In this article I'm going to explain what linting is, and why I am doing that and how to do it"
 toc: true
 category: ["javascript"]
-tags: ["ESLint", "Babel", "React"]
+tags: ["javascript", "ESLint", "Babel", "React"]
 excerpt: "Scripting languages like Javascript have no compiler to pre-check some rules and errors, so everything will be come out when the code runs (runtime). Even the smallest mistakes like forgetting a semicolon on a certain case, leads to tremendous bugs that may require hours of debugging and cause pain"
 image: "/assets/images/eslint-logo.png"
 ---

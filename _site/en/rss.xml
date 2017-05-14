@@ -5,17 +5,25 @@
         <description>Dhalsim's - Barış Aydek</description>
         <link>http://dhalsim.github.io/en</link>
         <atom:link href="http://dhalsim.github.io/en/rss.xml" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Sat, 21 Jan 2017 22:00:19 +0200</lastBuildDate>
-        <pubDate>Sat, 21 Jan 2017 22:00:19 +0200</pubDate>
+        <lastBuildDate>Sun, 14 May 2017 22:13:26 +0200</lastBuildDate>
+        <pubDate>Sun, 14 May 2017 22:13:26 +0200</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>Scala by code and comments 1 to 5</title>
+                <description>Some problems in scala and my notes as comments, part 1</description>
+                <link>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-one-to-five</link>
+                <guid>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-one-to-five</guid>
+                <pubDate>Sun, 14 May 2017 00:00:00 +0200</pubDate>
+        </item>
 
         <item>
                 <title>Jenkins NUnit Integration with Test and Coverage Reports</title>
                 <description>Create unit test and coverage reports automatically when your build runs on Jenkins with NUnit and other various tools.</description>
                 <link>http://dhalsim.github.io/en/build/tooling/2016/12/27/jenkins-nunit-integration</link>
                 <guid>http://dhalsim.github.io/en/build/tooling/2016/12/27/jenkins-nunit-integration</guid>
-                <pubDate>Tue, 27 Dec 2016 00:00:00 +0200</pubDate>
+                <pubDate>Tue, 27 Dec 2016 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -23,7 +31,7 @@
                 <description>Liskov's Substitution prinsiple as seen in SOLID principles is an important aspect of polymorphism. I tried to fully understand this concept by using variance techniques.</description>
                 <link>http://dhalsim.github.io/en/scala/2016/12/15/subtyping-and-variance</link>
                 <guid>http://dhalsim.github.io/en/scala/2016/12/15/subtyping-and-variance</guid>
-                <pubDate>Thu, 15 Dec 2016 00:00:00 +0200</pubDate>
+                <pubDate>Thu, 15 Dec 2016 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -31,7 +39,7 @@
                 <description>This is another build tool (task runner) like grunt or gulp but mostly a module bundler like browserify and also can be used with a transpiler like babel (to be able to use ES6 javascript feautures from the future!) or typescript</description>
                 <link>http://dhalsim.github.io/en/javascript/build/tooling/2016/12/03/webpack</link>
                 <guid>http://dhalsim.github.io/en/javascript/build/tooling/2016/12/03/webpack</guid>
-                <pubDate>Sat, 03 Dec 2016 00:00:00 +0200</pubDate>
+                <pubDate>Sat, 03 Dec 2016 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -39,7 +47,7 @@
                 <description>Every day a new technology, a new buzzword arises, and we are unable to catch the stream day by day. This leads to frustration, but at the end it leads to refusing to learn or conceiving new ideas altogether ... The last solution is this course, and I wanted to learn quickly as possible, so I attended Learning How To Learn By Dr. Barbara Oakley &amp; Dr. Terrence Sejnowski.</description>
                 <link>http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn</link>
                 <guid>http://dhalsim.github.io/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn</guid>
-                <pubDate>Mon, 25 Apr 2016 00:00:00 +0300</pubDate>
+                <pubDate>Mon, 25 Apr 2016 00:00:00 +0200</pubDate>
         </item>
 
         <item>
@@ -47,7 +55,7 @@
                 <description>Scripting languages like Javascript have no compiler to pre-check some rules and errors, so everything will be come out when the code runs (runtime). Even the smallest mistakes like forgetting a semicolon on a certain case, leads to tremendous bugs that may require hours of debugging and cause pain</description>
                 <link>http://dhalsim.github.io/en/javascript/2016/01/24/javascript-linting</link>
                 <guid>http://dhalsim.github.io/en/javascript/2016/01/24/javascript-linting</guid>
-                <pubDate>Sun, 24 Jan 2016 00:00:00 +0200</pubDate>
+                <pubDate>Sun, 24 Jan 2016 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -55,7 +63,7 @@
                 <description>Vagrant is a virtual machine manager. It makes easy for creating, running and monitoring of VM's on your host machines. But what real benefits we can get from it?</description>
                 <link>http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant</link>
                 <guid>http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant</guid>
-                <pubDate>Sat, 14 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Sat, 14 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -105,6 +113,8 @@
     
     
     
+    
+    
     &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -118,7 +128,7 @@
 </description>
                 <link>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging</link>
                 <guid>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging</guid>
-                <pubDate>Fri, 13 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Fri, 13 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -168,6 +178,8 @@
     
     
     
+    
+    
     &lt;/ul&gt;
 &lt;/div&gt;
 
@@ -177,7 +189,7 @@
 </description>
                 <link>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs</link>
                 <guid>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs</guid>
-                <pubDate>Fri, 13 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Fri, 13 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
 

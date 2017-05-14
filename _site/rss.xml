@@ -5,8 +5,8 @@
         <description>Dhalsim's - Barış Aydek</description>
         <link>http://dhalsim.github.io</link>
         <atom:link href="http://dhalsim.github.io/rss.xml" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Sat, 21 Jan 2017 22:00:18 +0200</lastBuildDate>
-        <pubDate>Sat, 21 Jan 2017 22:00:18 +0200</pubDate>
+        <lastBuildDate>Sun, 14 May 2017 22:13:25 +0200</lastBuildDate>
+        <pubDate>Sun, 14 May 2017 22:13:25 +0200</pubDate>
         <ttl>60</ttl>
 
 
@@ -15,7 +15,7 @@
                 <description>Javascript öyle garip bir dil ki çoğu insan dilin en temel özelliklerini bilmeden onu kullanabilir. Çoğu zaman da öğrenmemiz gerekmez ancak bunları öğrenmeden de çok fazla ileri gidemeyiz. Bu yazıda javascript'in çok görünen ama bilinmeyen temellerine iniyoruz..</description>
                 <link>http://dhalsim.github.io/javascript/2015/12/18/temel-javascript</link>
                 <guid>http://dhalsim.github.io/javascript/2015/12/18/temel-javascript</guid>
-                <pubDate>Fri, 18 Dec 2015 00:00:00 +0200</pubDate>
+                <pubDate>Fri, 18 Dec 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -24,7 +24,7 @@
 Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çalışan yazılımın neden önemli olduğunun sebeplerine bakalım. Aşağıda önemli yazılım hatalarının tarihte sebep olduğu olaylar listeleniyor.</description>
                 <link>http://dhalsim.github.io/software/2015/11/15/software-testing</link>
                 <guid>http://dhalsim.github.io/software/2015/11/15/software-testing</guid>
-                <pubDate>Sun, 15 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Sun, 15 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -32,7 +32,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
                 <description>Node.js ve socket.io kullanarak çok odalı, çok kullanıcılı realtime chat uygulaması yapıyoruz. Üstelik geliştirme araçlarından (grunt.js) da faydalanarak. MongoDB ve Redis veritabanlarını kullanarak NoSQL'e de giriş yapacağız. Javascript'in yeni versiyonu ES6'dan en önemli yeni özellik Promise'leri de sık sık projede kullanacağız. Express.js kullanarak çok basit middleware'ler nasıl yazılır ve Facebook gibi siteye login nasıl eklenir hepsini bu proje dizisinde göreceğiz.</description>
                 <link>http://dhalsim.github.io/node.js/2015/11/15/multi-room-chat-application</link>
                 <guid>http://dhalsim.github.io/node.js/2015/11/15/multi-room-chat-application</guid>
-                <pubDate>Sun, 15 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Sun, 15 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -40,7 +40,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
                 <description>Vagrant bir sanal makine yöneticisi. Bilgisayarınızdaki sanal makinelerin oluşturulmasından kurulumuna, çalıştırılmasına ve izlenmesine yönelik kolaylıklar sunuyor. Peki bu bizim gerçek hayatta ne işimize yarayacak?</description>
                 <link>http://dhalsim.github.io/virtual-machines/2015/11/14/vagrant</link>
                 <guid>http://dhalsim.github.io/virtual-machines/2015/11/14/vagrant</guid>
-                <pubDate>Sat, 14 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Sat, 14 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -48,7 +48,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
                 <description>Her yazılımcının bilmesi gereken yazılım geliştirme süreçlerine değineceğiz. Yazılım geliştirme modellerinin en çok kullanılanlarının avantaj ve dezavantajlarını görüp XP ve agile prensiplerine değineceğiz.</description>
                 <link>http://dhalsim.github.io/software/2015/11/14/software-development-processes</link>
                 <guid>http://dhalsim.github.io/software/2015/11/14/software-development-processes</guid>
-                <pubDate>Sat, 14 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Sat, 14 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -56,7 +56,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
                 <description>Bu yazıda .NET memory yönetimi nasıl çalışır onu öğreneceğiz böylece uygulamarımızı hafıza açısından daha bilinçli geliştirebileceğiz.</description>
                 <link>http://dhalsim.github.io/.net/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks</link>
                 <guid>http://dhalsim.github.io/.net/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks</guid>
-                <pubDate>Sat, 14 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Sat, 14 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -71,7 +71,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
 </description>
                 <link>http://dhalsim.github.io/javascript/2015/11/14/es6</link>
                 <guid>http://dhalsim.github.io/javascript/2015/11/14/es6</guid>
-                <pubDate>Sat, 14 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Sat, 14 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -79,7 +79,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
                 <description>ASP.NET uygulamalarında session management ile ilgili öneriler.</description>
                 <link>http://dhalsim.github.io/.net/security/2015/11/14/broken-authentication-and-session-management</link>
                 <guid>http://dhalsim.github.io/.net/security/2015/11/14/broken-authentication-and-session-management</guid>
-                <pubDate>Sat, 14 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Sat, 14 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -146,7 +146,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
 </description>
                 <link>http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama</link>
                 <guid>http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama</guid>
-                <pubDate>Fri, 13 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Fri, 13 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
         <item>
@@ -209,7 +209,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
 </description>
                 <link>http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/debugging-nodejs</link>
                 <guid>http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/debugging-nodejs</guid>
-                <pubDate>Fri, 13 Nov 2015 00:00:00 +0200</pubDate>
+                <pubDate>Fri, 13 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
 

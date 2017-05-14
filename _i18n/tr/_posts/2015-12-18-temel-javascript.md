@@ -4,7 +4,7 @@ title: "Temel Javascript"
 description: "Bu sayfada javascript'te bilinmesi gerekli ama çoğu zaman ayrıntılı bilgi sahibi olunmayan temel konular hakkında yazıyorum."
 toc: true
 category: ["javascript"]
-tags: ["this", "new", "property", "prototype", "call", "apply", "bind"]
+tags: ["javascript", "this", "new", "property", "prototype", "call", "apply", "bind"]
 excerpt: "Javascript öyle garip bir dil ki çoğu insan dilin en temel özelliklerini bilmeden onu kullanabilir. Çoğu zaman da öğrenmemiz gerekmez ancak bunları öğrenmeden de çok fazla ileri gidemeyiz. Bu yazıda javascript'in çok görünen ama bilinmeyen temellerine iniyoruz.."
 image: "/assets/images/js.jpg"
 ---
@@ -91,7 +91,7 @@ var myObj = Object.create(null, {name: { value: "Barış" }});
 console.log(myObj);
 var myObj2 = { name: "Barış" };
 // ya da:
-// var myObj2 = Object.create({ name: "Barış" }); 
+// var myObj2 = Object.create({ name: "Barış" });
 console.log(myObj2);
 
 console.log(myObj instanceof(Object));
@@ -103,8 +103,8 @@ console.log(myObj2 instanceof(Object));
 create metodunun ilk parametresini `null` vererek aslında Object'ten türememesi sağladık. Bunun tabii ki ilginç sonuçları var. Bir nesne Object'ten türemediğinde mesela şunu yapamıyoruz:
 
 ~~~js
-for(var x in myObj) { 
-   console.log(x); 
+for(var x in myObj) {
+   console.log(x);
 }
 ~~~
 
@@ -195,16 +195,16 @@ var testFunc = function(arg1, arg2, arg3) {
 };
 
 loggerFunc = function(originalFunc) {
-	return function() {	
+	return function() {
 		// fonksiyon parametrelerini yazdır
 	  console.log(arguments);
-	  
+
 		// orijinal fonksiyonu çalıştır
 	  var result = originalFunc.apply(this, arguments);
-	  
+
 		// sonucu yazdır
 		console.log(result);
-		
+
 		// sonucu döndür
 		return result;
 	};
@@ -238,4 +238,3 @@ Gördüğünüz gibi **this** yerine **results** objesini geçirdim, böylece ar
 > Eğer eski tarayıcı sürümlerine bağımlılığınız varsa (müşterilerinizin bir kısmı IE 7/8 kullanıyor olabilir, şu siteden kullanacağınız özelliği kontrol etmekte ve gerektiği durumlarda polyfill kullanmakta yarar var. <http://kangax.github.io/compat-table/es5/> (Show obselete browsers seçeneğini seçin)
 
 > Denk geldikçe bu yazıya javascript'le ilgili bilinmesi gereken temel konuları ekleyeceğim.
-
