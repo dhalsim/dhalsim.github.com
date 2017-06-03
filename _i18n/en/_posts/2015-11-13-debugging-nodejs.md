@@ -10,11 +10,6 @@ series_category: "i-have-control"
 series_no: 1
 image: "https://nodejs.org/static/images/logos/nodejs.png"
 ---
-{% include JB/setup %}
-
-{% include series.html %}
-
-<br />
 
 We got a node.js application here and we've got source codes, but we can't figure it out the problems and bugs occur. We need to examine those, but how? Debugging comes into play.
 
@@ -117,6 +112,3 @@ We forwarded all needed port to our machine but we need to re-open VM if it is a
 * Open on your own machine the given URL. (It will be <http://127.0.0.1:8080/debug?port=5858> if you didn't change any settings.)
 
 Thats all folks! See you another time.
-
-{% include series.html %}
-<br />

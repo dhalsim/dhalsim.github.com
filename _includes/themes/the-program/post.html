@@ -17,7 +17,20 @@
 
 			<div class="bd">
 				<div class="entry-content">
+					{% if page.series }
+					{% include JB/setup %}
+					{% include series.html %}
+					{% endif %}
+
 					{{ content }}
+
+          <hr />
+					{% if page.series }
+					{% include JB/setup %}
+					{% include series.html %}
+					<hr />
+				  {% endif %}
+
 					<div class="meta">
 						<p class="date-publish">
 							Published:
@@ -52,17 +65,19 @@
 				</div><!-- misc-content -->
 			</div><!-- bd -->
 			<footer class="unit-foot">
+
+
 				<div class="unit-inner unit-foot-inner">
 					<nav class="pagination">
 						<ul>
 							{% if page.previous %}
-							<li class="prev"><a class="internal" rel="prev"  href="{{ page.previous.url }}" title="View {{ page.previous.title }}">&laquo; {{ page.previous.title }}</a></li>
+							<li class="prev"><a class="internal" rel="prev"  href="{% if site.lang != "tr" %}/{{ site.lang }}{% endif %}{{ page.previous.url }}" title="View {{ page.previous.title }}">&laquo; {{ page.previous.title }}</a></li>
 							{% endif %}
 							{% if page.previous and page.next %}
 							<li class="pipe"> | </li>
 							{% endif %}
 							{% if page.next %}
-							<li class="next"><a class="internal" rel="next"  href="{{ page.next.url }}" title="View {{ page.next.title }}">{{ page.next.title }} &raquo;</a></li>
+							<li class="next"><a class="internal" rel="next"  href="{% if site.lang != "tr" %}/{{ site.lang }}{% endif %}{{ page.next.url }}" title="View {{ page.next.title }}">{{ page.next.title }} &raquo;</a></li>
 							{% endif %}
 						</ul>
 					</nav>

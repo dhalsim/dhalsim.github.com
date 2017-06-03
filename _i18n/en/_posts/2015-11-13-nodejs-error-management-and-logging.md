@@ -10,10 +10,6 @@ series_category: "i-have-control"
 series_no: 2
 image: "/assets/images/nodejs.png"
 ---
-{% include JB/setup %}
-
-{% include series.html %}
-<br />
 
 Hello, that's the new article for **I Have Control** series.
 
@@ -308,6 +304,3 @@ process.on('uncaughtException', logger.logAndCrash);
 # Result
 
 We proceed pretty much on error management and logging. Next article will be about logging in scaled systems. I'll write about how we log and gather these scaled node.js applications.
-
-{% include series.html %}
-<br />

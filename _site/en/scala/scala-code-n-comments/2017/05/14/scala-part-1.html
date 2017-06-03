@@ -8,7 +8,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width,initial-scale=1">
-	<title>Scala by code and comments 1 to 5</title>
+	<title>Scala by code and comments - Part 1</title>
 	<meta name="author" content="Barış Aydek">
 
 	<!-- for Google -->
@@ -20,19 +20,28 @@
 	<meta name="application-name" content="Dhalsim's" />
 
 	<!-- for Facebook -->
-	<meta property="og:title" content="Scala by code and comments 1 to 5" />
+	<meta property="og:title" content="Scala by code and comments - Part 1" />
 	<meta property="og:type" content="article" />
 	<meta property="og:image" content="http://dhalsim.github.io/assets/images/scala-logo.png" />
-	<meta property="og:url" content="http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-one-to-five" />
+	<meta property="og:url" content="http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-part-1" />
 	<meta property="og:description" content="Some problems in scala and my notes as comments" />
 
 	<!-- for Twitter -->
 	<meta name="twitter:card" content="summary_large_image" />
-	<meta name="twitter:title" content="Scala by code and comments 1 to 5" />
+	<meta name="twitter:title" content="Scala by code and comments - Part 1" />
 	<meta name="twitter:description" content="Some problems in scala and my notes as comments" />
 	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/scala-logo.png" />
 	<meta name="twitter:creator" content="@">
 
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
   <style>
 	  @font-face {
 			font-family: 'Allerta';
@@ -66,7 +75,7 @@
 	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
 	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
 	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
-	<link href="http://feeds.feedburner.com/" rel="alternate" title="Scala by code and comments 1 to 5" type="application/atom+xml">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Scala by code and comments - Part 1" type="application/atom+xml">
 	
 	<style media="screen">
 	.cd-top {
@@ -158,6 +167,10 @@
 							<a href="/" ><img src="/assets/blank.gif" class="flag flag-tr" alt="Turkish" /> </a><a href="/" class="alink">Turkish</a>
 						
 					</nav>
+
+					<hr />
+
+					<div> <a href="/en/rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/en/atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
 				</nav>
 			</div><!-- unit-inner -->
 		</div><!-- unit-head -->
@@ -174,7 +187,7 @@
 			<header>
 				<div class="unit-head">
 					<div class="unit-inner unit-head-inner">
-						<h1 class="h2 entry-title">Scala by code and comments 1 to 5</h1>
+						<h1 class="h2 entry-title">Scala by code and comments - Part 1</h1>
 					</div><!-- unit-inner -->
 				</div><!-- unit-head -->
 				
@@ -182,9 +195,104 @@
 
 			<div class="bd">
 				<div class="entry-content">
+					
+					
+
+
+
+
+<div class="seriesNote">
+  This article is <strong>part 1</strong> of a <strong>4-part</strong> series called <strong>Scala code and comments</strong></p>
+	<ul>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 1 -
+		
+    Scala by code and comments - Part 1
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 2 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/14/scala-part-2">
+		
+    Scala by code and comments - Part 2
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 3 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/20/scala-part-3">
+		
+    Scala by code and comments - Part 3
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 4 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/21/scala-part-4">
+		
+    Scala by code and comments - Part 4
+    
+      </a>
+    
+		</li>
+	
+	
+	</ul>
+</div>
+
+
+
+
+					
+
 					<h1>Preface</h1>
 
-<p>Best way to learn a new language is to code it. I&#39;ve found this helpful blog <a href="http://blog.thedigitalcatonline.com/blog/2015/04/07/99-scala-problems-01-find-last-element/#.WRi34FN95E4">The digital cat</a> that has 20 scala problems and solutions (not 99 despite the title). So I decided to look at them. But like always, I had some different methods and notes, too.</p>
+<p>Best way to learn a new language is to code it. I&#39;ve found this helpful blog <a href="http://blog.thedigitalcatonline.com/blog/2015/04/07/99-scala-problems-01-find-last-element/#.WRi34FN95E4">The digital cat</a> that has 20 scala problems and solutions (not 99 despite the title) and from what I saw, he got them from this <a href="http://aperiodic.net/phil/scala/s-99/">blog</a> and it also influenced from another list for <a href="https://sites.google.com/site/prologsite/prolog-problems">prolog</a>! So I decided to look at them. But like always, I had some different methods and notes, too.</p>
 
 <p>So I decided to share them here. I choose a different style here. Since it is already explained in the original blog, I just wanted to share my codes (and tests) with my comments. I want to try this style and see what happens. At the end of the file you can see my <strong>WHAT I LEARNED?</strong> part which you can find some interesting facts and sources about the theme.</p>
 
@@ -349,6 +457,111 @@
 <span class="lineno"> 99</span> <span class="cm">  */</span>
 <span class="lineno">100</span> <span class="o">}</span>
 </code></pre></div>
+<h2>Wanna try?</h2>
+
+<p>You can clone my git repository and run tests with <a href="http://www.scala-sbt.org/0.13/docs/Setup.html">sbt</a>.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> git clone https://github.com/dhalsim/scala-exercises.git
+<span class="lineno">2</span> cd scala-exercises
+<span class="lineno">3</span> sbt test
+</code></pre></div>
+
+          <hr />
+					
+					
+
+
+
+
+<div class="seriesNote">
+  This article is <strong>part 1</strong> of a <strong>4-part</strong> series called <strong>Scala code and comments</strong></p>
+	<ul>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 1 -
+		
+    Scala by code and comments - Part 1
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 2 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/14/scala-part-2">
+		
+    Scala by code and comments - Part 2
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 3 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/20/scala-part-3">
+		
+    Scala by code and comments - Part 3
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 4 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/21/scala-part-4">
+		
+    Scala by code and comments - Part 4
+    
+      </a>
+    
+		</li>
+	
+	
+	</ul>
+</div>
+
+
+
+
+					<hr />
+				  
+
 					<div class="meta">
 						<p class="date-publish">
 							Published:
@@ -367,11 +580,11 @@
   
     
     	<li><a href="/en/categories.html#scala-ref">
-    		scala <span>2</span>
+    		scala <span>5</span>
     	</a></li>
     
     	<li><a href="/en/categories.html#scala-code-n-comments-ref">
-    		scala-code-n-comments <span>1</span>
+    		scala-code-n-comments <span>4</span>
     	</a></li>
     
   
@@ -387,11 +600,11 @@
 
   
     
-    	<li><a href="/en/tags.html#scala-ref">scala <span>2</span></a></li>
+    	<li><a href="/en/tags.html#scala-ref">scala <span>5</span></a></li>
     
-    	<li><a href="/en/tags.html#recursive-ref">recursive <span>1</span></a></li>
+    	<li><a href="/en/tags.html#recursive-ref">recursive <span>4</span></a></li>
     
-    	<li><a href="/en/tags.html#algorithms-ref">algorithms <span>1</span></a></li>
+    	<li><a href="/en/tags.html#algorithms-ref">algorithms <span>4</span></a></li>
     
   
 
@@ -421,12 +634,12 @@
     /* * * DON'T EDIT BELOW THIS LINE * * */
     (function() {
         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
     })();
 </script>
-<noscript>Please enable JavaScript to view the <a href="http://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
-<a href="http://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
 
 
 
@@ -435,13 +648,19 @@
 				</div><!-- misc-content -->
 			</div><!-- bd -->
 			<footer class="unit-foot">
+
+
 				<div class="unit-inner unit-foot-inner">
 					<nav class="pagination">
 						<ul>
 							
-							<li class="prev"><a class="internal" rel="prev"  href="/build/tooling/2016/12/27/jenkins-nunit-integration" title="View Jenkins NUnit Integration with Test and Coverage Reports">&laquo; Jenkins NUnit Integration with Test and Coverage Reports</a></li>
+							<li class="prev"><a class="internal" rel="prev"  href="/en/build/tooling/2016/12/27/jenkins-nunit-integration" title="View Jenkins NUnit Integration with Test and Coverage Reports">&laquo; Jenkins NUnit Integration with Test and Coverage Reports</a></li>
 							
 							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/en/scala/scala-code-n-comments/2017/05/14/scala-part-2" title="View Scala by code and comments - Part 2">Scala by code and comments - Part 2 &raquo;</a></li>
 							
 						</ul>
 					</nav>
@@ -492,7 +711,7 @@
 		};
 	load('//platform.twitter.com/widgets.js', 'tweetjs');
 	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
-	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/scala/scala-code-n-comments/2017/05/14/scala-one-to-five" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/scala/scala-code-n-comments/2017/05/14/scala-part-1" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
 	}(document, 'script'));
 </script>
 <script>

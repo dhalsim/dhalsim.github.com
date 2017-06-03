@@ -10,10 +10,6 @@ series_category: "kontrol-bende"
 series_no: 2
 image: "/assets/images/nodejs.png"
 ---
-{% include JB/setup %}
-
-{% include series.html %}
-<br />
 
 Merhaba, **"Kontrol Bende"** serisine yeni bir konu daha ekliyoruz.
 
@@ -310,7 +306,3 @@ process.on('uncaughtException', logger.logAndCrash);
 # Sonuç
 
 Hata yönetimi ve loglamayla ilgili epey mesafe katettik. Sonraki yazım ölçeklenebilir loglama üzerine olacak. Node.js scaled yapıdaki sistemlerde nasıl loglarız, bu logları nasıl toplarız ve değerlendiririz konusunda yazacağım.
-
-<br />
-{% include series.html %}
-<br />

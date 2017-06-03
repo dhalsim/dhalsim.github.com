@@ -31,6 +31,15 @@
 	<meta name="twitter:image" content="http://dhalsim.github.io{{ page.image }}" />
 	<meta name="twitter:creator" content="@{{ site.author.twitter }}">
 
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
   <style>
 	  @font-face {
 			font-family: 'Allerta';
@@ -176,6 +185,10 @@
 							<img src="/assets/blank.gif" class="flag flag-tr" alt="{% t langs.turkish %}" /> {% t langs.turkish %}
 						{% endif %}
 					</nav>
+
+					<hr />
+
+					<div> <a href="/{% if site.lang != "tr" %}{{site.lang}}/{%endif%}rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/{% if site.lang != "tr" %}{{site.lang}}/{%endif%}atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
 				</nav>
 			</div><!-- unit-inner -->
 		</div><!-- unit-head -->

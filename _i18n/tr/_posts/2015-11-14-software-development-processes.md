@@ -11,10 +11,6 @@ series_category: "software"
 series_no: 1
 image: "/assets/images/gears-process.jpg"
 ---
-{% include JB/setup %}
-
-{% include series.html %}
-
 > NOT: Bu metotlar tek başlarına iyi, kötü, çöp şeklinde sınıflandırılmamalıdır. Burada yazılmayan daha birçok model vardır. Seçilecek model, projenin tipine, boyutuna vs. bağlı olarak değişebilir, ya da hibrit çözümlere gidilebilir. Dezavantajlı kısımlar farkında olunduğunda üstesinden gelinebilir.
 
 # Geleneksel (waterfall) model
@@ -269,7 +265,3 @@ Kaynaklar:
 * <http://c2.com/cgi/wiki?PlanningGame>
 * <https://en.wikipedia.org/wiki/Extreme_programming_practices>
 * <http://ronjeffries.com/xprog/what-is-extreme-programming>
-
-<br />
-{% include series.html %}
-<br />

@@ -238,7 +238,7 @@ https://www.youtube.com/watch?v=ZhuHCtR3xq8
 
 ## CSP
 
-* RxJS
+* RxJS <https://egghead.io/lessons/rxjs-understand-reactive-programming-using-rxjs>
 * <https://www.youtube.com/watch?v=W2DgDNQZOwo>
 
 ## Functional programming definition

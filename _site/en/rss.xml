@@ -5,16 +5,40 @@
         <description>Dhalsim's - Barış Aydek</description>
         <link>http://dhalsim.github.io/en</link>
         <atom:link href="http://dhalsim.github.io/en/rss.xml" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Sun, 14 May 2017 22:13:26 +0200</lastBuildDate>
-        <pubDate>Sun, 14 May 2017 22:13:26 +0200</pubDate>
+        <lastBuildDate>Sun, 21 May 2017 22:24:18 +0200</lastBuildDate>
+        <pubDate>Sun, 21 May 2017 22:24:18 +0200</pubDate>
         <ttl>60</ttl>
 
 
         <item>
-                <title>Scala by code and comments 1 to 5</title>
+                <title>Scala by code and comments - Part 4</title>
+                <description>Some problems in scala and my notes as comments, part 4</description>
+                <link>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/21/scala-part-4</link>
+                <guid>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/21/scala-part-4</guid>
+                <pubDate>Sun, 21 May 2017 00:00:00 +0200</pubDate>
+        </item>
+
+        <item>
+                <title>Scala by code and comments - Part 3</title>
+                <description>Some problems in scala and my notes as comments, part 3</description>
+                <link>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/20/scala-part-3</link>
+                <guid>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/20/scala-part-3</guid>
+                <pubDate>Sat, 20 May 2017 00:00:00 +0200</pubDate>
+        </item>
+
+        <item>
+                <title>Scala by code and comments - Part 2</title>
+                <description>Some problems in scala and my notes as comments, part 2</description>
+                <link>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-part-2</link>
+                <guid>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-part-2</guid>
+                <pubDate>Sun, 14 May 2017 00:00:00 +0200</pubDate>
+        </item>
+
+        <item>
+                <title>Scala by code and comments - Part 1</title>
                 <description>Some problems in scala and my notes as comments, part 1</description>
-                <link>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-one-to-five</link>
-                <guid>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-one-to-five</guid>
+                <link>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-part-1</link>
+                <guid>http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-part-1</guid>
                 <pubDate>Sun, 14 May 2017 00:00:00 +0200</pubDate>
         </item>
 
@@ -68,59 +92,7 @@
 
         <item>
                 <title>Node.js Error Management and Logging</title>
-                <description>&lt;div class=&quot;seriesNote&quot;&gt;
-  This article is &lt;strong&gt;part 2&lt;/strong&gt; of a &lt;strong&gt;2-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
-    &lt;ul&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 1 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/debugging-nodejs&quot;&gt;
-        
-    Debugging Node.js
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 2 -
-        
-    Node.js Error Management and Logging
-    
-        &lt;/li&gt;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Hello, that&amp;#39;s the new article for &lt;strong&gt;I Have Control&lt;/strong&gt; series.&lt;/p&gt;
+                <description>&lt;p&gt;Hello, that&amp;#39;s the new article for &lt;strong&gt;I Have Control&lt;/strong&gt; series.&lt;/p&gt;
 
 &lt;p&gt;Before this one, I wrote about &lt;a href=&quot;/en/node.js/2015/11/13/debugging-nodejs/&quot;&gt;Node.js Debugging&lt;/a&gt; and now in this part, we&amp;#39;re going to dive into the &lt;em&gt;essential&lt;/em&gt; &lt;strong&gt;logging&lt;/strong&gt;.&lt;/p&gt;
 
@@ -133,59 +105,7 @@
 
         <item>
                 <title>Debugging Node.js</title>
-                <description>&lt;div class=&quot;seriesNote&quot;&gt;
-  This article is &lt;strong&gt;part 1&lt;/strong&gt; of a &lt;strong&gt;2-part&lt;/strong&gt; series called &lt;strong&gt;I Have Control&lt;/strong&gt;&lt;/p&gt;
-    &lt;ul&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 1 -
-        
-    Debugging Node.js
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 2 -
-        
-            &lt;a href=&quot;/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging&quot;&gt;
-        
-    Node.js Error Management and Logging
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;We got a node.js application here and we&amp;#39;ve got source codes, but we can&amp;#39;t figure it out the problems and bugs occur. We need to examine those, but how? Debugging comes into play.&lt;/p&gt;
+                <description>&lt;p&gt;We got a node.js application here and we&amp;#39;ve got source codes, but we can&amp;#39;t figure it out the problems and bugs occur. We need to examine those, but how? Debugging comes into play.&lt;/p&gt;
 </description>
                 <link>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs</link>
                 <guid>http://dhalsim.github.io/en/node.js/i-have-control/2015/11/13/debugging-nodejs</guid>

@@ -4,7 +4,7 @@
  <title>Dhalsim's</title>
  <link href="http://dhalsim.github.io/atom.xml" rel="self"/>
  <link href="http://dhalsim.github.io"/>
- <updated>2017-05-14T22:13:25+02:00</updated>
+ <updated>2017-05-21T22:24:16+02:00</updated>
  <id>http://dhalsim.github.io</id>
  <author>
    <name>Barış Aydek</name>
@@ -89,61 +89,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
    <link href="http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama"/>
    <updated>2015-11-13T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama</id>
-   <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
-  Bu makale &lt;strong&gt;2&lt;/strong&gt; bölümlük &lt;strong&gt;Kontrol Bende&lt;/strong&gt; serisinin &lt;strong&gt;2.&lt;/strong&gt; bölümüdür.&lt;/p&gt;
-    &lt;ul&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 1 -
-        
-            &lt;a href=&quot;/node.js/kontrol-bende/2015/11/13/debugging-nodejs&quot;&gt;
-        
-    Debugging Node.js
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 2 -
-        
-    Node.js Hata Yönetimi ve Loglama
-    
-        &lt;/li&gt;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Merhaba, &lt;strong&gt;&amp;quot;Kontrol Bende&amp;quot;&lt;/strong&gt; serisine yeni bir konu daha ekliyoruz.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Merhaba, &lt;strong&gt;&amp;quot;Kontrol Bende&amp;quot;&lt;/strong&gt; serisine yeni bir konu daha ekliyoruz.&lt;/p&gt;
 
 &lt;p&gt;Bundan önce &lt;a href=&quot;/node.js/2015/11/13/debugging-nodejs/&quot;&gt;Node.js Debugging&lt;/a&gt; konusunu işlemiştik. Şimdi ise hem debugging&amp;#39;te hem de production&amp;#39;da olmazsa olmaz &lt;strong&gt;loglama&lt;/strong&gt; konusuna dalıyoruz.&lt;/p&gt;
 
@@ -156,61 +102,7 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
    <link href="http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/debugging-nodejs"/>
    <updated>2015-11-13T00:00:00+01:00</updated>
    <id>http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/debugging-nodejs</id>
-   <content type="html">&lt;div class=&quot;seriesNote&quot;&gt;
-  Bu makale &lt;strong&gt;2&lt;/strong&gt; bölümlük &lt;strong&gt;Kontrol Bende&lt;/strong&gt; serisinin &lt;strong&gt;1.&lt;/strong&gt; bölümüdür.&lt;/p&gt;
-    &lt;ul&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;selected&quot;&gt;Part 1 -
-        
-    Debugging Node.js
-    
-        &lt;/li&gt;
-    
-    
-    
-        
-
-    
-    
-        &lt;li class=&quot;&quot;&gt;Part 2 -
-        
-            &lt;a href=&quot;/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama&quot;&gt;
-        
-    Node.js Hata Yönetimi ve Loglama
-    
-      &lt;/a&gt;
-    
-        &lt;/li&gt;
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    &lt;/ul&gt;
-&lt;/div&gt;
-
-&lt;p&gt;&lt;br /&gt;&lt;/p&gt;
-
-&lt;p&gt;Şimdi elimizde bir node.js uygulaması var. Kodları var, çözemediğimiz çalıştırabiliyoruz ama bazı problemler/hatalar meydana geliyor. Onları incelememiz lazım. Burada noluyor? debugging devreye giriyor.&lt;/p&gt;
+   <content type="html">&lt;p&gt;Şimdi elimizde bir node.js uygulaması var. Kodları var, çözemediğimiz çalıştırabiliyoruz ama bazı problemler/hatalar meydana geliyor. Onları incelememiz lazım. Burada noluyor? debugging devreye giriyor.&lt;/p&gt;
 </content>
  </entry>
  

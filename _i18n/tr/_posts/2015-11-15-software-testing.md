@@ -13,11 +13,6 @@ series_category: "software"
 series_no: 2
 image: "/assets/images/happygoat.jpg"
 ---
-
-{% include JB/setup %}
-
-{% include series.html %}
-
 > YENİ: Aynı zamanda makalenin [sunumuna](/software-testing) da göz atabilirsin!
 
 # Tanım
