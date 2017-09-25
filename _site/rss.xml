@@ -5,10 +5,18 @@
         <description>Dhalsim's - Barış Aydek</description>
         <link>http://dhalsim.github.io</link>
         <atom:link href="http://dhalsim.github.io/rss.xml" rel="self" type="application/rss+xml" />
-        <lastBuildDate>Sun, 21 May 2017 22:24:16 +0200</lastBuildDate>
-        <pubDate>Sun, 21 May 2017 22:24:16 +0200</pubDate>
+        <lastBuildDate>Mon, 25 Sep 2017 17:02:50 +0200</lastBuildDate>
+        <pubDate>Mon, 25 Sep 2017 17:02:50 +0200</pubDate>
         <ttl>60</ttl>
 
+
+        <item>
+                <title>Fonksiyonel Programlama - S01E01</title>
+                <description>Fonksiyonel programlama üzerine yeni bir seri. Bu serinin ilk yazısında önsöz olarak kendi tecrübelerimi ve beni yazmaya iten sebepleri yazdım. İlk bölüm olarak yazılımın çıkmazlarında OOP'nin yetersiz kaldığı durumlara değinip FP'nin tanımını yaptık.</description>
+                <link>http://dhalsim.github.io/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01</link>
+                <guid>http://dhalsim.github.io/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01</guid>
+                <pubDate>Sun, 24 Sep 2017 00:00:00 +0200</pubDate>
+        </item>
 
         <item>
                 <title>Temel Javascript</title>
@@ -54,8 +62,8 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
         <item>
                 <title>.Net Memory Yönetimi ve Memory Leaks</title>
                 <description>Bu yazıda .NET memory yönetimi nasıl çalışır onu öğreneceğiz böylece uygulamarımızı hafıza açısından daha bilinçli geliştirebileceğiz.</description>
-                <link>http://dhalsim.github.io/.net/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks</link>
-                <guid>http://dhalsim.github.io/.net/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks</guid>
+                <link>http://dhalsim.github.io/dotnet/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks</link>
+                <guid>http://dhalsim.github.io/dotnet/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks</guid>
                 <pubDate>Sat, 14 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 
@@ -77,8 +85,8 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
         <item>
                 <title>Broken Authentication and Session Management</title>
                 <description>ASP.NET uygulamalarında session management ile ilgili öneriler.</description>
-                <link>http://dhalsim.github.io/.net/security/2015/11/14/broken-authentication-and-session-management</link>
-                <guid>http://dhalsim.github.io/.net/security/2015/11/14/broken-authentication-and-session-management</guid>
+                <link>http://dhalsim.github.io/dotnet/security/2015/11/14/broken-authentication-and-session-management</link>
+                <guid>http://dhalsim.github.io/dotnet/security/2015/11/14/broken-authentication-and-session-management</guid>
                 <pubDate>Sat, 14 Nov 2015 00:00:00 +0100</pubDate>
         </item>
 

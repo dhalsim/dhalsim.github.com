@@ -3,8 +3,8 @@ layout: post
 title: ".Net Memory Yönetimi ve Memory Leaks"
 description: "Bu yazıyı okuyarak .NET'in hafıza yönetiminde verimli uygulamalar yazabilmek için gerekli genel bilgileri öğrenibilirsiniz."
 toc: true
-category: [".net", "memory"]
-tags: [".net", "memory"]
+category: ["dotnet", "memory"]
+tags: ["dotnet", "memory"]
 excerpt: "Bu yazıda .NET memory yönetimi nasıl çalışır onu öğreneceğiz böylece uygulamarımızı hafıza açısından daha bilinçli geliştirebileceğiz."
 image: "/assets/images/net_framework.png"
 ---

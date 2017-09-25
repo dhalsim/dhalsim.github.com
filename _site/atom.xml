@@ -4,13 +4,21 @@
  <title>Dhalsim's</title>
  <link href="http://dhalsim.github.io/atom.xml" rel="self"/>
  <link href="http://dhalsim.github.io"/>
- <updated>2017-05-21T22:24:16+02:00</updated>
+ <updated>2017-09-25T17:02:50+02:00</updated>
  <id>http://dhalsim.github.io</id>
  <author>
    <name>Barış Aydek</name>
    <email>baris.aydek@gmail.com</email>
  </author>
 
+ 
+ <entry>
+   <title>Fonksiyonel Programlama - S01E01</title>
+   <link href="http://dhalsim.github.io/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01"/>
+   <updated>2017-09-24T00:00:00+02:00</updated>
+   <id>http://dhalsim.github.io/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01</id>
+   <content type="html">Fonksiyonel programlama üzerine yeni bir seri. Bu serinin ilk yazısında önsöz olarak kendi tecrübelerimi ve beni yazmaya iten sebepleri yazdım. İlk bölüm olarak yazılımın çıkmazlarında OOP'nin yetersiz kaldığı durumlara değinip FP'nin tanımını yaptık.</content>
+ </entry>
  
  <entry>
    <title>Temel Javascript</title>
@@ -55,9 +63,9 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
  
  <entry>
    <title>.Net Memory Yönetimi ve Memory Leaks</title>
-   <link href="http://dhalsim.github.io/.net/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks"/>
+   <link href="http://dhalsim.github.io/dotnet/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks"/>
    <updated>2015-11-14T00:00:00+01:00</updated>
-   <id>http://dhalsim.github.io/.net/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks</id>
+   <id>http://dhalsim.github.io/dotnet/memory/2015/11/14/net-memory-ynetimi-ve-memory-leaks</id>
    <content type="html">Bu yazıda .NET memory yönetimi nasıl çalışır onu öğreneceğiz böylece uygulamarımızı hafıza açısından daha bilinçli geliştirebileceğiz.</content>
  </entry>
  
@@ -78,9 +86,9 @@ Tanımı yaptık, hadi dağılın. Yok daha başlamadık bile. Önce doğru çal
  
  <entry>
    <title>Broken Authentication and Session Management</title>
-   <link href="http://dhalsim.github.io/.net/security/2015/11/14/broken-authentication-and-session-management"/>
+   <link href="http://dhalsim.github.io/dotnet/security/2015/11/14/broken-authentication-and-session-management"/>
    <updated>2015-11-14T00:00:00+01:00</updated>
-   <id>http://dhalsim.github.io/.net/security/2015/11/14/broken-authentication-and-session-management</id>
+   <id>http://dhalsim.github.io/dotnet/security/2015/11/14/broken-authentication-and-session-management</id>
    <content type="html">ASP.NET uygulamalarında session management ile ilgili öneriler.</content>
  </entry>
  
