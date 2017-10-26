@@ -1,0 +1,815 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="tr"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Fonksiyonel Programlama - S01E01</title>
+	<meta name="author" content="Barış Aydek">
+
+	<!-- for Google -->
+	<meta name="description" content="Fonksiyonel Programlama - S01E01: Fonksiyonel Programlama hakkında yazmak, okuyucuyu neler bekliyor" />
+	<meta name="keywords" content="" />
+
+	<meta name="author" content="Barış Aydek" />
+	<meta name="copyright" content="" />
+	<meta name="application-name" content="Dhalsim's" />
+
+	<!-- for Facebook -->
+	<meta property="og:title" content="Fonksiyonel Programlama - S01E01" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="http://dhalsim.github.io/assets/images/icon-fp.svg" />
+	<meta property="og:url" content="http://dhalsim.github.io/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01" />
+	<meta property="og:description" content="Fonksiyonel Programlama - S01E01: Fonksiyonel Programlama hakkında yazmak, okuyucuyu neler bekliyor" />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Fonksiyonel Programlama - S01E01" />
+	<meta name="twitter:description" content="Fonksiyonel Programlama - S01E01: Fonksiyonel Programlama hakkında yazmak, okuyucuyu neler bekliyor" />
+	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/icon-fp.svg" />
+	<meta name="twitter:creator" content="@">
+
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+  <style>
+	  @font-face {
+			font-family: 'Allerta';
+			src: url('/assets/fonts/Allerta-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Allerta-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Allerta-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Allerta-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+		@font-face {
+			font-family: 'Punk';
+			src: url('/assets/fonts/punk-regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/punk-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/punk-regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/punk-regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/punk-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/punk-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+
+		@font-face {
+			font-family: 'Ewert';
+			src: url('/assets/fonts/Ewert-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Ewert-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Ewert-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Ewert-Regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Ewert-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Ewert-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+	</style>
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Fonksiyonel Programlama - S01E01" type="application/atom+xml">
+	
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/">
+								Dhalsim's
+							</a>
+						</li>
+						<li class="archive"><a href="/archive.html">Arşiv</a></li>
+						<li class="page"><a href="/pages.html">Sayfalar</a></li>
+						<li class="category"><a href="/categories.html">Kategoriler</a></li>
+						<li class="tag"><a href="/tags.html">Taglar</a></li>
+					</ul>
+
+					<hr />
+					<nav class="languageSelector">
+						
+							<a href="/en" ><img src="/assets/blank.gif" class="flag flag-gb" alt="İngilizce" /> </a><a href="/en" class="alink">İngilizce</a>
+						
+						-
+						
+							<img src="/assets/blank.gif" class="flag flag-tr" alt="Türkçe" /> Türkçe
+						
+					</nav>
+
+					<hr />
+
+					<div> <a href="/rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Fonksiyonel Programlama - S01E01</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				
+				<div class="toc">
+					<span>İçindekiler tablosu yükleniyor...</span>
+					<div class="sp-circle"></div>
+				</div>
+				
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					
+					
+
+
+
+
+<div class="seriesNote">
+  Bu makale <strong>3</strong> bölümlük <strong>Fonksiyonel Programlama</strong> serisinin <strong>1.</strong> bölümüdür.</p>
+	<ul>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 1 -
+		
+    Fonksiyonel Programlama - S01E01
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 2 -
+		
+			<a href="/fonksiyonel-programlama/2017/09/27/fonksiyonel-programlama-s01e02">
+		
+    Fonksiyonel Programlama - S01E02
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 3 -
+		
+			<a href="/fonksiyonel-programlama/2017/10/22/fonksiyonel-programlama-s01e03">
+		
+    Fonksiyonel Programlama - S01E03
+    
+      </a>
+    
+		</li>
+	
+	
+	</ul>
+</div>
+
+
+
+
+					
+
+					<h1>Önsöz: Fonksiyonel Programlama hakkında yazmak</h1>
+
+<blockquote>
+<p>Yıllardır fonksiyonel programlamayı araştırıyorum, öğrenmeye çalışıyorum, notlar tutuyorum, hakkında vidyolar izliyorum, bloglar makaleler okuyorum ve bir noktaya kadar gelip tıkanıyorum.</p>
+</blockquote>
+
+<p>İş hayatında <strong>FP</strong> (fonksiyonel programlama) tekniklerini uygulayacak fırsatı bulamamam, çevremde böyle bir farkındalığın olmaması ve önceliklerimin değişkenliği gibi nedenlerle bu konuya daha önceden istediğim gibi eğilemedim.</p>
+
+<p>Birçok kere sayfalarca İngilizce ve Türkçe taslak yazılar, küçük programlar yazdım. Sonunda anladım ki FP bir derya ve tamamını öğreneyim de sonra yazayım yöntemi bende işe yaramayacak.</p>
+
+<p>Bu yaşadığım problemi aşmak için bir strateji geliştirdim: <em>Ayda en az bir blog makalesi ile kısa kısa, pratiğe dayalı yazılar yazmak.</em></p>
+
+<blockquote>
+<p><em>&quot;çok acil olarak değil ama çabuk çabuk yapılması gerekiyor.&quot;</em></p>
+
+<p>Necati Şaşmaz</p>
+</blockquote>
+
+<p>Bir Türk olarak tabii ki <strong>kervan yolda düzülür</strong> diyorum ve taslaklarımdan da yardım alarak bu girizgahla başlıyorum.  </p>
+
+<h2>Disclaimer</h2>
+
+<p>Şu an piyasada yazılımcılar arasında FP ve OOP iki ayrı siyasi kanat gibi birbiriyle çarpışıyor. Türkiye&#39;de ise OOP geleneğinin daha güçlü olduğunu biliyoruz. </p>
+
+<p>Bu yazı dizisi OOP geleneğine karşı bir savaş mıdır? Belki evet. </p>
+
+<blockquote>
+<p>Eğer kendinizi o kanattan bir nefer gibi görüyorsanız ve alıngan bir kişiliğe sahipseniz bu yazdıklarım sizi üzebilir.</p>
+</blockquote>
+
+<p>Bence konuya o şekilde yaklaşmayın. Önyargılarınızdan kurtulun ve size faydalı olan değerleri almaya bakın. </p>
+
+<p>Sadece bugüne bakarak da FP ne işime yarayacak demeyin. OOP dili olarak ortaya çıkan Java ve C# giderek FP özelliklerini kendilerine eklediklerini de göz önüne alırsak trendin FP yönüne olduğu bellidir.</p>
+
+<h2>Bu seri kimlere hitap eder?</h2>
+
+<ul>
+<li>Herhangi bir programlama dilinin basit syntax&#39;ını bilen veya biraz bakıp anlayabilen</li>
+<li>Yazılım ve <strong>OOP</strong> temel problemleriyle ilgili farkındalık sahibi olan</li>
+<li>İngilizce terim gördüğünde bilmiyorsa sözlüğe bakabilen</li>
+<li>Büyük bir yazılım projesini <em>fail</em> etmiş olan</li>
+<li>Yazılımı daha iyi nasıl yaparım derdi olan</li>
+<li>Önceden öğrendiklerini unutup yepyeni fikirlere açık olabilen</li>
+</ul>
+
+<p>dimağlara hitap etmektedir.</p>
+
+<h2>İçerik nasıl olacak?</h2>
+
+<ul>
+<li>Kendimi belli bir programlama diliyle, spesifik teknolojiyle kısıtlamayacağım. (<em>Güncelleme: İlk üç bölümü yazdıktan sonra örneklerin çoğunluğu typescript&#39;ten oluştuğunu söyleyebilirim. Ancak ileride Haskell, Scala, Elm, Closurescript, Eta gibi dillere değinmek istiyorum.</em>)</li>
+<li>Daha önce de uyguladığım gibi tek proje üzerinden evrile evrile de gidebilirim, hap şeklinde küçük örneklerle de.</li>
+<li>İlk yazılarımdaki gibi şekiller çizerek anlatımı güçlendirme yöntemine başvurabilirim ya da sıkılırsam anlamazlarsa anlamasınlar amk diyebilirim.</li>
+</ul>
+
+<h2>Nasıl başlamalı?</h2>
+
+<ol>
+<li><p>Kendim bu yazıya nasıl başlayacağım</p>
+
+<p>Birşey hakkında ilk yazarken bence en sıkıcı olan giriş ve tanımdır. Sonuçta bilmediğin bir konu, oradan buradan duyduğun yarım yamalak, yalan yanlış bilgiler var. Giriş bölümünü okuyunca insanda devamı ile ilgili bir fikriyat oluşmalı.</p>
+
+<p>Ama seçtiğim format buna çok uygun değil. Belki ilk başta anlatmam gerekenleri ortalarda söylerim. Ama yazarken FP&#39;yi  hiç bilmeyenlere göre yazacağım, o yüzden bana güvenin ve okumaya devam edin.</p></li>
+<li><p>Siz nasıl başlayasınız?</p>
+
+<p>Bence okumaya devam edin. Bildiğiniz kısımlar olursa bir sonrakine geçin. Ama tekrar etmekte fayda var. Sıkılırsanız başka kaynaklara bakın ve geri dönün. Olmadı baştan tekrar okuyun. Örnekleri çalıştırmayı deneyin. Kurcalayın, bol bol hata yapın. Ne bileyim uğraşın biraz işte. Çok sıkıştığınızda yorum yazın veya mail atın.</p></li>
+<li><p>Zorlanınca ne yapmalıyım?</p>
+
+<p>Öğrenme apayrı bir kavram. Bizim mesleğimizde çok önemli bir yere sahip. Size tavsiyem öğrenme hakkında düşünmeniz, okumanız, hatta <a href="/en/learning/2016/04/25/what-ive-learned-from-learning-how-to-learn">eğitim almanızdır</a>. <strong>Bu yazıyla ilgili olarak şimdiye kadar öğrendiklerinizi unutmanız gerekebilir.</strong> </p>
+
+<p>Kendinize zaman tanıyın. Her gün biraz biraz öğrenerek, iş hayatınızda öğrendiklerinizi uygulamaya çalışarak kalıcı öğrenebilirsiniz. Teori ile pratiği aynı anda götürmeye çalışın. Pratik üzerinden öğrenmek size daha kolay geliyorsa sonraki bölümlerdeki alıştırmalara bakabilirsiniz. </p></li>
+</ol>
+
+<h1>S01E01: Niye?</h1>
+
+<p>İş yerinde çalışırken farkettim ki:</p>
+
+<ul>
+<li>kodu yazarken <strong>X zaman</strong> harcıyorsam</li>
+<li>kodu test etmem yine en az X zaman</li>
+<li>kodu doğru çalışabilir hale getirmem 3X zaman</li>
+<li>bozduğum diğer yerleri bulup düzeltmem 5X zaman</li>
+</ul>
+
+<p>sürüyordu. Mesaimin yarısını da başkalarının hatalarını bulup düzeltmeye ayırıyordum. Verilen estimation&#39;lar tutmuyor ve bu durum düzelecekmiş gibi de görünmüyordu.</p>
+
+<p>Bu problemlerle ilgili elimizdeki alet kutusu şuydu:</p>
+
+<p>OOP, SOLID, design patterns, refactoring, DRY, unit testing, code reviewing, CI, pair programming, QA</p>
+
+<p>Bunların hepsini tabii ki uygulamıyorduk. Uygulasak da yarım yamalak, çoğunluğunda ortamlarda SOLID uyguluyoruz demek içindi (kim bilecek). Ama sonuç olarak elimizdeki aletler sorunu tamamen çözmemize yetmiyordu hatta belki de engel oluyordu. Kimse bu yöntemleri nasıl en doğru şekilde uygulanması gerektiğini bilmiyordu.</p>
+
+<ul>
+<li>OOP ve design patterns uygulayayım derken kod gereksizce şişip karmaşıklaşıyor,</li>
+<li>Class isimleri arttıkça isimlendirme problemleri yaşıyordum: XManager, XProvider, XBuilder gibi. Doğru ismi bulmak çok zaman alıyor,</li>
+<li>Refactoring yaparken başka yerler bozuluyor,</li>
+<li>Kimse test yazmak istemiyor, yazılan testler de çoğu zaman işe yaramıyor,</li>
+<li>Code review bazen işe yarasa da yaramadığı çok oluyor,</li>
+<li>QA&#39;den dönen bir bug&#39;ın çözümü günler sürebiliyordu.</li>
+</ul>
+
+<p>Mimari açıdan problemler kadar kodun kendisi de zamanla çok problemli hale geliyordu. En basitinden business içeren, asıl işi yapan bir kodu incelediğimde karşıma:</p>
+
+<ul>
+<li>yüzlerce satırlık metotlar</li>
+<li>oradan buradan kopyalanmış parça kodlar</li>
+<li>yama yapıla yapıla kodun bütünlüğü ve amacı kaybolmuş</li>
+<li>okunabilirliği çok az</li>
+<li>debug yapmadan nasıl çalışacağı tahmin edilemeyen</li>
+<li>başka yerleri bozmadan değiştirmesi imkansız</li>
+</ul>
+
+<p>kaynak kodları ortaya çıkıyordu. Yazılımcılar kendi aralarında design pattern&#39;lar hakkında konuşup masturbasyon yapadursunlar, mikroskopla en derine indiğinde bile <strong>problemsiz kod bulamıyorsun</strong>.</p>
+
+<blockquote>
+<p>Ben de hatasız kul olmaz ama hatasız kod olur mu diye inceden araştırmaya başladım. <strong>Fonksiyonel programlama</strong>yla ilk tanışmam o süreçte gerçekleşti.</p>
+</blockquote>
+
+<h2>Karmaşıklığın çözümü nedir?</h2>
+
+<p>Eğer büyük bir yazılım projesinde çalışıyorsan seni en fazla sıkıştıracak problem karmaşıklık problemidir.</p>
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">OO makes code understandable by encapsulating moving parts.  FP makes code understandable by minimizing moving parts.</p>&mdash; Michael Feathers (@mfeathers) <a href="https://twitter.com/mfeathers/status/29581296216">November 3, 2010</a></blockquote>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<p><br /></p>
+
+<p>OOP&#39;de ne yapıyoruz? Değişen kısımları <strong>abstraction</strong>&#39;a alıp, kalan kısımları ortaklaştırmaya çalışıyoruz. OOP&#39;un bize sunduğu en büyük araç da <strong>inheritance</strong>.</p>
+
+<p>Tabii OOP guruları, inheritance&#39;ın problemlerini görüp: <strong>Composition over inheritance</strong> prensibini tavsiye etmişler.</p>
+
+<blockquote>
+<p>Çevremize ve hatta evrene baktığımızda da karmaşık görünen sistemlerin aslında birbirine çok benzer parçaların farklı birleşimlerinden, kombinasyonlarından oluştuğunu görüyoruz.</p>
+</blockquote>
+
+<p>FP de tam olarak bu composition üzerine gidiyor. Composition&#39;ı sağlayabilmemiz için uymamız gereken kuralları gösteriyor.</p>
+
+<p><strong>Bu kuralları öğrenmeden önce FP neymiş bakalım:</strong></p>
+
+<h2>Tanım</h2>
+
+<p><strong>FP, matematikteki fonksiyon tanımındaki fonksiyonları kullanılarak yapılan programlamadır.</strong></p>
+
+<p>Bu kadar basit aslında. Lise matematiğinden hatırladığımız fonksiyonlar. Evet hakikaten de <em>&quot;Hocam gerçek hayatta bu bizim ne işimize yarayacak?&quot;</em> diye sorduğumuz konular işimize yarayacakmış. Keşke zamanında iyi dinleseymişim.</p>
+
+<p>Peki <strong>matematikteki fonksiyon</strong> neydi? Hatırlayalım:</p>
+
+<p>Dokuzuncu sınıf matematikte yaptığı tanımı aynen alıyorum:</p>
+
+<p>A ve B boş olmayan iki küme olsun. A’nın her elemanını B’nin yalnız bir elemanına eşleyen A’dan B’ye bir f bağıntısına, A’dan B’ye bir fonksiyon denir.</p>
+
+<p><img src="/assets/images/mathematical-function.png" alt=""></p>
+
+<p>Fonksiyon olması için;</p>
+
+<ol>
+<li>A’nın her elamanı B’ye gidecek.</li>
+<li>A kümesinde açıkta eleman kalmayacak.</li>
+<li>A’nın herhangi bir elamanı B’ye iki defa gitmeyecek.</li>
+</ol>
+
+<blockquote>
+<p>İyi de ne var bunda zaten yazdığımız fonksiyonlar böyle değil mi?</p>
+</blockquote>
+
+<p>Tam olarak değil. Cevabını bir sonraki bölümde örnek üzerinden göreceğiz.</p>
+
+
+          <hr />
+					
+					
+
+
+
+
+<div class="seriesNote">
+  Bu makale <strong>3</strong> bölümlük <strong>Fonksiyonel Programlama</strong> serisinin <strong>1.</strong> bölümüdür.</p>
+	<ul>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 1 -
+		
+    Fonksiyonel Programlama - S01E01
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 2 -
+		
+			<a href="/fonksiyonel-programlama/2017/09/27/fonksiyonel-programlama-s01e02">
+		
+    Fonksiyonel Programlama - S01E02
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 3 -
+		
+			<a href="/fonksiyonel-programlama/2017/10/22/fonksiyonel-programlama-s01e03">
+		
+    Fonksiyonel Programlama - S01E03
+    
+      </a>
+    
+		</li>
+	
+	
+	</ul>
+</div>
+
+
+
+
+					<hr />
+				  
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2017-09-24T00:00:00+02:00" datetime="2017-09-24T00:00:00+02:00" pubdate>
+							<span class="month"><abbr>September</abbr></span>
+							<span class="day">24</span>
+							<span class="year">2017</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/categories.html#fonksiyonel-programlama-ref">
+    		fonksiyonel-programlama <span>3</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/tags.html#fonksiyonel-programlama-ref">fonksiyonel-programlama <span>3</span></a></li>
+    
+    	<li><a href="/tags.html#functional-programming-ref">functional-programming <span>3</span></a></li>
+    
+    	<li><a href="/tags.html#OOP-ref">OOP <span>1</span></a></li>
+    
+    	<li><a href="/tags.html#software-ref">software <span>3</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+
+
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/javascript/2015/12/18/temel-javascript" title="View Temel Javascript">&laquo; Temel Javascript</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/fonksiyonel-programlama/2017/09/27/fonksiyonel-programlama-s01e02" title="View Fonksiyonel Programlama - S01E02">Fonksiyonel Programlama - S01E02 &raquo;</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>Hakkımda</h4>
+					<img src="/assets/me_rounded.png" style="width: 150px" />
+					<ul>
+						<li class="contact"><span class="author fn n">Barış Aydek</span></li>
+						<li class="resume"><a href="/resume/cv-tr">Özgeçmişim HTML (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-tr.pdf">pdf (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf (ingilizce)</a>
+						</li>
+						<li class="contact"><address><span class="fn email"><a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a></span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+
+					<hr />
+
+					<a href=/software-testing>Software Testing & TDD</a> sunumuma göz at!
+
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		$('.content header').append(
+			$('.toc').html(
+				$('<h4/>', {text: 'İçindekiler: '})
+			).append($parentUl)
+		);
+
+		$('.content img')
+			.attr('title', 'Resmi büyütmek için üstüne tıklayınız.')
+			.click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
+	});
+</script>
+
+
+
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70097547-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
+

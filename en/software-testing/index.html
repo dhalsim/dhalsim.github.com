@@ -1,0 +1,897 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title>Software Testing</title>
+    <style>
+      @import url(https://fonts.googleapis.com/css?family=Crete+Round);
+      @import url(https://fonts.googleapis.com/css?family=Merriweather:400,700,400italic);
+      @import url(https://fonts.googleapis.com/css?family=Ubuntu+Mono:400,700,400italic);
+
+      body {
+        font-family: 'Crete Round';
+      }
+
+      h1 {
+        font-family: 'Merriweather';
+        color: #c31b99;
+      }
+      h2, h3 {
+        font-family: 'Ubuntu Mono';
+        font-weight: normal;
+        color: #236cb8;
+      }
+      .remark-code, .remark-inline-code { font-family: 'Ubuntu Mono'; }
+      .remark-fading { display: none; }
+
+      .remark-slide-content {
+        background-color: #e9ecdd;
+      }
+
+      .red {
+        color: red;
+      }
+      .bold {
+        font-weight: bold;
+      }
+      .strong {
+        color: #f48585;
+      }
+
+      a, a > code {
+        color: rgb(249, 38, 114);
+        text-decoration: none;
+      }
+
+      .footnote {
+        position: absolute;
+        bottom: 3em;
+      }
+
+      .inverse {
+        background: #272822;
+        color: #777872;
+        text-shadow: 0 0 10px #000;
+      }
+      .inverse h1, .inverse h2 {
+        color: #a6c4a0;
+        line-height: 0.8em;
+      }
+      .inverse p {
+        color: #81949d;
+      }
+      strong {
+        color: #f48585
+      }
+
+      .left {
+        width: 50%;
+        float: left;
+      }
+
+      .right {
+        width: 50%;
+        float: right;
+      }
+
+      .left-column {
+        color: #777;
+        width: 20%;
+        height: 92%;
+        float: left;
+      }
+        .left-column h2:last-of-type, .left-column h3:last-child {
+          color: #000;
+        }
+      .right-column {
+        width: 75%;
+        float: right;
+        padding-top: 1em;
+      }
+
+      .lt {
+        text-decoration: line-through;;
+      }
+
+      blockquote {
+        border-left: 10px solid #ccc;
+        margin: 1.5em 10px;
+        padding: 0.5em 10px;
+        quotes: "\201C""\201D""\2018""\2019";
+      }
+      blockquote:before {
+        color: #ccc;
+        content: open-quote;
+        font-size: 4em;
+        line-height: 0.1em;
+        margin-right: 0.25em;
+        vertical-align: -0.4em;
+      }
+      blockquote:after {
+        content: close-quote;
+        visibility: hidden;
+      }
+      blockquote p {
+        display: inline;
+      }
+
+      ol > li {
+        list-style-position:outside;
+        border-left: 1px solid black;
+        padding: 0 0 6px 13px;
+      }
+
+      .bullet li {
+        list-style: none;
+        margin-left: 0;
+      }
+      .bullet li:before {
+        content: '\2192';
+      }
+      .bullet > li:before {
+        content: normal;
+      }
+      .bullet > li {
+        list-style: circle;
+      }
+
+      .pic {
+        text-align: center;
+      }
+      .elli img {
+        width: 50%;
+      }
+      .yetmis img {
+        width: 70%;
+      }
+      .doksan img {
+        width: 90%;
+      }
+    </style>
+    <link href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" />
+    <style type="text/css">
+    #mermaidChart0 .node { fill:#ffa; stroke:#666; stroke-width:3px; }
+    #mermaidChart0 .node text  { fill:#000; stroke:none; font-weight:300; font-family:"Helvetica Neue",Helvetica,Arial,sans-serf; font-size:14px; }
+    #mermaidChart0 .edgeLabel text  { fill:#000; stroke:none; font-weight:300; font-family:"Helvetica Neue",Helvetica,Arial,sans-serf; font-size:14px; }
+    .edgeLabel { background-color: darkgray; }
+    .mermaid .label { color: rgb(51, 51, 51); }
+    .node circle, .node polygon, .node rect { fill: rgb(236, 236, 255); stroke: rgb(204, 204, 255); stroke-width: 1px; }
+    .edgePath .path { stroke: rgb(51, 51, 51); }
+    .mermaid .label { color: rgb(51, 51, 51); }
+    .node circle, .node polygon, .node rect { fill: rgb(205, 228, 152); stroke: rgb(19, 84, 12); stroke-width: 1px; }
+    .edgePath .path { stroke: rgb(0, 128, 0); stroke-width: 1.5px; }
+    </style>
+  </head>
+  <body>
+    <textarea id="source" style="display:none">
+      # Software testing
+
+Gereksinimler
+* Nunit Test Adapter Extension
+* Test Driven .NET
+
+???
+* **UNUTMA: Bitly short link paylaşılacak!!**
+
+From önder yıldız:
+Varolan kodu nasıl test edilebilir hale getirebilirsin
+Örnek senaryo hazırla
+
+---
+class: middle
+
+## Gündem
+
+1. Kısaca yazılım testi
+1. Neden gerekli
+1. Türleri
+1. TDD
+1. Pratikte faydalari
+1. Test Coverage
+1. Continuous integration
+1. .NET Unit test
+	* Seçilen teknolojiler
+	* Yöntem
+	* Demo
+
+???
+
+* Yaklaşık süre 1 saat olacak
+* Sunuma katılım önemli
+* Demo interaktif olabilir
+
+---
+class: inverse, middle
+
+## Tanım
+
+> **Yazılım testi:** Yazılım ürününün *production*'a geçmeden önce, yazılımın doğruluğunun ve kalitesinin kontrol edilmesi, varsa hataların bulunup tespit edilmesi işlemidir.
+
+.footnote[.red[*] Bu sunum Yazılım testi nedir sorusunu cevaplayıp, .strong[Unit Testing]'e yoğunlaşacaktır.]
+
+???
+Yazılım testi çok büyük bir konu.
+Ve neden ihtiyaç duyulmuş biraz buna değineceğiz
+
+---
+class: inverse, middle
+
+# Yazılım .lt[hataları] kazaları
+
+???
+* Hepimiz yazılım hatasının ne olduğunu biliyoruz tabii
+* Ancak neden bu kadar önemli olduğunu ve test etme ihtiyacının nereden geldiğini birkaç tarihsel örnekle görelim
+
+---
+class: inverse, middle
+
+### Savaş
+
+.pic[.elli[
+![](/assets/images/coldwar.gif)
+]]
+
+* 1980, Amerika Hava Savunma Komutanlığı, iletişim cihazındaki hata bir nükleer saldırının yaşandığını yayıyor.
+* 1983, Sovyet uydusu, Amerikan füzesi saldırısı raporu veriyor.
+---
+class: inverse, middle
+
+### Hastalık
+
+* 1985-87 arası radyasyon tedavi aracındaki hata, en az 3 kişinin ölümene, çoğu hastanın da 100 kat fazla radyasyon almasına yol açıyor.
+---
+class: inverse, middle
+
+### Para kaybı
+
+* 1996, uzaya uydu gönderilmesinde roket yazılımdaki hata yörüngede sapmaya neden olup roketin kendini patlatmasına neden oluyor. Hatanın maliyeti 370 milyon dolar.
+* 1999, yine uydu fırlatmasındaki hata 1.2 milyar dolara maloluyor.
+* 1996, banka yazılım hatası 832 müşteriyi 920 milyon dolar borçlandırıyor.
+
+---
+class: inverse, middle
+
+### Kaza
+
+* 1994, sistem hatası bir helikopterin düşmesine ve 29 kişinin ölmesine neden oluyor.
+* 1994, Çin'de yazılım hatası uçak kazasına yol açıyor: 264 ölü.
+* 1993, uçak sistemindeki bir hata şuna yol açıyor
+
+<iframe width="50%" height="50%" src="https://www.youtube.com/embed/4iToQ2FykoI" frameborder="0" allowfullscreen></iframe>
+
+---
+
+### Kıssadan Hisse
+
+--
+
+* Yazılım ciddiye alınması gereken bir iştir.
+
+--
+
+* Farkedilmeyen hatalar ileride öngörülmeyen sonuçlar doğurabilir
+
+--
+
+* Yazılımın test edilmesi bu problemlerin önlenmesi için bulunan en etkili yollardan biridir.
+
+---
+
+## Test ile ilgili yanlış bilinenler
+
+--
+
+> Yazılımın testi, yazılım production'a geçmeden hemen önce yapılmalıdır.
+
+--
+
+.bullet[
+* Yazılım testi yapılabildiği en erken zamanda yapılmaya başlanmalı, mümkünse her değişiklikte güncellenmeli ve tekrarlanmalıdır.
+]
+
+--
+
+> Yazılım testi bittikten sonraki yapılan değişiklikler test edilmelidir.
+
+--
+
+.bullet[
+* Herhangibir değişiklik sonrası tüm test senaryoları tekrarlanmalıdır
+]
+
+---
+## Test ile ilgili yanlış bilinenler
+
+> Tüm kodlama bittikten sonra testing başlar
+
+--
+
+.bullet[
+* Development modeline göre değişir, **Agile** gibi metodolojilerde testing, gereksinim analiziyle başlar.
+]
+
+--
+
+> Unit testing iyidir ama bunun için yeterli vaktimiz ve kaynağımız yok.
+
+--
+
+.bullet[
+* İlerleyen bölümlerde bu konuya değineceğiz.
+]
+
+???
+Şimdilik Agile konusuna biraz değinelim
+
+---
+class: inverse
+
+### Ne kadar Agile'ız?
+
+* Waterfall neden bitti?
+
+???
+
+Hepimiz waterfall'un artık çok nadir kullanıldığını biliyoruzdur.
+
+--
+
+.bullet[
+* İş dünyası rekabet edebilmek için hızlı hareket etmek istiyor
+]
+
+???
+
+Waterfall bu iş için yeterince esnek ve çevik değil
+Yazılımın da bu gereklere adapte olması gerekiyordu. Sonuç: Agile
+--
+
+* Bu bir kültür meselesi
+
+???
+
+Yazılım iş dünyasının istediği kadar hızlı adapte olabilir mi?
+Bu sadece yazılım tekniğinin değil, yaklaşımının da tamamen değişmesi gerektiğine işaret ediyor
+--
+.bullet[
+* Agile sihirli bir değnek değil. Çalışılıp sindirilmesi gerekiyor
+]
+
+--
+
+* Hız ama?.. (kontrolsüz güç güç değildir)
+
+???
+Agile'ın gerektirdiği şeyleri tam olarak yapmadan sadece mesela sık release çıkarmak başka problemlere yol açar
+
+--
+.bullet[
+* Continuous Integration ve Continuous delivery? Nasıl mümkün olabilir
+]
+
+???
+Bu kavramları biliyor musunuz? İleride de değineceğiz ama kısaca kodun sürekli entegre edilmesi diye düşünebiliriz
+
+---
+
+### Şu anki sistem
+
+<div class="mermaid">
+graph LR
+    CR[CR Branch]-->Dev[Development]
+    Dev-->Test[Internal test]
+    Test-->Merge
+    Merge-->UAT1
+    UAT1-->R[Regression]
+    R-- QA Bug -->UAT1
+    Test-- CR Bug -->Dev
+		R-- OK -->PROD
+</div>
+
+???
+
+* Görüleceği üzere UAT1'e merge olana kadar yazılan kod hiçbir automated test'e girmiyor.
+* Tüm yapılan kodun manuel test edilmesi gerekmekte
+* Bu testin kapsamı ise genellikle sadece CR'ın ilgili kısımları oluyor
+* Herhangibir değişiklikte bu testlerin tekrar edilmesi gerekiyor. Ama çoğu zaman buna zaman kalmıyor
+* Bu durumda hatalar QA bug olarak dönmekte ve bu QA bug'ların hangi CR ve developer kaynaklı olduğu belli olmamakta
+* Case'in tekrar yaratılması çözülmesi ve tekrar test edilmesi süreçleri çok uzuyor
+
+---
+
+### Ne olabilirdi?
+
+???
+
+Yazılımın daha çevik olması için tavsiye edilen ve çok kullanılan bir yöntem var
+
+--
+
+> **Continuous Integration (CI)** is a development practice that requires developers to integrate code into a shared repository several times a day. Each check-in is then verified by an automated build, allowing teams to detect problems early. By integrating regularly, you can detect errors quickly, and locate them more easily.
+
+???
+
+Günde birkaç kere kodun ortak depoya entegre edilmesi. Otomatize build ile birlikte kodun hatasız çalıştığının kontrolü. Ne kadar erken entegrasyon yapılırsa o kadar erken hatalar tespit edilip düzeltilebilir
+
+---
+**Mesela**
+
+<div class="mermaid">
+graph TB;
+  CR[CR Branch]-->DEV[Development]
+	DEV-- +Integration Tests -->CI[Continuous Integration]
+	DEV-- Unit Tests -->DEV
+	CI-- Fail -->DEV;
+	CI-- OK -->Test[Internal Test];
+	Test-- +Manuel Tests -->Merge;
+	Merge-- +Integration Tests -->CI
+	CI-- OK -->UAT1;
+  UAT1-- All Tests -->CI
+	UAT1-- OK -->PROD
+</div>
+
+???
+* Amaç hataların erken tespiti
+
+---
+## Testing Türleri
+
+--
+
+.bullet[
+* Unit Testing
+]
+
+--
+
+.bullet[
+* Integration Testing
+]
+
+--
+
+.bullet[
+* UI Testing
+]
+
+--
+
+.red[*] Aslında 10'larca Testing türü vardır, burada sadece bizi ilgilendirenler bulunuyor.
+
+--
+
+.left[
+Çoğunlukta Nasıl:
+
+![](/assets/images/test-actual.png)
+]
+
+--
+
+.right[
+Olması Gereken:
+
+![](/assets/images/test-should.png)
+]
+
+???
+
+Peki bizde nasıl?
+
+---
+
+## Test Driven Development (TDD)
+
+--
+
+Yazılım geliştirirken **önce** testinin yazılması, daha sonra da kodun kendisinin yazılmasıdır.
+
+**Agile** ve **XP**'de TDD'yi sıkça görürüz.
+
+--
+
+> Peki neden TDD?
+
+--
+
+.bullet[
+* Çünkü lanet olası testleri sonradan yazması ya çok zordur ya da artık imkansız hale gelmiştir.
+]
+
+--
+
+.bullet[
+* Ve bunun yanında değineceğimiz birsürü yararı daha var.
+]
+
+???
+Bu kadar basit. Unit test yazmanın en iyi yolu TDD'dir.
+---
+
+## TDD'nin Amaçları
+
+--
+
+.bullet[
+* Yazılmış kodun testinin yazılması zordur, bu yüzden önce test sonra kod
+]
+
+--
+
+.bullet[
+* Zaman içindeki değişikliklerin önceden çalışan kodu bozup bozmadığının **anlık** kontrolü (lanetli hataların oluşmasının önlenmesi: biribirini bozan hata düzeltmeleri)
+]
+
+???
+
+Tanıdık geldi mi?
+
+--
+
+.bullet[
+* Değişime açık olmak
+]
+
+???
+Çoğu zaman kodun nereyi etkileyeceğini kestirdiğimizden ötürü **yama** yoluyla fix yapıyoruz. Olması gerekeni yapamıyoruz. TDD bize bu güveni sağlıyor.
+
+---
+
+### Hataların anlık farkedilmesi
+
+Diyelim yazılımda bir hata meydana geldi. Bu müşteriden de gelebilir, siz de farketmiş olabilirsiniz. _TDD kullanılmayan_ bir projede tipik olarak şunlar yaşanır.
+
+![](/assets/images/ffffuuu.png)
+
+---
+class: inverse
+
+1. Hata ile ilgili kaydın oluşturulması (kimin yazdığı, zamanı belli değil)
+1. Hatayı çözmek için geliştiricinin üzerine alması veya ona atanması
+1. Geliştirici tarafından hatanın yaratılması. İki aşamadır: ilki hatanın production ortamında anlaşılması için yaratılması gerekmektedir. Sonra kendi ortamında da yaratabilmelidir.
+1. Geliştirici hatayı anladıktan sonra hatanın nedenini kod üzerinde tespit etmelidir. Bu işlem genelde **debugging** dediğimiz yöntemle yapılır. Çoğu zaman bu yöntem, kodun büyük bir kısmına hakim olmayı gerektirir.
+1. Sorunlu kod tespit edildikten sonra değiştirmek için ne gerektiği analiz edilir. Kişinin kendi yazdığı bir kod dahi olsa eski kodu anlamak zordur. Yapılan değişikliğin nereleri etkileyeceği hakkında başka geliştiriciler hatta yazılım mimarları ile görüş alışverişi yapmak gerekecektir. Ender durumlarda da olsa bu bağımlılık yüzünden hatanın düzeltilmesi ertelenebilir ve hatta iptal edilebilir.
+1. Düzeltme işleminden sonra kod tekrar test edilmelidir. Test süreci sonrasında şanslıysak bir problem çıkmaz ve kodun tekrar canlıya atılması gerekmektedir. Şanslı değilsek ki çoğu zaman değiliz, bu hata ya hiç düzelmemiş ya da daha kötüsü başka hata(lar)a sebep olmuş olabilir. Bu durumda bu döngünün başına dönmemiz gerekiyor.
+
+???
+
+Bu kısımları roman tadında düşünün, hızlı hızlı okuyacağım, zaten bildiğimiz şeyler
+
+Bir de bu kısımların tahmini ne kadar süre alabileceğini birlikte hesaplayalım istiyorum.
+
+1. Aslında hatanın tespitine kadar olan zamanı da düşünmemiz gerekir
+1. Genelde bu hatayla ilgili kişi olmaz
+1. Kod farkı, ortam farkı vb. sebeplerle yaratılması zordur
+1. Hatanın yerinin/kaynağının tespit edilmesi
+1. Kodun fix edilmesi kısmı da ayrı bir işkence :)
+1. Bizim durumumuzda bu test otomatize edilmediğinden test ve deployment süreçleri haftaları bulabilir.
+
+---
+class: inverse, middle
+
+> If that guy has any way of making a mistake, he will. **Edward A. Murphy**
+
+???
+Eğer bir hata yapma ihtimali varsa, o hatayı yapılacaktır.
+
+---
+
+### Eğer TDD Olsaydı Senaryosu
+
+1. Geliştirici istenen özelliği sağlayacak kod değişikliğini yapmak için test yazar
+1. Test fail olur.
+1. Testi geçirecek **minimum** kodu yazar.
+1. Başka testler fail olur. Bu durumda neden fail oldukları yapılan son değişiklikle alakalıdır, yani nedeni/yeri bellidir.
+1. Yapılacak 3 şey olabilir: Eski kodlar tekrar düzenlenebilir, yeni yazılan kod düzenlenebilir veya yazılan testler düzenlenebilir
+1. Düzenleme yapılır ve hiçbir testin başarız olmadığı görülür.
+
+???
+Yine süreleri birlikte hesaplayalım
+
+1. Adı üstünde test driven development
+1. Haliyle
+1. Burada minimum kelimesi gerçekten önemli, çünkü TDD'nin dolaylı olarak bir amacı da testi olmayan kodun yazılmasının engellenmesi. Eğer testin gerektirdiğinden fazla kod yazarsanız testi yazmanın amacını bozmuş olursunuz.
+
+---
+
+### Sorular
+
+1. Karşılaştırdığımızda hangi senaryo daha kısa sürer?
+1. TDD yönteminde eksik gördüğünüz kısımlar var mı?
+1. Testin yakalamadığı durumlarda ne yapmamız gerekir?
+
+???
+Free talk
+
+---
+class: middle, inverse
+
+## Unit test
+
+Yazılımın en küçük birimlerinin (**fonksiyon**/**metod**) test edilmesidir. Bu kodun önceklikle **test edilebilir** olmasını gerektirir. Test edilebilir kodu yazmanın en doğru yolu TDD ve türevleridir.
+
+???
+Türevleri derken BDD'yi kastediyorum ama bu şu an için konu dışı
+
+---
+
+> Peki **test edilebilir kod** ne demek?
+
+--
+.bullet[
+* Bir fonksiyon sadece bir iş yapmalıdır ya da değişmek için tek bir nedeni olmalıdır. Birden fazla iş yapıyorsa bölünmelidir (Single responsibility)
+]
+
+???
+* Diğer birçok nedenin yanında bu fonksiyonun testi sadece bir şeyi kontrol etmelidir
+* Her şey bunun için. Neden bu kadar önemli? Diyelim ki bir fonksiyonu test eden kodu yazdık ve çalıştırdık. Bu test **fail** oldu. bu durumda fonksiyon beklenen sonuçları üretmemiş demektir. Peki hatayı düzeltmemiz gerektiğinde nereyi düzelteceğiz. Hata fonksiyonun kendisinde mi yoksa fonksiyonun kullandığı dış kaynaklardan mı meydana geldi? Eğer fonksiyonumuz test edilebilir prensiplere uymuyorsa bunu anlamanın kolay bir yolu yoktur.
+
+--
+.bullet[
+* Nesne yönelimli dillerde **constructor** yapısı sadece **field/property** ataması için kullanılmalıdır.
+]
+
+???
+Ki ben bu nesneyi test ederken beklenmeyen bir yerde değişiklik meydana gelmesin
+
+--
+.bullet[
+* Fonksiyona bağımlılıkların dışarıdan enjekte edilmesi gerekir. (Dependency Injection - Inversion of Control)
+]
+
+???
+Ki ben bu bağımlılıkları testte kendim verebileyim. (*örnek gerekebilir*)
+--
+.bullet[
+* Fonksiyonlara geçirilen parametreler olabildiğince basit objeler olmalıdır
+]
+
+???
+Ki ben bu parametreleri rahatlıkla oluşturup teste gönderebileyim
+
+Bu prensipler uygulandığında hatanın tespiti ve düzeltilmesi çok kolay olacaktır.
+
+---
+
+### Mock objeler
+
+> Bir obje düşünün ki siz bu objeyinin fonksiyonlarını, property'lerini istediğiniz çıktıları verecek şekilde değiştirebiliyorsunuz. Bu objeleri **run-time**'da yaratıp, **mock** edilen obje yerine kullanabilirsiniz.
+
+Fonksiyonun dış kaynaklardan bağımsız olarak test edilebilmesi için kullanılan tüm bu dış kaynakların izole edilmesi gerekir.
+
+--
+
+Neler mock edilebilir? Fonksiyonun kullandığı tüm dış kaynaklar: HTTP request objesi, veritabanı objesi gibi sistem kaynakları gibi.
+
+--
+
+.footnote[
+* Bu sunumda **stub** ve **driver** kavramlarına girilmeden sadece mock'a bakacağız
+* Doğru tasarlanan fonksiyonlarda mock ihtiyacı minimum seviyede olmalıdır
+]
+---
+
+### İyi unit testin özellikleri
+
+* (Çok) hızlı çalışması, çünkü bir kodun sonucunu ne kadar erken görebilirseniz o kadar iyidir.
+* İzole: Test edilmek istenen fonksiyonalar diğer kodlardan izole olmalıdır.
+* Tekrarlanabilir: Test her çalışmasında aynı sonucu vermelidir
+* Bağımsız: Diğer testlerin çalışmasından bağımsız olmalıdır.
+* Anlaşılabilir
+* Dökümante eder: Yazılan test aynı zamanda çok güncel bir dökümantasyondur (BDD)
+
+Bunların yanında tabii ki iyi test, hatayı yakalayan testtir. Ama TDD'nin doğru uygulandığı projelerde bu zaten kendiliğinden olacaktır.
+
+---
+
+### Yazma Yöntemleri (TDD)
+
+.bullet[
+*	Red: İstenen test yazılır. Bu test çalıştırılır ve başarısız olur.
+]
+--
+.bullet[
+*	Green: Testi geçirecek **minimum** kod yazılır. Dış kaynaklar, bağımlılıklar mock ile soyutlanabilir.
+]
+--
+.bullet[
+*	Refactor: Düzenleme işlemidir. Artık teste dayanan bir kodumuz olduğundan testin fail olmamasına dikkat ederek içimiz rahat kodumuzu düzenleyebiliriz.
+]
+--
+.bullet[
+*	Tekrar
+]
+
+???
+Bu kadar basit aslında. Bu disiplini tutturduktan sonra test yazmak artık zahmet değil kolaylık haline gelecek. Nasıl mı?
+---
+
+### TDD'nin geliştirmeye faydaları
+
+Kod değişimindeki faydalarını gördük. Peki kod geliştirmesinde de faydalı olabileceğini biliyor muydunuz?
+
+Yine bir senaryoyla durumu inceleyelim. Senaryomuz:
+
+> Bir ERP yazılımı yapıyorsunuz ve sizden istenen şey: siparişi görüp iptal etmek veya bir notla beraber ilgili departmana iletmek
+
+olsun. İlk örneğimiz de yine TDD kullanılmayan:
+
+---
+class: inverse
+
+1. İstenen işlemleri yapacak kod yazılır.
+1. Daha sonra yazılım derlenir ve local ortamda çalıştırılır. Bu iş çeşitli gereksinimler gerektirebilir: DB, network bağlantısı gibi.
+1. Müşteri rolünde bir kullanıcıyla sisteme giriş yapılır.
+1. Sipariş oluşturmak için gerekli ekranlarda veriler girilir
+1. Sistemden çıkılıp siparişleri görebilen bir kullanıcıyla tekrar girilir.
+1. Sistemden sipariş görülür ve kodlanan özelliğin doğru çalışıp çalışmadığına bakılır.
+
+Tüm bu adımlar bol bol debug ve UI etkileşimi gerektirebilir
+
+--
+
+> Eğer şanslıysak ki çoğu zaman değiliz (murphy!), bu işlemi 2-3 kere tekrar ederek istenen kodu yazabiliriz ama  biliyoruz ki yazılan kodu test edebilmek için bu doğrudan alakası olmayan işleri çok kereler tekrarlamamız gerekecek. Üstelik bu işin müşteriden, QA'den dönme durumunda yine aynı adımları izlememiz lazım.
+
+Bir de TDD kullanılan senaryoya bakalım:
+
+---
+
+1. Test yazmak basit ve etkili bir analiz ve tasarım sağlar
+1. Geliştirme esnasında kodun ne yapıp yapamadığının anlık sonucunu görmek konsantrasyon dağılmadan geliştirebilmeyi sağlar
+1. Değiştirilen kodun başka yerleri bozup bozmadığının farkında olabilmek daha radikal (ve doğru) değişiklikleri mümkün kılar
+1. Yazılan testler geliştiriciler için en güncel dökümantasyonu sağlar
+1. Testlerin izole yazılması sayesinde yazılımın diğer kısımlarından bağımsız geliştirilmesi sağlanabilir: Kodun bambaşka bir yerindeki bug artık sizin geliştirmenizi engellemez
+
+???
+
+1. İşin deneme yanılma kısmını UI, DB vb. olmadan yapabilirim
+1. Projeyi build et, aç, login ol vb. gibi adımları uygulamadan fonksiyonumun sonucunu anlık görebilirim.
+1. Refactor edebilme, gerekirse mimariyi değiştirebilme özgürlüğü
+1. Commentlere veya dökümanlara gerek duymadan bir fonksiyonun ne iş yaptığını testlerden görebilirim. BDD?
+1. Yazılımın diğer kısımlarındaki eksik ve hatalar benim kodu geliştirmeme engel değil
+
+---
+class: middle
+
+> Sizce hangi senaryo daha iyi? Neden?
+
+???
+Free talk
+---
+
+## Integration Testing
+
+Karmaşık bir yazılım birçok alt yazılımın birleşimiyle meydana gelir. Geliştirilen bu modüller birbirleriyle belirli arayüzlerle etkileşerek çalışırlar. Görülmüştür ki bu modüllerin entegrasyonu yazılım geliştirmesindeki en zorlu süreçlerden biridir.
+
+???
+Bunun bir nedeni de alt modüllerin izole bir şekilde geliştirilmesi ve entegrasyonun en sona bırakılmasıdır. Bu durumda çoğu hata farkedilmeden üzerinden uzun bir zaman geçebilir. Bu hataların birikmesi, durumun düzeltilmesini giderek daha da zor hale getirir.
+
+--
+
+Bunu çözebilmek için **çevik prensiplerden** de yararlanarak **integration testing** ortaya çıkarılmıştır. Farklı stratejiler mevcuttur:
+
+--
+.bullet[
+* **Big Bang Yöntemi:** Geliştirilen tüm modüller tek bir kerede birleştirilir ve test edilir. Tüm modüllerin bitmesini gerektirir ve çıkan hataların ana kaynağını tespit etmek zordur.
+]
+--
+.bullet[
+* **Incremental (Birikmeli) Yöntem:** *Buttom Up* (alttan üste), *Top Down* (üstten alta) ve ikisinin birleşimi olan...
+]
+--
+.bullet[
+* ...**Sandwich** yöntemleri kullanılabilir. Seçilen yönteme göre **stub** ve **driver** yazılması gerekebilir.
+]
+
+---
+
+## Integration Testing
+
+.pic[.doksan[
+![](/assets/images/topbottom.png)
+]]
+---
+
+## Code Coverage (Test Coverage)
+
+Yazılan testlerin, yazılımı gerçekte ne kadarını kapsadığının hesaplandığı yöntemdir. Teorik olarak code coverage %100 olan yazılımlar hatasızdır denebilir ancak pratikte birçok yönden çok fazla sayıda test yazılmasını gerektireceği için çok zordur. Ancak oran ne kadar yüksekse hata oluşma olasılığı düşer.
+
+???
+Tabii testlerin kalitesinin de yüksek olduğunu varsayıyoruz
+
+--
+
+**TDD** kullanımı code coverage'ın yüksek tutulması için bir yöntem olarak düşünülebilir çünkü TDD ile testi olmayan kod yazılmaması amaçlanır.
+
+---
+
+## .NET'de Unit Test
+
+???
+* Evet arkadaşlar, sonunda teorik ve sıkıcı ama bir o kadar da gerekli kısmı bitirmiş bulunuyoruz.
+* Burada anlatılan tüm konseptlerin öğrenmek bir günde olacak bir şey değil, kullana kullana, ihtiyaç oldukça dönüp bakılacak bir kaynak olarak düşünebilirsiniz
+* Ama unit test yazılacağı zaman buradaki pratikleri ve prensipleri uygulamak işimizi kolaylaştıracaktır.
+
+--
+
+http://stackoverflow.com/questions/261139/nunit-vs-mbunit-vs-mstest-vs-xunit-net
+
+http://www.slant.co/topics/543/compare/~nunit_vs_xunit-net_vs_mstest
+
+.bullet[
+* Genel olarak MbUnit ve xUnit frameworkleri yeni özellikleriyle dikkat çekerken, nUnit en çok kullanılan ve son versiyonlarıyla rakiplerinin özellikleri ekleyen framework olarak öne çıkıyor. MsTest ise Visual Studio entegrasyonuyla hem iyi hem de ona bağımlılığından kötü olarak geçiyor.
+]
+
+--
+
+> Benim şimdiye kadar kullandığım özellikleriyle nUnit, yeterli ve olgun geldi. Gerekirse değiştirilmesi veya birden çok framework'le çalışılması sağlanabilir.
+
+---
+
+## .NET'de Unit Test
+
+https://github.com/moq/moq4
+
+Mocking library: **moq**
+
+```csharp
+var mock = new Mock<ILoveThisFramework>();
+
+// WOW! No record/replay weirdness?! :)
+mock.Setup(framework => framework.DownloadExists("2.0.0.0"))
+		.Returns(true);
+
+// Hand mock.Object as a collaborator and exercise it,
+// like calling methods on it...
+ILoveThisFramework lovable = mock.Object;
+bool download = lovable.DownloadExists("2.0.0.0");
+
+// Verify that the given method was indeed called with the expected value at most once
+mock.Verify(framework => framework.DownloadExists("2.0.0.0"), Times.AtMostOnce());
+```
+
+---
+
+## It's Demo Time !!!
+
+* Varsa sorular
+
+---
+
+class: inverse, middle, center
+
+# Teşekkürler
+
+    </textarea>
+    <script src="https://remarkjs.com/downloads/remark-latest.min.js" type="text/javascript">
+    </script>
+    <script type="text/javascript">
+      var slideshow = remark.create({
+        navigation: {
+          scroll: false
+        },
+        highlightStyle: 'solarized-light',
+        highlightLines: true
+      });
+    </script>
+    <script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.js" type="text/javascript"></script>
+    <script>
+      mermaid.initialize({
+        startOnLoad: false,
+        cloneCssStyles: false
+      });
+
+      function initMermaid(s) {
+        var diagrams = document.querySelectorAll('.mermaid');
+        var i;
+        for(i=0;i<diagrams.length;i++){
+          if(diagrams[i].offsetWidth>0){
+            mermaid.init(undefined, diagrams[i]);
+          }
+        }
+      }
+      slideshow.on('afterShowSlide', initMermaid);
+      initMermaid(slideshow.getSlides()[slideshow.getCurrentSlideIndex()]);
+    </script>
+  </body>
+</html>

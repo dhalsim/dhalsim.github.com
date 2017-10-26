@@ -1,0 +1,711 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="tr"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Temel Javascript</title>
+	<meta name="author" content="Barış Aydek">
+
+	<!-- for Google -->
+	<meta name="description" content="Bu sayfada javascript'te bilinmesi gerekli ama çoğu zaman ayrıntılı bilgi sahibi olunmayan temel konular hakkında yazıyorum." />
+	<meta name="keywords" content="" />
+
+	<meta name="author" content="Barış Aydek" />
+	<meta name="copyright" content="" />
+	<meta name="application-name" content="Dhalsim's" />
+
+	<!-- for Facebook -->
+	<meta property="og:title" content="Temel Javascript" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="http://dhalsim.github.io/assets/images/js.jpg" />
+	<meta property="og:url" content="http://dhalsim.github.io/javascript/2015/12/18/temel-javascript" />
+	<meta property="og:description" content="Bu sayfada javascript'te bilinmesi gerekli ama çoğu zaman ayrıntılı bilgi sahibi olunmayan temel konular hakkında yazıyorum." />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Temel Javascript" />
+	<meta name="twitter:description" content="Bu sayfada javascript'te bilinmesi gerekli ama çoğu zaman ayrıntılı bilgi sahibi olunmayan temel konular hakkında yazıyorum." />
+	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/js.jpg" />
+	<meta name="twitter:creator" content="@">
+
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+  <style>
+	  @font-face {
+			font-family: 'Allerta';
+			src: url('/assets/fonts/Allerta-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Allerta-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Allerta-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Allerta-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+		@font-face {
+			font-family: 'Punk';
+			src: url('/assets/fonts/punk-regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/punk-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/punk-regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/punk-regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/punk-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/punk-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+
+		@font-face {
+			font-family: 'Ewert';
+			src: url('/assets/fonts/Ewert-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Ewert-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Ewert-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Ewert-Regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Ewert-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Ewert-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+	</style>
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Temel Javascript" type="application/atom+xml">
+	
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/">
+								Dhalsim's
+							</a>
+						</li>
+						<li class="archive"><a href="/archive.html">Arşiv</a></li>
+						<li class="page"><a href="/pages.html">Sayfalar</a></li>
+						<li class="category"><a href="/categories.html">Kategoriler</a></li>
+						<li class="tag"><a href="/tags.html">Taglar</a></li>
+					</ul>
+
+					<hr />
+					<nav class="languageSelector">
+						
+							<a href="/en" ><img src="/assets/blank.gif" class="flag flag-gb" alt="İngilizce" /> </a><a href="/en" class="alink">İngilizce</a>
+						
+						-
+						
+							<img src="/assets/blank.gif" class="flag flag-tr" alt="Türkçe" /> Türkçe
+						
+					</nav>
+
+					<hr />
+
+					<div> <a href="/rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Temel Javascript</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				
+				<div class="toc">
+					<span>İçindekiler tablosu yükleniyor...</span>
+					<div class="sp-circle"></div>
+				</div>
+				
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					
+
+					<blockquote>
+<p>Javascript öyle garip bir dil ki çoğu insan dilin en temel özelliklerini bilmeden onu kullanabilir. Çoğu zaman da öğrenmemiz gerekmez ancak bunları öğrenmeden de çok fazla ileri gidemeyiz. Bu yazıda javascript&#39;in çok görünen ama bilinmeyen temellerine iniyoruz.</p>
+</blockquote>
+
+<h1>This</h1>
+
+<p><strong>this</strong> javascript&#39;te bir fonksiyonun çağrıldığı context&#39;ini vermektedir. Eğer fonksiyon <code>global</code> objeden çağrılmışsa <strong>this</strong> global objeyi gösterir. Tarayıcılarda bu global obje <code>window</code> nesnesidir.</p>
+
+<p><em>Tanımlandığı</em> değil de <em>çağrıldığı</em> yer olarak üzerinde durmamım nedeni bunun farklı şeyler olmasıdır. Örneğin:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+<span class="lineno"> 2</span>     <span class="nx">arg1</span><span class="o">:</span> <span class="mi">10</span><span class="p">,</span>
+<span class="lineno"> 3</span>     <span class="nx">f</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 4</span>         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">arg1</span><span class="p">);</span>
+<span class="lineno"> 5</span>     <span class="p">}</span>
+<span class="lineno"> 6</span> <span class="p">};</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="kd">var</span> <span class="nx">obj2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">arg1</span><span class="o">:</span> <span class="mi">11</span> <span class="p">};</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">f</span><span class="p">();</span> <span class="c1">// --&gt; 10 yazar</span>
+<span class="lineno">11</span> <span class="nx">obj2</span><span class="p">.</span><span class="nx">f</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">f</span><span class="p">;</span>
+<span class="lineno">12</span> <span class="nx">obj2</span><span class="p">.</span><span class="nx">f</span><span class="p">();</span> <span class="c1">// --&gt; 11 yazar</span>
+</code></pre></div>
+<p><code>obj2.f = obj.f</code> diyerek <code>f</code> fonksiyonunu bağlamından kopardık ve <code>obj2</code>&#39;ye setledik. <code>obj2</code> üzerinden çağırdığımızda <strong>this</strong> artık <code>obj</code>&#39;yi değil <code>obj2</code>&#39;yi gösteriyordu. Yani <strong>this</strong> çağrıldığı yere göre dinamik olarak oluşan bir context&#39;tir. Bu context&#39;e (bağlama) <strong>this</strong> <strong>keyword</strong>&#39;ü üzerinden erişiz.</p>
+
+<p>Bu demek oluyor ki <strong>this</strong>&#39;e çok güvenip bir şeyler yazarsanız bazı durumlarda bu problemlere yol açabilir.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">obj</span> <span class="o">=</span> <span class="p">{</span>
+<span class="lineno"> 2</span>     <span class="nx">helperFunc</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 3</span>         <span class="k">return</span> <span class="s2">&quot;yardımcı kütüphane&quot;</span><span class="p">;</span>
+<span class="lineno"> 4</span>     <span class="p">},</span>
+<span class="lineno"> 5</span>     <span class="nx">workerFunc</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 6</span>         <span class="kd">var</span> <span class="nx">utilValue</span> <span class="o">=</span> <span class="k">this</span><span class="p">.</span><span class="nx">helperFunc</span><span class="p">();</span>
+<span class="lineno"> 7</span>     <span class="p">}</span>
+<span class="lineno"> 8</span> <span class="p">};</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="kd">var</span> <span class="nx">workFromHere</span> <span class="o">=</span> <span class="nx">obj</span><span class="p">.</span><span class="nx">workerFunc</span><span class="p">;</span>
+<span class="lineno">11</span> <span class="nx">workFromHere</span><span class="p">();</span> <span class="c1">// --&gt; TypeError: this.helperFunc is not a function</span>
+</code></pre></div>
+<p>Bunun için bir çözüm var o da <strong>bind</strong>. Ama bu konuya sonra bakacağız.</p>
+
+<p>Şimdi <strong>this</strong> ile ilgili başka bir keyword&#39;e <strong>new</strong>&#39;a balalım:</p>
+
+<h1>New</h1>
+
+<p><strong>new</strong> constructor fonksiyonunu kullanmak içindir. Parametre geçirebilirsiniz veya geçirmeseniz de olur. Dönen obje artık yeni bir objedir. Her <strong>new</strong> yeni bir kopya oluşturur.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">function</span> <span class="nx">Triangle</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">2</span>     <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="lineno">3</span> <span class="p">}</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="kd">var</span> <span class="nx">triangle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Triangle</span><span class="p">(</span><span class="s2">&quot;Üçgen&quot;</span><span class="p">);</span>
+<span class="lineno">6</span> <span class="kd">var</span> <span class="nx">triangle2</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Triangle</span><span class="p">(</span><span class="s2">&quot;Üçgen2&quot;</span><span class="p">);</span>
+<span class="lineno">7</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">triangle</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="lineno">8</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">triangle2</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div>
+<p>Aynısını ES5 ile gelen <code>Object.create</code> ile de yapabiliyoruz. Yani illa bir fonksiyon olmasına gerek yok.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">shape</span> <span class="o">=</span> <span class="p">{</span>
+<span class="lineno">2</span>     <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Şekil&quot;</span>
+<span class="lineno">3</span> <span class="p">};</span>
+<span class="lineno">4</span> 
+<span class="lineno">5</span> <span class="kd">var</span> <span class="nx">triangle</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">shape</span><span class="p">);</span>
+<span class="lineno">6</span> <span class="nx">triangle</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="s2">&quot;Üçgen&quot;</span><span class="p">;</span>
+<span class="lineno">7</span> 
+<span class="lineno">8</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">shape</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="lineno">9</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">triangle</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+</code></pre></div>
+<p>Mesela şu iki objenin farklarına bir bakın:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">myObj</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="p">{</span><span class="nx">name</span><span class="o">:</span> <span class="p">{</span> <span class="nx">value</span><span class="o">:</span> <span class="s2">&quot;Barış&quot;</span> <span class="p">}});</span>
+<span class="lineno">2</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myObj</span><span class="p">);</span>
+<span class="lineno">3</span> <span class="kd">var</span> <span class="nx">myObj2</span> <span class="o">=</span> <span class="p">{</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;Barış&quot;</span> <span class="p">};</span>
+<span class="lineno">4</span> <span class="c1">// ya da:</span>
+<span class="lineno">5</span> <span class="c1">// var myObj2 = Object.create({ name: &quot;Barış&quot; });</span>
+<span class="lineno">6</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myObj2</span><span class="p">);</span>
+<span class="lineno">7</span> 
+<span class="lineno">8</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myObj</span> <span class="k">instanceof</span><span class="p">(</span><span class="nb">Object</span><span class="p">));</span>
+<span class="lineno">9</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">myObj2</span> <span class="k">instanceof</span><span class="p">(</span><span class="nb">Object</span><span class="p">));</span>
+</code></pre></div>
+<blockquote>
+<p>Function değil Object yaratırken Object.create&#39;de prototype&#39;ı karıştırmayın, prototype daha çok Function&#39;larda kullanılır.</p>
+</blockquote>
+
+<p>create metodunun ilk parametresini <code>null</code> vererek aslında Object&#39;ten türememesi sağladık. Bunun tabii ki ilginç sonuçları var. Bir nesne Object&#39;ten türemediğinde mesela şunu yapamıyoruz:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="k">for</span><span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="k">in</span> <span class="nx">myObj</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">2</span>    <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">x</span><span class="p">);</span>
+<span class="lineno">3</span> <span class="p">}</span>
+</code></pre></div>
+<p><code>Object.create</code> ile birlikte ilginç iki özellik daha kullanabiliyoruz, bunlardan biri <strong>property</strong>, diğeri de önceden tanıdığımız ve sevdiğimiz <strong>prototype</strong>.</p>
+
+<h1>Property</h1>
+
+<p>Yeni yaratılan bir obje için:</p>
+
+<blockquote>
+<p>Object.create(proto[, propertiesObject])</p>
+</blockquote>
+
+<p>Zaten var olan bir objeye property eklemek için:</p>
+
+<blockquote>
+<p>Object.defineProperty(obj, prop, descriptor)</p>
+</blockquote>
+
+<p>Property&#39;nin özellikleri:</p>
+
+<ul>
+<li>value: property&#39;nin değeri</li>
+<li>writable: (varsayılan false) false ise o property&#39;ye setleme yapılamaz (immutable)</li>
+<li>enumerable: (varsayılan false) false ise Object.keys&#39;te veya for..in&#39;de kullanılamaz</li>
+<li>configurable: (varsayılan false) false ise property&#39;nin bu özellikleri sonradan değiştirilemez veya property silinemez</li>
+<li>özel set: property&#39;ye atama verilen fonksiyon üzerinden yapılır</li>
+<li>özet get: property&#39;nin değeri verilen fonksiyon üzerinden döndürülür.</li>
+</ul>
+
+<p>Define property ile ilgili örnekler: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/defineProperty</a></p>
+
+<p>Object.create ile birlikte kullanımı: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create#Using_propertiesObject_argument_with_Object.create()">https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/create#Using_propertiesObject_argument_with_Object.create()</a></p>
+
+<h1>Prototype</h1>
+
+<blockquote>
+<p><strong>Prototype chain</strong>: If you try to look up a key on an object and it is not found, JavaScript will look for it in the prototype. It will follow the &quot;prototype chain&quot; until it sees a null value. In that case, it returns undefined</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">function</span> <span class="nx">Shape</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 2</span>     <span class="k">this</span><span class="p">.</span><span class="nx">name</span> <span class="o">=</span> <span class="nx">name</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="p">}</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="nx">Shape</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">area</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">return</span> <span class="k">this</span><span class="p">.</span><span class="nx">edges</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span> <span class="o">*</span> <span class="k">this</span><span class="p">.</span><span class="nx">edges</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span> <span class="o">/</span> <span class="mi">2</span><span class="p">;</span>
+<span class="lineno"> 7</span> <span class="p">}</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> <span class="kd">function</span> <span class="nx">Triangle</span><span class="p">(</span><span class="nx">name</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="nx">Shape</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">name</span><span class="p">);</span>
+<span class="lineno">11</span>     <span class="k">this</span><span class="p">.</span><span class="nx">edges</span> <span class="o">=</span> <span class="p">[</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">];</span>
+<span class="lineno">12</span> <span class="p">}</span>
+<span class="lineno">13</span> 
+<span class="lineno">14</span> <span class="c1">// Burada object create diyerek yeni bir obje yaratılmış oluyor.</span>
+<span class="lineno">15</span> <span class="c1">// Kullanmasaydık Triangle prototype ile Shape prototype aynı nesneyi gösterecekti</span>
+<span class="lineno">16</span> <span class="c1">// Bu yüzden Triangle&#39;a özel prototype fonksiyonları tanımlayamayacaktık (Otomatik Shape&#39;e de tanımlanırdı)</span>
+<span class="lineno">17</span> <span class="nx">Triangle</span><span class="p">.</span><span class="nx">prototype</span> <span class="o">=</span> <span class="nb">Object</span><span class="p">.</span><span class="nx">create</span><span class="p">(</span><span class="nx">Shape</span><span class="p">.</span><span class="nx">prototype</span><span class="p">);</span>
+<span class="lineno">18</span> <span class="nx">Triangle</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">constructor</span> <span class="o">=</span> <span class="nx">Triangle</span><span class="p">;</span>
+<span class="lineno">19</span> 
+<span class="lineno">20</span> <span class="kd">var</span> <span class="nx">triangle</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">Triangle</span><span class="p">(</span><span class="s2">&quot;Dik üçgen&quot;</span><span class="p">);</span>
+<span class="lineno">21</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">triangle</span><span class="p">.</span><span class="nx">name</span><span class="p">);</span>
+<span class="lineno">22</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">triangle</span><span class="p">.</span><span class="nx">area</span><span class="p">());</span>
+</code></pre></div>
+<p>Ne bu? Aa object oriented. Ama prototype-based. Her ne kadar ES6&#39;da <strong>class</strong> keyword&#39;ü gelse de (syntax olarak değişse bile temelde yapı aynı) Javascript&#39;in diğer OO dillerindeki <code>class</code> gibi bir yapısı olmadığından obje üzerinden inheritance sağlar.</p>
+
+<p>Burada <code>this.edges</code> nasıl çalıştı diye soracak olursak; Triangle prototype ile Shape&#39;den türediği için aslında <code>Shape.prototype.area</code> Triangle context&#39;iyle çalıştı.</p>
+
+<blockquote>
+<p>Bu arada context&#39;i çok andım <a href="https://eksisozluk.com/entry/7225385">şuna</a> link vermezsem olmaz.</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ...
+<span class="lineno">2</span> Shape.call(this, name);
+<span class="lineno">3</span> ...
+<span class="lineno">4</span> console.log(triangle.name);
+</code></pre></div>
+<p>Burada da Shape&#39;in constructor&#39;ını Triangle&#39;ın this&#39;ini geçirerek çağırdık ve Shape içindeki this&#39;e olan atama aslında Triangle&#39;a olmuş oldu. Ve bu bize yepyeni konuları açtı: <strong>call</strong>, <strong>apply</strong>, ve <strong>bind</strong></p>
+
+<h1>Call ve Apply</h1>
+
+<p>Eğer <strong>call</strong>&#39;u anlarsak <strong>apply</strong>&#39;ı da anlayacağız, ikisi de aynı şey aslında.</p>
+
+<blockquote>
+<p>fun.call(thisArg[, arg1[, arg2[, ...]]])</p>
+
+<p>fun.apply(thisArg, [argsArray])</p>
+</blockquote>
+
+<p>İkisinde de ilk parametre <em>thisArg</em>, call&#39;da diğer parametreleri sırayla geçirirken apply&#39;da kalan parametreler bir array içinde geçirilebiliyor. Uygun durumlarda bunlardan birini seçip kullanabilirsiniz. Örneğin prototype hiyerarşisini sağlayabilmek için parent/üst constructor&#39;ı call ile çağırdık. Bu <em>this</em> argümanını geçirebilmek için gereklidir.</p>
+
+<p>Peki apply ne işe yarayacak. apply benim gördüğüm kadarıyla javascript framework&#39;ü yazanlar için oldukça kullanışlı. Özellikle <strong>arguments</strong> değişkeniyle birlikte kullanıldığında. Örneğin aşağıdaki koddaki <strong>loggerFunc</strong> varolan herhangibir fonksiyonun parametrelerini ve sonucunu yazdırır.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">testFunc</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">,</span> <span class="nx">arg3</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 2</span>         <span class="k">return</span> <span class="nx">arg1</span> <span class="o">+</span> <span class="nx">arg2</span> <span class="o">+</span> <span class="nx">arg3</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="p">};</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="nx">loggerFunc</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(</span><span class="nx">originalFunc</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 7</span>         <span class="c1">// fonksiyon parametrelerini yazdır</span>
+<span class="lineno"> 8</span>       <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arguments</span><span class="p">);</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span>         <span class="c1">// orijinal fonksiyonu çalıştır</span>
+<span class="lineno">11</span>       <span class="kd">var</span> <span class="nx">result</span> <span class="o">=</span> <span class="nx">originalFunc</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">arguments</span><span class="p">);</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>         <span class="c1">// sonucu yazdır</span>
+<span class="lineno">14</span>         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">result</span><span class="p">);</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span>         <span class="c1">// sonucu döndür</span>
+<span class="lineno">17</span>         <span class="k">return</span> <span class="nx">result</span><span class="p">;</span>
+<span class="lineno">18</span>     <span class="p">};</span>
+<span class="lineno">19</span> <span class="p">}</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span> <span class="kd">var</span> <span class="nx">wrapped</span> <span class="o">=</span> <span class="nx">loggerFunc</span><span class="p">(</span><span class="nx">testFunc</span><span class="p">);</span>
+<span class="lineno">22</span> <span class="nx">wrapped</span><span class="p">(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">4</span><span class="p">,</span> <span class="mi">5</span><span class="p">);</span>
+</code></pre></div>
+<h1>Bind</h1>
+
+<blockquote>
+<p>fun.bind(thisArg[, arg1[, arg2[, ...]]])</p>
+</blockquote>
+
+<p>Bind ise yine <strong>apply</strong> ve <strong>call</strong> gibi parametrelerin setlenmesini sağlar ancak bu sefer fonksiyonu direkt çalıştırmaz, yerine; verilen parametrelerin hazır setli bir versiyonunu yeniden üretir. bind&#39;dan dönen değer yine bir fonksiyondur ve siz istediğiniz zaman çağırabilirsiniz. Çağırdığınızda, önceden setlediğiniz parametrelerle çalışacaktır.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">function</span> <span class="nx">test</span><span class="p">(</span><span class="nx">arg1</span><span class="p">,</span> <span class="nx">arg2</span><span class="p">,</span> <span class="nx">arg3</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 2</span>         <span class="k">this</span><span class="p">.</span><span class="nx">arg1</span> <span class="o">=</span> <span class="nx">arg1</span><span class="p">;</span>
+<span class="lineno"> 3</span>         <span class="k">this</span><span class="p">.</span><span class="nx">arg2</span> <span class="o">=</span> <span class="nx">arg2</span><span class="p">;</span>
+<span class="lineno"> 4</span>         <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">arg3</span><span class="p">);</span>
+<span class="lineno"> 5</span> <span class="p">}</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="kd">var</span> <span class="nx">results</span> <span class="p">{};</span>
+<span class="lineno"> 8</span> <span class="kd">var</span> <span class="nx">testWithBind</span> <span class="o">=</span> <span class="nx">test</span><span class="p">.</span><span class="nx">bind</span><span class="p">(</span><span class="nx">results</span><span class="p">,</span> <span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">);</span>
+<span class="lineno"> 9</span> <span class="nx">testWithBind</span><span class="p">(</span><span class="mi">3</span><span class="p">);</span>            <span class="c1">// 3</span>
+<span class="lineno">10</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">results</span><span class="p">);</span> <span class="c1">// 1, 2</span>
+</code></pre></div>
+<p>Gördüğünüz gibi <strong>this</strong> yerine <strong>results</strong> objesini geçirdim, böylece arg1 ve arg2 results objesine setlendi. Aynı zamanda bind ile 1 ve 2 parametrelerini de setledim. İlk iki parametre artık verdiğim değerlere bağlı bir şekilde çalışacak. O yüzden testWithBind fonksiyonunu tek parametreyle çağırdığım halde bu arg3 parametresine denk geldi.</p>
+
+<blockquote>
+<p>Eğer eski tarayıcı sürümlerine bağımlılığınız varsa (müşterilerinizin bir kısmı IE 7/8 kullanıyor olabilir, şu siteden kullanacağınız özelliği kontrol etmekte ve gerektiği durumlarda polyfill kullanmakta yarar var. <a href="http://kangax.github.io/compat-table/es5/">http://kangax.github.io/compat-table/es5/</a> (Show obselete browsers seçeneğini seçin)</p>
+
+<p>Denk geldikçe bu yazıya javascript&#39;le ilgili bilinmesi gereken temel konuları ekleyeceğim.</p>
+</blockquote>
+
+
+          <hr />
+					
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2015-12-18T00:00:00+01:00" datetime="2015-12-18T00:00:00+01:00" pubdate>
+							<span class="month"><abbr>December</abbr></span>
+							<span class="day">18</span>
+							<span class="year">2015</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/categories.html#javascript-ref">
+    		javascript <span>2</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/tags.html#javascript-ref">javascript <span>5</span></a></li>
+    
+    	<li><a href="/tags.html#this-ref">this <span>1</span></a></li>
+    
+    	<li><a href="/tags.html#new-ref">new <span>1</span></a></li>
+    
+    	<li><a href="/tags.html#property-ref">property <span>1</span></a></li>
+    
+    	<li><a href="/tags.html#prototype-ref">prototype <span>1</span></a></li>
+    
+    	<li><a href="/tags.html#call-ref">call <span>1</span></a></li>
+    
+    	<li><a href="/tags.html#apply-ref">apply <span>1</span></a></li>
+    
+    	<li><a href="/tags.html#bind-ref">bind <span>1</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+
+
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/software/2015/11/15/software-testing" title="View Software Testing">&laquo; Software Testing</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01" title="View Fonksiyonel Programlama - S01E01">Fonksiyonel Programlama - S01E01 &raquo;</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>Hakkımda</h4>
+					<img src="/assets/me_rounded.png" style="width: 150px" />
+					<ul>
+						<li class="contact"><span class="author fn n">Barış Aydek</span></li>
+						<li class="resume"><a href="/resume/cv-tr">Özgeçmişim HTML (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-tr.pdf">pdf (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf (ingilizce)</a>
+						</li>
+						<li class="contact"><address><span class="fn email"><a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a></span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+
+					<hr />
+
+					<a href=/software-testing>Software Testing & TDD</a> sunumuma göz at!
+
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/javascript/2015/12/18/temel-javascript" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		$('.content header').append(
+			$('.toc').html(
+				$('<h4/>', {text: 'İçindekiler: '})
+			).append($parentUl)
+		);
+
+		$('.content img')
+			.attr('title', 'Resmi büyütmek için üstüne tıklayınız.')
+			.click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
+	});
+</script>
+
+
+
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70097547-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
+

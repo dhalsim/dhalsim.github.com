@@ -1,0 +1,898 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="tr"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Node.js Hata Yönetimi ve Loglama</title>
+	<meta name="author" content="Barış Aydek">
+
+	<!-- for Google -->
+	<meta name="description" content="Bu makalede node.js uygulamalarının Winston kütüphanesi ile nasıl kolay ve doğru bir şekilde loglama yapılacağını ve Express üzerinden hata yönetiminin nasıl yapılabileceğini okuyabilirsiniz." />
+	<meta name="keywords" content="" />
+
+	<meta name="author" content="Barış Aydek" />
+	<meta name="copyright" content="" />
+	<meta name="application-name" content="Dhalsim's" />
+
+	<!-- for Facebook -->
+	<meta property="og:title" content="Node.js Hata Yönetimi ve Loglama" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="http://dhalsim.github.io/assets/images/nodejs.png" />
+	<meta property="og:url" content="http://dhalsim.github.io/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama" />
+	<meta property="og:description" content="Bu makalede node.js uygulamalarının Winston kütüphanesi ile nasıl kolay ve doğru bir şekilde loglama yapılacağını ve Express üzerinden hata yönetiminin nasıl yapılabileceğini okuyabilirsiniz." />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Node.js Hata Yönetimi ve Loglama" />
+	<meta name="twitter:description" content="Bu makalede node.js uygulamalarının Winston kütüphanesi ile nasıl kolay ve doğru bir şekilde loglama yapılacağını ve Express üzerinden hata yönetiminin nasıl yapılabileceğini okuyabilirsiniz." />
+	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/nodejs.png" />
+	<meta name="twitter:creator" content="@">
+
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+  <style>
+	  @font-face {
+			font-family: 'Allerta';
+			src: url('/assets/fonts/Allerta-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Allerta-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Allerta-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Allerta-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+		@font-face {
+			font-family: 'Punk';
+			src: url('/assets/fonts/punk-regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/punk-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/punk-regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/punk-regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/punk-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/punk-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+
+		@font-face {
+			font-family: 'Ewert';
+			src: url('/assets/fonts/Ewert-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Ewert-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Ewert-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Ewert-Regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Ewert-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Ewert-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+	</style>
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Node.js Hata Yönetimi ve Loglama" type="application/atom+xml">
+	
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/">
+								Dhalsim's
+							</a>
+						</li>
+						<li class="archive"><a href="/archive.html">Arşiv</a></li>
+						<li class="page"><a href="/pages.html">Sayfalar</a></li>
+						<li class="category"><a href="/categories.html">Kategoriler</a></li>
+						<li class="tag"><a href="/tags.html">Taglar</a></li>
+					</ul>
+
+					<hr />
+					<nav class="languageSelector">
+						
+							<a href="/en" ><img src="/assets/blank.gif" class="flag flag-gb" alt="İngilizce" /> </a><a href="/en" class="alink">İngilizce</a>
+						
+						-
+						
+							<img src="/assets/blank.gif" class="flag flag-tr" alt="Türkçe" /> Türkçe
+						
+					</nav>
+
+					<hr />
+
+					<div> <a href="/rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Node.js Hata Yönetimi ve Loglama</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				
+				<div class="toc">
+					<span>İçindekiler tablosu yükleniyor...</span>
+					<div class="sp-circle"></div>
+				</div>
+				
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					
+					
+
+
+
+
+<div class="seriesNote">
+  Bu makale <strong>2</strong> bölümlük <strong>Kontrol Bende</strong> serisinin <strong>2.</strong> bölümüdür.</p>
+	<ul>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 1 -
+		
+			<a href="/node.js/kontrol-bende/2015/11/13/debugging-nodejs">
+		
+    Debugging Node.js
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 2 -
+		
+    Node.js Hata Yönetimi ve Loglama
+    
+		</li>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</ul>
+</div>
+
+
+
+
+					
+
+					<p>Merhaba, <strong>&quot;Kontrol Bende&quot;</strong> serisine yeni bir konu daha ekliyoruz.</p>
+
+<p>Bundan önce <a href="/node.js/2015/11/13/debugging-nodejs/">Node.js Debugging</a> konusunu işlemiştik. Şimdi ise hem debugging&#39;te hem de production&#39;da olmazsa olmaz <strong>loglama</strong> konusuna dalıyoruz.</p>
+
+<p>Loglama konusu node.js ile birlikte daha da önemli bir hale geliyor. Bunun nedeni node.js&#39;in kullanım amaçlarından biri olan <em>scaling</em>&#39;te ne kadar yaşamsal olduğunu bilmemiz.</p>
+
+<!--more-->
+
+<p>Şöyle düşünelim. Daha önceden <a href="https://en.wikipedia.org/wiki/Monolithic_application">Monolithic</a> mimarideki uygulamalarımızı yönetmek görece kolaydı. Tek bir makinede Uygulama ve DB çalışıyordu ve bakmamız gereken DB üzerindeki bir tablo veya birkaç log dosyasından ibaretti.</p>
+
+<p>Ama <strong>microservice</strong>&#39;lerin kullanımı, multi-tier uygulamaların kabul görmesi ve <strong>scaling</strong> ile beraber loglama ve analizi çetrefilli bir hal aldı.</p>
+
+<p>Uygulamanın çoklu makinede (sanal da olabilir) <strong>Docker container</strong>&#39;lar üzerinde <strong>clustered</strong> bir yapıda çalışması, <strong>redis</strong>, <strong>mongodb</strong> <strong>hadoop</strong> ve daha nice teknolojinin farklı makinelerde ve hatta yerlerde kurulu olması (cloud computing) bizi logging ve hata yönetiminde radikal çözümler üretmemizi gerektiriyor.</p>
+
+<p>Ancak bu kadar ileri gitmeden önce işleri sırayla yapmalıyız. İlk önceliğimiz node.js uygulamamızdaki logların sağlıklı bir şekilde yazılmasıdır.</p>
+
+<p>Node.js&#39;te bunu başarabilmenin çeşitli yolları mevcut. Ancak uygulama tarafında yapılması zorunlu kısımlar da var. Mesela loglamanın <strong>level</strong>&#39;lar bazında yapılması. <strong>Unhandeled Exception</strong>&#39;ların (yakalanmamış istisnalar/hatalar) yönetimi gibi.</p>
+
+<p>Dediğim gibi node.js&#39;te bunun çok farklı yöntemleri mevcut. Benim ilk önereceğim <a href="https://github.com/winstonjs/winston">Winston</a> olacak. İsmi de <a href="http://www.urbandictionary.com/define.php?term=Chill+Winston">şuradan</a> geliyormuş :/. Bu arada kendisi <strong>async</strong> loglama yapıyor.</p>
+
+<h1>Winston</h1>
+
+<p>Kurulum:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> npm install winston --save
+<span class="lineno">2</span> npm install winston-redis --save
+</code></pre></div>
+<h2>Seviyeler</h2>
+
+<p>Önemliden önemsize varsayılan seviyeler (levels): <strong><code>error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5</code></strong></p>
+
+<p>Kullanımı:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="c1">// varsayılan logger</span>
+<span class="lineno">2</span> <span class="kd">var</span> <span class="nx">winston</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;winston&#39;</span><span class="p">);</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="c1">// bu ikisi de aynı</span>
+<span class="lineno">5</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;Hello distributed log files!&#39;</span><span class="p">);</span>
+<span class="lineno">6</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;Hello again distributed logs&#39;</span><span class="p">);</span>
+</code></pre></div>
+<h2>Transports</h2>
+
+<p>Varsayılan logger&#39;ın winston.transports.Console tipinde varsayılan bir transportu vardır. Yani otomatik olarak çıktıyı Console&#39;a verecektir.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">remove</span><span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">Console</span><span class="p">);</span>
+<span class="lineno">2</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;Bu hiçbir yere yazılmıyor!&#39;</span><span class="p">);</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">File</span><span class="p">,</span> <span class="p">{</span> <span class="nx">filename</span><span class="o">:</span> <span class="s1">&#39;logdosyam.log&#39;</span> <span class="p">});</span>
+<span class="lineno">5</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;Dosyaya yazacak!&#39;</span><span class="p">);</span>
+<span class="lineno">6</span> 
+<span class="lineno">7</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">Console</span><span class="p">);</span>
+<span class="lineno">8</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">info</span><span class="p">(</span><span class="s1">&#39;Hem dosyaya hem console&#39;</span><span class="nx">a</span> <span class="nx">yazacak</span><span class="err">&#39;</span><span class="p">);</span>
+</code></pre></div>
+<p>Winston <a href="https://github.com/winstonjs/winston/blob/master/docs/transports.md#winston-transports">official transport&#39;ları</a> çokçadır. <em>HTTP, redis, mongo</em> vb. buradan bulabilirsiniz. Bunun dışında 3rd party <strong>zibilyon</strong> tane <a href="https://github.com/winstonjs/winston/blob/master/docs/transports.md#find-more-transports">seçenek</a> de mevcuttur.</p>
+
+<h2>Metadata</h2>
+
+<p>Farklı bilgileri de log&#39;a ekleyebiliyoruz:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;test mesajı&#39;</span><span class="p">,</span> <span class="p">{</span> <span class="nx">bilgi</span><span class="o">:</span> <span class="s1">&#39;bu bir metadatadır&#39;</span> <span class="p">});</span>
+</code></pre></div>
+<h2>Ekleme (interpolation)</h2>
+
+<p>Parametreli mesaj yazdırma konusunda yardımcı olur. Parametre tipleri: <code>%s string,   %d number, %j json</code></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">var</span> <span class="nx">util</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;util&#39;</span><span class="p">);</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s1">&#39;info&#39;</span><span class="p">,</span> <span class="s1">&#39;test mesajı %s %d %j&#39;</span><span class="p">,</span> <span class="s1">&#39;ilk&#39;</span><span class="p">,</span> <span class="mi">5</span><span class="p">,</span> <span class="p">{</span><span class="nx">number</span><span class="o">:</span> <span class="mi">123</span><span class="p">},</span> <span class="p">{</span><span class="nx">meta</span><span class="o">:</span> <span class="s2">&quot;bu meta&quot;</span> <span class="p">},</span> <span class="kd">function</span> <span class="nx">callback</span><span class="p">(</span><span class="nx">transport</span><span class="p">,</span> <span class="nx">level</span><span class="p">,</span> <span class="nx">msg</span><span class="p">,</span> <span class="nx">meta</span><span class="p">){</span>
+<span class="lineno">4</span>     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&quot;loglama gerçekleşti&quot;</span><span class="p">);</span>
+<span class="lineno">5</span>     <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">util</span><span class="p">.</span><span class="nx">format</span><span class="p">(</span><span class="s2">&quot;transport -&gt; %s, level -&gt; %s, mesaj -&gt; %s, meta -&gt; %j&quot;</span><span class="p">,</span> <span class="nx">transport</span><span class="p">,</span> <span class="nx">level</span><span class="p">,</span> <span class="nx">msg</span><span class="p">,</span> <span class="nx">meta</span><span class="p">));</span>
+<span class="lineno">6</span> <span class="p">});</span>
+</code></pre></div>
+<h2>Exceptions</h2>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">handleExceptions</span><span class="p">();</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="c1">// unhandled exception&#39;ların özel bir dosyaya yazdırılmasını isteyebilirsiniz</span>
+<span class="lineno"> 4</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">handleExceptions</span><span class="p">(</span><span class="k">new</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">File</span><span class="p">({</span> <span class="nx">filename</span><span class="o">:</span> <span class="s1">&#39;path/to/exceptions.log&#39;</span> <span class="p">}))</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="c1">// ya da transport eklerken handleExceptions ile belirtilebiliyor</span>
+<span class="lineno"> 7</span> <span class="c1">// humanReadableUnhandledException ise okunaklı stack trace demek</span>
+<span class="lineno"> 8</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">add</span><span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">File</span><span class="p">,</span> <span class="p">{</span>
+<span class="lineno"> 9</span>   <span class="nx">filename</span><span class="o">:</span> <span class="s1">&#39;path/to/all-logs.log&#39;</span><span class="p">,</span>
+<span class="lineno">10</span>   <span class="nx">handleExceptions</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">11</span>   <span class="nx">level</span><span class="o">:</span> <span class="s1">&#39;warn&#39;</span><span class="p">,</span>
+<span class="lineno">12</span>   <span class="nx">humanReadableUnhandledException</span><span class="o">:</span> <span class="kc">true</span>
+<span class="lineno">13</span> <span class="p">});</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span> <span class="c1">// exception logladıktan sonra uygulamadan çıkmasın:</span>
+<span class="lineno">16</span> <span class="nx">winston</span><span class="p">.</span><span class="nx">exitOnError</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</code></pre></div>
+<p>Üstteki kodda transport level&#39;ı <code>warn</code> olarak ayarlanmış. Bu demektir ki <code>warn</code> <strong>ve üzeri</strong> önemdeki log&#39;lar verilen transport&#39;a uygulanacak. Bunlar <code>warn</code>, <code>debug</code> ve <code>error</code>&#39;dür. Alt level&#39;lar loglanmayacak: <code>silly</code> ve <code>verbose</code>.</p>
+
+<h1>Demo</h1>
+
+<p>Konumuzu emektar repository&#39;miz <strong>chatcat</strong> üzerinden götürmeye kararlıyım :) Spoiler sevenler:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> git clone https://github.com/dhalsim/chatcat.git
+<span class="lineno">2</span> cd chatchat
+<span class="lineno">3</span> git checkout alti
+</code></pre></div>
+<p>Şeklinde tüm kodları alabilir, veya <code>git checkout bes</code> üzerinden değişiklikleri kendiniz de ekleyebilirsiniz.</p>
+
+<blockquote>
+<p>Not: Burada önceden belirtmediğim ileri seviye konuları kullanacağım. Bunlar: renklendirme, File için zipleme, tailing ve Redis loglama olacak</p>
+</blockquote>
+
+<p><strong>src/lib/logging.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">var</span> <span class="nx">winston</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;winston&#39;</span><span class="p">);</span>
+<span class="lineno"> 2</span> <span class="kd">var</span> <span class="nx">moment</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;moment&#39;</span><span class="p">);</span>
+<span class="lineno"> 3</span> <span class="kd">var</span> <span class="nx">redis_config</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/config&#39;</span><span class="p">).</span><span class="nx">redis</span><span class="p">;</span>
+<span class="lineno"> 4</span> <span class="kd">var</span> <span class="nx">extend</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/utils&#39;</span><span class="p">).</span><span class="nx">extend</span><span class="p">;</span>
+<span class="lineno"> 5</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;winston-redis&#39;</span><span class="p">).</span><span class="nx">Redis</span><span class="p">;</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span> <span class="kd">var</span> <span class="nx">redisClient</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/redisAdapters/redisConnection&#39;</span><span class="p">).</span><span class="nx">getClient</span><span class="p">();</span>
+<span class="lineno"> 8</span> <span class="kd">var</span> <span class="nx">os</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;os&#39;</span><span class="p">);</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="kd">var</span> <span class="nx">errorMeta</span> <span class="o">=</span> <span class="p">{</span>
+<span class="lineno">11</span>   <span class="nx">hostname</span><span class="o">:</span> <span class="nx">os</span><span class="p">.</span><span class="nx">hostname</span><span class="p">(),</span>
+<span class="lineno">12</span>   <span class="nx">pid</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">pid</span><span class="p">,</span>
+<span class="lineno">13</span>   <span class="nx">memory</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">memoryUsage</span><span class="p">(),</span>
+<span class="lineno">14</span>   <span class="nx">uptime</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">uptime</span><span class="p">(),</span>
+<span class="lineno">15</span>   <span class="nx">env</span><span class="o">:</span> <span class="nx">process</span><span class="p">.</span><span class="nx">env</span><span class="p">.</span><span class="nx">NODE_ENV</span> <span class="o">||</span> <span class="s1">&#39;development&#39;</span>
+<span class="lineno">16</span> <span class="p">};</span>
+<span class="lineno">17</span> 
+<span class="lineno">18</span> <span class="kd">var</span> <span class="nx">redisTransport</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">Redis</span><span class="p">)({</span>
+<span class="lineno">19</span>   <span class="nx">redis</span><span class="o">:</span> <span class="nx">redisClient</span>
+<span class="lineno">20</span> <span class="p">});</span>
+<span class="lineno">21</span> 
+<span class="lineno">22</span> <span class="kd">var</span> <span class="nx">errorFileTransport</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">File</span><span class="p">)({</span>
+<span class="lineno">23</span>   <span class="nx">filename</span><span class="o">:</span> <span class="s1">&#39;./logs/errors.log&#39;</span><span class="p">,</span>
+<span class="lineno">24</span>   <span class="nx">level</span><span class="o">:</span> <span class="s1">&#39;error&#39;</span><span class="p">,</span>
+<span class="lineno">25</span>   <span class="nx">colorize</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">26</span>   <span class="nx">timestamp</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">27</span>     <span class="k">return</span> <span class="nx">moment</span><span class="p">.</span><span class="nx">utc</span><span class="p">().</span><span class="nx">format</span><span class="p">();</span>
+<span class="lineno">28</span>   <span class="p">},</span>
+<span class="lineno">29</span>   <span class="nx">maxsize</span><span class="o">:</span> <span class="mi">10000</span><span class="p">,</span> <span class="c1">// 10 KB</span>
+<span class="lineno">30</span>   <span class="nx">maxFiles</span><span class="o">:</span> <span class="mi">5</span><span class="p">,</span>
+<span class="lineno">31</span>   <span class="c1">//formatter: function () {},</span>
+<span class="lineno">32</span>   <span class="nx">tailable</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">33</span>   <span class="nx">zippedArchive</span><span class="o">:</span> <span class="kc">true</span>
+<span class="lineno">34</span> <span class="p">});</span>
+<span class="lineno">35</span> 
+<span class="lineno">36</span> <span class="c1">// error: 0, warn: 1, info: 2, verbose: 3, debug: 4, silly: 5</span>
+<span class="lineno">37</span> 
+<span class="lineno">38</span> <span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="k">new</span> <span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">Logger</span><span class="p">)({</span>
+<span class="lineno">39</span>   <span class="nx">transports</span><span class="o">:</span> <span class="p">[</span>
+<span class="lineno">40</span>     <span class="k">new</span> <span class="p">(</span><span class="nx">winston</span><span class="p">.</span><span class="nx">transports</span><span class="p">.</span><span class="nx">Console</span><span class="p">)({</span>
+<span class="lineno">41</span>       <span class="nx">level</span><span class="o">:</span> <span class="s1">&#39;debug&#39;</span><span class="p">,</span>
+<span class="lineno">42</span>       <span class="nx">colorize</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">43</span>       <span class="nx">timestamp</span><span class="o">:</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">44</span>         <span class="k">return</span> <span class="nx">moment</span><span class="p">.</span><span class="nx">utc</span><span class="p">().</span><span class="nx">format</span><span class="p">();</span>
+<span class="lineno">45</span>       <span class="p">},</span>
+<span class="lineno">46</span>       <span class="nx">json</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">47</span>       <span class="nx">prettyPrint</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">48</span>       <span class="nx">humanReadableUnhandledException</span><span class="o">:</span> <span class="kc">true</span><span class="p">,</span>
+<span class="lineno">49</span>     <span class="p">}),</span>
+<span class="lineno">50</span>     <span class="nx">errorFileTransport</span><span class="p">,</span>
+<span class="lineno">51</span>     <span class="nx">redisTransport</span>
+<span class="lineno">52</span>   <span class="p">]</span>
+<span class="lineno">53</span> <span class="p">});</span>
+<span class="lineno">54</span> 
+<span class="lineno">55</span> <span class="c1">// log fonksiyonunu override ediyorum</span>
+<span class="lineno">56</span> <span class="c1">// error durumunda meta&#39;ya errorMeta&#39;yı inject edeceğim</span>
+<span class="lineno">57</span> <span class="nx">logger</span><span class="p">.</span><span class="nx">log</span> <span class="o">=</span> <span class="kd">function</span><span class="p">(){</span>
+<span class="lineno">58</span>   <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">;</span>
+<span class="lineno">59</span>   <span class="kd">var</span> <span class="nx">level</span> <span class="o">=</span> <span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="lineno">60</span> 
+<span class="lineno">61</span>   <span class="k">if</span><span class="p">(</span><span class="nx">level</span> <span class="o">===</span> <span class="s1">&#39;error&#39;</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">62</span>     <span class="kd">var</span> <span class="nx">originalMeta</span> <span class="o">=</span> <span class="nx">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">||</span> <span class="p">{};</span>
+<span class="lineno">63</span>     <span class="nx">args</span><span class="p">[</span><span class="mi">2</span><span class="p">]</span> <span class="o">=</span> <span class="nx">extend</span><span class="p">(</span><span class="nx">originalMeta</span><span class="p">,</span> <span class="nx">errorMeta</span><span class="p">);</span>
+<span class="lineno">64</span>   <span class="p">}</span>
+<span class="lineno">65</span> 
+<span class="lineno">66</span>   <span class="nx">winston</span><span class="p">.</span><span class="nx">Logger</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">log</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span><span class="nx">args</span><span class="p">);</span>
+<span class="lineno">67</span> <span class="p">};</span>
+<span class="lineno">68</span> 
+<span class="lineno">69</span> <span class="c1">// logger hatası</span>
+<span class="lineno">70</span> <span class="nx">logger</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;error&#39;</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">71</span>   <span class="nx">console</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="s1">&#39;Error occurred&#39;</span><span class="p">,</span> <span class="nx">err</span><span class="p">);</span>
+<span class="lineno">72</span> <span class="p">});</span>
+<span class="lineno">73</span> 
+<span class="lineno">74</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">log</span> <span class="o">=</span> <span class="nx">logger</span><span class="p">;</span>
+<span class="lineno">75</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">loggerMiddleware</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">76</span>   <span class="nx">req</span><span class="p">.</span><span class="nx">logger</span> <span class="o">=</span> <span class="nx">logger</span><span class="p">;</span>
+<span class="lineno">77</span>   <span class="nx">next</span><span class="p">();</span>
+<span class="lineno">78</span> <span class="p">};</span>
+<span class="lineno">79</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">exceptionMiddleware</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">,</span> <span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">80</span>   <span class="nx">logger</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="p">{</span> <span class="nx">stack</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">stack</span> <span class="p">});</span>
+<span class="lineno">81</span>   <span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="lineno">82</span> <span class="p">};</span>
+<span class="lineno">83</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">logAndCrash</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">84</span>   <span class="nx">logger</span><span class="p">.</span><span class="nx">error</span><span class="p">(</span><span class="nx">err</span><span class="p">.</span><span class="nx">message</span><span class="p">,</span> <span class="p">{</span> <span class="nx">stack</span><span class="o">:</span> <span class="nx">err</span><span class="p">.</span><span class="nx">stack</span> <span class="p">});</span>
+<span class="lineno">85</span>   <span class="k">throw</span> <span class="nx">err</span><span class="p">;</span>
+<span class="lineno">86</span> <span class="p">}</span>
+</code></pre></div>
+<p>3 tane export ettiğim fonksiyonum var. <code>logger</code> genel amaçlı kullanmak için nolur nolmaz koydum. <code>loggerMiddleware</code>, express&#39;te kullanacağım ve <em>req</em> objesine logger property&#39;si inject etmemi sağlayacak. <code>exceptionMiddleware</code>&#39;ı ise hataların yönetilmesi için kullanacağım. <code>next(error)</code> kullanımı bu middleware&#39;e yönlendirecektir.</p>
+
+<p><code>logAndCrash</code> fonksiyonu ise özel bir fonksiyon ve <strong>process uncaughtException</strong> tarafından kullanmak için yazdım. Burada farkettiyseniz hatayı logladıktan sonra tekrar <strong>throw</strong> ediyoruz. Bu node process&#39;inin kapanmasına neden olacaktır. Bu konuya daha ayrıntılı ileride değineceğim.</p>
+
+<p>logger&#39;ın <code>log</code> fonksiyonunu <em>override</em> (üzerine yazma, ezme) ederek yararlı olacağını düşündüğüm <code>errorMeta</code>&#39;yı error durumunda meta olarak ekliyorum.</p>
+
+<p>Kullandığım transportlar, genel durumlar için Console, hata durumumları için File ve Redis. Loglama olduktan sonra redis&#39;e girip bakarsanız <code>winston</code> adında bir <em>list</em> bulacaksınız.</p>
+
+<p>Şimdi redisAdapter&#39;da bir fonksiyonu değiştireceğiz. Redis&#39;ten ilgili room&#39;u bulamadığında bir <strong>Error</strong> throw ediyoruz:</p>
+
+<blockquote>
+<p>Not: <strong>Promise</strong> kullanarak <em>asenkron</em> hataların yakalanmasını kolaylaştırabiliriz.</p>
+</blockquote>
+
+<p><strong>redisAdapter.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="p">...</span>
+<span class="lineno"> 2</span> <span class="nx">module</span><span class="p">.</span><span class="nx">exports</span><span class="p">.</span><span class="nx">getRoomById</span> <span class="o">=</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">roomId</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 3</span>   <span class="kd">var</span> <span class="nx">key</span> <span class="o">=</span> <span class="nx">ROOMS</span> <span class="o">+</span> <span class="s1">&#39;:&#39;</span> <span class="o">+</span> <span class="nx">roomId</span><span class="p">;</span>
+<span class="lineno"> 4</span>   <span class="k">return</span> <span class="nx">hgetall</span><span class="p">(</span><span class="nx">key</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">room</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="k">if</span><span class="p">(</span><span class="o">!</span><span class="nx">room</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 6</span>       <span class="k">throw</span> <span class="k">new</span> <span class="nb">Error</span><span class="p">(</span><span class="s1">&#39;Room id not found:&#39;</span> <span class="o">+</span> <span class="nx">roomId</span><span class="p">);</span>
+<span class="lineno"> 7</span>     <span class="p">}</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span>     <span class="k">return</span> <span class="nx">unflatten</span><span class="p">(</span><span class="nx">room</span><span class="p">);</span>
+<span class="lineno">10</span>   <span class="p">});</span>
+<span class="lineno">11</span> <span class="p">};</span>
+<span class="lineno">12</span> <span class="p">...</span>
+</code></pre></div>
+<p><br /></p>
+
+<p>Burada da <em>promise</em>&#39;deki hatayı <strong>catch</strong> ile yakalayıp <code>next(..)</code> ile exception handler&#39;a gönderiyoruz.</p>
+
+<p><strong>routes/index.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="p">...</span>
+<span class="lineno"> 2</span> <span class="nx">router</span><span class="p">.</span><span class="nx">get</span><span class="p">(</span><span class="s1">&#39;/room/:id&#39;</span><span class="p">,</span> <span class="nx">securePage</span><span class="p">,</span> <span class="kd">function</span> <span class="p">(</span><span class="nx">req</span><span class="p">,</span> <span class="nx">res</span><span class="p">,</span> <span class="nx">next</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 3</span>   <span class="kd">var</span> <span class="nx">roomId</span> <span class="o">=</span> <span class="nx">req</span><span class="p">.</span><span class="nx">params</span><span class="p">.</span><span class="nx">id</span><span class="p">;</span>
+<span class="lineno"> 4</span>   <span class="nx">roomAdapter</span><span class="p">.</span><span class="nx">getRoomById</span><span class="p">(</span><span class="nx">roomId</span><span class="p">).</span><span class="nx">then</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">room</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="nx">req</span><span class="p">.</span><span class="nx">session</span><span class="p">.</span><span class="nx">room</span> <span class="o">=</span> <span class="nx">room</span><span class="p">;</span>
+<span class="lineno"> 6</span> 
+<span class="lineno"> 7</span>     <span class="nx">res</span><span class="p">.</span><span class="nx">render</span><span class="p">(</span><span class="s1">&#39;room&#39;</span><span class="p">,</span> <span class="p">{</span>
+<span class="lineno"> 8</span>       <span class="nx">user</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">req</span><span class="p">.</span><span class="nx">user</span><span class="p">),</span>
+<span class="lineno"> 9</span>       <span class="nx">room</span><span class="o">:</span> <span class="nx">JSON</span><span class="p">.</span><span class="nx">stringify</span><span class="p">(</span><span class="nx">room</span><span class="p">),</span>
+<span class="lineno">10</span>       <span class="nx">socket_host</span><span class="o">:</span> <span class="nx">config</span><span class="p">.</span><span class="nx">socket_host</span>
+<span class="lineno">11</span>     <span class="p">});</span>
+<span class="lineno">12</span>   <span class="p">}).</span><span class="k">catch</span><span class="p">(</span><span class="kd">function</span> <span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">13</span>     <span class="nx">next</span><span class="p">(</span><span class="nx">err</span><span class="p">);</span>
+<span class="lineno">14</span>   <span class="p">}).</span><span class="nx">done</span><span class="p">();</span>
+<span class="lineno">15</span> <span class="p">});</span>
+<span class="lineno">16</span> <span class="p">...</span>
+</code></pre></div>
+<blockquote>
+<p><strong>Express dökümantasyonundan:</strong> &quot;If the current middleware does not end the request-response cycle, it must call next() to pass control to the next middleware, otherwise the request will be left hanging.&quot;</p>
+
+<p>Express&#39;te ya request sonlanmalı ya da sonraki middleware için next() çağrılmalıdır. Böylece request-response döngüsü bitirilir.</p>
+</blockquote>
+
+<p><strong>app.js:</strong></p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="p">...</span>
+<span class="lineno">2</span> <span class="kd">var</span> <span class="nx">logger</span> <span class="o">=</span> <span class="nx">require</span><span class="p">(</span><span class="s1">&#39;src/lib/logging&#39;</span><span class="p">);</span>
+<span class="lineno">3</span> <span class="p">...</span>
+<span class="lineno">4</span> <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">logger</span><span class="p">.</span><span class="nx">loggerMiddleware</span><span class="p">);</span>
+<span class="lineno">5</span> <span class="nx">app</span><span class="p">.</span><span class="nx">use</span><span class="p">(</span><span class="nx">logger</span><span class="p">.</span><span class="nx">exceptionMiddleware</span><span class="p">);</span>
+<span class="lineno">6</span> <span class="nx">process</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s1">&#39;uncaughtException&#39;</span><span class="p">,</span> <span class="nx">logger</span><span class="p">.</span><span class="nx">logAndCrash</span><span class="p">);</span>
+<span class="lineno">7</span> <span class="p">...</span>
+</code></pre></div>
+<blockquote>
+<p>Şimdi gelelim <strong>logAndCrash</strong>&#39;e. Node.js&#39;in tek <em>thread</em> üzerinde çalışan bir uygulama olduğuna daha önceden değinmiştik. Asenkron yapısı nedeniyle de klasik <em>ASP.NET</em>, <em>Java</em> gibi web uygulamalarındaki gibi kullanıcıyı unhandled hata durumunda bir sayfaya yönlendirip hata oluştu diyemiyoruz (mesela Application_Error ile yapılabiliyor).</p>
+
+<p>Burada yapılabilecek en doğru seçenek, ne yazıkki programı patlamasına izin vermektir. <em>ASP.NET</em> gibi web uygulamalarında her request farklı bir thread&#39;de çalıştığından uygulamanın kalanı process durmadan devam edebilir ama node.js için aynı şeyi söyleyemeyiz.</p>
+
+<p>Bu ve bunun gibi nedenlerden (unhandled hataların programın çalışmasını bozabilmesi, yanlış sonuçlar gibi) dolayı process&#39;in çıkmasına izin veriyoruz. Uygulamanın tekrar çalışması için <a href="https://www.npmjs.com/package/forever">Forever</a>, <a href="http://pm2.keymetrics.io/">PM2</a> gibi çözümleri kullanabilirsiniz.</p>
+
+<p>Kaynaklar:</p>
+
+<ul>
+<li><a href="https://www.joyent.com/developers/node/design/errors">https://www.joyent.com/developers/node/design/errors</a></li>
+<li><a href="http://stackoverflow.com/a/15874115">http://stackoverflow.com/a/15874115</a></li>
+<li><a href="https://nodejs.org/api/process.html#process_event_uncaughtexception">https://nodejs.org/api/process.html#process_event_uncaughtexception</a></li>
+</ul>
+</blockquote>
+
+<h1>Sonuç</h1>
+
+<p>Hata yönetimi ve loglamayla ilgili epey mesafe katettik. Sonraki yazım ölçeklenebilir loglama üzerine olacak. Node.js scaled yapıdaki sistemlerde nasıl loglarız, bu logları nasıl toplarız ve değerlendiririz konusunda yazacağım.</p>
+
+
+          <hr />
+					
+					
+
+
+
+
+<div class="seriesNote">
+  Bu makale <strong>2</strong> bölümlük <strong>Kontrol Bende</strong> serisinin <strong>2.</strong> bölümüdür.</p>
+	<ul>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 1 -
+		
+			<a href="/node.js/kontrol-bende/2015/11/13/debugging-nodejs">
+		
+    Debugging Node.js
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 2 -
+		
+    Node.js Hata Yönetimi ve Loglama
+    
+		</li>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	</ul>
+</div>
+
+
+
+
+					<hr />
+				  
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2015-11-13T00:00:00+01:00" datetime="2015-11-13T00:00:00+01:00" pubdate>
+							<span class="month"><abbr>November</abbr></span>
+							<span class="day">13</span>
+							<span class="year">2015</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/categories.html#node.js-ref">
+    		node.js <span>3</span>
+    	</a></li>
+    
+    	<li><a href="/categories.html#kontrol-bende-ref">
+    		kontrol-bende <span>2</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/tags.html#javascript-ref">javascript <span>5</span></a></li>
+    
+    	<li><a href="/tags.html#node.js-ref">node.js <span>3</span></a></li>
+    
+    	<li><a href="/tags.html#log-ref">log <span>1</span></a></li>
+    
+    	<li><a href="/tags.html#error-ref">error <span>1</span></a></li>
+    
+    	<li><a href="/tags.html#hata-ref">hata <span>1</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+
+
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/node.js/kontrol-bende/2015/11/13/debugging-nodejs" title="View Debugging Node.js">&laquo; Debugging Node.js</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/dotnet/security/2015/11/14/broken-authentication-and-session-management" title="View Broken Authentication and Session Management">Broken Authentication and Session Management &raquo;</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>Hakkımda</h4>
+					<img src="/assets/me_rounded.png" style="width: 150px" />
+					<ul>
+						<li class="contact"><span class="author fn n">Barış Aydek</span></li>
+						<li class="resume"><a href="/resume/cv-tr">Özgeçmişim HTML (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-tr.pdf">pdf (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf (ingilizce)</a>
+						</li>
+						<li class="contact"><address><span class="fn email"><a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a></span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+
+					<hr />
+
+					<a href=/software-testing>Software Testing & TDD</a> sunumuma göz at!
+
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/node.js/kontrol-bende/2015/11/13/nodejs-hata-ynetimi-ve-loglama" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		$('.content header').append(
+			$('.toc').html(
+				$('<h4/>', {text: 'İçindekiler: '})
+			).append($parentUl)
+		);
+
+		$('.content img')
+			.attr('title', 'Resmi büyütmek için üstüne tıklayınız.')
+			.click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
+	});
+</script>
+
+
+
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70097547-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
+

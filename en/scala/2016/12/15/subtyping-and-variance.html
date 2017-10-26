@@ -1,0 +1,655 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Subtyping and Variance in Scala</title>
+	<meta name="author" content="Barış Aydek">
+
+	<!-- for Google -->
+	<meta name="description" content="Webpack: another build tool and task runner" />
+	<meta name="keywords" content="" />
+
+	<meta name="author" content="Barış Aydek" />
+	<meta name="copyright" content="" />
+	<meta name="application-name" content="Dhalsim's" />
+
+	<!-- for Facebook -->
+	<meta property="og:title" content="Subtyping and Variance in Scala" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="http://dhalsim.github.io/assets/images/scala-logo.png" />
+	<meta property="og:url" content="http://dhalsim.github.io/en/scala/2016/12/15/subtyping-and-variance" />
+	<meta property="og:description" content="Webpack: another build tool and task runner" />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Subtyping and Variance in Scala" />
+	<meta name="twitter:description" content="Webpack: another build tool and task runner" />
+	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/scala-logo.png" />
+	<meta name="twitter:creator" content="@">
+
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+  <style>
+	  @font-face {
+			font-family: 'Allerta';
+			src: url('/assets/fonts/Allerta-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Allerta-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Allerta-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Allerta-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+		@font-face {
+			font-family: 'Punk';
+			src: url('/assets/fonts/punk-regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/punk-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/punk-regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/punk-regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/punk-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/punk-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+
+		@font-face {
+			font-family: 'Ewert';
+			src: url('/assets/fonts/Ewert-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Ewert-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Ewert-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Ewert-Regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Ewert-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Ewert-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+	</style>
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Subtyping and Variance in Scala" type="application/atom+xml">
+	
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="/en">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/en/">
+								Dhalsim's
+							</a>
+						</li>
+						<li class="archive"><a href="/en/archive.html">Archive</a></li>
+						<li class="page"><a href="/en/pages.html">Pages</a></li>
+						<li class="category"><a href="/en/categories.html">Categories</a></li>
+						<li class="tag"><a href="/en/tags.html">Tags</a></li>
+					</ul>
+
+					<hr />
+					<nav class="languageSelector">
+						
+							<img src="/assets/blank.gif" class="flag flag-gb" alt="English" /> English
+						
+						-
+						
+							<a href="/" ><img src="/assets/blank.gif" class="flag flag-tr" alt="Turkish" /> </a><a href="/" class="alink">Turkish</a>
+						
+					</nav>
+
+					<hr />
+
+					<div> <a href="/en/rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/en/atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Subtyping and Variance in Scala</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				
+				<div class="toc">
+					<span>Loading table of contents...</span>
+					<div class="sp-circle"></div>
+				</div>
+				
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					
+
+					<p>This is an attempt to fully understand how to use scala&#39;s and similar languages&#39; generics better through using variance techniques. Everyone knows the principle of <em>Liskov&#39;s Substitution prinsiple</em> as seen in SO*<em>L</em>*ID principles. So these techniques are not only for functional programming languages because Scala is a decent object oriented programming language, too.</p>
+
+<h1>Subtyping and Variance</h1>
+
+<blockquote>
+<p><em>Barbara Liskov</em>&#39;s Substitution prinsiple (LSP): Given <code>A &lt;: B</code>, anything one can to do with a value of <code>B</code>, one should also be able to do with a value of type <code>A</code>.</p>
+</blockquote>
+
+<p>This subject is heavily related to these and their combined usages:</p>
+
+<ul>
+<li>Subtyping</li>
+<li>Generics</li>
+</ul>
+
+<p>Basic definitions on scala:</p>
+
+<p><code>S &lt;: IntSet</code> means <em>S</em> is any subtype of (including) <em>IntSet</em>
+<code>S &gt;: T</code> means <em>S</em> is a super type of (including) <em>T</em></p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">def</span> <span class="n">assertAllPos</span><span class="o">[</span><span class="kt">S</span> <span class="k">&lt;:</span> <span class="kt">IntSet</span><span class="o">](</span><span class="n">r</span><span class="k">:</span> <span class="kt">S</span><span class="o">)</span><span class="k">:</span> <span class="kt">S</span> <span class="o">=</span> <span class="o">...</span>
+</code></pre></div>
+<p>In this code, the function takes a parameter <em>r</em> whose type is a subtype of <em>IntSet</em> and returns a subtype of <em>IntSet</em> again.</p>
+
+<p>We could say</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="o">[</span><span class="kt">S</span> <span class="k">&gt;:</span> <span class="kt">NonEmpty</span><span class="o">]</span>
+</code></pre></div>
+<p>or even</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="o">[</span><span class="kt">S</span> <span class="k">&gt;:</span> <span class="kt">NonEmpty</span> <span class="k">&lt;:</span> <span class="kt">IntSet</span><span class="o">]</span>
+</code></pre></div>
+<p>So the hard question would be, given <code>NonEmpty &lt;: IntSet</code>, is also <code>List[NonEmpty] &lt;: List[IntSet]</code>?</p>
+
+<h2>Variance</h2>
+
+<h3>Covariant</h3>
+
+<p>When we think about it, the above statement will be true and called <strong>covariant</strong> because the relationship varies with the type parameter.</p>
+
+<p>In c# (or java) one could have done</p>
+<div class="highlight"><pre><code class="language-c#" data-lang="c#"><span class="lineno">1</span> <span class="n">NonEmpty</span><span class="p">[]</span> <span class="n">a</span> <span class="p">=</span> <span class="k">new</span> <span class="n">NonEmpty</span><span class="p">[]</span> <span class="p">{</span> <span class="k">new</span> <span class="n">NonEmpty</span><span class="p">()</span> <span class="p">};</span>
+<span class="lineno">2</span> <span class="n">IntSet</span><span class="p">[]</span> <span class="n">b</span> <span class="p">=</span> <span class="n">a</span><span class="p">;</span>
+<span class="lineno">3</span> <span class="n">b</span><span class="p">[</span><span class="m">0</span><span class="p">]</span> <span class="p">=</span> <span class="k">new</span> <span class="n">Empty</span><span class="p">();</span>
+<span class="lineno">4</span> <span class="n">NonEmpty</span> <span class="n">s</span> <span class="p">=</span> <span class="n">a</span><span class="p">[</span><span class="m">0</span><span class="p">];</span>
+</code></pre></div>
+<p>But all we could have this runtime error:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> System.ArrayTypeMismatchException: Attempted to access an element as a type incompatible with the array. (line 4)
+</code></pre></div>
+<p>Because c# arrays are <strong>covariant</strong> and <strong>mutable</strong> we got this error. Fortunately generic collections in c# are <strong>invariant</strong> so you&#39;ll have a compile-time check. Also scala&#39;s mutable arrays are not covariant unlike java and c# arrays.</p>
+
+<blockquote>
+<p>http://stackoverflow.com/a/2033921/2049893</p>
+</blockquote>
+
+<h3>Variance (cont.)</h3>
+
+<p>Knowing the above, now we can go further: <code>C[T]</code> is a parameterised type and A, B are types such that <code>A &lt;: B</code></p>
+
+<ul>
+<li>Covariant if <code>C[A] &lt;: C[B]</code></li>
+<li>Contravariant if <code>C[A] &gt;: C[B]</code></li>
+<li>Invariant if neither <code>C[A]</code> nor <code>C[B]</code> is a subtype of the other</li>
+</ul>
+
+<p>Scala lets you define variance like:</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">class</span> <span class="nc">C</span><span class="o">[</span><span class="kt">+A</span><span class="o">]</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// C is covariant</span>
+<span class="lineno">2</span> <span class="k">class</span> <span class="nc">C</span><span class="o">[</span><span class="kt">-A</span><span class="o">]</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span> <span class="c1">// C is contravariant</span>
+<span class="lineno">3</span> <span class="k">class</span> <span class="nc">C</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="o">{</span> <span class="o">...</span> <span class="o">}</span>  <span class="c1">// C is nonvariant</span>
+</code></pre></div>
+<p>If we have two function types (<code>NonEmpty &lt;: IntSet</code> and <code>Empty &lt;: IntSet</code>):</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">type</span> <span class="kt">A</span> <span class="o">=</span> <span class="nc">IntSet</span> <span class="k">=&gt;</span> <span class="nc">NonEmpty</span>
+<span class="lineno">2</span> <span class="k">type</span> <span class="kt">B</span> <span class="o">=</span> <span class="nc">NonEmpty</span> <span class="k">=&gt;</span> <span class="nc">IntSet</span>
+<span class="lineno">3</span> 
+<span class="lineno">4</span> <span class="n">A</span> <span class="o">-&gt;</span> <span class="nc">NonEmpty</span><span class="o">,</span><span class="nc">Empty</span> <span class="k">=&gt;</span> <span class="nc">NonEmpty</span>
+<span class="lineno">5</span> <span class="n">B</span> <span class="o">-&gt;</span> <span class="nc">NonEmpty</span>       <span class="k">=&gt;</span> <span class="nc">NonEmpty</span><span class="o">,</span><span class="nc">Empty</span>
+</code></pre></div>
+<p>If one pass <em>NonEmpty</em> to the function <em>A</em>, it returns <em>NonEmpty</em> and it is still an <em>IntSet</em>. But you can&#39;t do the same to the function <em>B</em> as you can&#39;t pass <em>Empty</em> to function <em>B</em> and it can return <em>Empty</em>. So it is <code>A &lt;: B</code>.</p>
+
+<p>To generalise, given <code>A2 &lt;: A1</code> and <code>B1 &lt;: B2</code>:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> A1 =&gt; B1 &lt;: A2 =&gt; B2
+</code></pre></div>
+<p>So functions are <strong>contravariant</strong> in their argument types, and <strong>covariant</strong> in their result type.</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">trait</span> <span class="nc">Function1</span><span class="o">[</span><span class="kt">-T</span>, <span class="kt">+U</span><span class="o">]</span> <span class="o">{</span>
+<span class="lineno">2</span>     <span class="k">def</span> <span class="n">apply</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">U</span>
+<span class="lineno">3</span> <span class="o">}</span>
+</code></pre></div>
+<blockquote>
+<p>This is a built-in function defined in scala.</p>
+</blockquote>
+
+<p>So the rules are:</p>
+
+<ul>
+<li><strong>covariant</strong> type parameters can only appear in method results.</li>
+<li><strong>contravariant</strong> type parameters can only appear in method parameters.</li>
+<li><strong>invariant</strong> type parameters can appear anywhere.</li>
+</ul>
+
+<p>But why is <code>Nil &lt; List[T]</code>:</p>
+
+<blockquote>
+<p><strong>Nothing</strong> is a subtype of every other type (including <em>Null</em>); there exist no instances of this type. Although type Nothing is uninhabited, it is nevertheless useful in several ways. For instance, the Scala library defines a value <em>scala.collection.immutable.Nil</em> of type <em>List[Nothing]</em>. Because lists are <strong>covariant</strong> in Scala, this makes <em>scala.collection.immutable.Nil</em> an instance of <em>List[T]</em>, for any element of type <em>T</em>.</p>
+</blockquote>
+
+<h3>Example</h3>
+
+<p>Lets see the List example here, which is a basic re-implementation of scala&#39;s immutable List:</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno"> 1</span> <span class="c1">// made List covariant</span>
+<span class="lineno"> 2</span> <span class="k">trait</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+<span class="lineno"> 3</span>   <span class="k">def</span> <span class="n">isEmpty</span><span class="k">:</span> <span class="kt">Boolean</span>
+<span class="lineno"> 4</span>   <span class="k">def</span> <span class="n">head</span><span class="k">:</span> <span class="kt">T</span>
+<span class="lineno"> 5</span>   <span class="k">def</span> <span class="n">tail</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span>
+<span class="lineno"> 6</span> <span class="o">}</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="k">class</span> <span class="nc">Cons</span><span class="o">[</span><span class="kt">T</span><span class="o">](</span><span class="k">val</span> <span class="n">head</span><span class="k">:</span> <span class="kt">T</span><span class="o">,</span> <span class="k">val</span> <span class="n">tail</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">])</span> <span class="k">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+<span class="lineno"> 9</span>   <span class="k">override</span> <span class="k">def</span> <span class="n">isEmpty</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">false</span>
+<span class="lineno">10</span> <span class="o">}</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span> <span class="k">class</span> <span class="nc">Nil</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="nc">extends</span> <span class="nc">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="o">{</span>
+<span class="lineno">13</span>   <span class="k">override</span> <span class="k">def</span> <span class="n">isEmpty</span><span class="k">:</span> <span class="kt">Boolean</span> <span class="o">=</span> <span class="kc">true</span>
+<span class="lineno">14</span> 
+<span class="lineno">15</span>   <span class="k">override</span> <span class="k">def</span> <span class="n">head</span><span class="k">:</span> <span class="kt">Nothing</span> <span class="o">=</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span><span class="o">(</span><span class="s">&quot;Nil.head&quot;</span><span class="o">)</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span>   <span class="k">override</span> <span class="k">def</span> <span class="n">tail</span><span class="k">:</span> <span class="kt">Nothing</span> <span class="o">=</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span><span class="o">(</span><span class="s">&quot;Nil.tail&quot;</span><span class="o">)</span>
+<span class="lineno">18</span> <span class="o">}</span>
+</code></pre></div>
+<p>And these additional types:</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno"> 1</span> <span class="k">abstract</span> <span class="k">class</span> <span class="nc">IntSet</span> <span class="o">{</span>
+<span class="lineno"> 2</span>   <span class="k">def</span> <span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span>
+<span class="lineno"> 3</span> <span class="o">}</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="k">object</span> <span class="nc">Empty</span> <span class="k">extends</span> <span class="nc">IntSet</span> <span class="o">{</span>
+<span class="lineno"> 6</span>   <span class="k">override</span> <span class="k">def</span> <span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span> <span class="k">new</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">x</span><span class="o">,</span> <span class="nc">Empty</span><span class="o">,</span> <span class="nc">Empty</span><span class="o">)</span>
+<span class="lineno"> 7</span> <span class="o">}</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> <span class="k">class</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="k">:</span> <span class="kt">Int</span><span class="o">,</span> <span class="n">left</span><span class="k">:</span> <span class="kt">IntSet</span><span class="o">,</span> <span class="n">right</span><span class="k">:</span> <span class="kt">IntSet</span><span class="o">)</span> <span class="k">extends</span> <span class="nc">IntSet</span> <span class="o">{</span>
+<span class="lineno">10</span>   <span class="k">override</span> <span class="k">def</span> <span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">IntSet</span> <span class="o">=</span> <span class="o">{</span>
+<span class="lineno">11</span>     <span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&lt;</span> <span class="n">elem</span><span class="o">)</span>
+<span class="lineno">12</span>       <span class="k">new</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">left</span><span class="o">.</span><span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="o">),</span> <span class="n">right</span><span class="o">)</span>
+<span class="lineno">13</span>     <span class="k">else</span> <span class="k">if</span><span class="o">(</span><span class="n">x</span> <span class="o">&gt;</span> <span class="n">elem</span><span class="o">)</span>
+<span class="lineno">14</span>       <span class="k">new</span> <span class="nc">NonEmpty</span><span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="n">left</span><span class="o">,</span> <span class="n">right</span><span class="o">.</span><span class="n">incl</span><span class="o">(</span><span class="n">x</span><span class="o">))</span>
+<span class="lineno">15</span>     <span class="k">else</span>
+<span class="lineno">16</span>       <span class="k">this</span>
+<span class="lineno">17</span>   <span class="o">}</span>
+<span class="lineno">18</span> <span class="o">}</span>
+</code></pre></div>
+<p>First of all, I want to change type <code>Nil</code> from <em>class</em> to <em>object</em> because we don&#39;t need to instantiate it. But then we lose generic parameter so we need to change <code>List[T]</code> to <code>List[Nothing]</code> because it is subtype of every other types.</p>
+
+<p>Now in this line <code>new Cons[T](elem, Nil)</code> we get an error:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> Error:(28, 57) type mismatch;
+<span class="lineno">2</span>  found   : A$A0.this.Nil.type
+<span class="lineno">3</span>  required: A$A0.this.List[T]
+<span class="lineno">4</span> Note: Nothing &lt;: T (and A$A0.this.Nil.type &lt;: A$A0.this.List[Nothing]), but trait List is invariant in type T.
+<span class="lineno">5</span> You may wish to define T as +T instead. (SLS 4.5)
+<span class="lineno">6</span> def singleton[T](elem: T): List[T] = new Cons[T](elem, Nil)
+</code></pre></div>
+<p>As the error message explains: the type <code>T</code> in <code>List</code> we defined is <em>invariant</em> and that means <code>List[Nothing]</code> is not a subtype of <code>List[T]</code>, so let&#39;s change definition of List to <code>List[+T]</code> <em>covariant</em>. Now everything compiles as expected. The actual implementation has this covariant definition, too.</p>
+
+<h3>Bounds</h3>
+
+<p>We can define type bounds in our generic types or functions. But why do we need them? Let&#39;s see an example: Adding a <strong>prepend</strong> method to the <code>List</code> type.</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">def</span> <span class="n">prepend</span><span class="o">(</span><span class="n">elem</span><span class="k">:</span> <span class="kt">T</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">T</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Cons</span><span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="k">this</span><span class="o">)</span>
+</code></pre></div>
+<p>Because we can use both Empty and NonEmpty as type T, this will violate LSP, will give a compile-time error:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> Error:(8, 16) covariant type T occurs in contravariant position in type T of value elem
+<span class="lineno">2</span>   def prepend(elem: T): List[T] = new Cons(elem, this)
+<span class="lineno">3</span>               ^
+</code></pre></div>
+<p>If we have defined our type as covariant, we also need to use parameters as contravariant. This means we need a type that have lower bound of <code>T</code>. We need to change our function like this:</p>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">1</span> <span class="k">def</span> <span class="n">prepend</span><span class="o">[</span><span class="kt">U</span> <span class="k">&gt;:</span> <span class="kt">T</span><span class="o">](</span><span class="n">elem</span><span class="k">:</span> <span class="kt">U</span><span class="o">)</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">U</span><span class="o">]</span> <span class="k">=</span> <span class="k">new</span> <span class="nc">Cons</span><span class="o">(</span><span class="n">elem</span><span class="o">,</span> <span class="k">this</span><span class="o">)</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="k">def</span> <span class="n">f</span><span class="o">(</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">NonEmpty</span><span class="o">],</span> <span class="n">x</span><span class="k">:</span> <span class="kt">Empty</span><span class="o">)</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">prepend</span><span class="o">(</span><span class="n">x</span><span class="o">)</span>
+</code></pre></div>
+<p>Function <code>f</code>&#39;s return type will be inferred as <code>List[IntSet]</code> automatically On our function, <code>U</code> will be an <code>Empty</code>, <code>T</code> will be <code>NonEmpty</code> and they are also <code>IntSet</code>s.</p>
+
+
+          <hr />
+					
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2016-12-15T00:00:00+01:00" datetime="2016-12-15T00:00:00+01:00" pubdate>
+							<span class="month"><abbr>December</abbr></span>
+							<span class="day">15</span>
+							<span class="year">2016</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/categories.html#scala-ref">
+    		scala <span>5</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/tags.html#scala-ref">scala <span>5</span></a></li>
+    
+    	<li><a href="/en/tags.html#generics-ref">generics <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#variance-ref">variance <span>1</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+
+
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/en/javascript/build/tooling/2016/12/03/webpack" title="View What is Webpack and How does it work">&laquo; What is Webpack and How does it work</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/en/build/tooling/2016/12/27/jenkins-nunit-integration" title="View Jenkins NUnit Integration with Test and Coverage Reports">Jenkins NUnit Integration with Test and Coverage Reports &raquo;</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>About Me</h4>
+					<img src="/assets/me_rounded.png" style="width: 150px" />
+					<ul>
+						<li class="contact"><span class="author fn n">Barış Aydek</span></li>
+						<li class="resume"><a href="/resume/cv-en">My Resumê HTML (simplified)</a> |
+							<a href="/assets/resume/cv-en.pdf">pdf (simplified)</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf (full)</a>
+						</li>
+						<li class="contact"><address><span class="fn email"><a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a></span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+
+					<hr />
+
+					You should check out my <a href=/software-testing>Software Testing & TDD</a> slide (Turkish)
+
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/scala/2016/12/15/subtyping-and-variance" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		$('.content header').append(
+			$('.toc').html(
+				$('<h4/>', {text: 'Table of contents: '})
+			).append($parentUl)
+		);
+
+		$('.content img')
+			.attr('title', 'Resmi büyütmek için üstüne tıklayınız.')
+			.click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
+	});
+</script>
+
+
+
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70097547-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
+

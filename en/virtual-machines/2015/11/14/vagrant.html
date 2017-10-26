@@ -1,0 +1,822 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Vagrant</title>
+	<meta name="author" content="Barış Aydek">
+
+	<!-- for Google -->
+	<meta name="description" content="Let's use Vagrant Virtual Machine manager to install and run our node.js application on Linux" />
+	<meta name="keywords" content="" />
+
+	<meta name="author" content="Barış Aydek" />
+	<meta name="copyright" content="" />
+	<meta name="application-name" content="Dhalsim's" />
+
+	<!-- for Facebook -->
+	<meta property="og:title" content="Vagrant" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="http://dhalsim.github.io/assets/images/vagrant.png" />
+	<meta property="og:url" content="http://dhalsim.github.io/en/virtual-machines/2015/11/14/vagrant" />
+	<meta property="og:description" content="Let's use Vagrant Virtual Machine manager to install and run our node.js application on Linux" />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Vagrant" />
+	<meta name="twitter:description" content="Let's use Vagrant Virtual Machine manager to install and run our node.js application on Linux" />
+	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/vagrant.png" />
+	<meta name="twitter:creator" content="@">
+
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+  <style>
+	  @font-face {
+			font-family: 'Allerta';
+			src: url('/assets/fonts/Allerta-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Allerta-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Allerta-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Allerta-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+		@font-face {
+			font-family: 'Punk';
+			src: url('/assets/fonts/punk-regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/punk-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/punk-regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/punk-regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/punk-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/punk-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+
+		@font-face {
+			font-family: 'Ewert';
+			src: url('/assets/fonts/Ewert-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Ewert-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Ewert-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Ewert-Regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Ewert-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Ewert-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+	</style>
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Vagrant" type="application/atom+xml">
+	
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="/en">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/en/">
+								Dhalsim's
+							</a>
+						</li>
+						<li class="archive"><a href="/en/archive.html">Archive</a></li>
+						<li class="page"><a href="/en/pages.html">Pages</a></li>
+						<li class="category"><a href="/en/categories.html">Categories</a></li>
+						<li class="tag"><a href="/en/tags.html">Tags</a></li>
+					</ul>
+
+					<hr />
+					<nav class="languageSelector">
+						
+							<img src="/assets/blank.gif" class="flag flag-gb" alt="English" /> English
+						
+						-
+						
+							<a href="/" ><img src="/assets/blank.gif" class="flag flag-tr" alt="Turkish" /> </a><a href="/" class="alink">Turkish</a>
+						
+					</nav>
+
+					<hr />
+
+					<div> <a href="/en/rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/en/atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Vagrant</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				
+				<div class="toc">
+					<span>Loading table of contents...</span>
+					<div class="sp-circle"></div>
+				</div>
+				
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					
+
+					<blockquote>
+<p>This article is co-posted on <strong><a href="http://www.swtestacademy.com/vagrant/">swtestacademy</a></strong>. You can more stuff about testing there.</p>
+
+<p>Note: Vagrant VM user is <code>vagrant</code>, and its password is <code>vagrant</code> too.</p>
+</blockquote>
+
+<h1>What is Vagrant for</h1>
+
+<p>Vagrant is a virtual machine manager. It makes easy for creating, running and monitoring of VM&#39;s on your host machines. It&#39;s an open source and cross-platform (for MacOS, Windows and Linux) software. Right now you can you can manage VMs for VMWare, VirtualBox ve AWS (Amazon Web Services). This means you can easily manage different kinds of VMs from one Vagrant configuration which is beautiful!</p>
+
+<p>But what real benefits we can get from it? What are the examples from real life?</p>
+
+<p>First of all, this could heavily increase of your <em>development</em> quality: Do you remember how much time did you spend for just running projects on your local computer for the first time?</p>
+
+<p>Or you would be much older after doing all of these work for all of your environments like <em>staging</em>, <em>test</em> and <em>production</em>. Lets say you need to setup and run your project on a new environment lets say: UAT. You will need to prepare all of the project&#39;s dependencies manually. That can react to a one week period depending your project&#39;s complexity and size.</p>
+
+<p>But maybe the most beneficial part would be ability to reproduce <em>production</em> errors and bugs on your <em>development</em> environment. Because it is so easy to run VMs with exactly the same configuration on any computer with Vagrant. Goodbye &quot;can&#39;t reproduce, runs on my machine&quot; issues.</p>
+
+<p><img src="/assets/images/disastergirl.jpg" alt=""></p>
+
+<h1>Prerequisites</h1>
+
+<p>Vagrant needs a VM manager as a provider. I already told vagrant can use multiple VM managers but for this article I chose <strong>VirtualBox</strong> which is an open and free provider presented by default on Vagrant. To download VirtualBox: <a href="https://www.virtualbox.org/wiki/Downloads">click here</a>.</p>
+
+<h1>Vagrant setup</h1>
+
+<ol>
+<li>Download Vagrant from: <a href="http://www.vagrantup.com/downloads">http://www.vagrantup.com/downloads</a></li>
+</ol>
+
+<h1>Setup Box Path</h1>
+
+<blockquote>
+<p>Note: This is for MacOS and Linux only:</p>
+</blockquote>
+
+<p>Vagrant uses this path to download VMs by default:</p>
+
+<p><code>~/.vagrant.d/boxes</code></p>
+
+<p>VMs could take up a lot of space so you might want to change its default path before installing any operating system. To change it just open <code>.bash_profile</code> on your favourite editor (you can use <em>vi</em> instead of <em>nano</em>)</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> sudo nano ~/.bash_profile
+</code></pre></div>
+<p>Add this line:</p>
+
+<p><code>export VAGRANT_HOME=&quot;/&lt;TYPE PATH HERE&gt;&quot;</code> New downloads will be under this directory.</p>
+
+<h1>Setup operating system</h1>
+
+<p>There are lots of Linux distributions provided from Hashi Corp&#39;s Atlas but I chose <em>Ubuntu</em> which I&#39;m already familiar and it is a <strong>LTE</strong> version! <a href="https://atlas.hashicorp.com/ubuntu/boxes/trusty64">https://atlas.hashicorp.com/ubuntu/boxes/trusty64</a></p>
+
+<p>Setup as told by the documentation:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> vagrant init ubuntu/trusty64
+<span class="lineno">2</span> vagrant up
+</code></pre></div>
+<p><strong>init</strong> command will create a file named <code>VagrantFile</code> on the current path. <code>vagrant up</code> command will use information on this file.</p>
+
+<p><strong>up</strong> command will download and install OS specified on to that VM.</p>
+
+<blockquote>
+<p>You can see and examine many useful commands with <code>vagrant --help</code></p>
+</blockquote>
+
+<h1>Connecting to the Box</h1>
+
+<p>To see the list of the <em>boxes</em> we type <code>vagrant box list</code> command.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ubuntu/trusty64 (virtualbox, 20151020.0.0)
+</code></pre></div>
+<p>Now we need to use <code>vagrant ssh</code>, which will connect to the VM written in the VagrantFile.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> vagrant@vagrant-ubuntu-trusty-64:~$
+</code></pre></div>
+<p>My terminal connection is changed to the above which means I&#39;m connected using <strong>ssh</strong>.</p>
+
+<h1>Installing Requirements</h1>
+
+<blockquote>
+<p>These requirements are totally for my node.js example application and will be changed by the project and development/running stack you use.</p>
+</blockquote>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> sudo apt-get -y install git build-essential
+<span class="lineno">2</span> curl --silent --location https://deb.nodesource.com/setup_4.x | sudo bash -
+<span class="lineno">3</span> sudo apt-get install -y nodejs redis-server
+<span class="lineno">4</span> sudo apt-key adv --keyserver hkp://keyserver.ubuntu.com:80 --recv 7F0CEB10
+<span class="lineno">5</span> echo &quot;deb http://repo.mongodb.org/apt/ubuntu trusty/mongodb-org/3.0 multiverse&quot; | sudo tee /etc/apt/sources.list.d/mongodb-org-3.0.list
+<span class="lineno">6</span> sudo apt-get update
+<span class="lineno">7</span> sudo apt-get install -y mongodb-org
+</code></pre></div>
+<p>Lets do the Redis configuration: (you can use <em>vi</em> instead of <em>nano</em>) Our application uses redis with this configuration:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> sudo vi /etc/redis/redis.conf
+</code></pre></div>
+<p>change the line with <code>notify-keyspace-events</code> to this:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> notify-keyspace-events &quot;Kgs&quot;
+</code></pre></div>
+<p>After that restart redis:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> sudo service redis-server restart
+</code></pre></div>
+<p>Now download and install the application:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> git clone https://github.com/dhalsim/chatcat.git
+<span class="lineno">2</span> cd chatcat
+<span class="lineno">3</span> git checkout dort
+<span class="lineno">4</span> npm install
+<span class="lineno">5</span> sudo npm install grunt-cli -g
+</code></pre></div>
+<p>We&#39;ll need to write all these commands to a file: <strong>provision.sh</strong>. Afterwards open and change the <code>VagrantFile</code> to this:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="lineno">1</span>  <span class="o">-*-</span> <span class="ss">mode</span><span class="p">:</span> <span class="n">ruby</span> <span class="o">-*-</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+<span class="lineno">4</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="s2">&quot;ubuntu/trusty64&quot;</span>
+<span class="lineno">5</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="s2">&quot;forwarded_port&quot;</span><span class="p">,</span> <span class="ss">guest</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span> <span class="ss">host</span><span class="p">:</span> <span class="mi">8080</span>
+<span class="lineno">6</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="ss">:shell</span><span class="p">,</span> <span class="ss">path</span><span class="p">:</span> <span class="s2">&quot;provision.sh&quot;</span>
+<span class="lineno">7</span> <span class="k">end</span>
+</code></pre></div>
+<p>Exit from <strong>ssh</strong> with <code>exit</code> command and then type:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> vagrant reload --provision
+</code></pre></div>
+<p>With this line Vagrant will close, reopen and make installments based on instruction you wrote on <code>provision.sh</code> file.</p>
+
+<h1>Vagrant synchronization</h1>
+
+<p>It might be hard for you to develop on Vagrant VMs especially with non-graphical terminals. If you&#39;re not used to terminal apps like <em>Vim</em> or <em>Emacs</em> and you want to use your IDE and tools on your <em>host</em> machine, you can do this by enabling Vagrant&#39;s synchronization mode. That could also be used for any data transfer.</p>
+
+<p>I&#39;ll be explaining usage of synchronization between Mac OSX <em>host</em> machine and <em>VirtualBox ubuntu guest</em> machine. A different combination would need something else and related information can be found on <a href="https://docs.vagrantup.com/v2/synced-folders/index.html">vagrant documentation</a> about synced folders.</p>
+
+<p>Lets change the <code>VagrantFile</code>:</p>
+<div class="highlight"><pre><code class="language-ruby" data-lang="ruby"><span class="lineno">1</span> <span class="no">Vagrant</span><span class="o">.</span><span class="n">configure</span><span class="p">(</span><span class="mi">2</span><span class="p">)</span> <span class="k">do</span> <span class="o">|</span><span class="n">config</span><span class="o">|</span>
+<span class="lineno">2</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">box</span> <span class="o">=</span> <span class="s2">&quot;ubuntu/trusty64&quot;</span>
+<span class="lineno">3</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">network</span> <span class="s2">&quot;forwarded_port&quot;</span><span class="p">,</span> <span class="ss">guest</span><span class="p">:</span> <span class="mi">3000</span><span class="p">,</span> <span class="ss">host</span><span class="p">:</span> <span class="mi">8080</span>
+<span class="lineno">4</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">provision</span> <span class="ss">:shell</span><span class="p">,</span> <span class="ss">path</span><span class="p">:</span> <span class="s2">&quot;provision.sh&quot;</span>
+<span class="lineno">5</span>   <span class="n">config</span><span class="o">.</span><span class="n">vm</span><span class="o">.</span><span class="n">synced_folder</span> <span class="s2">&quot;~/Projects/chatcat&quot;</span><span class="p">,</span> <span class="s2">&quot;/home/vagrant/chatcat&quot;</span>
+<span class="lineno">6</span> <span class="k">end</span>
+</code></pre></div>
+<ul>
+<li>We added <strong>config.vm.synced_folder</strong> command.</li>
+<li>First parameter <em>path</em>, is on the <em>host</em> machine.</li>
+<li>Second parameter <em>path</em>, is on the <em>guest</em> machine</li>
+</ul>
+
+<p>We can check the new options by</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> vagrant reload
+<span class="lineno">2</span> vagrant ssh
+</code></pre></div>
+<p>Now when we change a file using our favourite editor/IDE from our <em>host</em> machine within the specified path, it will automatically synchronized by given <em>guest</em> path.</p>
+
+<h1>Port Forwarding</h1>
+
+<p>Port forwarding means binding a port number used from <em>guest</em> machine to <em>host</em> machine&#39;s any port to be able to use from there.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> config.vm.network &quot;forwarded_port&quot;, guest: 3000, host: 3000
+</code></pre></div>
+<p>Now VM&#39;s 3000 port could be used from our compter with 3000 port.</p>
+
+<p>You can try the application running on guest, by entering this URL to your computer&#39;s browser: <a href="http://localhost:3000">http://localhost:3000</a>. Bon appetit :)</p>
+
+<h1>Private Network</h1>
+
+<p>You can also communicate with your VMs from a private network defined by you. You should change the configuration as follow:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> config.vm.network &quot;private_network&quot;, ip: &quot;192.168.1.20&quot;
+</code></pre></div>
+<blockquote>
+<p>With this method, there is no need for port forwarding, instead <em>localhost</em> you can use this network&#39;s IP address directly and test from here: <a href="http://192.168.1.20:3000">http://192.168.1.20:3000</a>.</p>
+</blockquote>
+
+<p>By defining an IP for the guest OS, you can even use your DNS which can be used for clustering.</p>
+
+<p>For VirtualBox use these commands (to make sure VM is closed type <code>vagrant halt</code>):</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> VBoxManage list vms  --&gt; type VM name below
+<span class="lineno">2</span> VBoxManage modifyvm &quot;YOUR_VM&#39;S_NAME&quot; --natdnshostresolver1 on
+</code></pre></div>
+<p>For local usages, you can set meaningful names on your computer&#39;s <em>hosts</em> file. For Mac OSX change that file using this command (you can use <em>vi</em> instead of <em>nano</em>):</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> sudo vi /private/etc/hosts  
+</code></pre></div>
+<p>Add <code>192.168.1.20 nodeapp.com</code> to the bottom of the file and save. After that we can reach to our node.js application from <a href="http://nodeapp.com:3000">http://nodeapp.com:3000</a> from the host machine. Furthermore other VMs can reach to that if we made the same configuration on that VMs.</p>
+
+<blockquote>
+<p>I&#39;ll continue with <strong>nodeapp.com</strong> below examples.</p>
+
+<p>These changes will cause problems on <em>facebook login</em> and <em>socket</em> processes. Facebook application settings should be changed to use <strong>nodeapp.com</strong> instead of <strong>localhost</strong>. These changes will be on <em>config/commons.js</em> on <strong>socket_host</strong> variable and on <em>test.json</em> file on <strong>callbackURL</strong> variable. Things to be done:</p>
+</blockquote>
+
+<ol>
+<li>We need to change application settings from <a href="http://developers.facebook.com">http://developers.facebook.com</a> I suggest you to use <strong>Test Apps</strong> to create a new application and change Site URL to <em>http://nodeapp.com:3000/</em>. You need to change <strong>test.json</strong> with related configuration variables with new AppID and AppSecret given by facebook.</li>
+<li><p>On <em>config/index.js</em> there is a little issue that I didn&#39;t notice before. We&#39;ll change that to override common settings by the given one:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> module.exports = require(&#39;src/lib/utils&#39;).extend(commons, environmentConfig);
+</code></pre></div></li>
+<li><p>On <em>test.json</em> add this to override <em>commons.json</em>:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ...
+<span class="lineno">2</span> &quot;socket_host&quot;: &quot;http://nodeapp.com:3000&quot;,
+<span class="lineno">3</span> ...
+</code></pre></div></li>
+</ol>
+
+<h1>Run Application as a Service</h1>
+
+<blockquote>
+<p>Until now, I explained what to be done to install and use our node.js application. Now I&#39;ll explain managing and monitoring it by using a tool named <strong>PM2</strong> which is very popular in node.js community. We&#39;ll use it to restart our application on application *crash*es and I also show you how to add our application to the OS as a service of Ubuntu/Linux which automates running application on OS restarts.</p>
+</blockquote>
+
+<p>Install PM2:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> sudo npm install -g pm2
+</code></pre></div>
+<p>Run this command to install PM2&#39;s command completion tool to help us write many complex commands:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> pm2 completion install
+</code></pre></div>
+<p>You can close and reopen your terminal window for completion to work or run this command:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> source ~/.bashrc
+</code></pre></div>
+<blockquote>
+<p><strong>NOTE:</strong> PM2 has actually lots of handy features for us, but that would be a topic for another article so I&#39;ll pass for now. If you&#39;d like you can search on your own from: <a href="http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/">http://pm2.keymetrics.io/docs/usage/pm2-doc-single-page/</a></p>
+</blockquote>
+
+<p>Before going throug service options, we need to make changes on <strong>grunt</strong> side. Until now our application ran on <em>dev</em> mode. I decided to use <em>test</em> mode for VM. We are still going to use grunt for running <em>redis</em> and <em>mongo</em> in the same instance but we don&#39;t use <em>watch</em> of grunt or <em>nodemon</em>, instead we&#39;ll use <strong>PM2</strong> for that feautures.</p>
+
+<blockquote>
+<p><strong>Spoiler:</strong> You can get the code ready for VM by typing <code>git checkout bes</code> but you&#39;d still need to do some of these tasks:</p>
+</blockquote>
+
+<ol>
+<li>copy <code>dev.json</code> content to a file called <code>test.json</code>.</li>
+<li>Type <code>service --status-all</code> to check if redis and mongo services are active.</li>
+<li>Run and test application with <strong><code>NODE_ENV=test pm2 start app.js</code></strong>.</li>
+<li>If it runs without an error, kill it with <code>pm2 kill</code></li>
+<li><p>Add a new file called <strong><code>startup.sh</code></strong> which will provide starting, stoping etc. of the service. Have a look on variables like <strong>NAME, PM2, USER, APP_HOME</strong> and change as your needs. For instance check your user name with <code>whoami</code> (which will be vagrant) or get the path of PM2 executable with <code>which pm2</code>.</p>
+<div class="highlight"><pre><code class="language-sh" data-lang="sh"><span class="lineno"> 1</span> <span class="c">#!/bin/bash</span>
+<span class="lineno"> 2</span>  chkconfig: <span class="m">2345</span> <span class="m">98</span> 02
+<span class="lineno"> 3</span> <span class="c">#</span>
+<span class="lineno"> 4</span>  description: our chatcat node app startup script
+<span class="lineno"> 5</span>  processname: chatcat
+<span class="lineno"> 6</span> <span class="c">#</span>
+<span class="lineno"> 7</span> <span class="c">## BEGIN INIT INFO</span>
+<span class="lineno"> 8</span>  Provides:
+<span class="lineno"> 9</span>  Required-Start: <span class="nv">$local_fs</span> <span class="nv">$remote_fs</span>
+<span class="lineno">10</span>  Required-Stop: <span class="nv">$local_fs</span> <span class="nv">$remote_fs</span>
+<span class="lineno">11</span>  Should-Start: <span class="nv">$network</span>
+<span class="lineno">12</span>  Should-Stop: <span class="nv">$network</span>
+<span class="lineno">13</span>  Default-Start:        <span class="m">2</span> <span class="m">3</span> <span class="m">4</span> 5
+<span class="lineno">14</span>  Default-Stop:         <span class="m">0</span> <span class="m">1</span> 6
+<span class="lineno">15</span>  Short-Description: chatcat
+<span class="lineno">16</span>  Description: chatcat node app is started
+<span class="lineno">17</span> <span class="c">## END INIT INFO</span>
+<span class="lineno">18</span> 
+<span class="lineno">19</span> <span class="nv">NAME</span><span class="o">=</span>chatcat
+<span class="lineno">20</span> <span class="nv">PM2</span><span class="o">=</span>/usr/bin/pm2
+<span class="lineno">21</span> <span class="nv">USER</span><span class="o">=</span>vagrant
+<span class="lineno">22</span> <span class="nv">APP_HOME</span><span class="o">=</span><span class="s2">&quot;/home/vagrant/chatcat&quot;</span>
+<span class="lineno">23</span> 
+<span class="lineno">24</span> <span class="nb">export </span><span class="nv">NODE_ENV</span><span class="o">=</span><span class="s2">&quot;test&quot;</span>
+<span class="lineno">25</span> 
+<span class="lineno">26</span> get_user_shell<span class="o">()</span> <span class="o">{</span>
+<span class="lineno">27</span>     <span class="nb">local </span><span class="nv">shell</span><span class="o">=</span><span class="k">$(</span>getent passwd <span class="k">${</span><span class="nv">1</span><span class="k">:-</span><span class="sb">`</span>whoami<span class="sb">`</span><span class="k">}</span> <span class="p">|</span> cut -d: -f7 <span class="p">|</span> sed -e <span class="s1">&#39;s/[[:space:]]*$//&#39;</span><span class="k">)</span>
+<span class="lineno">28</span> 
+<span class="lineno">29</span>     <span class="k">if</span> <span class="o">[[</span> <span class="nv">$shell</span> <span class="o">==</span> *<span class="s2">&quot;/sbin/nologin&quot;</span> <span class="o">]]</span> <span class="o">||</span> <span class="o">[[</span> <span class="nv">$shell</span> <span class="o">==</span> <span class="s2">&quot;/bin/false&quot;</span> <span class="o">]]</span> <span class="o">||</span> <span class="o">[[</span> -z <span class="s2">&quot;$shell&quot;</span> <span class="o">]]</span><span class="p">;</span>
+<span class="lineno">30</span>     <span class="k">then</span>
+<span class="lineno">31</span>       <span class="nv">shell</span><span class="o">=</span><span class="s2">&quot;/bin/bash&quot;</span>
+<span class="lineno">32</span>     <span class="k">fi</span>
+<span class="lineno">33</span> 
+<span class="lineno">34</span>     <span class="nb">echo</span> <span class="s2">&quot;$shell&quot;</span>
+<span class="lineno">35</span> <span class="o">}</span>
+<span class="lineno">36</span> 
+<span class="lineno">37</span> super<span class="o">()</span> <span class="o">{</span>
+<span class="lineno">38</span>     <span class="nb">local </span><span class="nv">shell</span><span class="o">=</span><span class="k">$(</span>get_user_shell <span class="nv">$USER</span><span class="k">)</span>
+<span class="lineno">39</span>     su - <span class="nv">$USER</span> -s <span class="nv">$shell</span> -c <span class="s2">&quot;NODE_ENV=$NODE_ENV $*&quot;</span>
+<span class="lineno">40</span> <span class="o">}</span>
+<span class="lineno">41</span> 
+<span class="lineno">42</span> start<span class="o">()</span> <span class="o">{</span>
+<span class="lineno">43</span>     <span class="nb">echo</span> <span class="s2">&quot;Starting $NAME&quot;</span>
+<span class="lineno">44</span>     super <span class="nv">$PM2</span> start <span class="nv">$APP_HOME</span>/app.js
+<span class="lineno">45</span> <span class="o">}</span>
+<span class="lineno">46</span> 
+<span class="lineno">47</span> stop<span class="o">()</span> <span class="o">{</span>
+<span class="lineno">48</span>     super <span class="nv">$PM2</span> dump
+<span class="lineno">49</span>     super <span class="nv">$PM2</span> delete all
+<span class="lineno">50</span>     super <span class="nv">$PM2</span> <span class="nb">kill</span>
+<span class="lineno">51</span> <span class="o">}</span>
+<span class="lineno">52</span> 
+<span class="lineno">53</span> restart<span class="o">()</span> <span class="o">{</span>
+<span class="lineno">54</span>     <span class="nb">echo</span> <span class="s2">&quot;Restarting $NAME&quot;</span>
+<span class="lineno">55</span>     stop
+<span class="lineno">56</span>     start
+<span class="lineno">57</span> <span class="o">}</span>
+<span class="lineno">58</span> 
+<span class="lineno">59</span> reload<span class="o">()</span> <span class="o">{</span>
+<span class="lineno">60</span>     <span class="nb">echo</span> <span class="s2">&quot;Reloading $NAME&quot;</span>
+<span class="lineno">61</span>     super <span class="nv">$PM2</span> reload all
+<span class="lineno">62</span> <span class="o">}</span>
+<span class="lineno">63</span> 
+<span class="lineno">64</span> status<span class="o">()</span> <span class="o">{</span>
+<span class="lineno">65</span>     <span class="nb">echo</span> <span class="s2">&quot;Status for $NAME:&quot;</span>
+<span class="lineno">66</span>     super <span class="nv">$PM2</span> list
+<span class="lineno">67</span>     <span class="nv">RETVAL</span><span class="o">=</span><span class="nv">$?</span>
+<span class="lineno">68</span> <span class="o">}</span>
+<span class="lineno">69</span> 
+<span class="lineno">70</span> <span class="k">case</span> <span class="s2">&quot;$1&quot;</span> in
+<span class="lineno">71</span>     start<span class="o">)</span>
+<span class="lineno">72</span>         start
+<span class="lineno">73</span>         <span class="p">;;</span>
+<span class="lineno">74</span>     stop<span class="o">)</span>
+<span class="lineno">75</span>         stop
+<span class="lineno">76</span>         <span class="p">;;</span>
+<span class="lineno">77</span>     status<span class="o">)</span>
+<span class="lineno">78</span>         status
+<span class="lineno">79</span>         <span class="p">;;</span>
+<span class="lineno">80</span>     restart<span class="o">)</span>
+<span class="lineno">81</span>         restart
+<span class="lineno">82</span>         <span class="p">;;</span>
+<span class="lineno">83</span>     reload<span class="o">)</span>
+<span class="lineno">84</span>         reload
+<span class="lineno">85</span>         <span class="p">;;</span>
+<span class="lineno">86</span>     force-reload<span class="o">)</span>
+<span class="lineno">87</span>         reload
+<span class="lineno">88</span>         <span class="p">;;</span>
+<span class="lineno">89</span>     *<span class="o">)</span>
+<span class="lineno">90</span>         <span class="nb">echo</span> <span class="s2">&quot;Usage: {start|stop|status|restart|reload|force-reload}&quot;</span>
+<span class="lineno">91</span>         <span class="nb">exit </span>1
+<span class="lineno">92</span>         <span class="p">;;</span>
+<span class="lineno">93</span> <span class="k">esac</span>
+<span class="lineno">94</span> <span class="nb">exit</span> <span class="nv">$RETVAL</span>
+</code></pre></div></li>
+<li><p>Copy the file to the path of services with <code>sudo cp startup.sh /etc/init.d/nodeapp</code>.</p></li>
+<li><p>Give execute right to the file with <code>sudo chmod a+x /etc/init.d/nodeapp</code></p></li>
+<li><p>Run the service with <code>sudo service nodeapp start</code>. You can <code>sudo /etc/init.d/nodeapp start</code> without using service.</p></li>
+<li><p>Check if application started with <code>pm2 list</code>.</p></li>
+<li><p>Stop the service with <code>sudo service nodeapp stop</code>. Check if no application is running with <code>pm2 list</code> and there is no node.js process with <code>ps aux | grep node</code>.</p></li>
+<li><p>If everything is OK, type this command to register service to start after VM started <code>sudo update-rc.d nodeapp defaults</code>.</p>
+
+<blockquote>
+<p>Note: If you encounter any issue trying these, proceed from basic to advanced. For instance first check <code>startup.sh</code> is working or not then check the service.</p>
+</blockquote></li>
+<li><p>We also need to make changes to the <code>provision.sh</code> file:</p></li>
+</ol>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno"> 1</span> ...
+<span class="lineno"> 2</span> git clone https://github.com/dhalsim/chatcat.git
+<span class="lineno"> 3</span> cd chatcat
+<span class="lineno"> 4</span> git checkout bes
+<span class="lineno"> 5</span> npm install
+<span class="lineno"> 6</span> sudo npm install grunt-cli -g
+<span class="lineno"> 7</span> sudo npm install -g pm2
+<span class="lineno"> 8</span> sudo cp startup.sh /etc/init.d/nodeapp
+<span class="lineno"> 9</span> sudo chmod a+x /etc/init.d/nodeapp
+<span class="lineno">10</span> sudo update-rc.d nodeapp defaults
+</code></pre></div>
+<p>That&#39;s all for now. If you don&#39;t feel familiar to all these Linux commands and such, there are tons of free sources for Linux from novice to advanced. If you encounter a problem you can&#39;t solve, I&#39;d like to help from the comments.</p>
+
+<p>The next article will be about how to manage logging on different machines using Vagrant to help simulate it. Wait for it :)</p>
+
+
+          <hr />
+					
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2015-11-14T00:00:00+01:00" datetime="2015-11-14T00:00:00+01:00" pubdate>
+							<span class="month"><abbr>November</abbr></span>
+							<span class="day">14</span>
+							<span class="year">2015</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/categories.html#virtual-machines-ref">
+    		virtual-machines <span>1</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/tags.html#vagrant-ref">vagrant <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#ubuntu-ref">ubuntu <span>1</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+
+
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/en/node.js/i-have-control/2015/11/13/nodejs-error-management-and-logging" title="View Node.js Error Management and Logging">&laquo; Node.js Error Management and Logging</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/en/javascript/2016/01/24/javascript-linting" title="View Javascript Linting with ESLint">Javascript Linting with ESLint &raquo;</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>About Me</h4>
+					<img src="/assets/me_rounded.png" style="width: 150px" />
+					<ul>
+						<li class="contact"><span class="author fn n">Barış Aydek</span></li>
+						<li class="resume"><a href="/resume/cv-en">My Resumê HTML (simplified)</a> |
+							<a href="/assets/resume/cv-en.pdf">pdf (simplified)</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf (full)</a>
+						</li>
+						<li class="contact"><address><span class="fn email"><a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a></span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+
+					<hr />
+
+					You should check out my <a href=/software-testing>Software Testing & TDD</a> slide (Turkish)
+
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/virtual-machines/2015/11/14/vagrant" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		$('.content header').append(
+			$('.toc').html(
+				$('<h4/>', {text: 'Table of contents: '})
+			).append($parentUl)
+		);
+
+		$('.content img')
+			.attr('title', 'Resmi büyütmek için üstüne tıklayınız.')
+			.click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
+	});
+</script>
+
+
+
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70097547-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
+

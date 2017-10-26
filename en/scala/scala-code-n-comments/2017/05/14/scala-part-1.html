@@ -1,0 +1,779 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Scala by code and comments - Part 1</title>
+	<meta name="author" content="Barış Aydek">
+
+	<!-- for Google -->
+	<meta name="description" content="Some problems in scala and my notes as comments" />
+	<meta name="keywords" content="" />
+
+	<meta name="author" content="Barış Aydek" />
+	<meta name="copyright" content="" />
+	<meta name="application-name" content="Dhalsim's" />
+
+	<!-- for Facebook -->
+	<meta property="og:title" content="Scala by code and comments - Part 1" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="http://dhalsim.github.io/assets/images/scala-logo.png" />
+	<meta property="og:url" content="http://dhalsim.github.io/en/scala/scala-code-n-comments/2017/05/14/scala-part-1" />
+	<meta property="og:description" content="Some problems in scala and my notes as comments" />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Scala by code and comments - Part 1" />
+	<meta name="twitter:description" content="Some problems in scala and my notes as comments" />
+	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/scala-logo.png" />
+	<meta name="twitter:creator" content="@">
+
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+  <style>
+	  @font-face {
+			font-family: 'Allerta';
+			src: url('/assets/fonts/Allerta-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Allerta-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Allerta-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Allerta-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+		@font-face {
+			font-family: 'Punk';
+			src: url('/assets/fonts/punk-regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/punk-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/punk-regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/punk-regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/punk-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/punk-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+
+		@font-face {
+			font-family: 'Ewert';
+			src: url('/assets/fonts/Ewert-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Ewert-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Ewert-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Ewert-Regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Ewert-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Ewert-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+	</style>
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Scala by code and comments - Part 1" type="application/atom+xml">
+	
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="/en">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/en/">
+								Dhalsim's
+							</a>
+						</li>
+						<li class="archive"><a href="/en/archive.html">Archive</a></li>
+						<li class="page"><a href="/en/pages.html">Pages</a></li>
+						<li class="category"><a href="/en/categories.html">Categories</a></li>
+						<li class="tag"><a href="/en/tags.html">Tags</a></li>
+					</ul>
+
+					<hr />
+					<nav class="languageSelector">
+						
+							<img src="/assets/blank.gif" class="flag flag-gb" alt="English" /> English
+						
+						-
+						
+							<a href="/" ><img src="/assets/blank.gif" class="flag flag-tr" alt="Turkish" /> </a><a href="/" class="alink">Turkish</a>
+						
+					</nav>
+
+					<hr />
+
+					<div> <a href="/en/rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/en/atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Scala by code and comments - Part 1</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					
+					
+
+
+
+
+<div class="seriesNote">
+  This article is <strong>part 1</strong> of a <strong>4-part</strong> series called <strong>Scala code and comments</strong></p>
+	<ul>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 1 -
+		
+    Scala by code and comments - Part 1
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 2 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/14/scala-part-2">
+		
+    Scala by code and comments - Part 2
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 3 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/20/scala-part-3">
+		
+    Scala by code and comments - Part 3
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 4 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/21/scala-part-4">
+		
+    Scala by code and comments - Part 4
+    
+      </a>
+    
+		</li>
+	
+	
+	</ul>
+</div>
+
+
+
+
+					
+
+					<h1>Preface</h1>
+
+<p>Best way to learn a new language is to code it. I&#39;ve found this helpful blog <a href="http://blog.thedigitalcatonline.com/blog/2015/04/07/99-scala-problems-01-find-last-element/#.WRi34FN95E4">The digital cat</a> that has 20 scala problems and solutions (not 99 despite the title) and from what I saw, he got them from this <a href="http://aperiodic.net/phil/scala/s-99/">blog</a> and it also influenced from another list for <a href="https://sites.google.com/site/prologsite/prolog-problems">prolog</a>! So I decided to look at them. But like always, I had some different methods and notes, too.</p>
+
+<p>So I decided to share them here. I choose a different style here. Since it is already explained in the original blog, I just wanted to share my codes (and tests) with my comments. I want to try this style and see what happens. At the end of the file you can see my <strong>WHAT I LEARNED?</strong> part which you can find some interesting facts and sources about the theme.</p>
+
+<h2>Tests</h2>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno"> 1</span> <span class="k">package</span> <span class="nn">org.onetofive</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="k">import</span> <span class="nn">org.scalatest._</span>
+<span class="lineno"> 4</span> <span class="k">import</span> <span class="nn">OneToFive._</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="k">class</span> <span class="nc">OneToFiveSuite</span> <span class="k">extends</span> <span class="nc">FunSuite</span> <span class="o">{</span>
+<span class="lineno"> 7</span>   <span class="k">val</span> <span class="n">list</span> <span class="k">=</span> <span class="nc">List</span><span class="o">(</span><span class="mi">1</span><span class="o">,</span> <span class="mi">2</span><span class="o">,</span> <span class="mi">3</span><span class="o">,</span> <span class="mi">4</span><span class="o">,</span> <span class="mi">5</span><span class="o">)</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span>   <span class="n">test</span><span class="o">(</span><span class="s">&quot;1. get the last element of a list&quot;</span><span class="o">)</span> <span class="o">{</span>
+<span class="lineno">10</span>     <span class="n">assert</span><span class="o">(</span><span class="n">last_procedural</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">===</span> <span class="mi">5</span><span class="o">)</span>
+<span class="lineno">11</span>     <span class="n">assertThrows</span><span class="o">[</span><span class="kt">NoSuchElementException</span><span class="o">]</span> <span class="o">{</span> <span class="n">last_procedural</span><span class="o">(</span><span class="nc">Nil</span><span class="o">)</span> <span class="o">}</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>     <span class="n">assert</span><span class="o">(</span><span class="n">last_recursive</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">===</span> <span class="mi">5</span><span class="o">)</span>
+<span class="lineno">14</span>     <span class="n">assertThrows</span><span class="o">[</span><span class="kt">NoSuchElementException</span><span class="o">]</span> <span class="o">{</span> <span class="n">last_recursive</span><span class="o">(</span><span class="nc">Nil</span><span class="o">)</span> <span class="o">}</span>
+<span class="lineno">15</span>   <span class="o">}</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span>   <span class="n">test</span><span class="o">(</span><span class="s">&quot;2. get the second last element of a list&quot;</span><span class="o">)</span> <span class="o">{</span>
+<span class="lineno">18</span>     <span class="n">assert</span><span class="o">(</span><span class="n">penultimate_procedural</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">===</span> <span class="mi">4</span><span class="o">)</span>
+<span class="lineno">19</span>     <span class="n">assertThrows</span><span class="o">[</span><span class="kt">NoSuchElementException</span><span class="o">]</span> <span class="o">{</span> <span class="n">penultimate_procedural</span><span class="o">(</span><span class="nc">Nil</span><span class="o">)</span> <span class="o">}</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span>     <span class="n">assert</span><span class="o">(</span><span class="n">penultimate_recursive</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">===</span> <span class="mi">4</span><span class="o">)</span>
+<span class="lineno">22</span>     <span class="n">assertThrows</span><span class="o">[</span><span class="kt">NoSuchElementException</span><span class="o">]</span> <span class="o">{</span> <span class="n">penultimate_recursive</span><span class="o">(</span><span class="nc">Nil</span><span class="o">)</span> <span class="o">}</span>
+<span class="lineno">23</span> 
+<span class="lineno">24</span>     <span class="n">assert</span><span class="o">(</span><span class="n">take_last_nth_procedural</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="o">===</span> <span class="mi">3</span><span class="o">)</span>
+<span class="lineno">25</span>     <span class="n">assertThrows</span><span class="o">[</span><span class="kt">NoSuchElementException</span><span class="o">]</span> <span class="o">{</span> <span class="n">take_last_nth_procedural</span><span class="o">(</span><span class="nc">Nil</span><span class="o">,</span> <span class="mi">3</span><span class="o">)</span> <span class="o">}</span>
+<span class="lineno">26</span>     <span class="n">assertThrows</span><span class="o">[</span><span class="kt">IllegalArgumentException</span><span class="o">]</span> <span class="o">{</span> <span class="n">take_last_nth_procedural</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="o">}</span>
+<span class="lineno">27</span> 
+<span class="lineno">28</span>     <span class="n">assert</span><span class="o">(</span><span class="n">take_last_nth_recursive</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">===</span> <span class="mi">4</span><span class="o">)</span>
+<span class="lineno">29</span>     <span class="n">assertThrows</span><span class="o">[</span><span class="kt">NoSuchElementException</span><span class="o">]</span> <span class="o">{</span> <span class="n">take_last_nth_recursive</span><span class="o">(</span><span class="nc">Nil</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}</span>
+<span class="lineno">30</span>     <span class="n">assertThrows</span><span class="o">[</span><span class="kt">IllegalArgumentException</span><span class="o">]</span> <span class="o">{</span> <span class="n">take_last_nth_recursive</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span> <span class="o">}</span>
+<span class="lineno">31</span>   <span class="o">}</span>
+<span class="lineno">32</span> 
+<span class="lineno">33</span>   <span class="n">test</span><span class="o">(</span><span class="s">&quot;3. Find the Kth element of a list&quot;</span><span class="o">)</span> <span class="o">{</span>
+<span class="lineno">34</span>     <span class="n">assert</span><span class="o">(</span><span class="n">nth_procedural</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">===</span> <span class="mi">2</span><span class="o">)</span>
+<span class="lineno">35</span>     <span class="n">assertThrows</span><span class="o">[</span><span class="kt">NoSuchElementException</span><span class="o">]</span> <span class="o">{</span> <span class="n">nth_procedural</span><span class="o">(</span><span class="nc">Nil</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}</span>
+<span class="lineno">36</span> 
+<span class="lineno">37</span>     <span class="n">assert</span><span class="o">(</span><span class="n">nth_recursive</span><span class="o">(</span><span class="n">list</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">===</span> <span class="mi">2</span><span class="o">)</span>
+<span class="lineno">38</span>     <span class="n">assertThrows</span><span class="o">[</span><span class="kt">NoSuchElementException</span><span class="o">]</span> <span class="o">{</span> <span class="n">nth_recursive</span><span class="o">(</span><span class="nc">Nil</span><span class="o">,</span> <span class="mi">2</span><span class="o">)</span> <span class="o">}</span>
+<span class="lineno">39</span>   <span class="o">}</span>
+<span class="lineno">40</span> 
+<span class="lineno">41</span>   <span class="n">test</span><span class="o">(</span><span class="s">&quot;4. Find the number of elements of a list&quot;</span><span class="o">)</span> <span class="o">{</span>
+<span class="lineno">42</span>     <span class="n">assert</span><span class="o">(</span><span class="n">count_recursive</span><span class="o">(</span><span class="nc">Nil</span><span class="o">)</span> <span class="o">===</span> <span class="mi">0</span><span class="o">)</span>
+<span class="lineno">43</span>     <span class="n">assert</span><span class="o">(</span><span class="n">count_with_fold</span><span class="o">(</span><span class="nc">Nil</span><span class="o">)</span> <span class="o">===</span> <span class="mi">0</span><span class="o">)</span>
+<span class="lineno">44</span> 
+<span class="lineno">45</span>     <span class="n">assert</span><span class="o">(</span><span class="n">count_recursive</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">===</span> <span class="n">list</span><span class="o">.</span><span class="n">length</span><span class="o">)</span>
+<span class="lineno">46</span>     <span class="n">assert</span><span class="o">(</span><span class="n">count_with_fold</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">===</span> <span class="n">list</span><span class="o">.</span><span class="n">length</span><span class="o">)</span>
+<span class="lineno">47</span>   <span class="o">}</span>
+<span class="lineno">48</span> 
+<span class="lineno">49</span>   <span class="n">test</span><span class="o">(</span><span class="s">&quot;5. Reverse a list&quot;</span><span class="o">)</span> <span class="o">{</span>
+<span class="lineno">50</span>     <span class="k">val</span> <span class="n">reversed</span> <span class="k">=</span> <span class="n">list</span><span class="o">.</span><span class="n">reverse</span>
+<span class="lineno">51</span> 
+<span class="lineno">52</span>     <span class="n">assert</span><span class="o">(</span><span class="n">reverse</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">===</span> <span class="n">reversed</span><span class="o">)</span>
+<span class="lineno">53</span>     <span class="n">assert</span><span class="o">(</span><span class="n">reverse_recursive</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">===</span> <span class="n">reversed</span><span class="o">)</span>
+<span class="lineno">54</span>     <span class="n">assert</span><span class="o">(</span><span class="n">reverse_tailrecursive</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">===</span> <span class="n">reversed</span><span class="o">)</span>
+<span class="lineno">55</span>     <span class="n">assert</span><span class="o">(</span><span class="n">reverse_withfold</span><span class="o">(</span><span class="n">list</span><span class="o">)</span> <span class="o">===</span> <span class="n">reversed</span><span class="o">)</span>
+<span class="lineno">56</span>   <span class="o">}</span>
+<span class="lineno">57</span> <span class="o">}</span>
+</code></pre></div>
+<h2>Solutions</h2>
+<div class="highlight"><pre><code class="language-scala" data-lang="scala"><span class="lineno">  1</span> <span class="k">package</span> <span class="nn">org.onetofive</span>
+<span class="lineno">  2</span> 
+<span class="lineno">  3</span> <span class="k">import</span> <span class="nn">scala.annotation.tailrec</span>
+<span class="lineno">  4</span> 
+<span class="lineno">  5</span> <span class="k">object</span> <span class="nc">OneToFive</span> <span class="k">extends</span> <span class="nc">App</span> <span class="o">{</span>
+<span class="lineno">  6</span>   <span class="k">def</span> <span class="n">last_procedural</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">last</span>
+<span class="lineno">  7</span> 
+<span class="lineno">  8</span>   <span class="k">def</span> <span class="n">last_recursive</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span> <span class="o">{</span>
+<span class="lineno">  9</span>     <span class="k">case</span> <span class="n">x</span> <span class="o">::</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">x</span>
+<span class="lineno"> 10</span>     <span class="k">case</span> <span class="n">head</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="n">last_recursive</span><span class="o">(</span><span class="n">tail</span><span class="o">)</span>
+<span class="lineno"> 11</span>     <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span>
+<span class="lineno"> 12</span>   <span class="o">}</span>
+<span class="lineno"> 13</span> 
+<span class="lineno"> 14</span>   <span class="k">def</span> <span class="n">penultimate_procedural</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="k">if</span><span class="o">(</span><span class="n">xs</span><span class="o">.</span><span class="n">isEmpty</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span> <span class="k">else</span> <span class="n">xs</span><span class="o">.</span><span class="n">init</span><span class="o">.</span><span class="n">last</span>
+<span class="lineno"> 15</span> 
+<span class="lineno"> 16</span>   <span class="k">def</span> <span class="n">penultimate_recursive</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span> <span class="o">{</span>
+<span class="lineno"> 17</span>     <span class="k">case</span> <span class="n">head</span> <span class="o">::</span> <span class="nc">List</span><span class="o">(</span><span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">head</span>
+<span class="lineno"> 18</span>     <span class="k">case</span> <span class="n">head</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="n">penultimate_recursive</span><span class="o">(</span><span class="n">tail</span><span class="o">)</span>
+<span class="lineno"> 19</span>     <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span>
+<span class="lineno"> 20</span>   <span class="o">}</span>
+<span class="lineno"> 21</span> 
+<span class="lineno"> 22</span>   <span class="k">def</span> <span class="n">take_last_nth_procedural</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="o">{</span>
+<span class="lineno"> 23</span>     <span class="k">if</span><span class="o">(</span><span class="n">xs</span><span class="o">.</span><span class="n">isEmpty</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span>
+<span class="lineno"> 24</span>     <span class="k">if</span><span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span>
+<span class="lineno"> 25</span> 
+<span class="lineno"> 26</span>     <span class="n">xs</span><span class="o">.</span><span class="n">takeRight</span><span class="o">(</span><span class="n">n</span><span class="o">).</span><span class="n">head</span>
+<span class="lineno"> 27</span>   <span class="o">}</span>
+<span class="lineno"> 28</span> 
+<span class="lineno"> 29</span>   <span class="c1">// first I thought that is smart to take the last element as looking to (length - index)</span>
+<span class="lineno"> 30</span>   <span class="c1">// but then I realized that Lists doesn&#39;t have a normal length property, it is calculated</span>
+<span class="lineno"> 31</span>   <span class="c1">// again and again recursively through traversing the whole List. So just a small optimization:</span>
+<span class="lineno"> 32</span>   <span class="k">def</span> <span class="n">take_last_nth_recursive</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="o">{</span>
+<span class="lineno"> 33</span>     <span class="k">val</span> <span class="n">l</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">length</span>
+<span class="lineno"> 34</span> 
+<span class="lineno"> 35</span>     <span class="k">def</span> <span class="n">iter</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">ys</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="n">ys</span> <span class="k">match</span> <span class="o">{</span>
+<span class="lineno"> 36</span>       <span class="k">case</span> <span class="k">_</span> <span class="k">if</span><span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span>
+<span class="lineno"> 37</span>       <span class="k">case</span> <span class="k">_</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">if</span><span class="o">(</span><span class="n">l</span> <span class="o">-</span> <span class="n">n</span> <span class="o">!=</span> <span class="mi">0</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">take_last_nth_recursive</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span>
+<span class="lineno"> 38</span>       <span class="k">case</span> <span class="n">head</span> <span class="o">::</span> <span class="k">_</span> <span class="k">if</span><span class="o">(</span><span class="n">l</span> <span class="o">-</span> <span class="n">n</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">head</span>
+<span class="lineno"> 39</span>       <span class="k">case</span> <span class="k">_</span> <span class="k">=&gt;</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span>
+<span class="lineno"> 40</span>     <span class="o">}</span>
+<span class="lineno"> 41</span> 
+<span class="lineno"> 42</span>     <span class="n">iter</span><span class="o">(</span><span class="n">xs</span><span class="o">,</span> <span class="n">n</span><span class="o">)</span>
+<span class="lineno"> 43</span>   <span class="o">}</span>
+<span class="lineno"> 44</span> 
+<span class="lineno"> 45</span>   <span class="c1">// even better</span>
+<span class="lineno"> 46</span>   <span class="k">def</span> <span class="n">nth_procedural</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">takeRight</span><span class="o">(</span><span class="n">xs</span><span class="o">.</span><span class="n">length</span> <span class="o">-</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">).</span><span class="n">head</span>
+<span class="lineno"> 47</span> 
+<span class="lineno"> 48</span>   <span class="k">def</span> <span class="n">nth_recursive</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">A</span> <span class="o">=</span> <span class="n">xs</span> <span class="k">match</span> <span class="o">{</span>
+<span class="lineno"> 49</span>     <span class="k">case</span> <span class="k">_</span> <span class="k">if</span><span class="o">(</span><span class="n">n</span> <span class="o">&lt;</span> <span class="mi">1</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">IllegalArgumentException</span>
+<span class="lineno"> 50</span>     <span class="k">case</span> <span class="k">_</span> <span class="k">if</span><span class="o">(</span><span class="n">xs</span><span class="o">.</span><span class="n">length</span> <span class="o">==</span> <span class="mi">0</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="k">throw</span> <span class="k">new</span> <span class="nc">NoSuchElementException</span>
+<span class="lineno"> 51</span>     <span class="k">case</span> <span class="n">head</span> <span class="o">::</span> <span class="k">_</span> <span class="k">if</span><span class="o">(</span><span class="n">n</span> <span class="o">==</span> <span class="mi">1</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">head</span>
+<span class="lineno"> 52</span>     <span class="k">case</span> <span class="k">_</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="n">nth_recursive</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">n</span> <span class="o">-</span> <span class="mi">1</span><span class="o">)</span>
+<span class="lineno"> 53</span>   <span class="o">}</span>
+<span class="lineno"> 54</span> 
+<span class="lineno"> 55</span>   <span class="c1">// oh yay! tail recursive</span>
+<span class="lineno"> 56</span>   <span class="k">def</span> <span class="n">count_recursive</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="o">{</span>
+<span class="lineno"> 57</span>     <span class="nd">@tailrec</span>
+<span class="lineno"> 58</span>     <span class="k">def</span> <span class="n">iter</span><span class="o">(</span><span class="n">ys</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">n</span><span class="k">:</span> <span class="kt">Int</span><span class="o">)</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">ys</span> <span class="k">match</span> <span class="o">{</span>
+<span class="lineno"> 59</span>       <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">n</span>
+<span class="lineno"> 60</span>       <span class="k">case</span> <span class="k">_</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="n">iter</span><span class="o">(</span><span class="n">tail</span><span class="o">,</span> <span class="n">n</span> <span class="o">+</span> <span class="mi">1</span><span class="o">)</span>
+<span class="lineno"> 61</span>     <span class="o">}</span>
+<span class="lineno"> 62</span> 
+<span class="lineno"> 63</span>     <span class="n">iter</span><span class="o">(</span><span class="n">xs</span><span class="o">,</span> <span class="mi">0</span><span class="o">)</span>
+<span class="lineno"> 64</span>   <span class="o">}</span>
+<span class="lineno"> 65</span> 
+<span class="lineno"> 66</span>   <span class="c1">// even better</span>
+<span class="lineno"> 67</span>   <span class="k">def</span> <span class="n">count_with_fold</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">Int</span> <span class="o">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">(</span><span class="mi">0</span><span class="o">){</span> <span class="o">(</span><span class="n">acc</span><span class="o">,</span> <span class="k">_</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">acc</span> <span class="o">+</span> <span class="mi">1</span> <span class="o">}</span>
+<span class="lineno"> 68</span> 
+<span class="lineno"> 69</span>   <span class="c1">// the obvious</span>
+<span class="lineno"> 70</span>   <span class="k">def</span> <span class="n">reverse</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">reverse</span>
+<span class="lineno"> 71</span> 
+<span class="lineno"> 72</span>   <span class="c1">// not tail recursive</span>
+<span class="lineno"> 73</span>   <span class="k">def</span> <span class="n">reverse_recursive</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span> <span class="k">match</span> <span class="o">{</span>
+<span class="lineno"> 74</span>     <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="nc">Nil</span>
+<span class="lineno"> 75</span>     <span class="k">case</span> <span class="n">head</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="n">reverse_recursive</span><span class="o">(</span><span class="n">tail</span><span class="o">)</span> <span class="o">:::</span> <span class="nc">List</span><span class="o">(</span><span class="n">head</span><span class="o">)</span>
+<span class="lineno"> 76</span>   <span class="o">}</span>
+<span class="lineno"> 77</span> 
+<span class="lineno"> 78</span>   <span class="c1">// better</span>
+<span class="lineno"> 79</span>   <span class="k">def</span> <span class="n">reverse_tailrecursive</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="o">{</span>
+<span class="lineno"> 80</span>     <span class="nd">@tailrec</span>
+<span class="lineno"> 81</span>     <span class="k">def</span> <span class="n">iter</span><span class="o">(</span><span class="n">acc</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">],</span> <span class="n">ys</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">ys</span> <span class="k">match</span> <span class="o">{</span>
+<span class="lineno"> 82</span>       <span class="k">case</span> <span class="nc">Nil</span> <span class="k">=&gt;</span> <span class="n">acc</span>
+<span class="lineno"> 83</span>       <span class="k">case</span> <span class="n">head</span> <span class="o">::</span> <span class="n">tail</span> <span class="k">=&gt;</span> <span class="n">iter</span><span class="o">(</span><span class="n">head</span> <span class="o">::</span> <span class="n">acc</span><span class="o">,</span> <span class="n">tail</span><span class="o">)</span>
+<span class="lineno"> 84</span>     <span class="o">}</span>
+<span class="lineno"> 85</span> 
+<span class="lineno"> 86</span>     <span class="n">iter</span><span class="o">(</span><span class="nc">Nil</span><span class="o">,</span> <span class="n">xs</span><span class="o">)</span>
+<span class="lineno"> 87</span>   <span class="o">}</span>
+<span class="lineno"> 88</span>   <span class="c1">// even better</span>
+<span class="lineno"> 89</span>   <span class="k">def</span> <span class="n">reverse_withfold</span><span class="o">[</span><span class="kt">A</span><span class="o">](</span><span class="n">xs</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">])</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]</span> <span class="k">=</span> <span class="n">xs</span><span class="o">.</span><span class="n">foldLeft</span><span class="o">(</span><span class="nc">Nil</span><span class="k">:</span> <span class="kt">List</span><span class="o">[</span><span class="kt">A</span><span class="o">]){</span> <span class="o">(</span><span class="n">ys</span><span class="o">,</span> <span class="n">x</span><span class="o">)</span> <span class="k">=&gt;</span> <span class="n">x</span> <span class="o">::</span> <span class="n">ys</span> <span class="o">}</span>
+<span class="lineno"> 90</span> 
+<span class="lineno"> 91</span>   <span class="cm">/*</span>
+<span class="lineno"> 92</span> <span class="cm">   WHAT I LEARNED?</span>
+<span class="lineno"> 93</span> 
+<span class="lineno"> 94</span> <span class="cm">   * You can check thrown exceptions in your tests with assertThrows</span>
+<span class="lineno"> 95</span> <span class="cm">   * you could add a @tailrec annotation so that you can be sure that your function is optimized by compiler as a tail recursive function.</span>
+<span class="lineno"> 96</span> <span class="cm">   * in Lists nearly every function&#39;s complexity except head is linear. So better think twice when you want to write your own recursive functions</span>
+<span class="lineno"> 97</span> <span class="cm">   * You can use fold or take functions for your recursive needs!</span>
+<span class="lineno"> 98</span> 
+<span class="lineno"> 99</span> <span class="cm">  */</span>
+<span class="lineno">100</span> <span class="o">}</span>
+</code></pre></div>
+<h2>Wanna try?</h2>
+
+<p>You can clone my git repository and run tests with <a href="http://www.scala-sbt.org/0.13/docs/Setup.html">sbt</a>.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> git clone https://github.com/dhalsim/scala-exercises.git
+<span class="lineno">2</span> cd scala-exercises
+<span class="lineno">3</span> sbt test
+</code></pre></div>
+
+          <hr />
+					
+					
+
+
+
+
+<div class="seriesNote">
+  This article is <strong>part 1</strong> of a <strong>4-part</strong> series called <strong>Scala code and comments</strong></p>
+	<ul>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 1 -
+		
+    Scala by code and comments - Part 1
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 2 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/14/scala-part-2">
+		
+    Scala by code and comments - Part 2
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 3 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/20/scala-part-3">
+		
+    Scala by code and comments - Part 3
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 4 -
+		
+			<a href="/en/scala/scala-code-n-comments/2017/05/21/scala-part-4">
+		
+    Scala by code and comments - Part 4
+    
+      </a>
+    
+		</li>
+	
+	
+	</ul>
+</div>
+
+
+
+
+					<hr />
+				  
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2017-05-14T00:00:00+02:00" datetime="2017-05-14T00:00:00+02:00" pubdate>
+							<span class="month"><abbr>May</abbr></span>
+							<span class="day">14</span>
+							<span class="year">2017</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/categories.html#scala-ref">
+    		scala <span>5</span>
+    	</a></li>
+    
+    	<li><a href="/en/categories.html#scala-code-n-comments-ref">
+    		scala-code-n-comments <span>4</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/tags.html#scala-ref">scala <span>5</span></a></li>
+    
+    	<li><a href="/en/tags.html#recursive-ref">recursive <span>4</span></a></li>
+    
+    	<li><a href="/en/tags.html#algorithms-ref">algorithms <span>4</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+
+
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/en/build/tooling/2016/12/27/jenkins-nunit-integration" title="View Jenkins NUnit Integration with Test and Coverage Reports">&laquo; Jenkins NUnit Integration with Test and Coverage Reports</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/en/scala/scala-code-n-comments/2017/05/14/scala-part-2" title="View Scala by code and comments - Part 2">Scala by code and comments - Part 2 &raquo;</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>About Me</h4>
+					<img src="/assets/me_rounded.png" style="width: 150px" />
+					<ul>
+						<li class="contact"><span class="author fn n">Barış Aydek</span></li>
+						<li class="resume"><a href="/resume/cv-en">My Resumê HTML (simplified)</a> |
+							<a href="/assets/resume/cv-en.pdf">pdf (simplified)</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf (full)</a>
+						</li>
+						<li class="contact"><address><span class="fn email"><a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a></span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+
+					<hr />
+
+					You should check out my <a href=/software-testing>Software Testing & TDD</a> slide (Turkish)
+
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/scala/scala-code-n-comments/2017/05/14/scala-part-1" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+
+
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70097547-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
+

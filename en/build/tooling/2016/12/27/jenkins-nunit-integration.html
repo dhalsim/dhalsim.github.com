@@ -1,0 +1,705 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="en"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Jenkins NUnit Integration with Test and Coverage Reports</title>
+	<meta name="author" content="Barış Aydek">
+
+	<!-- for Google -->
+	<meta name="description" content="Create unit test and coverage reports automatically when your build runs on Jenkins with NUnit and other various tools." />
+	<meta name="keywords" content="" />
+
+	<meta name="author" content="Barış Aydek" />
+	<meta name="copyright" content="" />
+	<meta name="application-name" content="Dhalsim's" />
+
+	<!-- for Facebook -->
+	<meta property="og:title" content="Jenkins NUnit Integration with Test and Coverage Reports" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="http://dhalsim.github.io/assets/images/jenkins-logo.png" />
+	<meta property="og:url" content="http://dhalsim.github.io/en/build/tooling/2016/12/27/jenkins-nunit-integration" />
+	<meta property="og:description" content="Create unit test and coverage reports automatically when your build runs on Jenkins with NUnit and other various tools." />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Jenkins NUnit Integration with Test and Coverage Reports" />
+	<meta name="twitter:description" content="Create unit test and coverage reports automatically when your build runs on Jenkins with NUnit and other various tools." />
+	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/jenkins-logo.png" />
+	<meta name="twitter:creator" content="@">
+
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+  <style>
+	  @font-face {
+			font-family: 'Allerta';
+			src: url('/assets/fonts/Allerta-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Allerta-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Allerta-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Allerta-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+		@font-face {
+			font-family: 'Punk';
+			src: url('/assets/fonts/punk-regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/punk-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/punk-regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/punk-regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/punk-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/punk-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+
+		@font-face {
+			font-family: 'Ewert';
+			src: url('/assets/fonts/Ewert-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Ewert-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Ewert-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Ewert-Regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Ewert-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Ewert-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+	</style>
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Jenkins NUnit Integration with Test and Coverage Reports" type="application/atom+xml">
+	
+	<link href="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.css" />
+	<style type="text/css">
+	#mermaidChart0 .node { fill:#ffa; stroke:#666; stroke-width:3px; }
+	#mermaidChart0 .node text  { fill:#000; stroke:none; font-weight:300; font-family:"Helvetica Neue",Helvetica,Arial,sans-serf; font-size:14px; }
+	#mermaidChart0 .edgeLabel text  { fill:#000; stroke:none; font-weight:300; font-family:"Helvetica Neue",Helvetica,Arial,sans-serf; font-size:14px; }
+	.edgeLabel { background-color: darkgray; }
+	.mermaid .label { color: rgb(51, 51, 51); }
+	.node circle, .node polygon, .node rect { fill: rgb(236, 236, 255); stroke: rgb(204, 204, 255); stroke-width: 1px; }
+	.edgePath .path { stroke: rgb(51, 51, 51); }
+	.mermaid .label { color: rgb(51, 51, 51); }
+	.node circle, .node polygon, .node rect { fill: rgb(205, 228, 152); stroke: rgb(19, 84, 12); stroke-width: 1px; }
+	.edgePath .path { stroke: rgb(0, 128, 0); stroke-width: 1.5px; }
+	</style>
+	
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="/en">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/en/">
+								Dhalsim's
+							</a>
+						</li>
+						<li class="archive"><a href="/en/archive.html">Archive</a></li>
+						<li class="page"><a href="/en/pages.html">Pages</a></li>
+						<li class="category"><a href="/en/categories.html">Categories</a></li>
+						<li class="tag"><a href="/en/tags.html">Tags</a></li>
+					</ul>
+
+					<hr />
+					<nav class="languageSelector">
+						
+							<img src="/assets/blank.gif" class="flag flag-gb" alt="English" /> English
+						
+						-
+						
+							<a href="/" ><img src="/assets/blank.gif" class="flag flag-tr" alt="Turkish" /> </a><a href="/" class="alink">Turkish</a>
+						
+					</nav>
+
+					<hr />
+
+					<div> <a href="/en/rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/en/atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Jenkins NUnit Integration with Test and Coverage Reports</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				
+				<div class="toc">
+					<span>Loading table of contents...</span>
+					<div class="sp-circle"></div>
+				</div>
+				
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					
+
+					<h1>Jenkins NUnit Integration</h1>
+
+<p><img src="/assets/images/jenkins-logo.png" alt="jenlins">
+<img src="/assets/images/nunit-logo.png" alt="nunit"></p>
+
+<p>This integration contains:</p>
+
+<ul>
+<li>A CI job that runs NUnit tests and creates HTML reports after building a .NET project</li>
+<li>Installing HTML publish plugin</li>
+<li>Generating NUnit report with ReportUnit</li>
+<li>Generating code coverage reports with OpenCover</li>
+<li>Generating code coverage HTML reports with ReportUnit</li>
+</ul>
+
+<p>But doesn&#39;t contain:</p>
+
+<ul>
+<li>How to install and Jenkins</li>
+<li>How to create a build job from scratch</li>
+<li>How to integrate the source control managers</li>
+<li>How to write unit tests</li>
+<li>etc.</li>
+</ul>
+
+<h2>Setup</h2>
+
+<p>This is relatively an easy task to integrate Jenkins with NUnit and the reports as you&#39;ll see in the batch script. But the tricky part is installing the right tools and running them on the console separately with the right parameters. If you can accomplish that, Jenkins integration is easy.</p>
+
+<h3>Step 1: Installing Nuget packages</h3>
+
+<p>Install these packages to your test project:</p>
+
+<ul>
+<li><a href="https://www.nunit.org/">NUnit</a></li>
+<li>NUnit.ConsoleRunner</li>
+<li><a href="https://github.com/reportunit/reportunit">ReportUnit</a></li>
+<li><a href="https://github.com/OpenCover/opencover">OpenCover</a></li>
+<li><a href="https://github.com/danielpalme/ReportGenerator">ReportGenerator</a></li>
+</ul>
+
+<p>If you check your <em>packages</em> directory, you&#39;ll see these packages installed for example NUnit Console Runner is in:</p>
+
+<p><code>packages\NUnit.ConsoleRunner.X.X.X\tools\nunit3-console.exe</code></p>
+
+<blockquote>
+<p>Write at least a few unit tests, and test the project using this exe from command line.</p>
+
+<p>Watch out the version numbers! You will need to arrange the batch script with the installed versions. If you update the packages and the version numbers change, you would need to update the script again.</p>
+</blockquote>
+
+<h3>Step 2: Create a bat executable</h3>
+
+<p>Create a <code>jenkins_unittests.bat</code> file in your project folder like this:</p>
+<div class="highlight"><pre><code class="language-bat" data-lang="bat"><span class="lineno"> 1</span> <span class="c">REM Path variables</span>
+<span class="lineno"> 2</span> <span class="k">SET</span> <span class="nv">FolderPath</span><span class="o">=</span><span class="nv">%1</span>
+<span class="lineno"> 3</span> <span class="k">SET</span> <span class="nv">ResultsPath</span><span class="o">=</span>C:\UnitTestResults
+<span class="lineno"> 4</span> <span class="k">SET</span> <span class="nv">CoverageHistoryPath</span><span class="o">=</span>C:\CoverageHistory
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="k">SET</span> <span class="nv">NunitPath</span><span class="o">=</span><span class="nv">%FolderPath%</span>\packages\NUnit.ConsoleRunner.<span class="m">3</span>.<span class="m">5</span>.<span class="m">0</span>\tools
+<span class="lineno"> 7</span> <span class="k">SET</span> <span class="nv">ReportUnitPath</span><span class="o">=</span><span class="nv">%FolderPath%</span>\packages\ReportUnit.<span class="m">1</span>.<span class="m">5</span>.<span class="m">0</span>-beta<span class="m">1</span>\tools
+<span class="lineno"> 8</span> <span class="k">SET</span> <span class="nv">OpenCoverPath</span><span class="o">=</span><span class="nv">%FolderPath%</span>\packages\OpenCover.<span class="m">4</span>.<span class="m">6</span>.<span class="m">519</span>\tools
+<span class="lineno"> 9</span> <span class="k">SET</span> <span class="nv">ReportGeneratorPath</span><span class="o">=</span><span class="nv">%FolderPath%</span>\packages\ReportGenerator.<span class="m">2</span>.<span class="m">4</span>.<span class="m">5</span>.<span class="m">0</span>\tools
+<span class="lineno">10</span> 
+<span class="lineno">11</span> <span class="k">SET</span> <span class="nv">UnitTestProj</span><span class="o">=</span><span class="nv">%FolderPath%</span>\MyProject.UnitTests\MyProject.UnitTests.csproj
+<span class="lineno">12</span> 
+<span class="lineno">13</span> <span class="c">REM Recreate Results Folder</span>
+<span class="lineno">14</span> rd <span class="n">/S</span> <span class="n">/Q</span> <span class="nv">%ResultsPath%</span>
+<span class="lineno">15</span> <span class="k">md</span> <span class="nv">%ResultsPath%</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span> <span class="c">REM Create coverage history folder if not exists</span>
+<span class="lineno">18</span> <span class="k">if</span> not <span class="k">exist</span> <span class="s2">&quot;%CoverageHistoryPath%&quot;</span> mkdir <span class="nv">%CoverageHistoryPath%</span>
+<span class="lineno">19</span> 
+<span class="lineno">20</span> <span class="c">REM Run Nunit3 for tests, it produces TestResult.xml report</span>
+<span class="lineno">21</span> <span class="nv">%NunitPath%</span>\nunit<span class="m">3</span>-console.exe <span class="nv">%UnitTestProj%</span> --result<span class="o">=</span><span class="nv">%ResultsPath%</span>\TestResult.xml
+<span class="lineno">22</span> 
+<span class="lineno">23</span> <span class="c">REM Get nunit command errorlevel</span>
+<span class="lineno">24</span> <span class="k">SET</span> <span class="nv">NunitError</span><span class="o">=</span><span class="nv">%ERRORLEVEL%</span>
+<span class="lineno">25</span> 
+<span class="lineno">26</span> <span class="c">REM Run ReportUnit to create HTML Report from Nunit XML report</span>
+<span class="lineno">27</span> <span class="nv">%ReportUnitPath%</span>\ReportUnit.exe <span class="nv">%ResultsPath%</span>\TestResult.xml
+<span class="lineno">28</span> 
+<span class="lineno">29</span> <span class="c">REM Run OpenCover to create coverage XML report</span>
+<span class="lineno">30</span> <span class="nv">%OpenCoverPath%</span>\OpenCover.Console.exe -register:user -register:user -target:<span class="nv">%NunitPath%</span>\nunit<span class="m">3</span>-console.exe -targetargs:<span class="nv">%UnitTestProj%</span> -output:<span class="nv">%ResultsPath%</span>\opencovertests.xml
+<span class="lineno">31</span> 
+<span class="lineno">32</span> <span class="c">REM Run ReportGenerator to create coverage HTML report from coverage XML</span>
+<span class="lineno">33</span> <span class="nv">%ReportGeneratorPath%</span>\ReportGenerator.exe -reports:<span class="nv">%ResultsPath%</span>\opencovertests.xml -targetDir:<span class="nv">%ResultsPath%</span> -historydir:<span class="nv">%CoverageHistoryPath%</span>
+<span class="lineno">34</span> 
+<span class="lineno">35</span> <span class="c">REM Fail if Nunit has found an error on tests</span>
+<span class="lineno">36</span> exit <span class="n">/b</span> <span class="nv">%NunitError%</span>
+</code></pre></div>
+<blockquote>
+<p>You need to add this file to the source control as well. In this way jenkins could access the file after pulling (TFS: checkout) your source repository.</p>
+</blockquote>
+
+<p>To update or maintain the script easily, I used some parameters and variables across the script. <code>%1</code> is the first (and only) parameter that we will use. We will pass the directory of our project that jenkins will use from the jenkins job.</p>
+
+<blockquote>
+<p>Please update the script as the right paths and versions of your packages. Also test project name must be changed according to yours.</p>
+</blockquote>
+
+<h3>Step 3: Creating paths</h3>
+
+<p>I used these 2 folders for reports generated.</p>
+
+<ul>
+<li><code>C:\UnitTestResults</code></li>
+<li><code>C:\CoverageHistory</code></li>
+</ul>
+
+<p>Create these folders on the computer jenkins runs.</p>
+
+<h3>Step 4: Understand and test</h3>
+
+<p>The basic flow is:</p>
+
+<div class="mermaid">
+graph LR
+    Start-- Unit test project -->nunit[Run Tests with NUnit]
+    nunit-->TR[TestResult.xml]
+    RU[ReportUnit.exe]-- TestResult.xml -->TReport[TestResult.html]
+    OC[OpenCover]-- Unit test project<br />NUnit -->OCR[opencovertests.xml]
+    RG[Report Generator]-- opencovertests.xml -->HTML[HTML Coverage Report]
+</div>
+
+<p>You can also try to run each script separately to see how it works, or to troubleshoot. In each step an output file will be created. When NUnit tests run, an XML file (we gave <strong>TestResult.xml</strong> as the output file name) will be created in the specified path. Then ReportUnit will create a single HTML file (<strong>TestResult.html</strong>) in the same folder. This will be the first report and will give us unit test results.</p>
+
+<p>Second report will be the coverage report. OpenCover will create report XML (<strong>opencovertests.xml</strong>) using NUnit, then ReportGenerator will create an HTML site with that file in the given path (<strong>C:\UnitTestResults</strong>) and addition to that, the old reports will be saved at (<strong>C:\CoverageHistory</strong>), so each time you run coverage, you can also track coverage changes.</p>
+
+<h3>Step 5: Configuring Jenkins</h3>
+
+<p>You need these plugins or equivalents in order to make this integration</p>
+
+<ul>
+<li>A source control plugin (In my case it is Team Foundation Server Plugin)</li>
+<li>A build plugin (In my case it is MSBuild Plugin)</li>
+<li>HTML publisher plugin</li>
+</ul>
+
+<p>Search and install these plugins from <strong>Manage Jenkins</strong> -&gt; <strong>Manage Plugins</strong></p>
+
+<h3>Step 6: Create/Update your jenkins job</h3>
+
+<p>After you setup your jenkins job and see that your build is successful, we can go on and integrate the tests.</p>
+
+<p>After the MSBuild step, you need to add a <strong>Execute Windows batch command</strong> step. Command will be:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> [PATH_TO_YOUR_PROJECT_ROOT]\jenkins_unittest.bat [PATH_TO_YOUR_PROJECT_ROOT]
+</code></pre></div>
+<p>This way we will pass the project root as a parameter to the batch script.</p>
+
+<p>Then we need to add two HTML reports from <strong>Add post-build action</strong> button, and selecting <strong>Publish HTML reports</strong>.</p>
+
+<p>We need to add two reports by clicking the add button twice. First one will be the unit test report, and second will be the Coverage report.</p>
+
+<p>Fill the forms with the appropriate values</p>
+
+<ol>
+<li>First report
+
+<ul>
+<li>HTML directory to archive: <code>C:\UnitTestResults</code></li>
+<li>Index page[s]: TestResult.html</li>
+<li>Report title: Unit Test Report</li>
+</ul></li>
+<li>Second report
+
+<ul>
+<li>HTML directory to archive: <code>C:\CoverageHistory</code></li>
+<li>Index page[s]: index.htm</li>
+<li>Report title: Code Coverage Report</li>
+</ul></li>
+</ol>
+
+<blockquote>
+<p>Select <strong>Keep past HTML reports</strong> and <strong>Always link to last build</strong> from <strong>Publishing options</strong>.</p>
+</blockquote>
+
+<h2>Notes</h2>
+
+<p>HTML publisher plugin uses external resources (js, css) and that is not allowed on jenkins&#39; default configuration. We need to change it as this <a href="https://wiki.jenkins-ci.org/display/JENKINS/Configuring+Content+Security+Policy">wiki page</a> explains.</p>
+
+<p>In my case jenkins is a windows service and I can change the configuration via <strong>jenkins.xml</strong> and restart the service.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> &lt;arguments&gt;-Xrs -Xmx256m -Dhudson.model.DirectoryBrowserSupport.CSP= -Dhudson.lifecycle=hudson.lifecycle.WindowsServiceLifecycle -jar &quot;%BASE%\jenkins.war&quot; --httpPort=8080 --webroot=&quot;%BASE%\war&quot;&lt;/arguments&gt;
+</code></pre></div>
+<p>As suggested, check the setting by running <code>System.getProperty(&quot;hudson.model.DirectoryBrowserSupport.CSP&quot;)</code> command in <a href="https://wiki.jenkins-ci.org/display/JENKINS/Jenkins+Script+Console">Jenkins Script Console</a></p>
+
+
+          <hr />
+					
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2016-12-27T00:00:00+01:00" datetime="2016-12-27T00:00:00+01:00" pubdate>
+							<span class="month"><abbr>December</abbr></span>
+							<span class="day">27</span>
+							<span class="year">2016</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/categories.html#build-ref">
+    		build <span>2</span>
+    	</a></li>
+    
+    	<li><a href="/en/categories.html#tooling-ref">
+    		tooling <span>2</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/en/tags.html#jenkins-ref">jenkins <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#nunit-ref">nunit <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#unit test-ref">unit test <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#code coverage-ref">code coverage <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#report-ref">report <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#TDD-ref">TDD <span>1</span></a></li>
+    
+    	<li><a href="/en/tags.html#CI-ref">CI <span>1</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+
+
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/en/scala/2016/12/15/subtyping-and-variance" title="View Subtyping and Variance in Scala">&laquo; Subtyping and Variance in Scala</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/en/scala/scala-code-n-comments/2017/05/14/scala-part-1" title="View Scala by code and comments - Part 1">Scala by code and comments - Part 1 &raquo;</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>About Me</h4>
+					<img src="/assets/me_rounded.png" style="width: 150px" />
+					<ul>
+						<li class="contact"><span class="author fn n">Barış Aydek</span></li>
+						<li class="resume"><a href="/resume/cv-en">My Resumê HTML (simplified)</a> |
+							<a href="/assets/resume/cv-en.pdf">pdf (simplified)</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf (full)</a>
+						</li>
+						<li class="contact"><address><span class="fn email"><a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a></span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+
+					<hr />
+
+					You should check out my <a href=/software-testing>Software Testing & TDD</a> slide (Turkish)
+
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/build/tooling/2016/12/27/jenkins-nunit-integration" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		$('.content header').append(
+			$('.toc').html(
+				$('<h4/>', {text: 'Table of contents: '})
+			).append($parentUl)
+		);
+
+		$('.content img')
+			.attr('title', 'Resmi büyütmek için üstüne tıklayınız.')
+			.click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
+	});
+</script>
+
+
+
+<script src="https://cdn.rawgit.com/knsv/mermaid/6.0.0/dist/mermaid.js" type="text/javascript"></script>
+<script>
+	mermaidAPI.initialize({
+			startOnLoad: true
+	});
+
+	mermaid.parseError = function(err, hash) {
+    console.log(err);
+	};
+</script>
+
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70097547-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
+

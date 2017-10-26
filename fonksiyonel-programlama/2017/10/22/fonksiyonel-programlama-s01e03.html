@@ -1,0 +1,863 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="tr"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Fonksiyonel Programlama - S01E03</title>
+	<meta name="author" content="Barış Aydek">
+
+	<!-- for Google -->
+	<meta name="description" content="Fonksiyonel Programlama - S01E03: Composition nedir ve nasıl yapılır." />
+	<meta name="keywords" content="" />
+
+	<meta name="author" content="Barış Aydek" />
+	<meta name="copyright" content="" />
+	<meta name="application-name" content="Dhalsim's" />
+
+	<!-- for Facebook -->
+	<meta property="og:title" content="Fonksiyonel Programlama - S01E03" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="http://dhalsim.github.io/assets/images/icon-fp.svg" />
+	<meta property="og:url" content="http://dhalsim.github.io/fonksiyonel-programlama/2017/10/22/fonksiyonel-programlama-s01e03" />
+	<meta property="og:description" content="Fonksiyonel Programlama - S01E03: Composition nedir ve nasıl yapılır." />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Fonksiyonel Programlama - S01E03" />
+	<meta name="twitter:description" content="Fonksiyonel Programlama - S01E03: Composition nedir ve nasıl yapılır." />
+	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/icon-fp.svg" />
+	<meta name="twitter:creator" content="@">
+
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+  <style>
+	  @font-face {
+			font-family: 'Allerta';
+			src: url('/assets/fonts/Allerta-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Allerta-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Allerta-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Allerta-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+		@font-face {
+			font-family: 'Punk';
+			src: url('/assets/fonts/punk-regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/punk-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/punk-regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/punk-regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/punk-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/punk-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+
+		@font-face {
+			font-family: 'Ewert';
+			src: url('/assets/fonts/Ewert-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Ewert-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Ewert-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Ewert-Regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Ewert-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Ewert-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+	</style>
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Fonksiyonel Programlama - S01E03" type="application/atom+xml">
+	
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/">
+								Dhalsim's
+							</a>
+						</li>
+						<li class="archive"><a href="/archive.html">Arşiv</a></li>
+						<li class="page"><a href="/pages.html">Sayfalar</a></li>
+						<li class="category"><a href="/categories.html">Kategoriler</a></li>
+						<li class="tag"><a href="/tags.html">Taglar</a></li>
+					</ul>
+
+					<hr />
+					<nav class="languageSelector">
+						
+							<a href="/en" ><img src="/assets/blank.gif" class="flag flag-gb" alt="İngilizce" /> </a><a href="/en" class="alink">İngilizce</a>
+						
+						-
+						
+							<img src="/assets/blank.gif" class="flag flag-tr" alt="Türkçe" /> Türkçe
+						
+					</nav>
+
+					<hr />
+
+					<div> <a href="/rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Fonksiyonel Programlama - S01E03</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				
+				<div class="toc">
+					<span>İçindekiler tablosu yükleniyor...</span>
+					<div class="sp-circle"></div>
+				</div>
+				
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					
+					
+
+
+
+
+<div class="seriesNote">
+  Bu makale <strong>3</strong> bölümlük <strong>Fonksiyonel Programlama</strong> serisinin <strong>3.</strong> bölümüdür.</p>
+	<ul>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 1 -
+		
+			<a href="/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01">
+		
+    Fonksiyonel Programlama - S01E01
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 2 -
+		
+			<a href="/fonksiyonel-programlama/2017/09/27/fonksiyonel-programlama-s01e02">
+		
+    Fonksiyonel Programlama - S01E02
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 3 -
+		
+    Fonksiyonel Programlama - S01E03
+    
+		</li>
+	
+	
+	</ul>
+</div>
+
+
+
+
+					
+
+					<h1>S01E03:</h1>
+
+<h2>Previously on FP</h2>
+
+<p>Bir önceki bölümde <strong>Option</strong> monad&#39;ıyla <em>null</em> kontrolü yapmadan fonksiyonlarımızı nasıl çağırabileceğimizi gördük. Bunun için <code>map</code> fonksiyonunu kullandık. <code>Some</code> ve <code>None</code> yapılarına baktık.</p>
+
+<p><code>Maybe</code> yardımcı fonksiyonumuzu, <em>null</em> dönebilme ihtimali olan fonksiyonlarda kullandık ve dönüş tipini <code>Option&lt;A&gt;</code> gibi buna göre düzenledik.</p>
+
+<h2>Composition</h2>
+
+<blockquote>
+<p><em>Computer programs are the most intricate, delicately balanced and finely interwoven of all the products of human industry to date. They are machines with far more moving parts than any engine: the parts don&#39;t wear out, but they interact and rub up against one another in ways the programmers themselves cannot predict.</em> - Fred Brooks</p>
+</blockquote>
+
+<p>Teknoloji geliştikçe ve ihtiyaçlar arttıkça biz programcıların üzerine binen yük de giderek artmakta. Peki yazılıma ayrılan kaynaklar aynı oranda artıyor mu? Kaynak ayırsak bile bu işin üstesinden aynı yöntemler ve yaklaşımlarla gelinebilir mi? İşte buna <strong>yazılım krizi</strong> diyoruz.</p>
+
+<p>Elbette elimizde eskisine nazaran daha güçlü tool&#39;lar, stackoverflow falan var. Ama bizim aslında bu işe bakış açımız özellikle karmaşıklık söz konusu olduğunda daha farklı olabilirdi.</p>
+
+<p>FP bize bunun çözümünü composition olarak gösteriyor. Nasıl doğada Hidrojen ve Oksijen atomları, yapılarını hiç bozmadan bir araya bambaşka bir yapı oluşturabiliyorsa bizim de karmaşık yapıları aynı şekilde yapabilmemiz lazım. Her seferinde baştan tasarım baştan kodlama yaparak bu işin üstesinden gelemeyiz.</p>
+
+<p>Peki ne oldu da FP son zamanlarda bu kadar popüler oldu. FP&#39;nin tarihi hiç de düşündüğünüz gibi son 10 yılın olayı falan değil. İlk FP dili <strong>Lisp</strong> 1960 yılında geliştirilmiş. Yalnız FP dilleri, FP olmayan diller kadar optimize çalışamıyordu. Ama transistör yoğunluğunun fiziksel olarak belli bir noktada duraklamasıyla multi-core CPU&#39;lar ortaya çıktı. Daha sonra da büyük firmalar dağıtık sistemler üzerinde işlem yapmayı yaygınlaştırdı ve donanım ucuzladı. FP dilleri ise bu yeni duruma yapıları gereği daha uyumluydular. Daha birçok pratik faydasıyla beraber artık her blog&#39;da FP ile ilgili bir yazı görmeye başladık. Kullandığımız Java, C# gibi diller de yavaş yavaş FP özelliklerini ediniyorlar.</p>
+
+<p><strong>Neyse bu kadar yıkama yağlama yeter!</strong> Konumuza geri dönecek olursak, yine javascript üzerinden composition yapacağız. Bu kısım belki de en çok eğleneceğimiz kısım olabilir. Bu bölümüm reytinglerini yüksek bekliyorum.</p>
+
+<h2>Utility Functions</h2>
+
+<p>Buradaki göreceğimiz fonksiyonları çoğu popüler javascript kütüphanesinde bulabilirsiniz. Bunlardan bir kaçı:</p>
+
+<ul>
+<li><a href="http://ramdajs.com/">Ramda.js</a></li>
+<li><a href="https://github.com/lodash/lodash/wiki/FP-Guide">Lodash FP</a></li>
+<li><a href="http://functionaljs.com/">functional.js</a></li>
+<li><a href="https://github.com/stoeffel/awesome-fp-js">Ve daha niceleri</a></li>
+</ul>
+
+<p>Yalnız ben bu bölümde hem ne kadar basit yapılar olduğunu göstermek adına hem de çok fazla 3rd party yazılıma muhtaç olmamak için kendi fonksiyonlarımızı nasıl yazacağımızı da göstereceğim.</p>
+
+<h3>Compose</h3>
+
+<p>FP&#39;nin esansı dediğimiz composition konusunun pratiğine gelmiş bulunuyoruz. Her ne kadar geçen bölümde <code>map</code> üzerinden bir composition yapsak da, bu sadece <strong>monadic</strong> yapılarda geçerlidir. Normal fonksiyonlarımızı nasıl compose edeceğimizi de görelim.</p>
+
+<p>Çoğu FP dillerinde compose için syntactic-sugar olarak kısaltmalar vardır. Mesela <strong>Haskell</strong> bize <code>.</code> operatörünü sunuyor:</p>
+<div class="highlight"><pre><code class="language-haskell" data-lang="haskell"><span class="lineno"> 1</span> <span class="c1">-- the &#39;.&#39; operator is used to compose functions</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="c1">-- result of sort is pipelined to reverse</span>
+<span class="lineno"> 4</span> <span class="nf">desort</span> <span class="ow">=</span> <span class="p">(</span><span class="n">reverse</span> <span class="o">.</span> <span class="n">sort</span><span class="p">)</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="c1">-- the result is a descending sort</span>
+<span class="lineno"> 7</span> <span class="nf">countdown</span> <span class="ow">=</span> <span class="n">desort</span> <span class="p">[</span><span class="mi">2</span><span class="p">,</span><span class="mi">8</span><span class="p">,</span><span class="mi">7</span><span class="p">,</span><span class="mi">10</span><span class="p">,</span><span class="mi">1</span><span class="p">,</span><span class="mi">9</span><span class="p">,</span><span class="mi">5</span><span class="p">,</span><span class="mi">3</span><span class="p">,</span><span class="mi">4</span><span class="p">,</span><span class="mi">6</span><span class="p">]</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span> <span class="c1">--reverse . sort is equivalent to</span>
+<span class="lineno">10</span> <span class="nf">\</span><span class="n">x</span> <span class="ow">-&gt;</span> <span class="n">reverse</span> <span class="p">(</span><span class="n">sort</span> <span class="n">x</span><span class="p">)</span>
+</code></pre></div>
+<p><code>.</code> operatörü kullanmayacağım diyorsan <code>lamda</code> fonksiyonlarla bu işi yapabiliyorsun zaten. Ama bu özel operatörler sayesinde kod kalabalığından kurtulduğumuz gibi geçici &quot;değişken&quot; tanımlanmasına da gerek kalmıyor.</p>
+
+<p>Peki sevgili Javascript&#39;te bunu nasıl tanımlarız?:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">function</span> <span class="nx">compose</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="kd">var</span> <span class="nx">funcs</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">;</span>
+<span class="lineno"> 3</span>   <span class="k">return</span> <span class="kd">function</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 4</span>     <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nx">arguments</span><span class="p">;</span>
+<span class="lineno"> 5</span>     <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">i</span> <span class="o">=</span> <span class="nx">funcs</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">i</span> <span class="o">--&gt;</span> <span class="mi">0</span><span class="p">;)</span> <span class="p">{</span>
+<span class="lineno"> 6</span>       <span class="nx">args</span> <span class="o">=</span> <span class="p">[</span><span class="nx">funcs</span><span class="p">[</span><span class="nx">i</span><span class="p">].</span><span class="nx">apply</span><span class="p">(</span><span class="k">this</span><span class="p">,</span> <span class="nx">args</span><span class="p">)];</span>
+<span class="lineno"> 7</span>     <span class="p">}</span>
+<span class="lineno"> 8</span>     <span class="k">return</span> <span class="nx">args</span><span class="p">[</span><span class="mi">0</span><span class="p">];</span>
+<span class="lineno"> 9</span>   <span class="p">};</span>
+<span class="lineno">10</span> <span class="p">}</span>
+</code></pre></div>
+<p>İlk göze çarpan fonksiyonun bir başka fonksiyon döndürmesi. Bu şu anlama geliyor: compose çağırırken parametreleri iki seferde verebilirsiniz. Mesela şu iki kullanım da gayet mümkün:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">compose</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)(</span><span class="mi">3</span><span class="p">));</span>
+<span class="lineno">2</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">compose</span><span class="p">(</span><span class="nb">Math</span><span class="p">.</span><span class="nx">pow</span><span class="p">)(</span><span class="mi">2</span><span class="p">,</span> <span class="mi">4</span><span class="p">));</span>
+<span class="lineno">3</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">compose</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">*</span> <span class="mi">2</span><span class="p">,</span> <span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">x</span> <span class="o">+</span> <span class="nx">y</span> <span class="o">+</span> <span class="mi">1</span><span class="p">)(</span><span class="mi">3</span><span class="p">,</span> <span class="mi">1</span><span class="p">));</span>
+</code></pre></div>
+<p>Örneklerin hepsinde iki grup parametre var. İlk grup fonksiyonlar, ikinci grup bu fonksiyonlardan ilkine (en sağdakine) geçilecek parametreler. Bir fonksiyonun çıktısı her zaman tek olacağından 2. ve sonraki fonksiyonlar tek parametreli (one arity) fonksiyonlardır.</p>
+
+<p>Aşağıdaki snippet&#39;ten de örneklere ve nasıl çalıştığına bakabilirsin:</p>
+
+<script src="//repl.it/embed/NM8J/3.js"></script>
+
+<p>Farkettin mi bilmiyorum ama hem Haskell hem de Javascript örneğinde compose fonksiyonunda bir gariplik var gibi. Haskell&#39;deki kodda önce <em>reverse</em> sonra <em>sort</em> yazılmış halbuki tersi olmalıydı sanki? Javascript&#39;te de sonuç sanki <strong>7</strong> çıkması gerekirker <strong>8</strong> çıkmış! Haskell&#39;de bunun nedeni compose&#39;un matematikteki gibi tersten kullanılması: <code>(g ∘ f )(x) = g(f(x))</code>. Biz de javascriptte aynı etkiyi yaratmak için <code>for</code> döngüsünü ona göre düzenledik. Ayrıca <strong>Ramda.js</strong> de aynı şekilde <a href="http://ramdajs.com/docs/#compose">compose</a>&#39;u tersten kullanıyor. Düzü için de <a href="http://ramdajs.com/docs/#pipe">pipe</a> fonksiyonunu önermişler.</p>
+
+<blockquote>
+<p>Yani kafan karışmasın kardeşim compose&#39;un fonksiyonları <strong>sağdan sola</strong> çalışıyor.</p>
+</blockquote>
+
+<h3>Curry</h3>
+
+<p><img src="/assets/images/curry.jpg" alt=""></p>
+
+<p>Daha hemen üstteki kısımda, composition sırasında bir fonksiyonun çıktısının tek olmasından ötürü sonraki fonksiyonun da zorunlu olarak tek parametre alması gerektiğinden bahsetmiştik.</p>
+
+<p>İşte adını Haskell programlama diline vermiş bu abimizin soyismini de bu yönteme vermişler. Neyse ki amcanın ikinci ismi (Brooks) halen boşta da biri yeni bir yöntem bulursa isim verirken zorlanmayacak.</p>
+
+<p>Curry yöntemi çok sık kullanılmakta ve sevilmekte öyle ki <strong>Ramda.js</strong> gibi kütüphaneler tüm fonksiyonlarını <a href="http://ramdajs.com/docs/#curry">curry</a> uygulanmış halde sunuyorlar.</p>
+
+<blockquote>
+<p>Not: Curry ve <strong>partial function application</strong> denen iki farklı şey var. Ben fonksiyonumda bu ikisini birleştiriyorum ve buna bundan sonra curry diyeceğim. Ramda.js curry de aynı şekilde çalışıyor.</p>
+</blockquote>
+
+<p>Haydi o zaman:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kd">function</span> <span class="nx">curry</span><span class="p">(</span><span class="nx">fx</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="kd">var</span> <span class="nx">arity</span> <span class="o">=</span> <span class="nx">fx</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span>   <span class="k">return</span> <span class="kd">function</span> <span class="nx">f1</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="kd">var</span> <span class="nx">args</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="lineno"> 6</span>     <span class="k">if</span> <span class="p">(</span><span class="nx">args</span><span class="p">.</span><span class="nx">length</span> <span class="o">&gt;=</span> <span class="nx">arity</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 7</span>       <span class="k">return</span> <span class="nx">fx</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">args</span><span class="p">);</span>
+<span class="lineno"> 8</span>     <span class="p">}</span>
+<span class="lineno"> 9</span>     <span class="k">else</span> <span class="p">{</span>
+<span class="lineno">10</span>       <span class="k">return</span> <span class="kd">function</span> <span class="nx">f2</span><span class="p">()</span> <span class="p">{</span>
+<span class="lineno">11</span>         <span class="kd">var</span> <span class="nx">args2</span> <span class="o">=</span> <span class="nb">Array</span><span class="p">.</span><span class="nx">prototype</span><span class="p">.</span><span class="nx">slice</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">arguments</span><span class="p">,</span> <span class="mi">0</span><span class="p">);</span>
+<span class="lineno">12</span>         <span class="k">return</span> <span class="nx">f1</span><span class="p">.</span><span class="nx">apply</span><span class="p">(</span><span class="kc">null</span><span class="p">,</span> <span class="nx">args</span><span class="p">.</span><span class="nx">concat</span><span class="p">(</span><span class="nx">args2</span><span class="p">));</span>
+<span class="lineno">13</span>       <span class="p">};</span>
+<span class="lineno">14</span>     <span class="p">}</span>
+<span class="lineno">15</span>   <span class="p">};</span>
+<span class="lineno">16</span> <span class="p">}</span>
+</code></pre></div>
+<p>Farkettiğiniz gibi yine iç içe fonksiyonlar var. Yani yine çoklu gruplarla parametreleri vermemiz gerekiyor. Tabii bu sefer farklı olarak kaç grup veya kaç parametre olacağını biz belirliyoruz. Eksik olduğu durumda dönen fonksiyona kalan parametreleri de yine verip tamamlama şansımız var. Bu tamamen tüm parametrelerle bağlanana kadar devam edebilir. Şimdi <strong>repl.it</strong> sitesi üzerinden örneklere bakalım:</p>
+
+<script src="//repl.it/embed/NMaO/2.js"></script>
+
+<h2>Listeler</h2>
+
+<blockquote>
+<p>FP&#39;den bahsedip de listelere değinmezsek herhalde bizi döverler. Aslında bloglarda anlatılan ilk konu da budur genelde. Hem işin temeli biraz burada hem de en sık kullanılan yapı da <strong>List</strong>&#39;dir. Normalde FP&#39;de listeler <a href="https://en.wikipedia.org/wiki/Linked_list">Linked List</a>&#39;dir ve <a href="https://en.wikipedia.org/wiki/Immutable_object">immutable</a> veri yapılarındandır. Bunun ne olduğuna ileride değiniceğiz. Ama şimdilik <strong>siz List dediğimde Javascript Array anlayabilirsiniz</strong>.</p>
+</blockquote>
+
+<p>Array&#39;lerle yaptığınız kodlamalara bakın ve ben eminim tamamına yakınında:</p>
+
+<ul>
+<li><strong>for-loop</strong>, <strong>if</strong> gibi</li>
+<li>Hesaplamaları yaparken de bol bol geçici array&#39;ler</li>
+<li><strong>in place</strong> yani array&#39;in içeğinin değiştirildiği</li>
+</ul>
+
+<p>yapılar kullanmışsınızdır.</p>
+
+<p>Biz FP&#39;de böyle yapmayız. Şimdi size ödevim aşağıdaki kaynaklardan veya bulduğunuz başka yerlerden Array&#39;in şu fonksiyonlarını öğrenin:</p>
+
+<ul>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map">Array.prototype.map()</a>, <a href="http://ramdajs.com/docs/#map">Ramda map</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter">Array.prototype.filter()</a>, <a href="http://ramdajs.com/docs/#filter">Ramda filter</a></li>
+<li><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/reduce">Array.prototype.reduce()</a>, <a href="http://ramdajs.com/docs/#reduce">Ramda reduce</a></li>
+</ul>
+
+<p>Niye hepsinin yanında bir de Ramda.js&#39;teki denk fonksiyonları verdim? Çünkü ramda fonksiyonlarının hepsi zaten curry&#39;lidir ;)</p>
+
+<p>Bundan sonrasında size for-loop ve if kullanımını yasaklıyorum. Aşağıda bir kaç liste egzersizi var. Bunları fonksiyonel yapıya çevireceğiz. Daha sonraki örnekleri de siz düzelteceksiniz. Bu alıştırmalarda yoğun emek vardır. Lütfen hakkını verin. En alttaki <strong>SPOILER</strong> kısmına bakmadan çözünüz. Hepsini bitirdikten sonra kontrol için bakınız.</p>
+
+<iframe frameborder="0" width="100%" height="800px" src="//repl.it/NOtu/1"></iframe>
+
+<h2>Option (devam)</h2>
+
+<p>Geçen bölümde <strong>Option Monad</strong>&#39;ından söz edip ve kullanmıştık. Ancak Option bizim için yeterince kullanışlı değildi. Mesela bir fonksiyondan <code>Some</code> bir değer dönüyorsa bir değeri, <code>None</code> değer dönüyorsa başka bir değeri döndürmek istersek nasıl yapacağız? <strong>fold</strong> ile:</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kr">interface</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">A</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno"> 2</span>   <span class="nx">map</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">fn</span><span class="o">:</span> <span class="p">(</span><span class="nx">a</span><span class="o">:</span> <span class="nx">A</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">B</span><span class="p">)</span><span class="o">:</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="lineno"> 3</span>   <span class="nx">fold</span><span class="p">(</span><span class="nx">succ</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span><span class="o">:</span> <span class="nx">A</span><span class="p">;</span>
+<span class="lineno"> 4</span> <span class="p">}</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="kr">class</span> <span class="nx">Some</span><span class="o">&lt;</span><span class="nx">A</span><span class="o">&gt;</span> <span class="kr">implements</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">A</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno"> 7</span>   <span class="nx">value</span><span class="o">:</span> <span class="nx">A</span>
+<span class="lineno"> 8</span> 
+<span class="lineno"> 9</span>   <span class="nx">constructor</span><span class="p">(</span><span class="nx">value</span><span class="o">:</span> <span class="nx">A</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">10</span>     <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="lineno">11</span>   <span class="p">}</span>
+<span class="lineno">12</span> 
+<span class="lineno">13</span>   <span class="nx">map</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">fn</span><span class="o">:</span> <span class="p">(</span><span class="nx">a</span><span class="o">:</span> <span class="nx">A</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">B</span><span class="p">)</span><span class="o">:</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno">14</span>     <span class="k">return</span> <span class="k">new</span> <span class="nx">Some</span><span class="p">(</span><span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">));</span>
+<span class="lineno">15</span>   <span class="p">}</span>
+<span class="lineno">16</span> 
+<span class="lineno">17</span>   <span class="nx">fold</span><span class="p">(</span><span class="nx">succ</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">18</span>     <span class="k">return</span> <span class="nx">succ</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">);</span>
+<span class="lineno">19</span>   <span class="p">}</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span>   <span class="kr">static</span> <span class="nx">of</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span>
+<span class="lineno">22</span>     <span class="k">return</span> <span class="k">new</span> <span class="nx">Some</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="lineno">23</span>   <span class="p">}</span>
+<span class="lineno">24</span> <span class="p">}</span>
+<span class="lineno">25</span> 
+<span class="lineno">26</span> <span class="kr">class</span> <span class="nx">NoneClass</span> <span class="kr">implements</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno">27</span>   <span class="nx">map</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">fn</span><span class="o">:</span> <span class="p">(</span><span class="nx">a</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">B</span><span class="p">)</span><span class="o">:</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno">28</span>     <span class="k">return</span> <span class="nx">None</span><span class="p">;</span>
+<span class="lineno">29</span>   <span class="p">}</span>
+<span class="lineno">30</span> 
+<span class="lineno">31</span>   <span class="nx">fold</span><span class="p">(</span><span class="nx">succ</span><span class="p">,</span> <span class="nx">err</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno">32</span>     <span class="k">if</span><span class="p">(</span><span class="k">typeof</span><span class="p">(</span><span class="nx">err</span><span class="p">)</span> <span class="o">===</span> <span class="s2">&quot;function&quot;</span><span class="p">)</span>
+<span class="lineno">33</span>       <span class="k">return</span> <span class="nx">err</span><span class="p">();</span>
+<span class="lineno">34</span> 
+<span class="lineno">35</span>     <span class="k">return</span> <span class="nx">err</span><span class="p">;</span>
+<span class="lineno">36</span>   <span class="p">}</span>
+<span class="lineno">37</span> <span class="p">}</span>
+</code></pre></div>
+<p>Gördüğünüz gibi <code>fold</code> adında yeni bir fonksiyon ekledik. İçine parametre olarak iki tane daha fonksiyon alıyor. İlki <code>Some</code> durumunda, ikincisi <code>None</code> durumunda çalışacak.</p>
+<div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kd">let</span> <span class="nx">getUserById</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="o">:</span> <span class="nx">number</span><span class="p">)</span><span class="o">:</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="nx">Maybe</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">id</span><span class="o">===</span> <span class="nx">id</span><span class="p">));</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span>
+<span class="lineno">4</span>   <span class="nx">getUserById</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">getUserName</span><span class="p">).</span><span class="nx">fold</span><span class="p">(</span><span class="nx">_</span><span class="p">.</span><span class="nx">identity</span><span class="p">,</span> <span class="s2">&quot;user not found&quot;</span><span class="p">)</span>
+<span class="lineno">5</span> <span class="p">)</span>
+</code></pre></div>
+<p>Bu kodda eper <code>Some</code> ise değeri döndür, değilse verdiğimiz string&#39;i döndür demiş olduk. İlk parametre aslında identity denen <code>x =&gt; x</code> fonksiyonudur. Kısaltma olarak kullandık. Ancak ikinci fonksiyon parametresiz olduğundan; fonksiyon olarak da çağrılabilir ya da sadece bir değer döndürebilir şekilde yazdık. Bunu da <code>typeof(err) === &quot;function&quot;</code> ile kontrol ediyoruz.</p>
+
+<h2>Bölüm sonu canavarı (daha fazla alıştırma)</h2>
+
+<p>Liste alıştırmalarını çözdün bitirdin anladın OK. Ama FP&#39;nın daha başlangıcındayız. Daha çok çalışman lazım.</p>
+
+<p>Önce üstteki alıştırmalara bir daha göz atalım da hem moral olsun hem de neler öğrendiğimizi, neleri geliştirdiğimizi görmüş olalım:</p>
+
+<ul>
+<li>basit fonksiyonlarla algoritmalarımızı yazdık</li>
+<li>gereksiz geçici değişkenler, Array&#39;ler tanımlamadık</li>
+<li>fonksiyonları birleştirerek daha karmaşık fonksiyonlar yarattık</li>
+<li>mutable veya in place işlem yapmadık (bu konu karışık sonra değinilecek)</li>
+<li>imperatif değil dekleratif kod yazdık, kod okunabilirliği arttı</li>
+</ul>
+
+<p>Şimdi bu bölümdeki son alıştırmalarımızı yapalım.</p>
+
+<p><a class="jsbin-embed" href="http://jsbin.com/nekuje/3/edit?js,console">Bölüm sonu alıştırmalarını jsbin.com&#39;da çözmek için tıkla!</a></p>
+
+<p>Zorlandıysanız ertesi gün bir daha deneyin, sonraki gün bir daha, sonraki gün bir daha şeklinde kafaya girene kadar uğraşmak gerekebilir.</p>
+
+<p>Sonraki bölümde buluşmak üzere; esen kalın.</p>
+
+
+          <hr />
+					
+					
+
+
+
+
+<div class="seriesNote">
+  Bu makale <strong>3</strong> bölümlük <strong>Fonksiyonel Programlama</strong> serisinin <strong>3.</strong> bölümüdür.</p>
+	<ul>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 1 -
+		
+			<a href="/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01">
+		
+    Fonksiyonel Programlama - S01E01
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 2 -
+		
+			<a href="/fonksiyonel-programlama/2017/09/27/fonksiyonel-programlama-s01e02">
+		
+    Fonksiyonel Programlama - S01E02
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 3 -
+		
+    Fonksiyonel Programlama - S01E03
+    
+		</li>
+	
+	
+	</ul>
+</div>
+
+
+
+
+					<hr />
+				  
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2017-10-22T00:00:00+02:00" datetime="2017-10-22T00:00:00+02:00" pubdate>
+							<span class="month"><abbr>October</abbr></span>
+							<span class="day">22</span>
+							<span class="year">2017</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/categories.html#fonksiyonel-programlama-ref">
+    		fonksiyonel-programlama <span>3</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/tags.html#fonksiyonel-programlama-ref">fonksiyonel-programlama <span>3</span></a></li>
+    
+    	<li><a href="/tags.html#functional-programming-ref">functional-programming <span>3</span></a></li>
+    
+    	<li><a href="/tags.html#software-ref">software <span>3</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+
+
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/fonksiyonel-programlama/2017/09/27/fonksiyonel-programlama-s01e02" title="View Fonksiyonel Programlama - S01E02">&laquo; Fonksiyonel Programlama - S01E02</a></li>
+							
+							
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>Hakkımda</h4>
+					<img src="/assets/me_rounded.png" style="width: 150px" />
+					<ul>
+						<li class="contact"><span class="author fn n">Barış Aydek</span></li>
+						<li class="resume"><a href="/resume/cv-tr">Özgeçmişim HTML (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-tr.pdf">pdf (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf (ingilizce)</a>
+						</li>
+						<li class="contact"><address><span class="fn email"><a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a></span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+
+					<hr />
+
+					<a href=/software-testing>Software Testing & TDD</a> sunumuma göz at!
+
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/fonksiyonel-programlama/2017/10/22/fonksiyonel-programlama-s01e03" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		$('.content header').append(
+			$('.toc').html(
+				$('<h4/>', {text: 'İçindekiler: '})
+			).append($parentUl)
+		);
+
+		$('.content img')
+			.attr('title', 'Resmi büyütmek için üstüne tıklayınız.')
+			.click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
+	});
+</script>
+
+
+
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70097547-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
+

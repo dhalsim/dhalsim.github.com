@@ -1,0 +1,921 @@
+
+
+<!DOCTYPE html>
+<!--[if lt IE 7]> <html class="no-js lt-ie9 lt-ie8 lt-ie7 ie" lang="en"> <![endif]-->
+<!--[if IE 7]>    <html class="no-js lt-ie9 lt-ie8 ie" lang="en"> <![endif]-->
+<!--[if IE 8]>    <html class="no-js lt-ie9 ie" lang="en"> <![endif]-->
+<!--[if gt IE 8]><!--> <html class="no-js" lang="tr"> <!--<![endif]-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width,initial-scale=1">
+	<title>Fonksiyonel Programlama - S01E02</title>
+	<meta name="author" content="Barış Aydek">
+
+	<!-- for Google -->
+	<meta name="description" content="Fonksiyonel Programlama - S01E02: Her programcının kabusu null kontrolü üzerine düşünüp bu sorunun FP ile çözümüne bakacağız." />
+	<meta name="keywords" content="" />
+
+	<meta name="author" content="Barış Aydek" />
+	<meta name="copyright" content="" />
+	<meta name="application-name" content="Dhalsim's" />
+
+	<!-- for Facebook -->
+	<meta property="og:title" content="Fonksiyonel Programlama - S01E02" />
+	<meta property="og:type" content="article" />
+	<meta property="og:image" content="http://dhalsim.github.io/assets/images/icon-fp.svg" />
+	<meta property="og:url" content="http://dhalsim.github.io/fonksiyonel-programlama/2017/09/27/fonksiyonel-programlama-s01e02" />
+	<meta property="og:description" content="Fonksiyonel Programlama - S01E02: Her programcının kabusu null kontrolü üzerine düşünüp bu sorunun FP ile çözümüne bakacağız." />
+
+	<!-- for Twitter -->
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="Fonksiyonel Programlama - S01E02" />
+	<meta name="twitter:description" content="Fonksiyonel Programlama - S01E02: Her programcının kabusu null kontrolü üzerine düşünüp bu sorunun FP ile çözümüne bakacağız." />
+	<meta name="twitter:image" content="http://dhalsim.github.io/assets/images/icon-fp.svg" />
+	<meta name="twitter:creator" content="@">
+
+	<!-- favicons -->
+	<link rel="apple-touch-icon" sizes="180x180" href="/assets/favicon/apple-touch-icon.png">
+	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32x32.png">
+	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16x16.png">
+	<link rel="manifest" href="/assets/favicon/manifest.json">
+	<link rel="mask-icon" href="/assets/favicon/safari-pinned-tab.svg" color="#5bbad5">
+	<link rel="shortcut icon" href="/assets/favicon/favicon.ico">
+	<meta name="msapplication-config" content="/assets/favicon/browserconfig.xml">
+	<meta name="theme-color" content="#ffffff">
+  <style>
+	  @font-face {
+			font-family: 'Allerta';
+			src: url('/assets/fonts/Allerta-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Allerta-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Allerta-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.woff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Allerta-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Allerta-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+		@font-face {
+			font-family: 'Punk';
+			src: url('/assets/fonts/punk-regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/punk-regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/punk-regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/punk-regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/punk-regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/punk-regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+
+		@font-face {
+			font-family: 'Ewert';
+			src: url('/assets/fonts/Ewert-Regular.eot'); /* IE9 Compat Modes */
+			src: url('/assets/fonts/Ewert-Regular.eot?#iefix') format('embedded-opentype'), /* IE6-IE8 */
+					 url('/assets/fonts/Ewert-Regular.woff2') format('woff2'), /* Super Modern Browsers */
+					 url('/assets/fonts/Ewert-Regularwoff') format('woff'), /* Pretty Modern Browsers */
+					 url('/assets/fonts/Ewert-Regular.ttf')  format('truetype'), /* Safari, Android, iOS */
+					 url('/assets/fonts/Ewert-Regular.svg#svgFontName') format('svg'); /* Legacy iOS */
+		}
+	</style>
+	<link href='/assets/themes/the-program/css/style.css' rel="stylesheet" media="all">
+	<link href='/assets/css/mystyles.css' rel="stylesheet" media="all">
+	<link href='/assets/css/flags/flags.css' rel="stylesheet" media="all">
+	<link href="http://feeds.feedburner.com/" rel="alternate" title="Fonksiyonel Programlama - S01E02" type="application/atom+xml">
+	
+	<style media="screen">
+	.cd-top {
+	  display: inline-block;
+	  height: 40px;
+	  width: 40px;
+	  position: fixed;
+	  bottom: 100px;
+	  right: 10px;
+	  z-index: 10;
+	  box-shadow: 0 0 10px rgba(0, 0, 0, 0.05);
+	  /* image replacement properties */
+	  overflow: hidden;
+	  text-indent: 100%;
+	  white-space: nowrap;
+	  background: rgba(232, 98, 86, 0.8) url(/assets/images/cd-top-arrow.svg) no-repeat center 50%;
+	  visibility: hidden;
+	  opacity: 0;
+	  -webkit-transition: opacity .3s 0s, visibility 0s .3s;
+	  -moz-transition: opacity .3s 0s, visibility 0s .3s;
+	  transition: opacity .3s 0s, visibility 0s .3s;
+	}
+	.cd-top.cd-is-visible, .cd-top.cd-fade-out, .no-touch .cd-top:hover {
+	  -webkit-transition: opacity .3s 0s, visibility 0s 0s;
+	  -moz-transition: opacity .3s 0s, visibility 0s 0s;
+	  transition: opacity .3s 0s, visibility 0s 0s;
+	}
+	.cd-top.cd-is-visible {
+	  /* the button becomes visible */
+	  visibility: visible;
+	  opacity: 1;
+	}
+	.cd-top.cd-fade-out {
+	  /* if the user keeps scrolling down, the button is out of focus and becomes less visible */
+	  opacity: .5;
+	}
+	.no-touch .cd-top:hover {
+	  background-color: #e86256;
+	  opacity: 1;
+	}
+	@media only screen and (min-width: 768px) {
+	  .cd-top {
+	    right: 20px;
+	    bottom: 20px;
+	  }
+	}
+	@media only screen and (min-width: 1024px) {
+	  .cd-top {
+	    height: 60px;
+	    width: 60px;
+	    right: 30px;
+	    bottom: 30px;
+	  }
+	}
+	</style>
+	
+	<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.min.css" charset="utf-8">
+	
+</head>
+<body>
+<a href="#0" class="cd-top cd-is-visible">Top</a>
+<div id="page" class="hentry">
+	<header class="the-header">
+		<div class="unit-head">
+			<div class="unit-inner unit-head-inner">
+				<nav class="nav-global">
+					<ul>
+						<li class="logo" style="height: 249px;">
+							<a href="">
+								<img src="/assets/dhalsim_logo.gif" />
+							</a>
+						</li>
+						<li class="logo">
+							<a href="/">
+								Dhalsim's
+							</a>
+						</li>
+						<li class="archive"><a href="/archive.html">Arşiv</a></li>
+						<li class="page"><a href="/pages.html">Sayfalar</a></li>
+						<li class="category"><a href="/categories.html">Kategoriler</a></li>
+						<li class="tag"><a href="/tags.html">Taglar</a></li>
+					</ul>
+
+					<hr />
+					<nav class="languageSelector">
+						
+							<a href="/en" ><img src="/assets/blank.gif" class="flag flag-gb" alt="İngilizce" /> </a><a href="/en" class="alink">İngilizce</a>
+						
+						-
+						
+							<img src="/assets/blank.gif" class="flag flag-tr" alt="Türkçe" /> Türkçe
+						
+					</nav>
+
+					<hr />
+
+					<div> <a href="/rss.xml"><img src="/assets/rss.png" width="50px"></a> <a href="/atom.xml"><img src="/assets/atom.png" width="50px"></a></div>
+				</nav>
+			</div><!-- unit-inner -->
+		</div><!-- unit-head -->
+	</header>
+	<div class="body" role="main">
+		<div class="unit-body">
+			<div class="unit-inner unit-body-inner">
+				<div class="entry-content">
+					
+
+<article class="unit-article layout-post">
+	<div class="unit-inner unit-article-inner">
+		<div class="content">
+			<header>
+				<div class="unit-head">
+					<div class="unit-inner unit-head-inner">
+						<h1 class="h2 entry-title">Fonksiyonel Programlama - S01E02</h1>
+					</div><!-- unit-inner -->
+				</div><!-- unit-head -->
+				
+				<div class="toc">
+					<span>İçindekiler tablosu yükleniyor...</span>
+					<div class="sp-circle"></div>
+				</div>
+				
+			</header>
+
+			<div class="bd">
+				<div class="entry-content">
+					
+					
+
+
+
+
+<div class="seriesNote">
+  Bu makale <strong>3</strong> bölümlük <strong>Fonksiyonel Programlama</strong> serisinin <strong>2.</strong> bölümüdür.</p>
+	<ul>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 1 -
+		
+			<a href="/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01">
+		
+    Fonksiyonel Programlama - S01E01
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 2 -
+		
+    Fonksiyonel Programlama - S01E02
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 3 -
+		
+			<a href="/fonksiyonel-programlama/2017/10/22/fonksiyonel-programlama-s01e03">
+		
+    Fonksiyonel Programlama - S01E03
+    
+      </a>
+    
+		</li>
+	
+	
+	</ul>
+</div>
+
+
+
+
+					
+
+					<h1>S01E02:</h1>
+
+<h2>Previously on FP</h2>
+
+<p><strong>FP, matematikteki fonksiyon tanımındaki fonksiyonları kullanılarak yapılan programlamadır.</strong></p>
+
+<p>Fonksiyon olması için;</p>
+
+<ol>
+<li>A’nın her elamanı B’ye gidecek.</li>
+<li>A kümesinde açıkta eleman kalmayacak.</li>
+<li>A’nın herhangi bir elamanı B’ye iki defa gitmeyecek.</li>
+</ol>
+
+<blockquote>
+<p>Not: FP literatüründe buna <strong>pure functions</strong> deniyor. Bir yerlerde görürseniz şaşırmayın diye belirteyim istedim.</p>
+</blockquote>
+
+<h2>Normal bir program</h2>
+
+<p>Herkes javascript bilir. Ama anlatmak istediğim şeyi anlatabilmek için biraz <a href="https://www.typescriptlang.org">typescript</a>&#39;ten yararlanacağım. Çünkü javascript&#39;in süper esnekliği burada bana yardımcı olmayacak.</p>
+
+<blockquote>
+<p>TypeScript is a free and open-source programming language developed and maintained by Microsoft. It is a strict syntactical superset of JavaScript, and adds optional static typing to the language.</p>
+</blockquote>
+
+<p>Neyse ki siz okuyucularım için <strong>docker</strong> üzerinden de çalıştırılabilir hale getirdim. Sizin için daha mı kolay daha mı zor tartışılır. Çok da umrumda değil; benim için kolay olacağı kesin. Ama bir kere <a href="https://www.docker.com/community-edition">docker kurduğunuz</a> zaman tüm örnekleri onun üzerinden çalıştırabilirsiniz.</p>
+
+<p>Kodlara ayrıca <a href="https://github.com/dhalsim/fp-exercises-s01e02">github üzerinden</a> de ulaşabilirsiniz. Docker Hub&#39;dan indirmek için aşağıdaki komutu uygulayın:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> docker pull dhalsim/fp-exercises-s01e02
+</code></pre></div>
+<p>Ardından docker container&#39;ın <em>interactive shell</em>&#39;ini şu komutla çalıştırabilirsiniz:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> docker run -it dhalsim/fp-exercises-s01e02
+</code></pre></div>
+<h3>Egzersizler</h3>
+
+<p>Gönlüm el vermedi ve programın yapısını size Bilal&#39;e çizer gibi - <em>çizim programı öğreniyorum en azından diye kendimi avuta avuta</em> - çizdim:</p>
+
+<p><img src="/assets/images/fp-s01e02-exercise.png" alt=""></p>
+
+<p>Hadi source kodu incelemeye başlayalım.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ~ $ cat exercise01.ts
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kr">export</span> <span class="kr">interface</span> <span class="nx">User</span> <span class="p">{</span>
+<span class="lineno"> 2</span>     <span class="nx">id</span><span class="o">:</span> <span class="nx">number</span><span class="p">;</span>
+<span class="lineno"> 3</span>     <span class="nx">name</span><span class="o">:</span> <span class="nx">string</span>
+<span class="lineno"> 4</span> <span class="p">}</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="kr">export</span> <span class="kd">let</span> <span class="nx">users</span><span class="o">:</span> <span class="p">[</span><span class="nx">User</span><span class="p">]</span> <span class="o">=</span> <span class="p">[</span>
+<span class="lineno"> 7</span>     <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">1</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;halide&quot;</span> <span class="p">},</span>
+<span class="lineno"> 8</span>     <span class="p">{</span> <span class="nx">id</span><span class="o">:</span> <span class="mi">2</span><span class="p">,</span> <span class="nx">name</span><span class="o">:</span> <span class="s2">&quot;edip&quot;</span> <span class="p">}</span>
+<span class="lineno"> 9</span> <span class="p">];</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span> <span class="kr">export</span> <span class="kd">let</span> <span class="nx">getUserById</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="o">:</span> <span class="nx">number</span><span class="p">)</span><span class="o">:</span> <span class="nx">User</span> <span class="o">=&gt;</span> <span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span><span class="p">);</span>
+</code></pre></div>
+<p>Neler var neler? <code>User</code> diye bir tip tanımladım. <code>number</code> tipinde <code>id</code> ve <code>string</code> tipinde <code>name</code> özellikleri mevcut.</p>
+
+<p>Ayrıca <code>users</code> isminde bir <code>User</code> array tanımladım.</p>
+
+<p>Son olarak <code>getUserById</code> isimli bir fonksiyon tanımlıyoruz. Parametre olarak <code>number</code> tipinde bir değişken alıp, es6 target&#39;inde desteklenen <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find">Array.prototype.find()</a> fonksiyonunu kullanıyoruz.</p>
+
+<blockquote>
+<p>The find() method returns the value of the first element in the array that satisfies the provided testing function. Otherwise <strong>undefined</strong> is returned.</p>
+</blockquote>
+
+<p><strong>Burada dikkat edilecek husus, find sonucunda istenen değer bulunamazsa <em>undefined</em> dönüyor olması.</strong> Bu ne demek? Bu bizim yukarıda yaptığımız matematiksel fonksiyon tanımına uymuyor demek. Yani uygun bir parametre - <code>number</code> tipi - gönderdiğimizde bile  her zaman bize <code>User</code> tipinde bir sonuç dönmüyor.</p>
+
+<p>Bu durumu şöyle açmak lazım: fonksiyonumuz aslında tam olarak <strong>dürüst</strong> değil. Yani fonksiyonun imzasına uygun hareket etmiyor. Bu da bu fonksiyonun kullanımında özellikle composition&#39;da problemlere yol açacak demektir.</p>
+
+<p>Daha önce de söylemiştik: <strong>FP&#39;nin temeli composition&#39;dır.</strong></p>
+
+<p>Şimdi programızı test edelim. typescript compiler çalıştırıyoruz. Merak ediyorsanız <strong>tsconfig.json</strong> dosyasından konfigürasyona da bakabilirsiniz.</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ~ $ tsc
+</code></pre></div>
+<p><code>.ts</code> dosyalarımız derlendi ve <code>.js</code> dosyaları oluştu. Son olarak da <strong>exercise02.js</strong> dosyasını görelim:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ~ $ cat exercise02.ts
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno">1</span> <span class="kr">import</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">users</span><span class="p">,</span> <span class="nx">getUserById</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;./exercise01&quot;</span><span class="p">;</span>
+<span class="lineno">2</span> 
+<span class="lineno">3</span> <span class="kd">let</span> <span class="nx">getUserName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">user</span><span class="o">:</span> <span class="nx">User</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span>
+<span class="lineno">4</span> <span class="kd">let</span> <span class="nx">getGreatingOfName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="o">:</span> <span class="nx">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span> <span class="o">=&gt;</span> <span class="s2">&quot;hello &quot;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span>
+<span class="lineno">5</span> 
+<span class="lineno">6</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getGreatingOfName</span><span class="p">(</span><span class="nx">getUserName</span><span class="p">(</span><span class="nx">getUserById</span><span class="p">(</span><span class="mi">1</span><span class="p">))))</span>
+<span class="lineno">7</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getGreatingOfName</span><span class="p">(</span><span class="nx">getUserName</span><span class="p">(</span><span class="nx">getUserById</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span>
+</code></pre></div>
+<p>Neler yapmışız?</p>
+
+<p><code>getUserName</code> isminde bir fonksiyon tanımladık. Parametre olarak aldığı <code>User</code> objesinin <code>name</code> özelliğini döndürüyor.</p>
+
+<p>Çalıştırma ve çıktısı:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ~ $ node exercise02.js 
+</code></pre></div>
+<p>Hop! İkinci satırda hata:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno"> 1</span> halide
+<span class="lineno"> 2</span> /app/exercise02.js:3
+<span class="lineno"> 3</span> let getUserName = (user) =&gt; user.name;
+<span class="lineno"> 4</span>                                 ^
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> TypeError: Cannot read property &#39;name&#39; of undefined
+<span class="lineno"> 7</span>     at getUserName (/app/exercise02.js:3:33)
+<span class="lineno"> 8</span>     at Object.&lt;anonymous&gt; (/app/exercise02.js:5:13)
+<span class="lineno"> 9</span>     at Module._compile (module.js:556:32)
+<span class="lineno">10</span>     at Object.Module._extensions..js (module.js:565:10)
+<span class="lineno">11</span>     at Module.load (module.js:473:32)
+<span class="lineno">12</span>     at tryModuleLoad (module.js:432:12)
+<span class="lineno">13</span>     at Function.Module._load (module.js:424:3)
+<span class="lineno">14</span>     at Module.runMain (module.js:590:10)
+<span class="lineno">15</span>     at run (bootstrap_node.js:394:7)
+<span class="lineno">16</span>     at startup (bootstrap_node.js:149:9)
+</code></pre></div>
+<h2>Neden?</h2>
+
+<p>Hata almamız gayet normal çünkü <code>users</code> array&#39;inde 1 <code>id</code>&#39;li <code>User</code> tanımlı ama 3 <code>id</code>&#39;li <code>User</code> tanımlı değil. <code>undefined</code> dönen sonucu <code>getUserName</code> fonksiyonuna geçiriyoruz ve sonucunda <code>undefined</code> bir değerin <code>name</code> özelliğine ulaşmaya çalışırken <strong>TypeError</strong> alıyoruz.</p>
+
+<p>Şimdi typescript&#39;in ayarını düzenleyip bir daha deneyelim:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> tsc --strictNullChecks
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> exercise01.ts(11,48): error TS2322: Type &#39;User | undefined&#39; is not assignable to type &#39;User&#39;.
+<span class="lineno">2</span>   Type &#39;undefined&#39; is not assignable to type &#39;User&#39;.
+</code></pre></div>
+<p>Typescript compiler eğer doğru konfigürasyonda çalıştırılırsa bize zaten null kontrolünü yapıp problemli yerlerde bunun uyarısını yapıyor.</p>
+
+<blockquote>
+<p><a href="https://www.infoq.com/presentations/Null-References-The-Billion-Dollar-Mistake-Tony-Hoare">Null References: The Billion Dollar Mistake</a>:</p>
+
+<p>Tony Hoare introduced Null references in ALGOL W back in 1965 &quot;simply because it was so easy to implement&quot;, says Mr. Hoare. He talks about that decision considering it &quot;my billion-dollar mistake&quot;.</p>
+</blockquote>
+
+<p>Çoğu FP dillerinde <strong>null referansının</strong> olmaması veya teşvik edilmemesinin geçerli bir sebebi var. Ancak bir ihtiyaçtan kaynaklandığı da doğru.</p>
+
+<h2>FP&#39;de nasıl çözülür?</h2>
+
+<p>FP camiasında <strong>the M word</strong> denerek adı anılmayan bir terim var. Matematikteki kategori teorisinden alınan bu terim <strong>monad</strong>&#39;dır. Şimdi anlatacağım yapı: <strong>Option</strong> da bir monad&#39;dır. Ama hiçbir tanım yapmadan direkt örnek üzerinden gireceğim.</p>
+
+<h3>Belki burada bir Monad vardır: Option</h3>
+
+<p>Bir değerinizin olduğunu düşünün. Integer, string veya <em>custom</em> bir tip olsun farketmez. Alabileceği iki farklı durum vardır:</p>
+
+<ul>
+<li>Kendi değeri: 5, &quot;Ali&quot; veya User objesi. Farklı dillerde <strong>Some</strong>, <strong>Just</strong> gibi ifade edildiği olmuştur.</li>
+<li>Veya değerinin olmaması. Farklı dillerde farklı şekilde ifade edilir: <strong>None</strong>, <strong>Nothing</strong> gibi.</li>
+</ul>
+
+<p>Şimdilik işin felsefesine teorisine çok karışmadan örnek üzerinden bakalım. Normal koşullarda <strong>exercise02.js</strong>&#39;de aldığımız hatayı düzeltmek için yapabileceğimiz şeyler kısıtlıdır. Bunlardan en pratiği <strong>null kontrolü</strong> yapmaktır. <strong>exercise03.ts</strong> dosyasında bunu yaptım, inceleyelim:</p>
+
+<p><strong>Bilinen çözüm:</strong></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ~ $ cat exercise03.ts
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kr">import</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">users</span><span class="p">,</span> <span class="nx">getUserById</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;./exercise01&quot;</span><span class="p">;</span>
+<span class="lineno"> 2</span> 
+<span class="lineno"> 3</span> <span class="kd">let</span> <span class="nx">getUserName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">user</span><span class="o">:</span> <span class="nx">User</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span> <span class="o">=&gt;</span> <span class="p">{</span>
+<span class="lineno"> 4</span>   <span class="k">if</span><span class="p">(</span><span class="nx">user</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 5</span>     <span class="k">return</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span>
+<span class="lineno"> 6</span>   <span class="p">}</span> <span class="k">else</span> <span class="p">{</span>
+<span class="lineno"> 7</span>     <span class="k">return</span> <span class="s2">&quot;&quot;</span><span class="p">;</span>
+<span class="lineno"> 8</span>   <span class="p">}</span>
+<span class="lineno"> 9</span> <span class="p">};</span>
+<span class="lineno">10</span> 
+<span class="lineno">11</span> <span class="kd">let</span> <span class="nx">getGreatingOfName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="o">:</span> <span class="nx">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span> <span class="o">=&gt;</span> <span class="s2">&quot;hello &quot;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span> 
+<span class="lineno">12</span> 
+<span class="lineno">13</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getGreatingOfName</span><span class="p">(</span><span class="nx">getUserName</span><span class="p">(</span><span class="nx">getUserById</span><span class="p">(</span><span class="mi">1</span><span class="p">))))</span>
+<span class="lineno">14</span> <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="nx">getGreatingOfName</span><span class="p">(</span><span class="nx">getUserName</span><span class="p">(</span><span class="nx">getUserById</span><span class="p">(</span><span class="mi">3</span><span class="p">))))</span>
+</code></pre></div>
+<p>Derleyip çalıştıralım:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> tsc
+<span class="lineno">2</span> node exercise03.js
+</code></pre></div><div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> $ node exercise03.js 
+<span class="lineno">2</span> hello halide
+<span class="lineno">3</span> hello 
+</code></pre></div>
+<p>Haydaa! </p>
+
+<p><code>getGreatingOfName</code>&#39;de de şimdi boş string kontrolü yapmam gerekiyor. Onu yapsam bu sefer <code>console.log</code> boşuna çağırılacak. Bir <code>if</code> de oraya koymalı. </p>
+
+<p>İşte arkadaşlar null kullanımının zararları. Basit diye düşündüğümüz tek satırlık fonksiyonlar bir anda şişmeye başlıyor. Neyse ki FP&#39;de buna şık bir çözüm bulabiliyoruz: </p>
+
+<p><strong>FP ile çözüm:</strong></p>
+
+<p><strong>Option</strong> veya diğer dillerde geçen haliyle <strong>Maybe</strong>. Ben bunu <a href="https://gir.im/https://tr.wikipedia.org/wiki/Schr%C3%B6dinger%27in_kedisi">Schrödinger&#39;in Kedisi</a>&#39;ne benzetiyorum. İçinde tuttuğu değeri bizden saklıyor ve biz bunun kesin sonucunu fonksiyonu çağırıp çıktıyı basana kadar bilemiyoruz.</p>
+
+<p><img src="/assets/images/cat.png" alt=""></p>
+
+<p>Bizi bu bilinmez durumun farkında olmamızı sağlıyor. Yani null kontrolü unutmuşuz hadi düzeltip bir daha kod atıyoruz gibi bir durumla karşılaşmıyorsunuz çünkü - <em>en azından strongly-typed dillerde</em> - o kontrolü yapmadan kullanamıyorsunuz.</p>
+
+<p>Haydi <strong>exercise04.ts</strong></p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ~ $ cat exercise04.ts
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kr">import</span> <span class="p">{</span> <span class="nx">User</span><span class="p">,</span> <span class="nx">users</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;./exercise01&quot;</span><span class="p">;</span>
+<span class="lineno"> 2</span> <span class="kr">import</span> <span class="p">{</span> <span class="nx">Some</span><span class="p">,</span> <span class="nx">None</span><span class="p">,</span> <span class="nx">Option</span><span class="p">,</span> <span class="nx">Maybe</span> <span class="p">}</span> <span class="nx">from</span> <span class="s2">&quot;./option&quot;</span><span class="p">;</span>
+<span class="lineno"> 3</span> 
+<span class="lineno"> 4</span> <span class="kd">let</span> <span class="nx">getUserById</span> <span class="o">=</span> <span class="p">(</span><span class="nx">id</span><span class="o">:</span> <span class="nx">number</span><span class="p">)</span><span class="o">:</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">User</span><span class="o">&gt;</span> <span class="o">=&gt;</span> <span class="nx">Maybe</span><span class="p">(</span><span class="nx">users</span><span class="p">.</span><span class="nx">find</span><span class="p">(</span><span class="nx">x</span> <span class="o">=&gt;</span> <span class="nx">x</span><span class="p">.</span><span class="nx">id</span> <span class="o">===</span> <span class="nx">id</span><span class="p">));</span>
+<span class="lineno"> 5</span> 
+<span class="lineno"> 6</span> <span class="kd">let</span> <span class="nx">getUserName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">user</span><span class="o">:</span> <span class="nx">User</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span> <span class="o">=&gt;</span> <span class="nx">user</span><span class="p">.</span><span class="nx">name</span><span class="p">;</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span> <span class="kd">let</span> <span class="nx">getGreatingOfName</span> <span class="o">=</span> <span class="p">(</span><span class="nx">name</span><span class="o">:</span> <span class="nx">string</span><span class="p">)</span><span class="o">:</span> <span class="nx">string</span> <span class="o">=&gt;</span> <span class="s2">&quot;hello &quot;</span> <span class="o">+</span> <span class="nx">name</span><span class="p">;</span>
+<span class="lineno"> 9</span> 
+<span class="lineno">10</span> <span class="nx">getUserById</span><span class="p">(</span><span class="mi">1</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">getUserName</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">getGreatingOfName</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+<span class="lineno">11</span> <span class="nx">getUserById</span><span class="p">(</span><span class="mi">3</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">getUserName</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">getGreatingOfName</span><span class="p">).</span><span class="nx">map</span><span class="p">(</span><span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">);</span>
+</code></pre></div>
+<p><code>getUserById</code> fonksiyonunu <code>exercise01.ts</code>&#39;ten almayıp farklı bir versiyonunu kendimiz yazdık. Dönüş tipi artık <code>User</code> değil <code>Option&lt;User&gt;</code> oldu.</p>
+
+<p>Diğer değişen kısımlar da aşağıdaki fonksiyon çağrımları oldu. Farkettiğiniz üzere <code>map</code> diye bir fonksiyon kullanıyoruz ve bu <code>Option</code> monadından geliyor. Farkettiniz mi bilmiyorum ama bu <code>map</code> aynı zamanda javascript <code>Array</code> üzerinde de tanımlıdır ve size bir sır vereyim: <strong>Array de bir Monad&#39;dır.</strong></p>
+
+<p>Programımızın yeni halini çalıştıralım:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ~ $ node exercise04.js 
+<span class="lineno">2</span> hello halide
+</code></pre></div>
+<p>Gördüğünüz gibi ikinci satır hiç çalışmadı. Nedenini sıradaki bölümde öğreneceğiz.</p>
+
+<p><strong>Karşınızda Option Monad!:</strong></p>
+
+<p>Şimdi de <strong>option.ts</strong>&#39;yi inceleyelim:</p>
+<div class="highlight"><pre><code class="language-text" data-lang="text"><span class="lineno">1</span> ~ $ cat option.ts
+</code></pre></div><div class="highlight"><pre><code class="language-js" data-lang="js"><span class="lineno"> 1</span> <span class="kr">export</span> <span class="kr">interface</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">A</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno"> 2</span>     <span class="nx">map</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">fn</span><span class="o">:</span> <span class="p">(</span><span class="nx">a</span><span class="o">:</span> <span class="nx">A</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">B</span><span class="p">)</span><span class="o">:</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span><span class="p">;</span>
+<span class="lineno"> 3</span> <span class="p">}</span>
+<span class="lineno"> 4</span> 
+<span class="lineno"> 5</span> <span class="kr">export</span> <span class="kr">class</span> <span class="nx">Some</span><span class="o">&lt;</span><span class="nx">A</span><span class="o">&gt;</span> <span class="kr">implements</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">A</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno"> 6</span>     <span class="nx">value</span><span class="o">:</span> <span class="nx">A</span>
+<span class="lineno"> 7</span> 
+<span class="lineno"> 8</span>     <span class="nx">constructor</span><span class="p">(</span><span class="nx">value</span><span class="o">:</span> <span class="nx">A</span><span class="p">)</span> <span class="p">{</span>
+<span class="lineno"> 9</span>         <span class="k">this</span><span class="p">.</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">value</span><span class="p">;</span>
+<span class="lineno">10</span>     <span class="p">}</span>
+<span class="lineno">11</span> 
+<span class="lineno">12</span>     <span class="nx">map</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">fn</span><span class="o">:</span> <span class="p">(</span><span class="nx">a</span><span class="o">:</span> <span class="nx">A</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">B</span><span class="p">)</span><span class="o">:</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno">13</span>         <span class="k">return</span> <span class="k">new</span> <span class="nx">Some</span><span class="p">(</span><span class="nx">fn</span><span class="p">(</span><span class="k">this</span><span class="p">.</span><span class="nx">value</span><span class="p">));</span>
+<span class="lineno">14</span>     <span class="p">}</span>
+<span class="lineno">15</span> 
+<span class="lineno">16</span>     <span class="kr">static</span> <span class="nx">of</span><span class="p">(</span><span class="nx">value</span><span class="p">){</span>
+<span class="lineno">17</span>         <span class="k">return</span> <span class="k">new</span> <span class="nx">Some</span><span class="p">(</span><span class="nx">value</span><span class="p">);</span>
+<span class="lineno">18</span>     <span class="p">}</span>
+<span class="lineno">19</span> <span class="p">}</span>
+<span class="lineno">20</span> 
+<span class="lineno">21</span> <span class="kr">class</span> <span class="nx">NoneClass</span> <span class="kr">implements</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">any</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno">22</span>     <span class="nx">map</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">fn</span><span class="o">:</span> <span class="p">(</span><span class="nx">a</span><span class="o">:</span> <span class="nx">any</span><span class="p">)</span> <span class="o">=&gt;</span> <span class="nx">B</span><span class="p">)</span><span class="o">:</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">B</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno">23</span>         <span class="k">return</span> <span class="nx">None</span><span class="p">;</span>
+<span class="lineno">24</span> 
+<span class="lineno">25</span>     <span class="p">}</span>
+<span class="lineno">26</span> <span class="p">}</span>
+<span class="lineno">27</span> 
+<span class="lineno">28</span> <span class="kr">export</span> <span class="kr">const</span> <span class="nx">None</span> <span class="o">=</span> <span class="k">new</span> <span class="nx">NoneClass</span><span class="p">();</span>
+<span class="lineno">29</span> 
+<span class="lineno">30</span> <span class="kr">export</span> <span class="kr">const</span> <span class="nx">Maybe</span> <span class="o">=</span> <span class="kd">function</span> <span class="nx">OptionObject</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span><span class="p">(</span><span class="nx">value</span><span class="o">:</span> <span class="nx">T</span><span class="p">)</span><span class="o">:</span> <span class="nx">Option</span><span class="o">&lt;</span><span class="nx">T</span><span class="o">&gt;</span> <span class="p">{</span>
+<span class="lineno">31</span>   <span class="k">return</span> <span class="p">(</span><span class="nx">value</span> <span class="o">!==</span> <span class="kc">null</span> <span class="o">&amp;&amp;</span> <span class="nx">value</span> <span class="o">!==</span> <span class="kc">undefined</span><span class="p">)</span> <span class="o">?</span> <span class="nx">Some</span><span class="p">.</span><span class="nx">of</span><span class="p">(</span><span class="nx">value</span><span class="p">)</span> <span class="o">:</span> <span class="nx">None</span>
+<span class="lineno">32</span> <span class="p">}</span>
+</code></pre></div>
+<p>Nasıl Schrödinger&#39;in kedisini, kutuyu açmadan canlı mı ölü mü olduğunu bilemiyorsak, Option için de aynısı geçerli. Fonksiyonlarımız <code>map</code> üzerinden çağrılmadan değerimize ulaşamaz. </p>
+
+<p>Önceden de dediğimiz gibi Option&#39;ın iki durumu söz konusu:</p>
+
+<ul>
+<li>Some: İçinde kendi değerini taşır</li>
+<li>None: Değer taşımaz</li>
+</ul>
+
+<p>Yalnız bi kere değerimizi kutunun içine koyduktan sonra artık onu normal fonksiyonlarımızda kullanmamız mümkün değil. Çünkü kutunun içinde ve tipi değişmiş oldu. Bunu aşmanın yolu da <strong>map</strong> fonksiyonuyla oluyor.</p>
+
+<p>Aşağıdaki şemadan Option monad nasıl çalıştığını görebilirsiniz:</p>
+
+<p><img src="/assets/images/fp-s01e02-option-monad.png" alt=""></p>
+
+<p><strong>map</strong> bir A -&gt; B (A&#39;dan B&#39;ye diye okunur) bir fonksiyon alıyor. Kutuyu açıp değeri alıp fonksiyona veriyor ve sonucu  hesaplayıp yeni bir kutuya koyuyor. </p>
+
+<p>Yeni değerimiz kutu içinde kalmaya devam ettiği için de biz fonksiyonlarımızı aynı şekilde <strong>map</strong> üzerinden kullanmaya devam edebiliyoruz. <code>x.map(..).map(..).map(..)</code> şeklindeki kullanım bu şekilde çalışıyor.</p>
+
+<p>Monad&#39;larda <strong>Option</strong> örneğinden konuşacak olursak <code>fn</code> hesaplaması <code>Some</code> değerleri için çalıştırırken, <code>None</code> da çalıştırılmaz; yeni kutuya <code>None</code> olarak doğrudan geçirilir. Bu ne demek? Eğer bir kez <code>None</code> değeri dönülürse, zincirdeki hiçbir hesaplama çalışmayacaktır.</p>
+
+<h2>Bölüm sonu canavarı</h2>
+
+<blockquote>
+<p>Pratik kazancımız: artık fonksiyonların içinde tek tek null kontrolü yapmamıza gerek kalmadı, bu özelliği kullandığımız data üzerinden sağlayabiliyoruz.</p>
+</blockquote>
+
+<p>Bu bölümde çok fazla teknik ayrıntıya girip kafaları karıştırmak istemedim. Ancak şuna dikkati çekmek lazım ki OO dillerde yapamadığımız, dil üzerindeki yapılarda bile geçerli <strong>abstaction</strong>&#39;ı FP yöntemlerinde yapabiliyoruz.</p>
+
+<p>Bunu da çok basit bir şekilde fonksiyonlarla yapıyoruz. Bu fonksiyonel yöntemlerin çoğu modern OO dillerinde de destekleniyor. </p>
+
+<p>Yani bu özellikleri kullanmak için illa bir FP diline geçmeniz gerekmiyor. Geçerseniz sizin yararınıza olacaktır çünkü doğru bir FP dili sizi bu özellikleri kullanmaya zorlamalıdır. Bu şekilde öğrenmeniz de hızlanır.</p>
+
+<p>Bir sonraki bölümümüzde <strong>composition</strong> meselesine biraz daha eğileceğiz. Option monad&#39;imizi biraz daha geliştireceğiz.</p>
+
+
+          <hr />
+					
+					
+
+
+
+
+<div class="seriesNote">
+  Bu makale <strong>3</strong> bölümlük <strong>Fonksiyonel Programlama</strong> serisinin <strong>2.</strong> bölümüdür.</p>
+	<ul>
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 1 -
+		
+			<a href="/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01">
+		
+    Fonksiyonel Programlama - S01E01
+    
+      </a>
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="selected">Part 2 -
+		
+    Fonksiyonel Programlama - S01E02
+    
+		</li>
+	
+	
+	
+		
+
+    
+    
+		<li class="">Part 3 -
+		
+			<a href="/fonksiyonel-programlama/2017/10/22/fonksiyonel-programlama-s01e03">
+		
+    Fonksiyonel Programlama - S01E03
+    
+      </a>
+    
+		</li>
+	
+	
+	</ul>
+</div>
+
+
+
+
+					<hr />
+				  
+
+					<div class="meta">
+						<p class="date-publish">
+							Published:
+							<date class="date-pub" title="2017-09-27T00:00:00+02:00" datetime="2017-09-27T00:00:00+02:00" pubdate>
+							<span class="month"><abbr>September</abbr></span>
+							<span class="day">27</span>
+							<span class="year">2017</span>
+							</date>
+						</p>
+						<ul class="list-category list-linear">
+							<li class="list-head">category: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/categories.html#fonksiyonel-programlama-ref">
+    		fonksiyonel-programlama <span>3</span>
+    	</a></li>
+    
+  
+
+
+
+						</ul>
+						<ul class="list-tag list-linear">
+							<li class="list-head">tags: </li>
+							
+							
+
+
+  
+    
+    	<li><a href="/tags.html#fonksiyonel-programlama-ref">fonksiyonel-programlama <span>3</span></a></li>
+    
+    	<li><a href="/tags.html#functional-programming-ref">functional-programming <span>3</span></a></li>
+    
+    	<li><a href="/tags.html#software-ref">software <span>3</span></a></li>
+    
+  
+
+
+
+						</ul>
+					</div><!-- meta -->
+				</div><!-- entry-content -->
+				<div class="misc-content">
+					<div class="social">
+						<ul class="list-linear">
+							<li><div class="twitter-tweet"><a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="" data-lang="en">Tweet</a></div></li>
+							<li><div class="twitter-follow"><a href="https://twitter.com/" class="twitter-follow-button" data-show-count="false" data-lang="en"></a></div></li>
+						</ul>
+					</div>
+					<div class="comment">
+					
+
+
+  <div id="disqus_thread"></div>
+<script type="text/javascript">
+    
+
+    
+    var disqus_shortname = 'dhalsimblog'; // required: replace example with your forum shortname
+    
+    /* * * DON'T EDIT BELOW THIS LINE * * */
+    (function() {
+        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
+        dsq.src = 'https://' + disqus_shortname + '.disqus.com/embed.js';
+        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
+    })();
+</script>
+<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+<a href="https://disqus.com" class="dsq-brlink">blog comments powered by <span class="logo-disqus">Disqus</span></a>
+
+
+
+
+					</div>
+				</div><!-- misc-content -->
+			</div><!-- bd -->
+			<footer class="unit-foot">
+
+
+				<div class="unit-inner unit-foot-inner">
+					<nav class="pagination">
+						<ul>
+							
+							<li class="prev"><a class="internal" rel="prev"  href="/fonksiyonel-programlama/2017/09/24/fonksiyonel-programlama-s01e01" title="View Fonksiyonel Programlama - S01E01">&laquo; Fonksiyonel Programlama - S01E01</a></li>
+							
+							
+							<li class="pipe"> | </li>
+							
+							
+							<li class="next"><a class="internal" rel="next"  href="/fonksiyonel-programlama/2017/10/22/fonksiyonel-programlama-s01e03" title="View Fonksiyonel Programlama - S01E03">Fonksiyonel Programlama - S01E03 &raquo;</a></li>
+							
+						</ul>
+					</nav>
+				</div>
+			</footer>
+
+		</div><!-- content -->
+	</div><!-- unit-inner -->
+</article>
+
+
+				</div>
+			</div><!-- unit-inner -->
+		</div><!-- unit-body -->
+	</div><!-- body -->
+	<footer class="the-footer">
+		<div class="unit-foot">
+			<div class="unit-inner unit-foot-inner">
+				<div class="misc vcard">
+					<h4>Hakkımda</h4>
+					<img src="/assets/me_rounded.png" style="width: 150px" />
+					<ul>
+						<li class="contact"><span class="author fn n">Barış Aydek</span></li>
+						<li class="resume"><a href="/resume/cv-tr">Özgeçmişim HTML (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-tr.pdf">pdf (basitleştirilmiş)</a> |
+							<a href="/assets/resume/cv-full-en.pdf">pdf (ingilizce)</a>
+						</li>
+						<li class="contact"><address><span class="fn email"><a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a></span></address></li>
+						<li class="github"><a href="http://github.com/dhalsim/" rel="me">github.com/dhalsim</a></li>
+						<li class="linkedin"><a href="https://www.linkedin.com/in/baris-aydek-39352325" rel="me">linkedin.com</a></li>
+					</ul>
+
+					<hr />
+
+					<a href=/software-testing>Software Testing & TDD</a> sunumuma göz at!
+
+				</div><!-- misc -->
+			</div><!-- unit-foot-inner -->
+		</div><!-- unit-foot -->
+	</footer>
+</div><!-- page -->
+<script>
+	(function(d, s) {
+		var js, fjs = d.getElementsByTagName(s)[0], load = function(url, id) {
+		if (d.getElementById(id)) {return;}
+		js = d.createElement(s); js.src = url; js.id = id;
+		fjs.parentNode.insertBefore(js, fjs);
+		};
+	load('//platform.twitter.com/widgets.js', 'tweetjs');
+	// load('https://apis.google.com/js/plusone.js', 'gplus1js'); // Checkout http://j.mp/ApDgMr for usage html for this is <div class="g-plusone" data-size="medium"></div>
+	// load('//connect.facebook.net/en_US/all.js#xfbml=1', 'fbjssdk'); // Checkout http://j.mp/wZw2xR for using open graph protorol html for this is <div class="fb-like" data-href="/fonksiyonel-programlama/2017/09/27/fonksiyonel-programlama-s01e02" data-send="false" data-layout="button_count" data-width="450" data-show-faces="false" data-font="verdana"></div>
+	}(document, 'script'));
+</script>
+<script>
+/*! A fix for the iOS orientationchange zoom bug.Script by @scottjehl, rebound by @wilto. MIT License.*/
+(function(j){var i=j.document;if(!i.querySelectorAll){return}var l=i.querySelectorAll("meta[name=viewport]")[0],a=l&&l.getAttribute("content"),h=a+", maximum-scale=1.0",d=a+", maximum-scale=10.0",g=true,c=j.orientation,k=0;if(!l){return}function f(){l.setAttribute("content",d);g=true}function b(){l.setAttribute("content",h);g=false}function e(m){c=Math.abs(j.orientation);k=Math.abs(m.gamma);if(k>8&&c===0){if(g){b()}}else{if(!g){f()}}}j.addEventListener("orientationchange",f,false);j.addEventListener("deviceorientation",e,false)})(this);
+</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.4/jquery.min.js" charset="utf-8"></script>
+<script type="text/javascript">
+$(document).ready(function(){
+	// browser window scroll (in pixels) after which the "back to top" link is shown
+	var offset = 300,
+	//browser window scroll (in pixels) after which the "back to top" link opacity is reduced
+	offset_opacity = 1200,
+	//duration of the top scrolling animation (in ms)
+	scroll_top_duration = 700,
+	//grab the "back to top" link
+	$back_to_top = $('.cd-top');
+
+	//hide or show the "back to top" link
+	$(window).scroll(function(){
+		( $(this).scrollTop() > offset ) ? $back_to_top.addClass('cd-is-visible') : $back_to_top.removeClass('cd-is-visible cd-fade-out');
+		if( $(this).scrollTop() > offset_opacity ) {
+			$back_to_top.addClass('cd-fade-out');
+		}
+	});
+
+	//smooth scroll to top
+	$back_to_top.on('click', function(event){
+		event.preventDefault();
+		$('body,html').animate({
+			scrollTop: 0 ,
+		 	}, scroll_top_duration
+		);
+	});
+});
+</script>
+
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.0.6/modernizr.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/anchor-js/2.0.0/anchor.min.js" charset="utf-8"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/fancybox/2.1.5/jquery.fancybox.pack.js" charset="utf-8"></script>
+<script type="text/javascript">
+	$(document).ready(function () {
+		anchors.add('.content h1');
+		anchors.add('.content h2');
+		anchors.add('.content h3');
+		anchors.add('.content h4');
+		anchors.add('.content h5');
+
+		var level = 1;
+		var $parentUl = $currentUl = $('<ul/>');
+		var count = 0;
+		var listTypes = ['decimal', 'lower-alpha', 'circle']
+		$('.anchorjs-link').each(function () {
+			count++;
+			if(count === 1)
+			{
+				return true;
+			}
+
+			var $this = $(this);
+			var $parent = $this.parent();
+			var tagName = $parent.prop("tagName");
+			var thisLevel = tagName.charAt(1);
+			var text = $parent.text();
+
+			if(thisLevel > level) {
+				var $newUl = $('<ul/>');
+				$currentUl.append($newUl);
+				$currentUl = $newUl;
+			} else if(thisLevel < level) {
+				var diff = level - thisLevel;
+				$currentUl = $currentUl.parents().eq(diff-1);
+			}
+
+			var $a = $('<a/>');
+			$a.text(text);
+			$a.attr('href', $this.attr('href'));
+
+			level = thisLevel;
+			$currentUl.css('list-style', listTypes[level - 1]);
+			$currentUl.append($('<li/>').append($a));
+		});
+
+		$('.content header').append(
+			$('.toc').html(
+				$('<h4/>', {text: 'İçindekiler: '})
+			).append($parentUl)
+		);
+
+		$('.content img')
+			.attr('title', 'Resmi büyütmek için üstüne tıklayınız.')
+			.click(function (e) {
+				var img = $('<img/>', {src: this.src});
+				return $.fancybox(img);
+			});
+	});
+</script>
+
+
+
+
+  
+
+
+
+
+
+  <script type="text/javascript">
+  var _gaq = _gaq || [];
+  _gaq.push(['_setAccount', 'UA-70097547-1']);
+  _gaq.push(['_trackPageview']);
+
+  (function() {
+    var ga = document.createElement('script'); ga.type = 'text/javascript'; ga.async = true;
+    ga.src = ('https:' == document.location.protocol ? 'https://ssl' : 'http://www') + '.google-analytics.com/ga.js';
+    var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(ga, s);
+  })();
+</script>
+
+
+
+
+</body>
+</html>
+
