@@ -4,7 +4,7 @@ permalink: /:categories/:year/:month/:day/:title
 
 baseurl: ""
 
-exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md"]
+exclude: [".rvmrc", ".rbenv-version", "README.md", "Rakefile", "changelog.md", "vendor"]
 
 THEME_NAME: the-program
 
