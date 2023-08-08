@@ -3,8 +3,6 @@ layout: page
 ---
 {% include JB/setup %}
 
-<h1 class="slogan"><span>{% t headers.main %}</span></h1>
-
 {% for post in site.posts %}
 <div class="clearfix">
   <div class="postTitle">

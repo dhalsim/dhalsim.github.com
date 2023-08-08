@@ -25,12 +25,23 @@ Trying to understand and use functional programming concepts while learning Scal
 
 ## Work expreriences
 
+`17-23`
+**Comtravo (Acquired by Navan) / Navan (Formerly TripActions)** Senior Software Developer
+
+Before the Acquirement (5 years):
+
+I played a multifaceted role encompassing a wide range of responsibilities: integrations across various platforms including hotel (booking.com and hrs), flight (sabre with search upgrades, hitchhiker, luggage, and seats), train (DB and Amadeus). in accounting (invoices, collective invoices, and reports). CRM management: handling users, companies, FF cards, policies, and imports. system integrations with AWS Cognito, Zendesk, Slack and Swagger (OpenAPI v2). On the data side, I worked with MongoDB, Mongoose, Elasticsearch. On the infrastructure front, I worked with Terraform, AWS, and Jenkins. I utilized AWS Lambdas and AWS step functions thoughout the system. As my experience grew, I became the most knowledgeable person in the department, serving as the primary point of escalation, consultation and mentorship. Additionally, I was entrusted with technical reviews, PR reviews, and making architectural updates to the system as needed.
+
+After the Acquirement (1 year):
+
+I took on the challenge of integrating the British Airways NDC API, which involved integrating a new Node.js service into an existing Java stack. Furthermore, we integrated Auth0 into out authentication system, focusing on the SSO Self Serve service implementation.
+
 `13-16`
 **Amadeus R&D Istanbul** Software Developer
 
-Amadeus e-Power is a fully customizable, high performance, easy-to-use online booking engine (flight, hotel, car, train) that will deliver online sales success to travel agencies which are about worldwide 1000+ booking portals.
+Amadeus e-Power is a fully customizable, high performance, easy-to-use online booking engine (flight, hotel, car, train) by the time was used by about worldwide 1000+ booking portals.
 
-Responsibilities: Application configuration management for deploying on different farm machines 	Unit test initial setup, Test and Code Coverage Reports integration for Jenkins 	Application code security 	Various Flight, Hotel, Payment, Webservice module features 
+Responsibilities: • Application configuration management for deploying on different farm machines. • Unit test initial setup, Test and Code Coverage Reports integration for Jenkins • Application code security • Various Flight, Hotel, Payment, Webservice module features
 
 `12-13`
 **Gezisitesi** Software Development Specialist
@@ -54,17 +65,12 @@ I was responsible from developing of an XML based ASP.NET framework which create
 
 ## Technical
 
-* C# / Javascript / Scala / Python / Ruby
-* ASP.NET / Node.js / Meteor.js
-* WCF / REST / Web API
-* React.js / Redux
+* Javascript / Typescript / Node.js
+* Java Spring
 * OOP / FP
+* MongoDB / Mysql
 * TDD / BDD
-* MS SQL / MongoDB / Redis
-* Git / TFS
-* Docker / Vagrant
-* Bash / Grunt / Webpack
-* Mac OS / Linux / Windows
+* Docker, Jenkins, Terraform
 
 ## Projects
 
