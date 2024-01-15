@@ -1,30 +1,11 @@
----
-layout: cv
-title: Barış Aydek CV
----
-# Barış Aydek
-Computer Engineer
-
-<div id="webaddress">
-<a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a>
-|
-<a href="https://dhalsim.github.io/en">My Blog (EN)</a>
-|
-<a href="https://dhalsim.github.io">My Blog (TR)</a>
-|
-<i class="fa fa-github"></i> <a href="http://github.com/dhalsim">dhalsim</a>
-|
-<i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/in/baris-aydek-39352325">Barış Aydek</a>
-</div>
-
-## Work expreriences
+## Berufserfahrungen
 
 `2017-2023`
 **Senior Software Developer, Comtravo (Acquired by Navan, Formerly TripActions)**
 
 I started my journey at Comtravo as a Junior Software Engineer despite having six years of prior experience in C# development. My motivation was to transition Node.js due to my fascination with its ecosystem. Comtravo offered me the opportunity to join as a junior developer, and I embraced the challenge of proving my expertise in a new tech stack. Within a year, I had promoted to middle, and senior software engineering positions as my responsibilities grew. 
 
-During my initial adaptation phase in the backend team, my primary focus was on reporting. The first thing I did was refactoring the code to make it easier to maintain reports as I fixed its bugs. 
+Während meiner Anpassungsphase im Backend-Team lag mein Hauptaugenmerk auf dem Reporting. Das Erste, was ich tat, war die Refaktorisierung des Codes, um die Wartung von Berichten zu erleichtern, während ich deren Bugs behob. 
 
 I participated in various data integrations for our B2B travel search and booking engine. Search engine was responsible for fetching data from multiple sources, merging the results into a common data type, and show the best results for the user, which will be used to finilize the booking flow asyncroniously. 
 

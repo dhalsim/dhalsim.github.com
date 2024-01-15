@@ -28,17 +28,15 @@ article, aside, details, figcaption, figure,
 footer, header, hgroup, menu, nav, section {
 	display: block;
 }
+
 body {
 	line-height: 1;
 }
 
-ol {
+ul, ol {
 	list-style: circle;
 }
 
-ul {
-	list-style: none;
-}
 blockquote, q {
 	quotes: none;
 }
@@ -54,54 +52,38 @@ table {
 
 /* end of reset */
 
-/* faux Wikipedia logo font */
-@font-face { font-family: 'Linux Libertine'; font-style: normal; font-weight: 400; src: local('Linux Libertine'),url(//brick.a.ssl.fastly.net/fonts/linuxlibertine/400.woff) format('woff'); } .fa-wikipedia:before { font-family: 'Linux Libertine', 'Times New Roman', Times, serif; font-weight: 400; content: "W"; }
-
 body {
 	font: normal normal 400;
-	font-size: 80%;
+	font-size: 70%;
 	line-height: 1.5em;
-	/* font-family: Verdana, sans-serif; */
-	font-family: "Open sans", sans-serif;
+	font-family: Menlo, monospace, sans-serif;
 	margin-top: 1em;
 	margin-left: 1em;
 }
 
 p {
 	position: relative;
-	left: 25%;
+	left: 20%;
 	margin-bottom: 0.7em;
 	margin-right: 0;
-	width: 50%;
+	width: 70%;
 }
 
 code {
 	font: normal normal;
 	font-size: 90%;
-	font-family: Menlo, monospace, sans-serif;
 	color: #aaa;
 }
 
 p code {
 	position: absolute;
-	left: -10%;
+	left: -15%;
 }
 
-
-ul {
+ul, ol {
 	position: relative;
-	left: 25%;
-	width: 50%;
-	margin-bottom: 1.5em;
-  columns: 3;
-  -webkit-columns: 3;
-  -moz-columns: 3;
-}
-
-ol {
-	position: relative;
-	left: 26%;
-	width: 50%;
+	left: 21%;
+	width: 60%;
 	margin-bottom: 1.5em;
 }
 
@@ -117,22 +99,16 @@ li ul {
 }
 
 h1,h2,h3,h4 {
-	font-weight: 400;
-	font-family: Cousine,Verdana,sans-serif;
+	font-weight: bold;
 	width: 65%;
 }
 
 h1 {
-	color: crimson;
-	text-align: left;
-	font-size: 3em;
+	color: #222;
+	font-size: 2.2em;
 	line-height: 1em;
 	position: relative;
-	margin-top: 2em;
-	left: 25%;
-	/* padding: .1rem 1rem; */
-  text-shadow: 1px 1px #fff,
-      					1px 2px #ccc;
+	left: 20%;
 }
 
 h1+p {
@@ -147,23 +123,19 @@ h1+p {
 
 h2 {
 	font-size: 1.1em;
-	/* color: #a00; */
 	color: #1D49A0;
-	margin-top: 2em;
 	position: relative;
-	top: 1.4em;
-	text-align: right;
-	width: 15%;
+	left: 20%;
+	margin: 30px 0px 10px 0px;
+	font-weight: bold;
 }
 
 h3 {
 	color: #F07415;
-	font-size: 1em;
-	line-height: 2em;
 	position: relative;
-	top: 1.7em;
+	left: -50%;
+	top: 19px;
 	text-align: right;
-	width: 15%;
 }
 
 a {
@@ -178,7 +150,7 @@ a:hover {
 #webaddress {
 	margin-top: 0em;
 	position: relative;
-  margin-left: 25%;
+  margin-left: 20%;
 	color: #aaa;
 	font-family: Menlo,monospace,sans-serif;
 	font-size: 80%;
@@ -206,16 +178,9 @@ strong {
     -moz-column-count: 3; /* Firefox */
     column-count: 3;
 		position: relative;
-		left: 25%;
+		left: 20%;
 		margin-top: 2em;
 		margin-bottom: 7em;
 		margin-right: 0;
 		width: 65%;
 }
-
-#technical
-
-/*
-@media only screen and (max-width: 480px) {
-	make one column somehow...
-}*/
