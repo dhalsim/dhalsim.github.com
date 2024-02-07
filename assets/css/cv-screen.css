@@ -66,7 +66,7 @@ p {
 	left: 20%;
 	margin-bottom: 0.7em;
 	margin-right: 0;
-	width: 70%;
+	width: 60%;
 }
 
 code {
@@ -78,6 +78,7 @@ code {
 p code {
 	position: absolute;
 	left: -15%;
+	width: 100px;
 }
 
 ul, ol {
@@ -148,12 +149,12 @@ a:hover {
 }
 
 #webaddress {
-	margin-top: 0em;
+	margin-top: 1em;
 	position: relative;
   margin-left: 20%;
 	color: #aaa;
 	font-family: Menlo,monospace,sans-serif;
-	font-size: 80%;
+	font-size: 90%;
 }
 
 #webaddress a {

@@ -12,7 +12,6 @@ headers:
   tags: Tags
   toc: Table of contents
   cv: My Resumê
-  simplified: (simplified)
   full: (full)
 series:
   title: This article is <strong>part {{ idx }}</strong> of a <strong>{{ count }}-part</strong> series called <strong>{{series}}</strong></p>
