@@ -85,7 +85,7 @@ and implementing new technologies to drive project success.
 
 ## Open Source Projects
 
-* Check out my [nostr](https://nostr.com/) application to fetch nostr events and transform them into markdown lists to be published again as long formatted notes using Nostr Web : [Github link](https://github.com/btcpayserver/BTCPayServer.Lightning/pull/151)
+* Check out my [nostr](https://nostr.com/) application to fetch nostr events and transform them into markdown lists to be published again as long formatted notes using Nostr Web : [Github link](https://github.com/dhalsim/nostr-hightlights-to-note)
 * BTCPay Server: Blink API integration PR: [Github link](https://github.com/btcpayserver/BTCPayServer.Lightning/pull/151)
 
 ## Courses and Seminars
