@@ -1,115 +1,92 @@
+---
+layout: cv
+title: Barış Aydek CV
+---
+# Barış Aydek
+
+## Berufliche Zusammenfassung
+
+Senior Software-Entwickler mit umfangreicher Erfahrung in Backend-Technologien, API-Integrationen und
+Cloud-basierten Lösungen. Bekannt für technische Expertise in der Lösungsarchitektur, insbesondere in AWS,
+und Kompetenz in TypeScript. Ein neugieriger und innovativer Fachmann, der dafür bekannt ist, ständig
+neue Technologien zu erforschen und zu implementieren, um den Projekterfolg voranzutreiben.
+
 ## Berufserfahrungen
 
-`2017-2023`
-**Senior Software Developer, Comtravo (Acquired by Navan, Formerly TripActions)**
+`2017-2023, Berlin`
 
-I started my journey at Comtravo as a Junior Software Engineer despite having six years of prior experience in C# development. My motivation was to transition Node.js due to my fascination with its ecosystem. Comtravo offered me the opportunity to join as a junior developer, and I embraced the challenge of proving my expertise in a new tech stack. Within a year, I had promoted to middle, and senior software engineering positions as my responsibilities grew. 
+**Senior Software-Entwickler, Comtravo (Übernommen von Navan)**
 
-Während meiner Anpassungsphase im Backend-Team lag mein Hauptaugenmerk auf dem Reporting. Das Erste, was ich tat, war die Refaktorisierung des Codes, um die Wartung von Berichten zu erleichtern, während ich deren Bugs behob. 
+* Als technischer Experte anerkannt, schnell vom Junior Entwickler zum Senior Entwickler aufgestiegen
+* Kritische Module wie die Rechnungsstellung umstrukturiert, um die Wartbarkeit zu verbessern und gleichzeitig Fehler zu beheben, indem eng mit den Produkt- und Finanzteams zusammengearbeitet wurde
+* Bekannt für Expertise in der Lösungsarchitektur, insbesondere in AWS-Umgebungen, was zu robusten und skalierbaren Systemen führte
+* Entwurf und Implementierung eines JWT-basierten Sicherheitsmechanismus für Backend-API-Endpunkte
+* Instrumentell bei der Integration fortschrittlicher Backend-Services mit großen Dienstleistern wie booking.com, Sabre und Amadeus durch Nutzung von AWS-Diensten wie SNS/SQS-Ereignissen, Step Functions und Lambdas
+* Entwurf von MongoDB-Schemas, Modellen und Bibliotheken für verschiedene Backend- und Frontend-Services
+* Ausbildung und Mentoring von Junior-Entwicklern und Ingenieuren, Vermittlung von Programmierfähigkeiten und Arbeit an der Verbesserung der Gesamtleistung des Teams
+* Konsistent hochwertige Lösungen geliefert, bekannt für Zuverlässigkeit und innovative Problemlösung
+* Eng mit QA- und Infrastrukturteams für eine reibungslose Lieferung zusammengearbeitet
+* Spielte eine entscheidende Rolle bei der Integration von Node.JS-Services in den Java-Stack durch Implementierung von Adaptern und Nutzung von Kafka-Warteschlangen
+* Unterstützte die Integration von Auth0 Cloud Authentication in das bestehende System, verantwortlich für die Gestaltung von SSO-Modulen und das Schreiben von Infrastructure as Code
 
-I participated in various data integrations for our B2B travel search and booking engine. Search engine was responsible for fetching data from multiple sources, merging the results into a common data type, and show the best results for the user, which will be used to finilize the booking flow asyncroniously. 
+`2013-2016, Istanbul`
+**Software-Entwickler, Amadeus R&D Istanbul**
 
-Integrations I worked on the product: 
+* Schlüsselrolle bei der Entwicklung des Amadeus e-Power Online-Buchungsmotors gespielt, der weltweit von über 1000 Buchungsportalen genutzt wird
+* Verwaltung der Anwendungskonfiguration, Codesicherheit und Entwicklung von Webdienstmodulen
+* Integration von Jenkins für kontinuierliche Integration, was die Effizienz der Bereitstellung erheblich verbesserte
+* Funktionen für Flug-, Hotel-, Zahlungs-, Webdienstmodule einschließlich Backend- und Frontend-Seite
 
-* Hotel integrations with booking.com and hrs
-* Flight integrations with Sabre, Hitchhiker
-* Train integrations with DB and Amadeus
-* Use of SNS/SQS events and AWS Step Functions for async fulfillment
+`2012-2013, Istanbul`
+**Spezialist für Softwareentwicklung, Gezisitesi.com**
 
-We used SNS/SQS events to create messages for offers and bookings. Then the messages are picked by AWS Step Functions and do async fulfillment on those bookings.
+* Spielte eine wichtige Rolle bei Wartung und Support
+* Schloss sich einem anderen Team an, um neue Backend- und Frontend-Anwendungen unter Verwendung von SOA-Prinzipien und -Technologien zu entwickeln
 
-I worked some parts of our CRM service such as invoice management within the same company. After this project, I played a key role in designing and implementing the Aggregated Invoices project, allowing customers to manage their accounting more efficiently. We utilized AWS Step Functions, triggered by custom AWS cron jobs, to generate invoices in batches during low DB usage periods. This approach offered flexibility and resilience, as we could re-run the step functions in case of any issues.
+`2010-2012, Istanbul`
+**Spezialist für Softwareentwicklung, Cronom**
 
-Some backstory: Initially, our customers primarily interacted with our products through email channels, connecting travel managers with Comtravo Operations Team agents. Beside the email channel, which is between our travel agents and company admins, manually fulfilled using an internal backoffice UI, later management decided to introduce a new channel for customers that they can book their own travels and only get in touch with the agents if something goes wrong, so the company operations could scale. This fascilitated new products, features and needs.
+* Verantwortlich für die Entwicklung von OttO, einem XML-basierten ASP.NET-Framework, das es Kunden ermöglichte, Webseiten und Formulare zu erstellen, Daten zu verwalten und Workflows mühelos einzurichten
+* Unterstützte das Produktteam bei der Fehlerbehebung und der Entwicklung neuer Funktionen. In dieser Zeit wuchs auch mein Wissen über die Codebasis und Architektur, und ich konnte an herausfordernderen Problemen, einschließlich Konkurrenzproblemen, arbeiten
+* SOA wurde intensiv genutzt, indem .NET und WCF eingesetzt wurden
+* Arbeitete als Berater in wichtigen türkischen Unternehmen wie Coca Cola İçecek, GlobalBilgi (Turkcell), Abdi İbrahim und Ulaşım A.Ş und half Kunden bei der Integration von Produkten in ihre bestehenden Lösungen
 
-On the backend, we needed to introduce company roles (traveler, booker and admin) for the users. I created a security check mechanism for our backend API endpoints using JWT tokens. I desinged a library that can be used to validate our API requests against the rules defined in the services.
-
-Travel policies was the most wanted feature among our customers, and I was responsible for designing MongoDB schemas, models, and a library for the actual policy validations which is called from various backend services and frontend applications. The requirements was the company admins or travel agents could set rules like budgeting or allowed cabin types, and system should signal the user about any violations of that policies. 
-
-As my experience grew in the company, I became the most knowledgeable person in the department, serving as the primary point of escalation, consultation and mentorship. Additionally, I was entrusted with technical reviews, PR reviews, and making architectural updates to the system as needed. 
-
-Even though the company grew in size during the last years, it challenging to make changes to one area of the software without affecting other areas. We wanted to split developers around services or projects so the team can have expertise on certain parts and develop faster and better software. There was an initiative in the company to make the architectural changes, to make the teams more independent and deploy faster. In the initiative we chose using DDD practices to analyse and define our models and services to match up with organisational structure and our development teams. In the initiative I was also researching event sourcing as an alternative for our architecture. You can check out my research notes on Datomic, as a way for event sourcing that I found is possible to make the changes within the size of a company like ours: [here](https://hackmd.io/@TksjGp60TRiDO6GbU0fhOQ/r1ZFSJlxq).
-
-We had to stop these initiatives and other things as well because Comtravo was acquired by TripActions (later to be rebranded as Navan) and it was decided to sunset Comtravo products in a year. We prioritised on migrating the customers to the new platform.  
-
-I took on the challenge of integrating the British Airways NDC (a new standard in flights industry) API. We integrated a new Node.js service into an existing Java stack. We created an adaptor in between the Java services and Node.js service using REST and Kafka queues.
-
-Furthermore, I joined the core team to help integrating Auth0 into our authentication system. With the integration we aimed increased security, scalibility and compliance. Navan already had Single Sign-on (SSO) features using SAML and OIDC, and it was decided to create some adapters for existing users, while giving an option to migrate to Auth0 in time. I was in charge of the part of creating an SSO service to be used by the customers that wants to create and edit their SSO connections using Auth0 API. Users could upload their XMLs or define their connection configurations. This time I had the chance to work with Java Spring Framework to create our service. I was also mainly writing Terraform definitions to create the infrastructure layer in our AWS infra using Auth0 terraform provider. After the acquisation, we had to go through rebranding of TripActions to Navan, and we supported this change as a team.
-
-`2013-2016`
-**Software Developer, Amadeus R&D Istanbul**
-
-Amadeus e-Power is a fully customizable, high performance, easy-to-use online booking engine (flight, hotel, car, train) by the time was used by about worldwide 1000+ booking portals. It can be served to B2B (agencies) or B2C customers, either using extensible e-Power UI engine or using e-Power web services.  
-
-Responsibilities:
-
-* Application configuration management for deploying on different farm machines. 
-* Unit test initial setup, Test and Code Coverage Reports integration for Jenkins
-* Application code security 
-* Various Flight, Hotel, Payment, Webservice module features
-
-`2012-2013`
-**Software Development Specialist, Gezisitesi.com**
-
-I was responsible of developing an online hotel and tour selling platform.
-
-*Technologies used: ASP.NET MVC 4, WCF, NHibernate.*
-
-`2010-2012`
-**Software Development Specialist, Cronom**
-
-I was responsible of developing of an XML based ASP.NET framework. Using the framework customers are able to create their web screens and forms, manage data, create different workflows by triggering actions on the screen, all by defining XML declarations and simple scripts. Product can be used with optional UI tool (Windows Forms) providing customers to generate screens, workflows, and data integrations using drag and drop UI or wizards to generate necessary XML definitions.
-
-In my first year, I worked on supporting this product with fixing bugs and developing new features. 
-
-That year I learned basic ASP.NET web development skills, and mostly back-end programming skills like maintaining and developing our in-house ORM framework, generating ASP.NET pages (including generating necessary Javascript code) and business workflows from XMLs defined.
-
-Also worked on in-house solutions in Coca Cola İçecek, GlobalBilgi (Turkcell), Abdi İbrahim and Ulaşım A.Ş by helping customers to solve their enterprise requirements.
-
-In my second year, I worked in support and development team on a rolling basis. In that period I worked with all parts of the product, including product design tool using Windows Forms and DexExpress libraries. During that time, my knowledge on the code base and architecture also increased and was able to work on more technical problems including concurrency issues.
-
-On the last 4 months I did a project with the product to work with
-cloud platforms and started to build a web platform for managing this cloud product. This let me to
-develop my SOA knowledge using WCF technologies, and deployment libraries found on .net platform. In this development cycle I studied Test Driven Development heavily and practiced it using NUnit framework
-
-## Education
+## Ausbildung
 
 `2005-2009`
 **Computer Engineering**, Pamukkale University 
 
+* Notendurchschnitt: 3,04/4
+
 `1997-2005`
-İzmir Milli Piyango Anatolian High School (English)
+**İzmir Milli Piyango Anatolisches Gymnasium**
 
-## Technical skills
+* Englisch
 
-* Javascript / Typescript / Node.js / Java Spring
-* OOP / FP
-* TDD / BDD / DDD
-* MongoDB / Mysql
-* Docker, Jenkins, Terraform, AWS
+## Technische Fähigkeiten
 
-## Projects
+* Amazon Web Services
+* MongoDB, Mysql
+* Git, Docker, Jenkins, Terraform
+* Javascript (Typescript), C#, Java
+* Node.js, Java Spring, ASP.NET
 
-### open source
+## Open-Source-Projekte
 
-* Check out my [nostr](https://nostr.com/) application to fetch nostr events and transform them into markdown lists to be published again as long formatted notes using Nostr Web : [Github link](https://github.com/btcpayserver/BTCPayServer.Lightning/pull/151)
-* BTCPay Server: Blink API integration PR: [Github link](https://github.com/btcpayserver/BTCPayServer.Lightning/pull/151)
+* Schauen Sie sich meine nostr Anwendung an, um [nostr](https://nostr.com/) Ereignisse abzurufen und sie in Markdown-Listen umzuwandeln, die dann wieder als langformatige Notizen mit Nostr Web veröffentlicht werden: [Github link](https://github.com/dhalsim/nostr-hightlights-to-note)
+* BTCPay Server: Blink API Integration PR: [Github link](https://github.com/btcpayserver/BTCPayServer.Lightning/pull/151)
 
-### blog
+## Kurse und Seminare
 
-I write mostly about javascript on my [blog](https://dhalsim.github.io/en) which is in Turkish and English.
+1. OOP & Design Patterns / BTAkademi, 32 Stunden
+1. Advanced C# / BTAkademi, 50 Stunden
+1. Enterprise Design Patterns / BTAkademi, 32 Stunden
+1. Enterprice Library 5.0 / BTAkademi, 10 Stunden
+1. WCF / BTAkademi, 18 Stunden
+1. ASP.NET MVC Framework / BTAkademi, 18 Stunden
+1. Windows Azure/ Microsoft, 24 Stunden
 
-## Courses and Seminars
-
-1. OOP & Design Patterns / BTAkademi, 32 hours
-1. Advanced C# / BTAkademi, 50 hours
-1. Enterprise Design Patterns / BTAkademi, 32 hours
-1. Enterprice Library 5.0 / BTAkademi, 10 hours
-1. WCF / BTAkademi, 18 hours
-1. ASP.NET MVC Framework / BTAkademi, 18 hours
-1. Windows Azure/ Microsoft, 24 hours
-
-## Certificates
+## Zertifikate
 
 1. Fundamentals of Application Security / Team Mentor (Score: 92/100)
 1. [Learning how to learn / Coursera (Grade Achieved: 92.4%)](https://www.coursera.org/account/accomplishments/records/4FKFYFV5643W)
