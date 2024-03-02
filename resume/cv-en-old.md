@@ -22,29 +22,38 @@ Computer Engineer
 `2017-2023`
 **Senior Software Developer, Comtravo (Acquired by Navan, Formerly TripActions)**
 
-I joined Comtravo as a Junior Software Engineer with six years of prior experience in C# development, driven by my desire to transition to Node.js and its fascinating ecosystem. Embracing the challenge of proving my expertise in this new tech stack, I swiftly advanced to middle and senior software engineering positions within a year.
+I started my journey at Comtravo as a Junior Software Engineer despite having six years of prior experience in C# development. My motivation was to transition Node.js due to my fascination with its ecosystem. Comtravo offered me the opportunity to join as a junior developer, and I embraced the challenge of proving my expertise in a new tech stack. Within a year, I had promoted to middle, and senior software engineering positions as my responsibilities grew. 
 
-In my early days with the backend team, my primary focus was on reporting. I started by refactoring code to enhance maintainability while addressing bugs.
+During my initial adaptation phase in the backend team, my primary focus was on reporting. The first thing I did was refactoring the code to make it easier to maintain reports as I fixed its bugs. 
 
-My contributions extended to various data integrations for our B2B travel search and booking engine. These integrations involved fetching data from multiple sources, merging it into a standardised format, and facilitating asynchronous booking flows by leveraging AWS services, SNS/SQS events and AWS Step Functions.
+I participated in various data integrations for our B2B travel search and booking engine. Search engine was responsible for fetching data from multiple sources, merging the results into a common data type, and show the best results for the user, which will be used to finilize the booking flow asyncroniously. 
 
-Specific integrations I worked on included:
+Integrations I worked on the product: 
 
 * Hotel integrations with booking.com and hrs
-* Flight integrations with Sabre and Hitchhiker
+* Flight integrations with Sabre, Hitchhiker
 * Train integrations with DB and Amadeus
+* Use of SNS/SQS events and AWS Step Functions for async fulfillment
 
-I also made significant contributions to our CRM service, particularly in invoice management. Subsequently, I played a pivotal role in designing and implementing the Aggregated Invoices project, enabling customers to streamline their accounting processes. We used AWS Step Functions triggered by custom cron jobs for batch invoice generation, ensuring flexibility and resilience.
+We used SNS/SQS events to create messages for offers and bookings. Then the messages are picked by AWS Step Functions and do async fulfillment on those bookings.
 
-I introduced company roles for users and implemented a JWT based security mechanism for backend API endpoints. I designed a reusable library to validate API requests against defined service rules.
+I worked some parts of our CRM service such as invoice management within the same company. After this project, I played a key role in designing and implementing the Aggregated Invoices project, allowing customers to manage their accounting more efficiently. We utilized AWS Step Functions, triggered by custom AWS cron jobs, to generate invoices in batches during low DB usage periods. This approach offered flexibility and resilience, as we could re-run the step functions in case of any issues.
 
-On the frontend, I worked on our new customer facing frontend application which is built with Angular. I migrated some of the reports to the new frontend, and wrote its UI tests using Cypress.
+Some backstory: Initially, our customers primarily interacted with our products through email channels, connecting travel managers with Comtravo Operations Team agents. Beside the email channel, which is between our travel agents and company admins, manually fulfilled using an internal backoffice UI, later management decided to introduce a new channel for customers that they can book their own travels and only get in touch with the agents if something goes wrong, so the company operations could scale. This fascilitated new products, features and needs.
 
-I spearheaded the design and development of travel policies, a highly sought-after feature by our customers. This involved creating MongoDB schemas, models, and a validation library for enforcing policies across various backend services and frontend applications. These policies allowed company admins and travel agents to set rules, such as budgeting and cabin types.
+On the backend, we needed to introduce company roles (traveler, booker and admin) for the users. I created a security check mechanism for our backend API endpoints using JWT tokens. I desinged a library that can be used to validate our API requests against the rules defined in the services.
 
-After the acquisition, we switched to the TripAction platform. I took on the challenge of integrating the British Airways NDC API, a new industry standard, by seamlessly integrating a Node.js service into an existing Java stack. Our solution involved the creation of a REST-based adapter and the use of Kafka queues to bridge the two technologies.
+Travel policies was the most wanted feature among our customers, and I was responsible for designing MongoDB schemas, models, and a library for the actual policy validations which is called from various backend services and frontend applications. The requirements was the company admins or travel agents could set rules like budgeting or allowed cabin types, and system should signal the user about any violations of that policies. 
 
-Furthermore, I joined the core team to integrate Auth0 into our authentication system, focusing on enhancing security, scalability, and compliance. I led the development of an SSO service for customer-managed SSO connections using the Auth0 API, integrating Java Spring Framework and managing infrastructure with Terraform.
+As my experience grew in the company, I became the most knowledgeable person in the department, serving as the primary point of escalation, consultation and mentorship. Additionally, I was entrusted with technical reviews, PR reviews, and making architectural updates to the system as needed. 
+
+Even though the company grew in size during the last years, it challenging to make changes to one area of the software without affecting other areas. We wanted to split developers around services or projects so the team can have expertise on certain parts and develop faster and better software. There was an initiative in the company to make the architectural changes, to make the teams more independent and deploy faster. In the initiative we chose using DDD practices to analyse and define our models and services to match up with organisational structure and our development teams. In the initiative I was also researching event sourcing as an alternative for our architecture. You can check out my research notes on Datomic, as a way for event sourcing that I found is possible to make the changes within the size of a company like ours: [here](https://hackmd.io/@TksjGp60TRiDO6GbU0fhOQ/r1ZFSJlxq).
+
+We had to stop these initiatives and other things as well because Comtravo was acquired by TripActions (later to be rebranded as Navan) and it was decided to sunset Comtravo products in a year. We prioritised on migrating the customers to the new platform.  
+
+I took on the challenge of integrating the British Airways NDC (a new standard in flights industry) API. We integrated a new Node.js service into an existing Java stack. We created an adaptor in between the Java services and Node.js service using REST and Kafka queues.
+
+Furthermore, I joined the core team to help integrating Auth0 into our authentication system. With the integration we aimed increased security, scalibility and compliance. Navan already had Single Sign-on (SSO) features using SAML and OIDC, and it was decided to create some adapters for existing users, while giving an option to migrate to Auth0 in time. I was in charge of the part of creating an SSO service to be used by the customers that wants to create and edit their SSO connections using Auth0 API. Users could upload their XMLs or define their connection configurations. This time I had the chance to work with Java Spring Framework to create our service. I was also mainly writing Terraform definitions to create the infrastructure layer in our AWS infra using Auth0 terraform provider. After the acquisation, we had to go through rebranding of TripActions to Navan, and we supported this change as a team.
 
 `2013-2016`
 **Software Developer, Amadeus R&D Istanbul**
