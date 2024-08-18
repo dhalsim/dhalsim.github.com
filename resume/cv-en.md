@@ -2,6 +2,9 @@
 layout: cv
 title: Barış Aydek CV
 ---
+
+<div class="print-cv-header"></div>
+
 # Barış Aydek
 
 <div id="webaddress">
@@ -16,6 +19,8 @@ title: Barış Aydek CV
 <i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/in/baris-aydek-39352325">Barış Aydek</a>
 </div>
 
+<div class="print-cv-summary"></div>
+
 ## Professional Summary
 
 Senior Software Developer with extensive experience in backend technologies, API integrations, and
@@ -23,13 +28,45 @@ cloud-based solutions. Renowned for technical expertise in solution architecture
 and proficiency in TypeScript. A curious and innovative professional, known for consistently exploring
 and implementing new technologies to drive project success.
 
+<div class="print-cv-t-skills"></div>
+
+## Technical skills
+
+* Amazon Web Services
+* MongoDB, Mysql
+* Git, Docker, Jenkins, Terraform
+* Javascript (Typescript), C#, Java
+* Node.js, Java Spring, ASP.NET
+* Security best practices
+* Functional programming
+
+<div class="print-cv-s-skills"></div>
+
+## Soft skills
+
+* Problem solver
+* Leadership
+* Mentorship
+* Fast learner
+
+<div class="print-cv-open-source"></div>
+
+## Open Source Projects
+
+* [Nostrize](http://nostrize.me) brings [nostr](https://nostr.com/) to popular platforms like GitHub, YouTube and Twitter, and creates new capabilities like zero fee p2p bitcoin payments and crowd funding capabilities.
+* Check out my [nostr](https://nostr.com/) application to fetch nostr events and transform them into markdown lists to be published again as long formatted notes using Nostr Web: [Github link](https://github.com/dhalsim/nostr-hightlights-to-note)
+* BTCPay Server: Blink API integration PR: [Github link](https://github.com/btcpayserver/BTCPayServer.Lightning/pull/151)
+
+<div class="print-cv-exp"></div>
+
 ## Work expreriences
+
+<div class="print-cv-exp-1"></div>
 
 `2017-2023, Berlin`
 
 **Senior Software Developer, Comtravo (Acquired by Navan)**
 
-* Recognized as technical rockstar, advancing rapidly from Junior Developer to Senior Developer
 * Refactored critical modules such as invoicing to enhance maintainability while addressing its bugs by working closely with Product and Finance teams
 * Known for expertise in solution architecture, especially in AWS environments, leading to robust and scalable systems
 * Designed and implemented JWT based security mechanism for backend API endpoints
@@ -41,6 +78,8 @@ and implementing new technologies to drive project success.
 * Played crucial role in integrating Node.JS services into Java stack by implementing adaptors and using Kafka queues.
 * Helped integrating Auth0 Cloud Authentication into existing system, responsible from designing SSO modules and writing infrastructure as code
 
+<div class="print-cv-exp-2"></div>
+
 `2013-2016, Istanbul`
 **Software Developer, Amadeus R&D Istanbul**
 
@@ -49,11 +88,15 @@ and implementing new technologies to drive project success.
 * Integrated Jenkins for continuous integration, significantly improving deployment efficiency
 * Flight, hotel, payment, web service module features including both backend and frontend side
 
+<div class="print-cv-exp-3"></div>
+
 `2012-2013, Istanbul`
 **Software Development Specialist, Gezisitesi.com**
 
 * Played important role on maintenance and support
 * Joined another team to develop new backend and frontend applications, using SOA principles and technologies
+
+<div class="print-cv-exp-4"></div>
 
 `2010-2012, Istanbul`
 **Software Development Specialist, Cronom**
@@ -62,6 +105,8 @@ and implementing new technologies to drive project success.
 * Supported product team with fixing bugs and developing new features. During that time, my knowledge on code base and architecture also increased and was able to work on more challenging problems including concurrency issues
 * SOA was heavily used by leveraging .NET and WCF
 * Worked as consultant in important Turkish companies such as Coca Cola İçecek, GlobalBilgi (Turkcell), Abdi İbrahim and Ulaşım A.Ş and helped customers to integrate products to their existing solutions
+
+<div class="print-cv-edu"></div>
 
 ## Education
 
@@ -74,19 +119,6 @@ and implementing new technologies to drive project success.
 **İzmir Milli Piyango Anatolian High School**
 
 * English
-
-## Technical skills
-
-* Amazon Web Services
-* MongoDB, Mysql
-* Git, Docker, Jenkins, Terraform
-* Javascript (Typescript), C#, Java
-* Node.js, Java Spring, ASP.NET
-
-## Open Source Projects
-
-* Check out my [nostr](https://nostr.com/) application to fetch nostr events and transform them into markdown lists to be published again as long formatted notes using Nostr Web : [Github link](https://github.com/dhalsim/nostr-hightlights-to-note)
-* BTCPay Server: Blink API integration PR: [Github link](https://github.com/btcpayserver/BTCPayServer.Lightning/pull/151)
 
 ## Courses and Seminars
 
