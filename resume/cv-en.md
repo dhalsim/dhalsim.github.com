@@ -8,15 +8,13 @@ title: Barış Aydek CV
 # Barış Aydek
 
 <div id="webaddress">
-<a href="mailto:baris.aydek@gmail.com">baris.aydek@gmail.com</a>
+<a href="mailto:nostrize@proton.me">nostrize@proton.me</a>
 |
-<a href="https://dhalsim.github.io/en">My Blog (EN)</a>
+<a href="https://nostree.me/npub1dejts0qlva8mqzjlrxqkc2tmvs2t7elszky5upxaf3jha9qs9m5q605uc4">Nostree</a>
 |
-<a href="https://dhalsim.github.io">My Blog (TR)</a>
+<i class="fa fa-github"></i> <a href="http://github.com/dhalsim">Dhalsim</a>
 |
-<i class="fa fa-github"></i> <a href="http://github.com/dhalsim">dhalsim</a>
-|
-<i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/in/baris-aydek-39352325">Barış Aydek</a>
+<i class="fa fa-github"></i> <a href="http://github.com/nostrize">Nostrize</a>
 </div>
 
 <div class="print-cv-summary"></div>
@@ -26,17 +24,17 @@ title: Barış Aydek CV
 Senior Software Developer with extensive experience in backend technologies, API integrations, and
 cloud-based solutions. Renowned for technical expertise in solution architecture, particularly in AWS,
 and proficiency in TypeScript. A curious and innovative professional, known for consistently exploring
-and implementing new technologies to drive project success.
+and implementing new technologies to drive project success. Lately, focusing on open-source development related to Bitcoin, Nostr, and Lightning technologies.
 
 <div class="print-cv-t-skills"></div>
 
 ## Technical skills
 
+* Javascript (Typescript), C#, Java
+* Node.js, Java Spring, ASP.NET
 * Amazon Web Services
 * MongoDB, Mysql
 * Git, Docker, Jenkins, Terraform
-* Javascript (Typescript), C#, Java
-* Node.js, Java Spring, ASP.NET
 * Security best practices
 * Functional programming
 
@@ -53,7 +51,9 @@ and implementing new technologies to drive project success.
 
 ## Open Source Projects
 
-* [Nostrize](http://nostrize.me) brings [nostr](https://nostr.com/) to popular platforms like GitHub, YouTube and Twitter, and creates new capabilities like zero fee p2p bitcoin payments and crowd funding capabilities.
+* [En basit Bitcoin kitabı](https://enbasitbitcoinkitabi.site) translated creative commons book
+[Simplest bitcoin Book Ever Written](https://thesimplestbitcoinbook.net/) PDF to a website in Turkish and English and potentially for more languages, integrated Nostr Hightlights and Comments (WIP). [Git Repo](https://github.com/dhalsim/the-simplest-bitcoin-book)
+* [Nostrize](https://nostrize.me) brings [nostr](https://nostr.com/) to popular platforms like GitHub, YouTube and Twitter, and creates new capabilities like zero fee p2p bitcoin payments and crowd funding capabilities.
 * Check out my [nostr](https://nostr.com/) application to fetch nostr events and transform them into markdown lists to be published again as long formatted notes using Nostr Web: [Github link](https://github.com/dhalsim/nostr-hightlights-to-note)
 * BTCPay Server: Blink API integration PR: [Github link](https://github.com/btcpayserver/BTCPayServer.Lightning/pull/151)
 
