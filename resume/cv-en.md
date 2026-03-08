@@ -32,6 +32,7 @@ and implementing new technologies to drive project success. Lately, focusing on 
 
 * Javascript (Typescript), C#, Java
 * Node.js, Java Spring, ASP.NET
+* React, Tailwind CSS
 * Amazon Web Services
 * MongoDB, Mysql
 * Git, Docker, Jenkins, Terraform
@@ -51,13 +52,18 @@ and implementing new technologies to drive project success. Lately, focusing on 
 
 ## Open Source Projects
 
-* [En basit Bitcoin kitabı](https://enbasitbitcoinkitabi.site) translated creative commons book
-[Simplest bitcoin Book Ever Written](https://thesimplestbitcoinbook.net/) PDF to a website in Turkish and English and potentially for more languages, integrated Nostr Hightlights and Comments (WIP). [Git Repo](https://github.com/dhalsim/the-simplest-bitcoin-book)
+* [Nostr Static](blog.nostrize.me) Nostr-static, a static site generator for blogging on top of Nostr, offers RSS/Atom feeds and smart content discovery
+* [Bettr Quest (Prototype)](https://bettr.quest/) Bettr Quest is a decentralized social platform built on the Nostr network that enables users to create, share, and participate in quests and challenges.
+* [Lantern](https://chromewebstore.google.com/detail/lantern/jjoijlenmgefkaeiomoaelcljfibpcgh) Contributed to the development of a nostr-powered web annotations, highlighting and bookmarking extension/library
+* [En basit Bitcoin kitabı](https://enbasitbitcoinkitabi.site) translated creative commons book to Turkish in web format.
 * [Nostrize](https://nostrize.me) brings [nostr](https://nostr.com/) to popular platforms like GitHub, YouTube and Twitter, and creates new capabilities like zero fee p2p bitcoin payments and crowd funding capabilities.
-* Check out my [nostr](https://nostr.com/) application to fetch nostr events and transform them into markdown lists to be published again as long formatted notes using Nostr Web: [Github link](https://github.com/dhalsim/nostr-hightlights-to-note)
-* BTCPay Server: Blink API integration PR: [Github link](https://github.com/btcpayserver/BTCPayServer.Lightning/pull/151)
 
-<div class="print-cv-exp"></div>
+<br /><br />
+
+## Freelance Projects
+
+* [Bitcoin Son Dakika](https://bitcoinsondakika.com) News website/podcast written in React and Node.js that uses Nostr protocol for content storing and social features.
+* [Metdiaroma.com](https://metdiaroma.com) E-commerce website written in React and WooCommerce/PHP.
 
 ## Work expreriences
 
@@ -81,6 +87,7 @@ and implementing new technologies to drive project success. Lately, focusing on 
 <div class="print-cv-exp-2"></div>
 
 `2013-2016, Istanbul`
+
 **Software Developer, Amadeus R&D Istanbul**
 
 * Played key role in developing Amadeus e-Power online booking engine which used by worldwide 1000+ booking portals
@@ -91,6 +98,7 @@ and implementing new technologies to drive project success. Lately, focusing on 
 <div class="print-cv-exp-3"></div>
 
 `2012-2013, Istanbul`
+
 **Software Development Specialist, Gezisitesi.com**
 
 * Played important role on maintenance and support
@@ -98,7 +106,10 @@ and implementing new technologies to drive project success. Lately, focusing on 
 
 <div class="print-cv-exp-4"></div>
 
+<br /><br />
+
 `2010-2012, Istanbul`
+
 **Software Development Specialist, Cronom**
 
 * Responsible for development of OttO, XML-based ASP.NET framework which empowered customers to create web screens and forms, manage data, and establish workflows effortlessly
