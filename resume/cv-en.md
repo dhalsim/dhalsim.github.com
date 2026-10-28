@@ -8,13 +8,20 @@ title: Barış Aydek CV
 # Barış Aydek
 
 <div id="webaddress">
-<a href="mailto:nostrize@proton.me">nostrize@proton.me</a>
-|
-<a href="https://getappweaver.com">getappweaver.com</a>
-|
-<i class="fa fa-github"></i> <a href="http://github.com/dhalsim">Dhalsim</a>
-|
-<i class="fa fa-github"></i> <a href="http://github.com/nostrize">Nostrize</a>
+  <a href="mailto:nostrize@proton.me">nostrize@proton.me</a>
+  |
+  <a href="https://getappweaver.com">getappweaver.com</a>
+  |
+  <i class="fa fa-github"></i> <a href="https://github.com/dhalsim">Dhalsim</a>
+  |
+  <i class="fa fa-github"></i> <a href="https://github.com/nostrize">Nostrize</a>
+  |
+  <i class="fa fa-linkedin"></i> <a href="https://www.linkedin.com/in/baris-aydek-39352325">LinkedIn</a>
+  <span class="printer-hide">
+    |
+    <a href="https://dhalsim.github.io/assets/resume/cv-en.pdf">PDF</a>
+  </span>
+</div>
 </div>
 
 <div class="height-0-6in"></div>

@@ -19,3 +19,7 @@ p code {
 	left: -20%;
 	width: 100px;
 }
+
+.printer-hide {
+  display: none;
+}
