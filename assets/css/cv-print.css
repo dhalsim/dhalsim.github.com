@@ -1,31 +1,21 @@
-.print-cv-header {
-  height: 1in;
-}
-
-.print-cv-summary {
+.height-0-6in {
   height: 0.6in;
 }
 
-.print-cv-t-skills {
-
+.height-1in {
+  height: 1in;
 }
 
-.print-cv-s-skills {
-
-}
-
-.print-cv-open-source {
-
-}
-
-.print-cv-exp {
+.height-1-2in {
   height: 1.2in;
 }
 
-.print-cv-exp-2 {
-
+.page-break {
+  break-after: page;
 }
 
-.print-cv-edu {
-  height: 1in;
+p code {
+	position: absolute;
+	left: -20%;
+	width: 100px;
 }
